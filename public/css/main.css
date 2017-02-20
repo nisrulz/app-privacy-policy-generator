@@ -1,0 +1,16 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.tab-content {
+    border-left: 1px;
+    border-bottom: 1px;
+    border-radius: 4px;
+    border-right: 1px;
+    border-style: solid;
+    border-color: lightgray;
+    border-top: 0;
+    padding: 1em;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
