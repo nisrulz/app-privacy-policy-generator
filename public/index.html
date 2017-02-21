@@ -4,131 +4,135 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="">
-  <!--<![endif]-->
+<!--<![endif]-->
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>App Privacy Policy Generator</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-      body {
+    body {
         padding-top: 50px;
         padding-bottom: 20px;
-      }
+    }
     </style>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/main.css">
-
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">App Privacy Policy Generator</a>
-        </div>
-      </div>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand visible-xs" href="#">App Privacy Policy Generator</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="https://github.com/nisrulz/app-privacy-policy-generator" target="_blank">Github</a></li>
+                </ul>
+            </div>
     </nav>
     <div class="jumbotron hero-pattern-bg">
-      <div class="container">
-        <h1 class="text-white">Hello, Developer!</h1>
-        <p class="text-whitesmoke">This is a simple web-app to generate app privacy policy</p>
-      </div>
+        <div class="container">
+            <h1 class="text-white">App Privacy Policy Generator</h1>
+            <p class="text-whitesmoke">Simple web app to generate a generic privacy policy for apps</p>
+        </div>
     </div>
-
     <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="appName">App Name</label>
-            <input type="text" class="form-control" id="appName" placeholder="App Name">
-          </div>
-
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Choose Type of App
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a id="free">Free</a></li>
-              <li><a id="opensource">Open Source</a></li>
-              <li><a id="freemium">Freemium</a></li>
-              <li><a id="adsupported">Ad Supported</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a id="commercial">Commercial</a></li>
-            </ul>
-          </div>
-          <br/>
-
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Choose Dev Type
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <li><a id="individual">Individual</a></li>
-              <li><a id="company">Company</a></li>
-            </ul>
-          </div>
-          <br/>
-          <div class="form-group">
-            <input type="text" class="form-control" id="companyName" placeholder="Company Name">
-          </div>
-
-          <div class="form-group">
-            <input type="text" class="form-control" id="devName" placeholder="Developer Name">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="pidInfo" placeholder="Personally Identifiable Information You Collect (Comma Separated)">
-          </div>
-
-
-
-          <button class="btn btn-info" id="btnGenerate">Generate</button>
-
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="appName">App Name</label>
+                    <input type="text" class="form-control" id="appName" placeholder="App Name">
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Choose Type of App
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a id="free">Free</a></li>
+                        <li><a id="opensource">Open Source</a></li>
+                        <li><a id="freemium">Freemium</a></li>
+                        <li><a id="adsupported">Ad Supported</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="commercial">Commercial</a></li>
+                    </ul>
+                </div>
+                <br/>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Choose Dev Type
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><a id="individual">Individual</a></li>
+                        <li><a id="company">Company</a></li>
+                    </ul>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="companyName" placeholder="Company Name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="devName" placeholder="Developer Name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="pidInfo" placeholder="Personally Identifiable Information You Collect (Comma Separated)">
+                </div>
+                <button class="btn btn-info" id="btnGenerate">Generate</button>
+            </div>
+            <div class="col-md-8">
+                Select and copy-paste to use
+                </br>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#preview" aria-controls="" role="tab" data-toggle="tab">Preview/Raw</a></li>
+                    <li role="presentation"><a href="#html" aria-controls="html" role="tab" data-toggle="tab">HTML</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="preview">Fill in the form and hit generate!</div>
+                    <div role="tabpanel" class="tab-pane" id="html">Fill in the form and hit generate!</div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-8">
-          Select and copy-paste to use
-          </br>
-
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#preview" aria-controls="" role="tab" data-toggle="tab">Preview/Raw</a></li>
-            <li role="presentation"><a href="#html" aria-controls="html" role="tab" data-toggle="tab">HTML</a></li>
-          </ul>
-
-
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="preview">Fill in the form and hit generate!</div>
-            <div role="tabpanel" class="tab-pane" id="html">Fill in the form and hit generate!</div>
-          </div>
-
+        <hr>
+        <div class="row well">
+            <p>
+                DISCLAIMER: The generated privacy policy isn't perfect. There is a link to the blog post in the footer which explains the whole idea of how this privacy policy was drafted and where it makes sense to use it. For anyone who has anything specific they should build a well-thought privacy policy and not depend on this.
+            </p>
+            <p>
+                This privacy policy is provided on "AS IS" basis, without warranties or conditions of any kind, either expressed or implied. The developer cannot be held responsible for anything that you might encounter after using this. Use at your own risk.
+            </p>
         </div>
-
-      </div>
-      <hr>
-
-      <footer>
-        <p>Credits to <a href="https://twitter.com/ali_muzaffar" target="_blank">Ali Muzaffar</a> for editting out the base template, you should read his blog post about it
-          <a href="https://medium.com/@ali.muzaffar/did-you-get-one-of-these-google-play-developer-policy-violation-emails-6c529ceb082d#.f10upj3fy">here</a>.
-        </p>
-        <p>Developer: <a href="https://about.me/nisrulz" target="_blank">Nishant Srivastava</a></p>
-      </footer>
+        <hr>
+        <footer>
+            <p>Credits to <a href="https://twitter.com/ali_muzaffar" target="_blank">Ali Muzaffar</a> for editting out the base template, you should read his blog post about it
+                <a href="https://medium.com/@ali.muzaffar/did-you-get-one-of-these-google-play-developer-policy-violation-emails-6c529ceb082d#.f10upj3fy">here</a>.
+            </p>
+            <p>Developer: <a href="https://about.me/nisrulz" target="_blank">Nishant Srivastava</a></p>
+        </footer>
     </div>
     <script src="https://code.jquery.com/jquery-1.11.2.min.js" integrity="sha256-Ls0pXSlb7AYs7evhd+VLnWsZ/AqEHcXBeMZUycz/CcA=" crossorigin="anonymous"></script>
     <script>
-      window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+    window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
     </script>
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
-  </body>
+</body>
 
 </html>
