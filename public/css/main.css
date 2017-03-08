@@ -16,7 +16,7 @@
 }
 
 .box{
-    height: 33vh;
+    height: 48vh;
     overflow-y: auto;
 }
 
@@ -35,4 +35,12 @@
 
 body{
     overflow-y: auto;
+}
+
+.help-block{
+    font-size: 0.7em;
+}
+
+.navbar-brand>img {
+    height: 1.35em;
 }

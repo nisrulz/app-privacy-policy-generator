@@ -14,6 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <style>
     body {
       padding-top: 50px;
@@ -39,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-        <a class="navbar-brand visible-xs" href="#">App Privacy Policy Generator</a>
+        <a class="navbar-brand" href="#"><img src="img/icon.png"/><span class="visible-xs">App Privacy Policy Generator</span></a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
@@ -50,24 +51,24 @@
   </nav>
   <div class="container-fluid" id="vueapp">
     <div class="row">
-          <div class="hero-pattern-bg">
-            <div class="container-fluid">
-              <h2 class="text-white">App Privacy Policy Generator</h2>
-              <p class="text-whitesmoke">Simple web app to generate a generic privacy policy for apps</p>
-              <br/>
-            </div>
-          </div>
+      <div class="hero-pattern-bg">
+        <div class="container-fluid">
+          <h2 class="text-white">App Privacy Policy Generator</h2>
+          <p class="text-whitesmoke">Simple web app to generate a generic privacy policy for apps</p>
+          <br/>
         </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-lg-3">
-          <h3>Fill up the form</h3>
-          <div class="form-group">
-            <label for="appName">App Name</label>
-            <input type="text" class="form-control" v-model="appName" placeholder="App Name">
-          </div>
+        <h3>Fill up the form</h3>
+        <div class="form-group">
+          <label for="appName">App Name</label>
+          <input type="text" class="form-control" v-model="appName" placeholder="App Name">
+        </div>
 
-          <div class="form-group">
-            <select v-model="typeOfApp" class="form-control">
+        <div class="form-group">
+          <select v-model="typeOfApp" class="form-control">
               <option value="" disabled>Choose Type of App</option>
               <option>Free</option>
               <option>Open Source</option>
@@ -75,25 +76,38 @@
               <option>Ad Supported</option>
               <option>Commercial</option>
             </select>
-          </div>
-          <div class="form-group">
-            <select v-model="typeOfDev" class="form-control">
+        </div>
+        <div class="form-group">
+          <select v-model="typeOfDev" class="form-control">
               <option value="" disabled>Choose Dev Type</option>
               <option>Individual</option>
               <option>Company</option>
             </select>
-          </div>
+        </div>
 
-          <div class="form-group" v-if="typeOfDev=='Company'">
-            <input type="text" class="form-control" v-model="companyName" placeholder="Company Name">
-          </div>
-          <div class="form-group" v-if="typeOfDev=='Individual'">
-            <input type="text" class="form-control" v-model="devName" placeholder="Developer Name">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" v-model="pidInfoIn" placeholder="Personally Identifiable Information You Collect (Comma Separated)">
-          </div>
-          <button class="btn btn-info" v-on:click="generate">Generate</button>
+        <div class="form-group" v-if="typeOfDev=='Company'">
+          <input type="text" class="form-control" v-model="companyName" placeholder="Company Name">
+        </div>
+        <div class="form-group" v-if="typeOfDev=='Individual'">
+          <input type="text" class="form-control" v-model="devName" placeholder="Developer Name">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="pidInfoIn" placeholder="Personally Identifiable Information You Collect (Comma Separated)">
+        </div>
+        <button class="btn btn-info" v-on:click="generate">Generate</button>
+        <hr>
+        <div class="help-block">
+          <p>
+            DISCLAIMER: The generated privacy policy isn't perfect. There is a link to the blog post in the footer which explains the
+            whole idea of how this privacy policy was drafted and where it makes sense to use it. For anyone who has anything
+            specific they should build a well-thought privacy policy and not depend on this.
+          </p>
+          <p>
+            This privacy policy is provided on "AS IS" basis, without warranties or conditions of any kind, either expressed or implied.
+            The developer cannot be held responsible for anything that you might encounter after using this. Use at your
+            own risk.
+          </p>
+        </div>
       </div>
       <div class="col-lg-9">
         <h3>Select and copy-paste to use</h3>
@@ -179,7 +193,7 @@
               <p>If you have any questions or suggestions about {{myOrOur }} Privacy Policy, do not hesitate to contact {{meOrUs
                 }} .
               </p>
-              <p>This Privacy Policy page was created at <a href="https://privacypolicytemplate.net" target="_blank">privacypolicytemplate.net</a>.</p>
+              <p>This Privacy Policy page was created at <a href="https://privacypolicytemplate.net" target="_blank">privacypolicytemplate.net</a>                and modified/generated by <a href="https://app-privacy-policy-generator.firebaseapp.com/" target="_blank">App Privacy Policy Generator</a></p>
           </div>
           <div role="tabpanel" class="tab-pane box" id="html">
             Fill the form and click on generate!
@@ -188,25 +202,13 @@
       </div>
     </div>
     <hr>
-    <div class="row col-lg-12 help-block" style="font-size: 0.78em;">
-      <p>
-        DISCLAIMER: The generated privacy policy isn't perfect. There is a link to the blog post in the footer which explains the
-        whole idea of how this privacy policy was drafted and where it makes sense to use it. For anyone who has anything
-        specific they should build a well-thought privacy policy and not depend on this.
-      </p>
-      <p>
-        This privacy policy is provided on "AS IS" basis, without warranties or conditions of any kind, either expressed or implied.
-        The developer cannot be held responsible for anything that you might encounter after using this. Use at your own
-        risk.
-      </p>
-    </div>
-    <hr>
     <footer>
       <p>Credits to <a href="https://twitter.com/ali_muzaffar" target="_blank">Ali Muzaffar</a> for editting out the base template,
         you should read his blog post about it
         <a href="https://medium.com/@ali.muzaffar/did-you-get-one-of-these-google-play-developer-policy-violation-emails-6c529ceb082d#.f10upj3fy">here</a>.
+        This tool is built by <a href="https://github.com/nisrulz" target="_blank">Nishant Srivastava</a> (..with lots of
+        caffiene)
       </p>
-      <p> Built by <a href="https://github.com/nisrulz" target="_blank">Nishant Srivastava</a> (..with lots of caffiene)</p>
     </footer>
   </div>
 
@@ -218,7 +220,7 @@
   </script>
 
   <!-- VueJs -->
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
 
   <script src="js/vendor/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
