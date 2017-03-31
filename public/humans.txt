@@ -3,11 +3,7 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
-
-# THANKS
-
-    <name>
+    Nishant Srivastava -- Software Engineer -- @nisrulz
 
 # TECHNOLOGY COLOPHON
 
