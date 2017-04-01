@@ -66,7 +66,8 @@ var vueapp = new Vue({
           this.typeOfAppTxt = 'an ' + this.typeOfApp
           break
       }
-      window.location.href = '#privacypolicy'
+
+      document.getElementById('privacy_tab').click()
     }
   }
 })
