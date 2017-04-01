@@ -315,8 +315,11 @@ footer.app-footer a {
 .footer-brand {
   text-align: right;
   width: 100%;
-  margin-top: 1.4em;
+  margin-top: 0.8em;
   margin-right: 8px;
+  border-top: 1px solid rgba(128, 128, 128, 0.1);
+  padding-top: 0.6em;
+  margin-left: 8px;
 }
 
 .footer-brand.center {
