@@ -21,31 +21,31 @@ html, body {
   height: 100%;
 }
 
-.mdl-demo .mdl-layout__header-row {
+.mdl-appg .mdl-layout__header-row {
   padding-left: 40px;
 }
 
-.mdl-demo .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
+.mdl-appg .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
   font-size: inherit;
 }
 
-.mdl-demo .mdl-layout__tab-bar-button {
+.mdl-appg .mdl-layout__tab-bar-button {
   display: none;
 }
 
-.mdl-demo .mdl-layout.is-small-screen .mdl-layout__tab-bar .mdl-button {
+.mdl-appg .mdl-layout.is-small-screen .mdl-layout__tab-bar .mdl-button {
   display: none;
 }
 
-.mdl-demo .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar, .mdl-demo .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar-container {
+.mdl-appg .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar, .mdl-appg .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar-container {
   overflow: visible;
 }
 
-.mdl-demo .mdl-layout__tab-bar-container {
+.mdl-appg .mdl-layout__tab-bar-container {
   height: 64px;
 }
 
-.mdl-demo .mdl-layout__tab-bar {
+.mdl-appg .mdl-layout__tab-bar {
   padding: 0;
   padding-left: 16px;
   box-sizing: border-box;
@@ -53,24 +53,21 @@ html, body {
   width: 100%;
 }
 
-.mdl-demo .mdl-layout__tab-bar .mdl-layout__tab {
+.mdl-appg .mdl-layout__tab-bar .mdl-layout__tab {
   height: 64px;
   line-height: 64px;
 }
 
-.mdl-demo .mdl-layout__tab-bar .mdl-layout__tab.is-active::after {
+.mdl-appg .mdl-layout__tab-bar .mdl-layout__tab.is-active::after {
   background-color: white;
   height: 4px;
 }
 
-.mdl-demo main > .mdl-layout__tab-panel {
+.mdl-appg main > .mdl-layout__tab-panel {
   padding: 8px;
-  /*padding-top: 25px;
-   padding-bottom: 25px;*/
-  background-color: whitesmoke;
 }
 
-.mdl-demo .mdl-card {
+.mdl-appg .mdl-card {
   height: auto;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -80,11 +77,11 @@ html, body {
   flex-direction: column;
 }
 
-.mdl-demo .mdl-card > * {
+.mdl-appg .mdl-card > * {
   height: auto;
 }
 
-.mdl-demo .mdl-card .mdl-card__supporting-text {
+.mdl-appg .mdl-card .mdl-card__supporting-text {
   margin: 40px;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
@@ -94,32 +91,32 @@ html, body {
   width: calc(100% - 80px);
 }
 
-.mdl-demo.mdl-demo .mdl-card__supporting-text h4 {
+.mdl-appg.mdl-appg .mdl-card__supporting-text h4 {
   margin-top: 0;
   margin-bottom: 20px;
 }
 
-.mdl-demo .mdl-card__actions {
+.mdl-appg .mdl-card__actions {
   margin: 0;
   padding: 4px 40px;
   color: inherit;
 }
 
-.mdl-demo .mdl-card__actions a {
+.mdl-appg .mdl-card__actions a {
   color: #00BCD4;
   margin: 0;
 }
 
-.mdl-demo .mdl-card__actions a:hover, .mdl-demo .mdl-card__actions a:active {
+.mdl-appg .mdl-card__actions a:hover, .mdl-appg .mdl-card__actions a:active {
   color: inherit;
   background-color: transparent;
 }
 
-.mdl-demo .mdl-card__supporting-text + .mdl-card__actions {
+.mdl-appg .mdl-card__supporting-text + .mdl-card__actions {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.mdl-demo #add {
+.mdl-appg #add {
   position: absolute;
   background-color: white;
   right: 40px;
@@ -127,20 +124,28 @@ html, body {
   z-index: 999;
 }
 
-.mdl-demo .mdl-layout__content section:not(:last-of-type) {
+.mdl-appg .mdl-layout__content section:not(:last-of-type) {
   position: relative;
   margin-bottom: 48px;
 }
 
-.mdl-demo section.section--center {
+.mdl-layout__content {
+  background-color: white;
+}
+
+#privacypolicy, #edit {
+  background-color: whitesmoke;
+}
+
+.mdl-appg section.section--center {
   max-width: 860px;
 }
 
-.mdl-demo #features section.section--center {
+.mdl-appg #features section.section--center {
   max-width: 620px;
 }
 
-.mdl-demo section > header {
+.mdl-appg section > header {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -152,22 +157,22 @@ html, body {
   justify-content: center;
 }
 
-.mdl-demo section > .section__play-btn {
+.mdl-appg section > .section__play-btn {
   min-height: 200px;
 }
 
-.mdl-demo section > header > .material-icons {
+.mdl-appg section > header > .material-icons {
   font-size: 3rem;
 }
 
-.mdl-demo section > button {
+.mdl-appg section > button {
   position: absolute;
   z-index: 99;
   top: 8px;
   right: 8px;
 }
 
-.mdl-demo section .section__circle {
+.mdl-appg section .section__circle {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -185,7 +190,7 @@ html, body {
   flex-shrink: 1;
 }
 
-.mdl-demo section .section__text {
+.mdl-appg section .section__text {
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
@@ -195,44 +200,40 @@ html, body {
   padding-top: 8px;
 }
 
-.mdl-demo section .section__text h5 {
+.mdl-appg section .section__text h5 {
   font-size: inherit;
   margin: 0;
   margin-bottom: 0.5em;
 }
 
-.mdl-demo section .section__text a {
+.mdl-appg section .section__text a {
   text-decoration: none;
 }
 
-.mdl-demo section .section__circle-container > .section__circle-container__circle {
+.mdl-appg section .section__circle-container > .section__circle-container__circle {
   width: 64px;
   height: 64px;
   border-radius: 32px;
   margin: 8px 0;
 }
 
-.mdl-demo section.section--center .section__text:not(:last-child) {
+.mdl-appg section.section--center .section__text:not(:last-child) {
   border-bottom: 1px solid rgba(0, 0, 0, .13);
 }
 
-.mdl-demo .mdl-card .mdl-card__supporting-text > h3:first-child {
+.mdl-appg .mdl-card .mdl-card__supporting-text > h3:first-child {
   margin-bottom: 24px;
 }
 
-.mdl-demo .mdl-layout__tab-panel:not(#overview) {
-  background-color: whitesmoke;
-}
-
-.mdl-demo #features section {
+.mdl-appg #features section {
   margin-bottom: 72px;
 }
 
-.mdl-demo #features h4, #features h5 {
+.mdl-appg #features h4, #features h5 {
   margin-bottom: 16px;
 }
 
-.mdl-demo .toc {
+.mdl-appg .toc {
   border-left: 4px solid #C1EEF4;
   margin: 24px;
   padding: 0;
@@ -245,12 +246,12 @@ html, body {
   flex-direction: column;
 }
 
-.mdl-demo .toc h4 {
+.mdl-appg .toc h4 {
   font-size: 0.9rem;
   margin-top: 0;
 }
 
-.mdl-demo .toc a {
+.mdl-appg .toc a {
   color: #4DD0E1;
   text-decoration: none;
   font-size: 16px;
@@ -258,7 +259,7 @@ html, body {
   display: block;
 }
 
-.mdl-demo .mdl-menu__container {
+.mdl-appg .mdl-menu__container {
   z-index: 99;
 }
 
