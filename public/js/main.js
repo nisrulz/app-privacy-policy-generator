@@ -22,13 +22,12 @@ var vueapp = new Vue({
 
   },
   methods: {
-    selectAllText: function () {
-      selectText('privacy_content')
+    selectAllText: function (id) {
+      selectText(id)
     },
-    generateHTML: function () {
-      let content = getContent()
+    generateHTML: function (id, filename) {
+      let content = getContent(id)
       let rawHTML = getRawHTML(content)
-      let filename = 'privacy_policy'
       downloadHTML(filename, rawHTML)
     },
     generate: function () {
@@ -82,8 +81,8 @@ function getRawHTML (content) {
   return html
 }
 
-function getContent () {
-  var content = document.getElementById('privacy_content')
+function getContent (id) {
+  var content = document.getElementById(id)
   return content.innerHTML
 }
 
