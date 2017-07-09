@@ -17,7 +17,8 @@ var vueapp = new Vue({
     pidInfo: '[add whatever else you collect here, e.g. users name | address | location | pictures]',
     gps: true,
     admob: false,
-    firebase_analytics: false
+    firebase_analytics: false,
+    piwik: false
 
   },
   methods: {
