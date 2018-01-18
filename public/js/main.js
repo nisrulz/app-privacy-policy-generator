@@ -18,8 +18,9 @@ var vueapp = new Vue({
     gps: true,
     admob: false,
     firebase_analytics: false,
-    piwik: false
-
+    piwik: false,
+    fabric: false,
+    crashlytics:false
   },
   methods: {
     selectAllText: function (id) {

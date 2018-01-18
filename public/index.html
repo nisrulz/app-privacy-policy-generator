@@ -129,9 +129,9 @@
             </div>
             <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-grid--no-spacing mdl-shadow--1dp">
               <div class="mdl-card__supporting-text">
-                <h4>Include links to privacy policy of Third Party Services</h4>
+                <h4>Include links to privacy policy of Third Party Services <small>(Scroll for more)</small></h4>
 
-                <ul class='mdl-list'>
+                <ul class='mdl-list' style="overflow-y: scroll; height: 30vh;">
                   <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
                      <img src="images/gps.png" alt="Google Play Services logo" class="thirdparty-logo">
@@ -157,8 +157,30 @@
 
                   <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
-                      <img src="images/firebase.png" alt="Firebase logo" class="thirdparty-logo">
-                      Firebase Analytics
+                      <img src="images/fabric.png" alt="Fabric logo" class="thirdparty-logo">
+                      Fabric
+                    </span>
+                    <span class="mdl-list__item-secondary-action">
+                      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-fabric">
+                        <input type="checkbox" id="list-switch-fabric" class="mdl-switch__input" v-model="fabric" />
+                      </label>
+                    </span>
+                  </li>
+
+                  <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                      <img src="images/crashlytics.png" alt="Crashlytics logo" class="thirdparty-logo"> Crashlytics
+                    </span>
+                    <span class="mdl-list__item-secondary-action">
+                      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-crashlytics">
+                        <input type="checkbox" id="list-switch-crashlytics" class="mdl-switch__input" v-model="crashlytics" />
+                      </label>
+                    </span>
+                  </li>
+
+                  <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                      <img src="images/firebase.png" alt="Firebase logo" class="thirdparty-logo"> Firebase Analytics
                     </span>
                     <span class="mdl-list__item-secondary-action">
                       <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-firebase_analytics">
@@ -210,12 +232,18 @@
                   </p>
                   <p>The app does use third party services that may collect information used to identify you.</p>
 
-                  <div v-if="gps || admob || firebase_analytics || piwik">
-                    <p>Link to privacy policy of third party service providers used by the app </p>
+                  <div v-if="gps || admob || firebase_analytics || piwik || fabric || crashlytics">
+                    <p>Link to privacy policy of third party service providers used by the app</p>
                     <ul>
                       <li v-if="gps"><a href="https://www.google.com/policies/privacy/" target="_blank">Google Play Services</a></li>
                       <li v-if="admob"><a href="https://support.google.com/admob/answer/6128543?hl=en" target="_blank">AdMob</a></li>
                       <li v-if="firebase_analytics"><a href="https://firebase.google.com/policies/analytics" target="_blank">Firebase Analytics</a></li>
+                      <li v-if="fabric">
+                        <a href="https://fabric.io/privacy" target="_blank">Fabric</a>
+                      </li>
+                      <li v-if="crashlytics">
+                        <a href="http://try.crashlytics.com/terms/privacy-policy.pdf" target="_blank">Crashlytics</a>
+                      </li>
                        <li v-if="piwik"><a href="https://piwik.org/privacy-policy/" target="_blank">Piwik</a></li>
                     </ul>
                   </div>
