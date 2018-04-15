@@ -16,7 +16,12 @@ Goto [Webapp](https://app-privacy-policy-generator.firebaseapp.com/)
 
 
 # Pull Requests
-I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request.
+I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
+  1. If its a feature, bugfix, or anything please only change code to what you specify.
+  1. Please keep PR titles easy to read and descriptive of changes, this will make them easier to merge :)
+  1. Pull requests _must_ be made against `develop` branch. Any other branch (unless specified by the maintainers) will get rejected.
+  1. Check for existing [issues](https://github.com/nisrulz/app-privacy-policy-generator/issues) first, before filing an issue.
+  1. Have fun!
 
 ## Author & support
 This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisrulz.github.io#nishant-srivastava) but hopefully developed and maintained by many others. See the [the list of contributors here](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
@@ -25,7 +30,7 @@ This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisr
 >  + [PayPal](https://www.paypal.me/nisrulz/5)
 >  + Bitcoin Address: 13PjuJcfVW2Ad81fawqwLtku4bZLv1AxCL
 >
-> I love using my work and I'm available for contract work. Freelancing helps to maintain and keep [my open source projects](https://github.com/nisrulz/) up to date!
+> I love using my work and thus maintain and keep [my open source projects](https://github.com/nisrulz/) up to date!
 
 License
 =======
