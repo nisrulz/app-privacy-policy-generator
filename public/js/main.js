@@ -20,7 +20,9 @@ var vueapp = new Vue({
     firebase_analytics: false,
     piwik: false,
     fabric: false,
-    crashlytics:false
+    crashlytics:false,
+    osType: '',
+    requirementOfSystem :'system'
   },
   methods: {
     selectAllText: function (id) {
@@ -68,6 +70,24 @@ var vueapp = new Vue({
         case 'Ad Supported':
           this.typeOfAppTxt = 'an ' + this.typeOfApp
           break
+      }
+
+      switch (this.osType) {
+        case 'Android':{
+        this.osType = 'Android'
+        this.requirementOfSystem = 'system'
+        break
+        }
+        case 'iOS':{
+          this.osType = 'iOS'
+          this.requirementOfSystem = 'system'
+          break
+        }
+        case 'Android & iOS':{
+          this.osType = 'Android & iOS'
+          this.requirementOfSystem = 'both systems'
+          break
+        }
       }
 
       document.getElementById('privacy_tab').click()

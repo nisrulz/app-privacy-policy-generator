@@ -102,10 +102,10 @@
                 &nbsp;&nbsp;
                 <div class="mdl-textfield mdl-js-textfield">
                   <select v-model="typeOfDev" class="form-control">
-                  <option value="" disabled>Choose Dev Type</option>
-                  <option>Individual</option>
-                  <option>Company</option>
-                </select>
+                    <option value="" disabled>Choose Dev Type</option>
+                    <option>Individual</option>
+                    <option>Company</option>
+                  </select>
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield" v-if="typeOfDev=='Company'">
@@ -120,7 +120,15 @@
 
                 <div class="mdl-textfield mdl-js-textfield" style="width: 100%;">
                   <input class="mdl-textfield__input" type="text" v-model="pidInfoIn" placeholder="Personally Identifiable Information you collect (comma separated)">
+                </div>
 
+                <div class="mdl-textfield mdl-js-textfield">
+                  <select v-model="osType" class="form-control">
+                    <option value="" disabled>Choose Mobile OS</option>
+                    <option>Android</option>
+                    <option>iOS</option>
+                    <option>Android & iOS</option>
+                  </select>
                 </div>
               </div>
               <div class="mdl-card__actions">
@@ -248,7 +256,7 @@
                   </div>
                   <p><strong>Log Data</strong></p>
                   <p> {{iOrWe | capitalize }} want to inform you that whenever you use {{myOrOur}} Service, in a case of an
-                    error in the app {{iOrWe }} collect data and information (through third party products) on your phone
+                    error in the app {{iOrWe}} collect data and information (through third party products) on your phone
                     called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address,
                     device name, operating system version, the configuration of the app when utilizing {{myOrOur }} Service,
                     the time and date of your use of the Service, and other statistics.
@@ -334,7 +342,7 @@
 
                     <p>With respect to {{devOrCompanyName}}’s responsibility for your use of the app, when you’re using the app, it’s important to bear in mind that although we endeavour to ensure that it is updated and correct at all times, we do rely on third parties to provide information to us so that we can make it available to you. {{devOrCompanyName}} accepts no liability for any loss, direct or indirect, you experience as a result of relying wholly on this functionality of the app.</p>
 
-                    <p>At some point, we may wish to update the app. The app is currently available on Android and iOS – the requirements for both systems (and for any additional systems we decide to extend the availability of the app to) may change, and you’ll need to download the updates if you want to keep using the app. {{devOrCompanyName}} does not promise that it will always update the app so that it is relevant to you and/or works with the iOS/Android version that you have installed on your device. However, you promise to always accept updates to the application when offered to you, We may also wish to stop providing the app, and may terminate use of it at any time without giving notice of termination to you. Unless we tell you otherwise, upon any termination, (a) the rights and licenses granted to you in these terms will end; (b) you must stop using the app, and (if needed) delete it from your device.</p>
+                    <p>At some point, we may wish to update the app. The app is currently available on {{osType}} – the requirements for {{requirementOfSystem}}(and for any additional systems we decide to extend the availability of the app to) may change, and you’ll need to download the updates if you want to keep using the app. {{devOrCompanyName}} does not promise that it will always update the app so that it is relevant to you and/or works with the {{osType}} version that you have installed on your device. However, you promise to always accept updates to the application when offered to you, We may also wish to stop providing the app, and may terminate use of it at any time without giving notice of termination to you. Unless we tell you otherwise, upon any termination, (a) the rights and licenses granted to you in these terms will end; (b) you must stop using the app, and (if needed) delete it from your device.</p>
 
                     <p><strong>Changes to This Terms and Conditions</strong></p>
                     <p> {{iOrWe | capitalize }} may update our Terms and Conditions from time to time. Thus, you are advised to review
