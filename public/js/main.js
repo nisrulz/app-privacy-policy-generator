@@ -1,20 +1,20 @@
 var vueapp = new Vue({
   el: '#vueapp',
   data: {
-    iOrWe: '[I | we]',
+    iOrWe: '[I/We]',
     typeOfApp: '',
-    typeOfAppTxt: '[open source | free | freemium | ad-supported | commercial]',
+    typeOfAppTxt: '[open source/free/freemium/ad-supported/commercial]',
     typeOfDev: '',
     appName: '[App Name]',
-    myOrOur: '[my|our]',
-    meOrUs: '[me|us]',
+    myOrOur: '[my/our]',
+    meOrUs: '[me/us]',
     atNoCost: '[at no cost]',
-    retainedInfo: '[retained on your device and is not collected by [me|us] in any way]|[will be retained by us and used as described in this privacy policy].',
+    retainedInfo: '[retained on your device and is not collected by [me/us] in any way]/[retained by us and used as described in this privacy policy].',
     devName: '',
     companyName: '',
-    devOrCompanyName: '[Developer name or Company name]',
+    devOrCompanyName: '[Developer/Company name]',
     pidInfoIn: '',
-    pidInfo: '[add whatever else you collect here, e.g. users name | address | location | pictures]',
+    pidInfo: '[add whatever else you collect here, e.g. users name, address, location, pictures]',
     gps: true,
     admob: false,
     firebase_analytics: false,
@@ -43,7 +43,7 @@ var vueapp = new Vue({
         this.iOrWe = 'we'
         this.myOrOur = 'our'
         this.meOrUs = 'us'
-        this.retainedInfo = 'will be retained by us and used as described in this privacy policy.'
+        this.retainedInfo = 'retained by us and used as described in this privacy policy.'
       }
 
       if (this.typeOfApp === 'Commercial') {
