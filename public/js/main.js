@@ -9,7 +9,7 @@ var vueapp = new Vue({
     myOrOur: '[my/our]',
     meOrUs: '[me/us]',
     atNoCost: '[at no cost]',
-    retainedInfo: '[retained on your device and is not collected by [me/us] in any way]/[retained by us and used as described in this privacy policy].',
+    retainedInfo: '[retained on your device and is not collected by [me/us] in any way]/[retained by us and used as described in this privacy policy]',
     devName: '',
     companyName: '',
     devOrCompanyName: '[Developer/Company name]',
@@ -45,7 +45,7 @@ var vueapp = new Vue({
         this.iOrWe = 'we'
         this.myOrOur = 'our'
         this.meOrUs = 'us'
-        this.retainedInfo = 'retained by us and used as described in this privacy policy.'
+        this.retainedInfo = 'retained by us and used as described in this privacy policy'
       }
 
       if (this.typeOfApp === 'Commercial') {
