@@ -3,9 +3,9 @@
 
 # TEAM
 
-    Nishant Srivastava -- Software Engineer -- @nisrulz
+    Nishant Srivastava -- Android Engineer -- @nisrulz
 
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    jQuery, Modernizr
+    jQuery, Modernizr, VueJs
