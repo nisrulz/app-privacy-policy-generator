@@ -1,7 +1,7 @@
-# **App Privacy Policy Generator**
-Simple web app to generate a generic privacy policy for apps
+# App Privacy Policy Generator
+A simple web app to generate a generic privacy policy for your app
 
-Goto [Webapp](https://app-privacy-policy-generator.firebaseapp.com/)
+Check out the [web app](https://app-privacy-policy-generator.firebaseapp.com/)!
 
 ### Featured in
 [![AndroidDev Digest](https://img.shields.io/badge/AndroidDev%20Digest-%23133-blue.svg)](https://www.androiddevdigest.com/digest-133/)
@@ -10,10 +10,8 @@ Goto [Webapp](https://app-privacy-policy-generator.firebaseapp.com/)
 [![GitHub stars](https://img.shields.io/github/stars/nisrulz/app-privacy-policy-generator.svg?style=social&label=Star)](https://github.com/nisrulz/app-privacy-policy-generator) [![GitHub forks](https://img.shields.io/github/forks/nisrulz/app-privacy-policy-generator.svg?style=social&label=Fork)](https://github.com/nisrulz/app-privacy-policy-generator/fork) [![GitHub watchers](https://img.shields.io/github/watchers/nisrulz/app-privacy-policy-generator.svg?style=social&label=Watch)](https://github.com/nisrulz/app-privacy-policy-generator) [![GitHub followers](https://img.shields.io/github/followers/nisrulz.svg?style=social&label=Follow)](https://github.com/nisrulz/app-privacy-policy-generator)  
 [![Twitter Follow](https://img.shields.io/twitter/follow/nisrulz.svg?style=social)](https://twitter.com/nisrulz)
 
-## Webapp Screenshot
-
+## Web App Screenshot
 ![screenshot](/img/sc1.jpg)
-
 
 # Pull Requests
 I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
@@ -23,7 +21,7 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
   1. Check for existing [issues](https://github.com/nisrulz/app-privacy-policy-generator/issues) first, before filing an issue.
   1. Have fun!
 
-## Author & support
+## Author & Support
 This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisrulz.github.io#nishant-srivastava) but hopefully developed and maintained by many others. See the [the list of contributors here](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
 
 > If you appreciate my work, consider buying me a cup of :coffee: to keep me recharged :metal:
