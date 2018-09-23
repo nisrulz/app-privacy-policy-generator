@@ -46,12 +46,14 @@ var vueapp = new Vue({
     },
     generateHTML: function (id, filename) {
       let content = getContent(id)
-      let rawHTML = getRawHTML(content)
+      let title = getTitle(id)
+      let rawHTML = getRawHTML(content, title)
       downloadHTML(filename, rawHTML)
     },
     generateMD: function (id, filename) {
       let content = getContent(id)
-      let rawHTML = getRawHTML(content)
+      let title = getTitle(id)
+      let rawHTML = getRawHTML(content, title)
       let markdown = convertHtmlToMd(rawHTML)
       downloadMD(filename, markdown)
     },
@@ -125,8 +127,8 @@ function convertHtmlToMd (html) {
   return markdown
 }
 
-function getRawHTML (content) {
-  var head = '<!DOCTYPE html><html> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width"> <title>Privacy Policy</title> <style>body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; padding:1em;}</style></head> <body>'
+function getRawHTML (content, title) {
+  var head = '<!DOCTYPE html><html> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width"> <title>' + title + '</title> <style>body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; padding:1em;}</style></head> <body>'
   var end = '</body></html>'
   var html = head + content + end
   return html
@@ -135,6 +137,12 @@ function getRawHTML (content) {
 function getContent (id) {
   var content = document.getElementById(id)
   return content.innerHTML
+}
+
+function getTitle (id) {
+  var content = document.getElementById(id)
+  var title = content.getElementsByTagName('h2')[0]
+  return title.innerHTML
 }
 
 function selectText (containerId) {
