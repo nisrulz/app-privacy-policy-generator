@@ -49,6 +49,12 @@ var vueapp = new Vue({
       let rawHTML = getRawHTML(content)
       downloadHTML(filename, rawHTML)
     },
+    generateMD: function (id, filename) {
+      let content = getContent(id)
+      let rawHTML = getRawHTML(content)
+      let markdown = convertHtmlToMd(rawHTML)
+      downloadMD(filename, markdown)
+    },
     generate: function () {
       if (this.typeOfDev === 'Individual') {
         this.devOrCompanyName = this.devName
@@ -111,6 +117,14 @@ var vueapp = new Vue({
   }
 })
 
+function convertHtmlToMd (html) {
+  let markdown = toMarkdown(html, {converters: [{
+    filter: 'div',
+    replacement: function (content) { return content }
+  }]})
+  return markdown
+}
+
 function getRawHTML (content) {
   var head = '<!DOCTYPE html><html> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width"> <title>Privacy Policy</title> <style>body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; padding:1em;}</style></head> <body>'
   var end = '</body></html>'
@@ -154,4 +168,9 @@ function download (filename, text, format) {
 function downloadHTML (filename, content) {
   filename += '.html'
   download(filename, content, 'data:text/html')
+}
+
+function downloadMD (filename, content) {
+  filename += '.md'
+  download(filename, content, 'data:text/markdown')
 }

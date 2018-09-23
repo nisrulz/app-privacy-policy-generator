@@ -345,7 +345,8 @@
                 </div>
               </div>
               <div class="mdl-card__actions">
-                <a href="#" class="mdl-button" v-on:click="generateHTML('privacy_content', 'privacy_policy')">Download HTML</a>or
+                <a href="#" class="mdl-button" v-on:click="generateHTML('privacy_content', 'privacy_policy')">Download HTML</a> /
+                <a href="#" class="mdl-button" v-on:click="generateMD('privacy_content', 'privacy_policy')">Download Markdown</a> or
                 <a href="#" v-on:click="selectAllText('privacy_content')">Select all</a> and copy
               </div>
             </div>
@@ -387,7 +388,8 @@
                 </div>
               </div>
             <div class="mdl-card__actions">
-                <a href="#" class="mdl-button" v-on:click="generateHTML('tandc_content','terms_and_conditions')">Download HTML</a>or
+                <a href="#" class="mdl-button" v-on:click="generateHTML('tandc_content','terms_and_conditions')">Download HTML</a> /
+                <a href="#" class="mdl-button" v-on:click="generateMD('tandc_content', 'terms_and_conditions')">Download Markdown</a> or
                 <a href="#" v-on:click="selectAllText('tandc_content')">Select all</a> and copy
               </div>
             </div>
@@ -448,6 +450,10 @@
 
     <!-- ClipboardJS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js" integrity="sha256-dFEb+kXsOlXDFU4a9+EwfHE8z1hUJhEGTUb3zkhybYM=" crossorigin="anonymous"></script>
+
+    <!-- to-markdown -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/to-markdown/3.1.1/to-markdown.min.js" integrity="sha256-2PIa0cHy6lNEesnk4/qokv291Whx/uhAy2V6WL2zmfo=" crossorigin="anonymous"></script>
+
     <script src="js/main.js"></script>
   </body>
 
