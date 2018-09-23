@@ -128,20 +128,19 @@ function convertHtmlToMd (html) {
 }
 
 function getRawHTML (content, title) {
-  let html = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width">
-      <title>` + title + `</title>
-      <style> body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; padding:1em; } </style>
-    </head>
-    <body>
-    ` + content + `
-    </body>
-    </html>
-  `
+  let html = "<!DOCTYPE html>\n\
+<html>\n\
+<head>\n\
+  <meta charset='utf-8'>\n\
+  <meta name='viewport' content='width=device-width'>\n\
+  <title>" + title + "</title>\n\
+  <style> body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding:1em; } </style>\n\
+</head>\n\
+<body>\n\
+" + content + "\n\
+</body>\n\
+</html>\n\
+  "
   return html
 }
 
