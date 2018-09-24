@@ -46,8 +46,16 @@ var vueapp = new Vue({
     },
     generateHTML: function (id, filename) {
       let content = getContent(id)
-      let rawHTML = getRawHTML(content)
+      let title = getTitle(id)
+      let rawHTML = getRawHTML(content, title)
       downloadHTML(filename, rawHTML)
+    },
+    generateMD: function (id, filename) {
+      let content = getContent(id)
+      let title = getTitle(id)
+      let rawHTML = getRawHTML(content, title)
+      let markdown = convertHtmlToMd(rawHTML)
+      downloadMD(filename, markdown)
     },
     generate: function () {
       if (this.typeOfDev === 'Individual') {
@@ -111,16 +119,40 @@ var vueapp = new Vue({
   }
 })
 
-function getRawHTML (content) {
-  var head = '<!DOCTYPE html><html> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width"> <title>Privacy Policy</title> <style>body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; padding:1em;}</style></head> <body>'
-  var end = '</body></html>'
-  var html = head + content + end
+function convertHtmlToMd (html) {
+  let markdown = toMarkdown(html, {converters: [{
+    filter: 'div',
+    replacement: function (content) { return content }
+  }]})
+  return markdown
+}
+
+function getRawHTML (content, title) {
+  let html = "<!DOCTYPE html>\n\
+<html>\n\
+<head>\n\
+  <meta charset='utf-8'>\n\
+  <meta name='viewport' content='width=device-width'>\n\
+  <title>" + title + "</title>\n\
+  <style> body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding:1em; } </style>\n\
+</head>\n\
+<body>\n\
+" + content + "\n\
+</body>\n\
+</html>\n\
+  "
   return html
 }
 
 function getContent (id) {
   var content = document.getElementById(id)
   return content.innerHTML
+}
+
+function getTitle (id) {
+  var content = document.getElementById(id)
+  var title = content.getElementsByTagName('h2')[0]
+  return title.innerHTML
 }
 
 function selectText (containerId) {
@@ -154,4 +186,9 @@ function download (filename, text, format) {
 function downloadHTML (filename, content) {
   filename += '.html'
   download(filename, content, 'data:text/html')
+}
+
+function downloadMD (filename, content) {
+  filename += '.md'
+  download(filename, content, 'data:text/markdown')
 }
