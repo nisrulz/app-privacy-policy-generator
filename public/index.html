@@ -213,6 +213,18 @@
                     </span>
                   </li>
 
+                  <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                     <img src="images/facebook.png" alt="Facebook logo" class="thirdparty-logo">
+                      Facebook
+                    </span>
+                    <span class="mdl-list__item-secondary-action">
+                      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-facebook">
+                        <input type="checkbox" id="list-switch-facebook" class="mdl-switch__input" v-model="facebook" />
+                      </label>
+                    </span>
+                  </li>
+
                    <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
                       <img src="images/piwik.png" alt="Piwik logo" class="thirdparty-logo">
@@ -267,12 +279,13 @@
                   </p>
                   <p>The app does use third party services that may collect information used to identify you.</p>
 
-                  <div v-if="gps || admob || firebase_analytics || piwik || fabric || crashlytics">
+                  <div v-if="gps || admob || firebase_analytics || facebook || piwik || fabric || crashlytics">
                     <p>Link to privacy policy of third party service providers used by the app</p>
                     <ul>
                       <li v-if="gps"><a href="https://www.google.com/policies/privacy/" target="_blank">Google Play Services</a></li>
                       <li v-if="admob"><a href="https://support.google.com/admob/answer/6128543?hl=en" target="_blank">AdMob</a></li>
                       <li v-if="firebase_analytics"><a href="https://firebase.google.com/policies/analytics" target="_blank">Firebase Analytics</a></li>
+                      <li v-if="facebook"><a href="https://www.facebook.com/about/privacy" target="_blank">Facebook</a></li>
                       <li v-if="fabric">
                         <a href="https://fabric.io/privacy" target="_blank">Fabric</a>
                       </li>

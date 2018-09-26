@@ -37,6 +37,7 @@ var vueapp = new Vue({
     fabric: false,
     clicky: false,
     crashlytics:false,
+    facebook:false,
     osType: '',
     requirementOfSystem :'system'
   },
