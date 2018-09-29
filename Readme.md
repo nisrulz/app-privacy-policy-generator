@@ -13,6 +13,26 @@ Check out the [web app](https://app-privacy-policy-generator.firebaseapp.com/)!
 ## Web App Screenshot
 ![screenshot](/img/sc1.jpg)
 
+# Contributing more 3rd Party Service's Privacy links
+The webapp uses a JSON aary to populate the list of 3rd party services section. If you want that a new 3rd party service be added to the section then simply add a new JSON item to the JSON Array in [`js/thirdpartyservices.js`](js/thirdpartyservices.js)
+The format is very simple and you only need to provide fill the fields as follows:
+```
+[
+  ..
+  {
+    name: 'Google Play Services',
+    model: 'gps', // this is stores the name of the model
+    gps: true, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
+    logo: 'images/gps.png',
+    link: {
+      privacy: 'https://www.google.com/policies/privacy/',
+      terms: ''
+    }
+  }
+]
+```
+> Note: You also will have to drop the logo image into the `images` folder. Make sure the logo is 160 × 160 in size.
+
 # Pull Requests
 I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
   1. If its a feature, bugfix, or anything please only change code to what you specify.
