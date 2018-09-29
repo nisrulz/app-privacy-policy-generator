@@ -19,6 +19,7 @@ The format is very simple and you only need to provide fill the fields as follow
 ```
 [
   ..
+  }, // Donot forget to add a ',' before adding your new item in the array
   {
     name: 'Google Play Services',
     model: 'gps', // this is stores the name of the model
@@ -31,7 +32,7 @@ The format is very simple and you only need to provide fill the fields as follow
   }
 ]
 ```
-> Note: You also will have to drop the logo image into the `public/images/` folder. Make sure the logo is 160 × 160 in size.
+> Note: You also will have to drop the logo image into the [`public/images/`](public/images/) folder. Make sure the logo is 160 × 160 in size.
 
 # Pull Requests
 I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
