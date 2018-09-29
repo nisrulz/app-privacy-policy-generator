@@ -14,7 +14,8 @@ Check out the [web app](https://app-privacy-policy-generator.firebaseapp.com/)!
 ![screenshot](/img/sc1.jpg)
 
 # Contributing more 3rd Party Service's Privacy links
-The webapp uses a JSON aary to populate the list of 3rd party services section. If you want that a new 3rd party service be added to the section then simply add a new JSON item to the JSON Array in [`public/js/thirdpartyservices.js`](public/js/thirdpartyservices.js)
+The webapp uses a JSON array to populate the list of 3rd party services section. If you want contribute a new 3rd party service for the section then open a Pull Request which simply adds a new JSON item to the JSON Array in [`public/js/thirdpartyservices.js`](public/js/thirdpartyservices.js)
+
 The format is very simple and you only need to provide fill the fields as follows:
 ```
 [
