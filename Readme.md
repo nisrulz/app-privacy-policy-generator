@@ -14,7 +14,7 @@ Check out the [web app](https://app-privacy-policy-generator.firebaseapp.com/)!
 ![screenshot](/img/sc1.jpg)
 
 # Contributing more 3rd Party Service's Privacy links
-The webapp uses a JSON aary to populate the list of 3rd party services section. If you want that a new 3rd party service be added to the section then simply add a new JSON item to the JSON Array in [`js/thirdpartyservices.js`](js/thirdpartyservices.js)
+The webapp uses a JSON aary to populate the list of 3rd party services section. If you want that a new 3rd party service be added to the section then simply add a new JSON item to the JSON Array in [`public/js/thirdpartyservices.js`](public/js/thirdpartyservices.js)
 The format is very simple and you only need to provide fill the fields as follows:
 ```
 [
@@ -31,7 +31,7 @@ The format is very simple and you only need to provide fill the fields as follow
   }
 ]
 ```
-> Note: You also will have to drop the logo image into the `images` folder. Make sure the logo is 160 × 160 in size.
+> Note: You also will have to drop the logo image into the `public/images/` folder. Make sure the logo is 160 × 160 in size.
 
 # Pull Requests
 I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
