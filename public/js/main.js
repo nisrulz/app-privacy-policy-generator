@@ -20,6 +20,7 @@ var vueapp = new Vue({
     typeOfAppTxt: '[open source/free/freemium/ad-supported/commercial]',
     typeOfDev: '',
     appName: '[App Name]',
+    appContact:  '[App Contact informations]',
     myOrOur: '[my/our]',
     meOrUs: '[me/us]',
     atNoCost: '[at no cost]',
