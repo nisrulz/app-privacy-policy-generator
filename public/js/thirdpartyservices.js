@@ -92,5 +92,15 @@ var thirdPartyServicesJsonArray = [
       privacy: 'https://clicky.com/terms#privacy',
       terms: ''
     }
+  },
+  {
+    name: 'Flurry Analytics',
+    model: 'flurry',
+    flurry: false,
+    logo: 'images/flurry.png',
+    link: {
+      privacy: 'https://developer.yahoo.com/flurry/legal-privacy/terms-service/',
+      terms: ''
+    }
   }
 ]
