@@ -100,7 +100,7 @@ var thirdPartyServicesJsonArray = [
     logo: 'images/flurry.png',
     link: {
       privacy: 'https://privacy.oath.com',
-      terms: ''
+      terms: 'https://developer.yahoo.com/flurry/legal-privacy/terms-service/flurry-analytics-terms-service.html'
     }
   }
 ]
