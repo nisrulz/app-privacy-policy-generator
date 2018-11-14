@@ -35,6 +35,7 @@ var vueapp = new Vue({
     piwik: false,
     fabric: false,
     clicky: false,
+    flurry: false,
     crashlytics: false,
     facebook: false,
     osType: '',
