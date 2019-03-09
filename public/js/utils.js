@@ -12,21 +12,19 @@
     See the License for the specific language governing permissions and
     limitations under the License. */
 
-function convertHtmlToMd (html) {
+function convertHtmlToMd(html) {
   let markdown = toMarkdown(html, {
-    converters: [
-      {
-        filter: 'div',
-        replacement: function (content) {
-          return content
-        }
+    converters: [{
+      filter: 'div',
+      replacement: function (content) {
+        return content
       }
-    ]
+    }]
   })
   return markdown
 }
 
-function getRawHTML (content, title) {
+function getRawHTML(content, title) {
   let html =
     "<!DOCTYPE html>\n\
     <html>\n\
@@ -48,18 +46,18 @@ function getRawHTML (content, title) {
   return html
 }
 
-function getContent (id) {
+function getContent(id) {
   var content = document.getElementById(id)
   return content.innerHTML
 }
 
-function getTitle (id) {
+function getTitle(id) {
   var content = document.getElementById(id)
-  var title = content.getElementsByTagName('h2')[0]
+  var title = content.getElementsByTagName('strong')[0]
   return title.innerHTML
 }
 
-function selectText (containerId) {
+function selectText(containerId) {
   var range
   if (document.selection) {
     range = document.body.createTextRange()
@@ -72,27 +70,31 @@ function selectText (containerId) {
   }
 }
 
-function download (filename, text, format) {
-  format += ';charset=utf-8,'
-  var pom = document.createElement('a')
-  pom.setAttribute('href', format + encodeURIComponent(text))
-  pom.setAttribute('download', filename)
-
-  if (document.createEvent) {
-    var event = document.createEvent('MouseEvents')
-    event.initEvent('click', true, true)
-    pom.dispatchEvent(event)
-  } else {
-    pom.click()
-  }
+function loadInTextView(id, content) {
+  document.getElementById(id).value = content
 }
 
-function downloadHTML (filename, content) {
-  filename += '.html'
-  download(filename, content, 'data:text/html')
-}
+// function download (filename, text, format) {
+//   format += ';charset=utf-8,'
+//   var pom = document.createElement('a')
+//   pom.setAttribute('href', format + encodeURIComponent(text))
+//   pom.setAttribute('download', filename)
 
-function downloadMD (filename, content) {
-  filename += '.md'
-  download(filename, content, 'data:text/markdown')
-}
+//   if (document.createEvent) {
+//     var event = document.createEvent('MouseEvents')
+//     event.initEvent('click', true, true)
+//     pom.dispatchEvent(event)
+//   } else {
+//     pom.click()
+//   }
+// }
+
+// function downloadHTML (filename, content) {
+//   filename += '.html'
+//   download(filename, content, 'data:text/html')
+// }
+
+// function downloadMD (filename, content) {
+//   filename += '.md'
+//   download(filename, content, 'data:text/markdown')
+// }

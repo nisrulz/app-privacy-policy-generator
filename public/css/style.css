@@ -1,0 +1,257 @@
+body,
+html {
+  background: whitesmoke;
+}
+
+li {
+  margin: 10px;
+}
+
+.hero.is-primary {
+  color: white;
+  background-color: transparent;
+}
+
+.hero-body {
+  padding-bottom: 0.6em;
+}
+
+#app> :nth-child(2) {
+  padding-top: 0;
+}
+
+.help.form-label {
+  font-size: 1em;
+  font-weight: 600;
+  color: #565656;
+}
+
+#footer {
+  color: white;
+  margin: 0 auto;
+  font-weight: 600;
+}
+
+#footer a:visited,
+#footer a {
+  color: whitesmoke;
+  text-decoration: underline;
+}
+
+.column.is-information {
+  padding: 2em;
+  height: 100%;
+}
+
+.center-block {
+  margin: 0 auto;
+  display: block;
+}
+
+.box {
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  height: 65vh;
+}
+
+.box span.icon {
+  float: right;
+  font-size: 1.7em;
+  padding: 2rem 2rem 0 0;
+}
+
+.is-large.fab {
+  font-size: 7em;
+}
+
+.is-large.fas {
+  font-size: 5em;
+  margin-left: 0.2em;
+}
+
+.menu-list li a:hover {
+  background: #d9d9d9;
+}
+
+.token.number {
+  display: inline;
+  padding: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  vertical-align: inherit;
+  border-radius: inherit;
+  font-weight: inherit;
+  white-space: inherit;
+  background: inherit;
+  margin: inherit;
+}
+
+.footer {
+  background-color: white;
+}
+
+.scrollable {
+  height: 65vh;
+  display: flex;
+  overflow-y: auto;
+  flex-direction: column;
+}
+
+.heart-logo {
+  height: 1em;
+}
+
+.button-logo {
+  height: 1em;
+  margin-right: 5px;
+}
+
+.thirdparty-logo {
+  height: 1em;
+  padding-right: 2px;
+}
+
+
+#step-1,
+#step-2,
+#step-3 {
+  padding-bottom: 0.3em;
+  padding-top: 0.4em;
+}
+
+#page-404>div {
+  display: table-cell;
+  vertical-align: middle;
+  margin: 2em auto;
+}
+
+#page-404 {
+  color: #888;
+  display: table;
+  font-family: sans-serif;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+
+#page-404 h1 {
+  color: white;
+  font-size: 4em;
+  font-weight: 600;
+  text-align: center;
+}
+
+#page-404 p {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  color: white;
+
+  font-size: 2em;
+  font-weight: 200;
+
+}
+
+.modal-card-body ul {
+  list-style-type: disc;
+}
+
+.modal-card-body li {
+  margin-left: 2.5em;
+}
+
+.modal-card-body textarea {
+  height: 66%;
+  width: 100%;
+  border: none;
+}
+
+
+.gradient-bg {
+  background: linear-gradient(131deg, #4CAF50, #00BCD4);
+  background-size: 400% 400%;
+
+  -webkit-animation: GradientAnimation 42s ease infinite;
+  -moz-animation: GradientAnimation 42s ease infinite;
+  -o-animation: GradientAnimation 42s ease infinite;
+  animation: GradientAnimation 42s ease infinite;
+
+  @-webkit-keyframes GradientAnimation {
+    0% {
+      background-position: 0% 52%
+    }
+
+    50% {
+      background-position: 100% 49%
+    }
+
+    100% {
+      background-position: 0% 52%
+    }
+  }
+
+  @-moz-keyframes GradientAnimation {
+    0% {
+      background-position: 0% 52%
+    }
+
+    50% {
+      background-position: 100% 49%
+    }
+
+    100% {
+      background-position: 0% 52%
+    }
+  }
+
+  @-o-keyframes GradientAnimation {
+    0% {
+      background-position: 0% 52%
+    }
+
+    50% {
+      background-position: 100% 49%
+    }
+
+    100% {
+      background-position: 0% 52%
+    }
+  }
+
+  @keyframes GradientAnimation {
+    0% {
+      background-position: 0% 52%
+    }
+
+    50% {
+      background-position: 100% 49%
+    }
+
+    100% {
+      background-position: 0% 52%
+    }
+  }
+}
+
+.center-parent {
+  width: 100%;
+  text-align: center;
+}
+
+.center-parent>.child {
+  display: inline-block;
+  margin: 2px;
+}
+
+
+.column.is-information .nav-btn {
+  height: 10%;
+  cursor: grab;
+  opacity: 0.5;
+}
+
+.pattern-bg {
+  height: 100%;
+  width: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.33'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
