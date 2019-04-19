@@ -175,8 +175,30 @@
             </div>
           </section>
         </div>
+
         <div class="mdl-layout__tab-panel" id="privacypolicy">
           <section class="section--center mdl-grid">
+
+            <div class="mdl-cell mdl-cell--12-col mdl-shadow--2dp" id="fc-container">
+              <div id="fc-container-text">
+                <div style="color:#302428;">Free privacy policy hosting + website for {{appName}}.</div>
+                <div style="font-size:0.7em;color:#979193;">Powered by <a href="https://flycricket.com/?utm_source=partner&utm_medium=website&utm_campaign=privacy_generator" target="_blank">Flycricket</a></div>
+              </div>
+              <div id="fc-callouts">
+                <form action="https://app.flycricket.com/import/privacy" method="post" target="_blank" id="fc-form" onsubmit="return fc_submit(event)">
+                  <input type="hidden" name="fc-referrer" value="nishant">
+                  <input type="hidden" name="fc-body" id="fc-body">
+                  <input type="hidden" name="fc-name" id="fc-name" v-model="appName">
+                  <button class="mdl-button mdl-js-button mdl-button--raised" style="margin-right:8px;background:white;color:#00BCD4;">
+                    Learn More
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                    Deploy
+                  </button>
+                </form>
+              </div>
+            </div>
+
             <div class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--2dp">
               <div class="mdl-card__supporting-text">
                 <div id="privacy_content">
@@ -451,6 +473,7 @@
     <script src="js/thirdpartyservices.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/flycricket.js"></script>
   </body>
 
 </html>

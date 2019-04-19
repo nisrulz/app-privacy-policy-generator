@@ -407,3 +407,36 @@ select:focus {
   border-top: 0.375em solid rgba(0, 0, 0, 0.12);
   pointer-events: none;
 }
+
+/* Flycricket dialog */
+#fc-container {
+  background:#EAFAFD;
+  padding: 1em;
+  font-size: 1.2em;
+}
+#fc-container .mdl-button--accent {
+  background: #00BCD4;
+}
+#fc-container a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  font-weight: 400;
+}
+#fc-container a:hover {
+  color: #00BCD4;
+  text-decoration: underline;
+}
+#fc-container-text {
+  display:inline-block;
+}
+#fc-callouts {
+  margin-left:16px;
+  float: right;
+}
+@media only screen and (max-width: 491px)  {
+  #fc-callouts {
+    margin-top: 12px;
+  }
+}
+/* End Flycricket Dialog */
