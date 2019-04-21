@@ -181,15 +181,15 @@
 
             <div class="mdl-cell mdl-cell--12-col mdl-shadow--2dp" id="fc-container">
               <div id="fc-container-text">
-                <div style="color:#302428;">Free privacy policy hosting + website for {{appName}}.</div>
-                <div style="font-size:0.7em;color:#979193;">Powered by <a href="https://app.flycricket.com/r/nishant?utm_source=partner&utm_medium=website&utm_campaign=privacy_generator" target="_blank">Flycricket</a></div>
+                <div class="fc-title">Free privacy policy hosting + website for {{appName}}.</div>
+                <div class="fc-powered-by">Powered by <a href="https://app.flycricket.com/r/nishant?utm_source=partner&utm_medium=website&utm_campaign=privacy_generator" target="_blank">Flycricket</a></div>
               </div>
               <div id="fc-callouts">
                 <form action="https://app.flycricket.com/import/privacy" method="post" target="_blank" id="fc-form" onsubmit="return fc_submit(event)">
                   <input type="hidden" name="fc-referrer" value="nishant">
                   <input type="hidden" name="fc-body" id="fc-body">
                   <input type="hidden" name="fc-name" id="fc-name" v-model="appName">
-                  <button class="mdl-button mdl-js-button mdl-button--raised" style="margin-right:8px;background:white;color:#00BCD4;">
+                  <button class="mdl-button mdl-js-button mdl-button--raised fc-learn-more">
                     Learn More
                   </button>
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">

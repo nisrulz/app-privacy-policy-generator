@@ -430,9 +430,21 @@ select:focus {
 #fc-container-text {
   display:inline-block;
 }
+#fc-container-text .fc-title {
+  color:#302428;
+}
+#fc-container .fc-powered-by {
+  font-size:0.7em;
+  color:#979193;
+}
 #fc-callouts {
   margin-left:16px;
   float: right;
+}
+#fc-callouts .fc-learn-more {
+  margin-right:8px;
+  background:white;
+  color:#00BCD4;
 }
 @media only screen and (max-width: 491px)  {
   #fc-callouts {
