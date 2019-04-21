@@ -157,9 +157,9 @@
               </div>
             </div>
             <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-grid--no-spacing mdl-shadow--1dp">
-              <div class="mdl-card__supporting-text">
+              <div class="mdl-card__supporting-text" >
                 <h4>Include links to privacy policy of Third Party Services <small>(Scroll for more)</small></h4>
-                <ul class='mdl-list' style="overflow-y: scroll; height: 40vh;">
+                <ul class='mdl-list' style="overflow: scroll; height: 40vh;">
                   <li class="mdl-list__item" v-for="item in thirdPartyServices">
                     <span class="mdl-list__item-primary-content">
                       <img :src="item.logo" :alt="item.name" class="thirdparty-logo" /> {{ item.name }}
