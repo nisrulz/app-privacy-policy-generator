@@ -103,6 +103,9 @@
                   <input class="mdl-textfield__input" type="text" v-model="appName" placeholder="App Name">
                   <label class="mdl-textfield__label" for="appName">App Name</label>
                 </div>
+
+                <br/>
+
                 <div class="mdl-textfield mdl-js-textfield">
                   <input class="mdl-textfield__input" type="text" v-model="appContact" placeholder="App Contact informations (email, address, ... )">
                   <label class="mdl-textfield__label" for="appContact">App Contact informations (email, address, ... )</label>
@@ -120,7 +123,7 @@
                     <option>Commercial</option>
                   </select>
                 </div>
-                &nbsp;&nbsp;
+                <br/>
                 <div class="mdl-textfield mdl-js-textfield">
                   <select v-model="typeOfDev" class="form-control">
                     <option value="" disabled>Choose Dev Type</option>
@@ -157,9 +160,9 @@
               </div>
             </div>
             <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-grid--no-spacing mdl-shadow--1dp">
-              <div class="mdl-card__supporting-text">
+              <div class="mdl-card__supporting-text" >
                 <h4>Include links to privacy policy of Third Party Services <small>(Scroll for more)</small></h4>
-                <ul class='mdl-list' style="overflow-y: scroll; height: 40vh;">
+                <ul class='mdl-list'>
                   <li class="mdl-list__item" v-for="item in thirdPartyServices">
                     <span class="mdl-list__item-primary-content">
                       <img :src="item.logo" :alt="item.name" class="thirdparty-logo" /> {{ item.name }}
