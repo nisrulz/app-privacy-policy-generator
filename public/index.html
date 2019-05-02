@@ -298,12 +298,11 @@
                       Privacy Policy Generator</a></p>
                 </div>
               </div>
-              <div class="mdl-card__actions">
+              <div class="mdl-card__actions" style="text-align:center;">
                 <a href="#" class="mdl-button" v-on:click="generateHTML('privacy_content', 'privacy_policy')">Download HTML</a>
-                /
                 <a href="#" class="mdl-button" v-on:click="generateMD('privacy_content', 'privacy_policy')">Download Markdown</a>
-                or
-                <a href="#" v-on:click="selectAllText('privacy_content')">Select all</a> and copy
+                <a href="#" class="mdl-button" onclick="document.getElementById('fc-form').submit()">Deploy to Free Hosting</a>
+                <a href="#" class="mdl-button" v-on:click="selectAllText('privacy_content')">Select All &amp; Copy</a>
               </div>
             </div>
           </section>
