@@ -101,6 +101,14 @@ var thirdPartyServicesJsonArray = [
     link: {
       privacy: 'https://privacy.oath.com',
       terms: 'https://developer.yahoo.com/flurry/legal-privacy/terms-service/flurry-analytics-terms-service.html'
+    },
+    {
+    name: 'ACRA',
+    model: 'ACRA',
+    acra: false,
+    logo: 'images/acra.png',
+    link: {
+      privacy: 'https://github.com/ACRA/acra/',
+      terms: ''
     }
-  }
 ]
