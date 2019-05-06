@@ -104,7 +104,7 @@ var thirdPartyServicesJsonArray = [
     },
     {
     name: 'ACRA',
-    model: 'ACRA',
+    model: 'acra',
     acra: false,
     logo: 'images/acra.png',
     link: {
