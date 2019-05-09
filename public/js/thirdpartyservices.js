@@ -101,16 +101,15 @@ var thirdPartyServicesJsonArray = [
     link: {
       privacy: 'https://privacy.oath.com',
       terms: 'https://developer.yahoo.com/flurry/legal-privacy/terms-service/flurry-analytics-terms-service.html'
-    }
-      , // Donot forget to add a ',' before adding your new item in the array
+    },    
   {
     name: 'Fathom Analytics',
     model: 'fathom', // this is stores the name of the model
-    gps: true, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
+    fathom: true, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
     logo: 'images/fathom.png',
     link: {
       privacy: 'https://usefathom.com/privacy/',
       terms: 'https://usefathom.com/terms/'
     }
-  }
+  } // Donot forget to add a ',' before adding your new item in the array
 ]
