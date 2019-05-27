@@ -100,12 +100,24 @@ var thirdPartyServicesJsonArray = [
     logo: 'images/flurry.png',
     link: {
       privacy: 'https://privacy.oath.com',
-      terms: 'https://developer.yahoo.com/flurry/legal-privacy/terms-service/flurry-analytics-terms-service.html'
-    },    
+      terms:
+        'https://developer.yahoo.com/flurry/legal-privacy/terms-service/flurry-analytics-terms-service.html'
+    }
+  },
+  {
+    name: 'Appodeal',
+    model: 'appodeal',
+    appodeal: false,
+    logo: 'images/appodeal.png',
+    link: {
+      privacy: 'https://www.appodeal.com/home/privacy-policy/',
+      terms: 'https://www.appodeal.com/home/terms-of-service/'
+    }
+  },
   {
     name: 'Fathom Analytics',
     model: 'fathom', // this is stores the name of the model
-    fathom: true, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
+    fathom: false, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
     logo: 'images/fathom.png',
     link: {
       privacy: 'https://usefathom.com/privacy/',
