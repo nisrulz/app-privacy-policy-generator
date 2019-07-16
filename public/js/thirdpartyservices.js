@@ -133,5 +133,15 @@ var thirdPartyServicesJsonArray = [
         privacy: 'https://unity3d.com/legal/privacy-policy',
         terms: 'https://unity3d.com/legal/terms-of-service'
       }
-  } // Donot forget to add a ',' before adding your new item in the array
+  },
+  {
+	  name: 'GameAnalytics',
+	  model: 'gameanalytics',
+	  gameanalytics: false,
+	  logo: 'images/gameanalytics.png',
+	  links: {
+		  privacy: 'https://gameanalytics.com/privacy',
+		  terms: 'https://gameanalytics.com/terms'
+	  }
+  } // Do not forget to add a ',' before adding your new item in the array
 ]
