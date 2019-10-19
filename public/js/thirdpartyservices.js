@@ -125,6 +125,25 @@ var thirdPartyServicesJsonArray = [
     }
   },
   {
+     name: 'Unity',
+     model: 'unity',
+     unity: false,
+     logo: 'images/unity.png',
+     link: {
+       privacy: 'https://unity3d.com/legal/privacy-policy',
+       terms: 'https://unity3d.com/legal/terms-of-service'
+     }
+  },
+  {
+	  name: 'GameAnalytics',
+	  model: 'gameanalytics',
+	  gameanalytics: false,
+	  logo: 'images/gameanalytics.png',
+	  links: {
+		  privacy: 'https://gameanalytics.com/privacy',
+		  terms: 'https://gameanalytics.com/terms'
+	},
+  {
     name: 'SDKBOX',
     model: 'sdkbox', // this is stores the name of the model
     sdkbox: false, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
