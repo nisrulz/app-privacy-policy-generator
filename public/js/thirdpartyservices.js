@@ -142,6 +142,7 @@ var thirdPartyServicesJsonArray = [
     links: {
       privacy: 'https://gameanalytics.com/privacy',
       terms: 'https://gameanalytics.com/terms'
+    }
   },
   {
     name: 'SDKBOX',
