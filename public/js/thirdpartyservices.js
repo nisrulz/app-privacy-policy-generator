@@ -116,8 +116,8 @@ var thirdPartyServicesJsonArray = [
   },
   {
     name: 'Fathom Analytics',
-    model: 'fathom', // this is stores the name of the model
-    fathom: false, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
+    model: 'fathom',
+    fathom: false,
     logo: 'images/fathom.png',
     link: {
       privacy: 'https://usefathom.com/privacy/',
@@ -125,14 +125,14 @@ var thirdPartyServicesJsonArray = [
     }
   },
   {
-      name: 'Unity',
-      model: 'unity',
-      unity: false,
-      logo: 'images/unity.png',
-      link: {
-        privacy: 'https://unity3d.com/legal/privacy-policy',
-        terms: 'https://unity3d.com/legal/terms-of-service'
-      }
+     name: 'Unity',
+     model: 'unity',
+     unity: false,
+     logo: 'images/unity.png',
+     link: {
+       privacy: 'https://unity3d.com/legal/privacy-policy',
+       terms: 'https://unity3d.com/legal/terms-of-service'
+     }
   },
   {
 	  name: 'GameAnalytics',
@@ -142,6 +142,14 @@ var thirdPartyServicesJsonArray = [
 	  links: {
 		  privacy: 'https://gameanalytics.com/privacy',
 		  terms: 'https://gameanalytics.com/terms'
-	  }
-  } // Do not forget to add a ',' before adding your new item in the array
+	},
+  {
+    name: 'SDKBOX',
+    model: 'sdkbox', // this is stores the name of the model
+    sdkbox: false, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
+    logo: 'images/sdkbox.png',
+    link: {
+      privacy: 'https://www.sdkbox.com/privacy'
+    }
+  } // Donot forget to add a ',' before adding your new item in the array
 ]
