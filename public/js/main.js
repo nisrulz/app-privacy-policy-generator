@@ -43,6 +43,9 @@ var vueapp = new Vue({
     flurry: false,
     appodeal: false,
     fathom: false,
+    unity: false,
+    gameanalytics: false,
+    sdkbox: false,
     osType: '',
     requirementOfSystem: 'system',
     thirdPartyServices: thirdPartyServicesJsonArray
