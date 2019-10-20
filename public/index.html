@@ -366,7 +366,7 @@
                   </p>
 
                   <div
-                    v-if="gps || admob || firebase || facebook || fabric || crashlytics || piwik || clicky || flurry || appodeal || fathom || unity || gameanalytics || sdkbox"
+                    v-if="isServiceEnabled()"
                   >
                     <p>
                       Link to privacy policy of third party service providers
