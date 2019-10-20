@@ -134,22 +134,22 @@ var thirdPartyServicesJsonArray = [
     }
   },
   {
-    "name": "GameAnalytics",
-    "model": "gameanalytics",
-    "gameanalytics": false,
-    "logo": "images/gameanalytics.png",
-    "links": {
-      "privacy": "https://gameanalytics.com/privacy",
-      "terms": "https://gameanalytics.com/terms"
-    }
-  },
-  {
     "name": "SDKBOX",
     "model": "sdkbox",
     "sdkbox": false,
     "logo": "images/sdkbox.png",
     "link": {
       "privacy": "https://www.sdkbox.com/privacy"
+    }
+  },
+  {
+    "name": "GameAnalytics",
+    "model": "gameanalytics",
+    "gameanalytics": false,
+    "logo": "images/gameanalytics.png",
+    "link": {
+      "privacy": "https://gameanalytics.com/privacy",
+      "terms": "https://gameanalytics.com/terms"
     }
   }
 ]
