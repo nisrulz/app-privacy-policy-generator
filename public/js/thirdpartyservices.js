@@ -135,14 +135,15 @@ var thirdPartyServicesJsonArray = [
      }
   },
   {
-	  name: 'GameAnalytics',
-	  model: 'gameanalytics',
-	  gameanalytics: false,
-	  logo: 'images/gameanalytics.png',
-	  links: {
-		  privacy: 'https://gameanalytics.com/privacy',
-		  terms: 'https://gameanalytics.com/terms'
-	},
+    name: 'GameAnalytics',
+    model: 'gameanalytics',
+    gameanalytics: false,
+    logo: 'images/gameanalytics.png',
+    links: {
+      privacy: 'https://gameanalytics.com/privacy',
+      terms: 'https://gameanalytics.com/terms'
+    }
+  },
   {
     name: 'SDKBOX',
     model: 'sdkbox', // this is stores the name of the model
