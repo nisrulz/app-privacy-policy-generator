@@ -22,13 +22,13 @@ The format is very simple and you only need to provide fill the fields as follow
   ..
   }, // Donot forget to add a ',' before adding your new item in the array
   {
-    name: 'Google Play Services',
-    model: 'gps', // this is stores the name of the model
+    name: "Google Play Services",
+    model: "gps", // this is stores the name of the model
     gps: true, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
-    logo: 'images/gps.png',
+    logo: "images/gps.png",
     link: {
-      privacy: 'https://www.google.com/policies/privacy/',
-      terms: ''
+      privacy: "https://www.google.com/policies/privacy/",
+      terms: ""
     }
   }
 ]
