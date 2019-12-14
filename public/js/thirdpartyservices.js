@@ -44,6 +44,16 @@ var thirdPartyServicesJsonArray = [
     }
   },
   {
+    "name": "Firebase Crashlytics",
+    "model": "crashlytics",
+    "crashlytics": false,
+    "logo": "images/firebase.png",
+    "link": {
+      "privacy": "https://firebase.google.com/terms/crashlytics",
+      "terms": ""
+    }
+  },
+  {
     "name": "Facebook",
     "model": "facebook",
     "facebook": false,
@@ -60,16 +70,6 @@ var thirdPartyServicesJsonArray = [
     "logo": "images/fabric.png",
     "link": {
       "privacy": "https://fabric.io/privacy",
-      "terms": ""
-    }
-  },
-  {
-    "name": "Crashlytics",
-    "model": "crashlytics",
-    "crashlytics": false,
-    "logo": "images/crashlytics.png",
-    "link": {
-      "privacy": "http://try.crashlytics.com/terms/privacy-policy.pdf",
       "terms": ""
     }
   },
