@@ -559,6 +559,29 @@
                   </p>
 
                   <p>
+                    The app does use third party services that declare their own Terms and Conditions.
+                  </p>
+
+                  <div
+                    v-if="isServiceEnabled()"
+                  >
+                    <p>
+                      Link to Terms and Conditions of third party service providers
+                      used by the app
+                    </p>
+                    <ul>
+                      <li
+                        v-if="item[item.model]"
+                        v-for="item in thirdPartyServices"
+                      >
+                        <a :href="item.link.terms" target="_blank">{{
+                          item.name
+                        }}</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p>
                     You should be aware that there are certain things that
                     {{ devOrCompanyName }} will not take responsibility for.
                     Certain functions of the app will require the app to have an

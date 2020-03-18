@@ -45,6 +45,7 @@ var vueapp = new Vue({
     fathom: false,
     unity: false,
     gameanalytics: false,
+    onesignal: false,
     sdkbox: false,
     osType: '',
     requirementOfSystem: 'system',
@@ -52,7 +53,7 @@ var vueapp = new Vue({
   },
   methods: {
     isServiceEnabled:function(){
-      return (this.gps || this.admob || this.firebase || this.facebook || this.fabric || this.crashlytics || this.piwik || this.clicky || this.flurry || this.appodeal || this.fathom || this.unity || this.sdkbox ||  this.gameanalytics)
+      return (this.gps || this.admob || this.firebase || this.facebook || this.fabric || this.crashlytics || this.piwik || this.clicky || this.flurry || this.appodeal || this.fathom || this.unity || this.sdkbox ||  this.gameanalytics || this.onesignal)
     },
     selectAllText: function (id) {
       selectText(id)
