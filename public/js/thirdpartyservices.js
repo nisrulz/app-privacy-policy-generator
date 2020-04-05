@@ -163,5 +163,15 @@ var thirdPartyServicesJsonArray = [
       privacy: "https://onesignal.com/privacy_policy",
       terms: "https://onesignal.com/tos"
     }
+  },
+  {
+    name: "Expo",
+    model: "expo",
+    expo: false,
+    logo: "images/expo.png",
+    link: {
+      privacy: "https://expo.io/privacy",
+      terms: "https://expo.io/terms"
+    }
   }
 ];
