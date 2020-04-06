@@ -47,13 +47,14 @@ var vueapp = new Vue({
     gameanalytics: false,
     onesignal: false,
     sdkbox: false,
+    expo: false,
     osType: '',
     requirementOfSystem: 'system',
     thirdPartyServices: thirdPartyServicesJsonArray
   },
   methods: {
     isServiceEnabled:function(){
-      return (this.gps || this.admob || this.firebase || this.facebook || this.fabric || this.crashlytics || this.piwik || this.clicky || this.flurry || this.appodeal || this.fathom || this.unity || this.sdkbox ||  this.gameanalytics || this.onesignal)
+      return (this.gps || this.admob || this.firebase || this.facebook || this.fabric || this.crashlytics || this.piwik || this.clicky || this.flurry || this.appodeal || this.fathom || this.unity || this.sdkbox ||  this.gameanalytics || this.onesignal || this.expo)
     },
     selectAllText: function (id) {
       selectText(id)
