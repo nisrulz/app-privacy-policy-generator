@@ -39,14 +39,14 @@ var app = new Vue({
     showPrivacyModal: false,
     showTermsModal: false,
     showDisclaimerModal: false,
+    hasThirdPartyServicesSelected: true,
     contentRenderType: 1,
     wizardStep: 1,
     totalWizardSteps: 3,
   },
   methods: {
-    selectAllText: function (id) {
+    preview: function (id) {
       this.contentRenderType = 1
-      selectText(id)
     },
     nextStep: function () {
       if (this.wizardStep <= this.totalWizardSteps) {
@@ -154,11 +154,13 @@ var app = new Vue({
     },
     togglePrivacyModalVisibility: function () {
       this.generate()
+      this.hasThirdPartyServicesSelected = this.checkForThirdPartyServicesEnabled()
       this.contentRenderType = 1
       this.showPrivacyModal = !this.showPrivacyModal
     },
     toggleTermsModalVisibility: function () {
       this.generate()
+      this.hasThirdPartyServicesSelected = this.checkForThirdPartyServicesEnabled()
       this.contentRenderType = 1
       this.showTermsModal = !this.showTermsModal
     },

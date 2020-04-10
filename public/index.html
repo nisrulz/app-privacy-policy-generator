@@ -378,14 +378,14 @@
           <div class="modal-background"></div>
           <div class="modal-card">
             <header class="modal-card-head">
-              <p class="modal-card-title">Privacy Policy</p>
+              <p class="modal-card-title no-select">Privacy Policy</p>
               <button
                 class="delete"
                 aria-label="close"
                 @click="togglePrivacyModalVisibility"
               ></button>
             </header>
-            <section class="modal-card-body">
+            <section class="modal-card-body modal-box">
               <div id="privacy_content" v-show="contentRenderType==1">
                 <strong>Privacy Policy</strong>
                 <p>
@@ -420,7 +420,7 @@
                   {{iOrWe}} request will be {{retainedInfo}}.
                 </p>
 
-                <div v-if="checkForThirdPartyServicesEnabled()">
+                <div v-if="hasThirdPartyServicesSelected">
                   <p>
                     The app does use third party services that may collect
                     information used to identify you.
@@ -566,10 +566,11 @@
                 Markdown
               </button>
               <button
+                v-if="contentRenderType!=1"
                 class="button is-success"
-                @click="selectAllText('privacy_content')"
+                @click="preview()"
               >
-                Select All & Copy
+                Preview
               </button>
             </footer>
           </div>
@@ -580,7 +581,7 @@
           <div class="modal-background"></div>
           <div class="modal-card">
             <header class="modal-card-head">
-              <p class="modal-card-title">Terms & Conditions</p>
+              <p class="modal-card-title no-select">Terms & Conditions</p>
               <button
                 class="delete"
                 aria-label="close"
@@ -624,8 +625,8 @@
                   compromise your phone’s security features and it could mean
                   that the {{appName}} app won’t work properly or at all.
                 </p>
-
-                <div v-if="checkForThirdPartyServicesEnabled()">
+                {{hasThirdPartyServicesSelected}}
+                <div v-if="hasThirdPartyServicesSelected">
                   <p>
                     The app does use third party services that declare their own
                     Terms and Conditions.
@@ -743,10 +744,7 @@
                 </p>
               </div>
 
-              <textarea
-                id="tandc_txtarea"
-                v-show="contentRenderType==2"
-              ></textarea>
+              <textarea id="tandc_txtarea" v-show="contentRenderType==2"></textarea>
             </section>
             <footer class="modal-card-foot">
               <button
@@ -820,19 +818,12 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-    
-    <!-- ClipboardJS-->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"
-      integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ="
-      crossorigin="anonymous"
-    ></script>
+
     <!-- to-markdown -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/to-markdown/3.1.1/to-markdown.min.js"
       integrity="sha256-2PIa0cHy6lNEesnk4/qokv291Whx/uhAy2V6WL2zmfo="
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
 
     <!-- Main -->
     <script src="js/thirdpartyservices.js"></script>
