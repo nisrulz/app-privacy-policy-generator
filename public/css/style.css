@@ -16,7 +16,7 @@ li {
   padding-bottom: 0.6em;
 }
 
-#app> :nth-child(2) {
+#app > :nth-child(2) {
   padding-top: 0;
 }
 
@@ -50,7 +50,7 @@ li {
 
 .box {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
-  height: 65vh;
+  height: 70%;
 }
 
 .box span.icon {
@@ -111,7 +111,6 @@ li {
   padding-right: 2px;
 }
 
-
 #step-1,
 #step-2,
 #step-3 {
@@ -119,7 +118,7 @@ li {
   padding-top: 0.4em;
 }
 
-#page-404>div {
+#page-404 > div {
   display: table-cell;
   vertical-align: middle;
   margin: 2em auto;
@@ -149,7 +148,6 @@ li {
 
   font-size: 2em;
   font-weight: 200;
-
 }
 
 .modal-card-body ul {
@@ -166,9 +164,8 @@ li {
   border: none;
 }
 
-
 .gradient-bg {
-  background: linear-gradient(131deg, #4CAF50, #00BCD4);
+  background: linear-gradient(131deg, #4caf50, #00bcd4);
   background-size: 400% 400%;
 
   -webkit-animation: GradientAnimation 42s ease infinite;
@@ -178,57 +175,57 @@ li {
 
   @-webkit-keyframes GradientAnimation {
     0% {
-      background-position: 0% 52%
+      background-position: 0% 52%;
     }
 
     50% {
-      background-position: 100% 49%
+      background-position: 100% 49%;
     }
 
     100% {
-      background-position: 0% 52%
+      background-position: 0% 52%;
     }
   }
 
   @-moz-keyframes GradientAnimation {
     0% {
-      background-position: 0% 52%
+      background-position: 0% 52%;
     }
 
     50% {
-      background-position: 100% 49%
+      background-position: 100% 49%;
     }
 
     100% {
-      background-position: 0% 52%
+      background-position: 0% 52%;
     }
   }
 
   @-o-keyframes GradientAnimation {
     0% {
-      background-position: 0% 52%
+      background-position: 0% 52%;
     }
 
     50% {
-      background-position: 100% 49%
+      background-position: 100% 49%;
     }
 
     100% {
-      background-position: 0% 52%
+      background-position: 0% 52%;
     }
   }
 
   @keyframes GradientAnimation {
     0% {
-      background-position: 0% 52%
+      background-position: 0% 52%;
     }
 
     50% {
-      background-position: 100% 49%
+      background-position: 100% 49%;
     }
 
     100% {
-      background-position: 0% 52%
+      background-position: 0% 52%;
     }
   }
 }
@@ -238,20 +235,27 @@ li {
   text-align: center;
 }
 
-.center-parent>.child {
+.center-parent > .child {
   display: inline-block;
   margin: 2px;
 }
 
-
 .column.is-information .nav-btn {
-  height: 10%;
   cursor: grab;
-  opacity: 0.5;
+  height: 3em;
+  opacity: 0.8;
+}
+
+.column.is-information .sidebar-img{
+  pointer-events: none;
 }
 
 .pattern-bg {
   height: 100%;
   width: 100%;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.33'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.subtitle p{
+  font-size:0.7em;
 }

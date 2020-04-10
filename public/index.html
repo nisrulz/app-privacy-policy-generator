@@ -41,9 +41,6 @@
 <body class="gradient-bg">
     <div id="app" class="pattern-bg">
         <div class="container">
-
-
-
             <!-- Hero Section -->
             <section class="hero is-primary">
                 <div class="hero-body">
@@ -53,11 +50,10 @@
                                 <h1 class="title">App <em>Privacy Policy</em> Generator</h1>
                                 <h4 class="subtitle">
                                     Generate a generic Privacy Policy and Terms &amp; Conditions for your apps
-                                    <p style="font-size:0.7em;">Built with <img src="images/heart.svg" alt="heart"
-                                            class="heart-logo">
-                                        by <a href="http://www.nisrulz.com/" target="_blank">Nishant</a> <a href="https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors"
-                                            target="_blank">and
-                                            contributors</a></p>
+                                    <p>Built with <img src="images/heart.svg" alt="heart" class="heart-logo">by <a href="http://www.nisrulz.com/" target="_blank">Nishant</a> <a href="https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors" target="_blank">and contributors</a></p>
+                                    <p>
+                                        The source code is licensed <a href="https://opensource.org/licenses/Apache-2.0" target="_blank">Apache 2.0</a>. The website content is licensed <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.&nbsp;<a href="https://icons8.com" target="_blank" alt="illustration by Ouch.pics">Illustration by Ouch.pics</a>
+                                    </p>
                                 </h4>
                             </div>
                         </div>
@@ -70,8 +66,8 @@
                 <div class="box">
                     <div class="columns">
                         <div class="column is-4 is-information">
-                            <img src="images/step_1.png" class="center-block" />
-                            <img src="images/next.png" class="center-block nav-btn" @click="wizardStep=2" />
+                            <img src="images/step_1.png" class="center-block sidebar-img" />
+                            <img src="images/next.png" class="center-block nav-btn" @click="nextStep()" />
                         </div>
                         <div class="column is-content">
                             <div class="field is-grouped">
@@ -170,11 +166,11 @@
                 <div class="box">
                     <div class="columns">
                         <div class="column is-4 is-information">
-                            <img src="images/step_2.png" class="center-block" />
+                            <img src="images/step_2.png" class="center-block sidebar-img" />
 
                             <div class="center-parent">
-                                <img src="images/prev.png" class="child nav-btn" @click="wizardStep=1" />
-                                <img src="images/next.png" class="child nav-btn" @click="wizardStep=3" />
+                                <img src="images/prev.png" class="child nav-btn" @click="prevStep()" />
+                                <img src="images/next.png" class="child nav-btn" @click="nextStep()" />
                             </div>
 
                         </div>
@@ -197,13 +193,12 @@
 
             </section>
 
-
             <section class="section" id="step-3" v-if="wizardStep==3">
                 <div class="box">
                     <div class="columns">
                         <div class="column is-4 is-information">
-                            <img src="images/step_3.png" class="center-block" />
-                            <img src="images/prev.png" class="center-block nav-btn" @click="wizardStep=2" />
+                            <img src="images/step_3.png" class="center-block sidebar-img" />
+                            <img src="images/prev.png" class="center-block nav-btn" @click="prevStep()" />
                         </div>
                         <div class="column is-content">
                             <b>All Done!</b>
@@ -248,20 +243,6 @@
                         </div>
                     </div>
                 </div>
-
-            </section>
-
-            <div class="has-text-centered" id="footer">
-                <p>
-                    The source code is
-                    licensed
-                    <a href="https://opensource.org/licenses/Apache-2.0" target="_blank">Apache 2.0</a>. The
-                    website content
-                    is licensed <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.&nbsp;<a
-                        href="https://icons8.com" target="_blank" alt="illustration by Ouch.pics">Illustration
-                        by Ouch.pics</a>
-                </p>
-            </div>
 
             </section>
 
@@ -706,12 +687,10 @@
         </div>
     </div>
 
-    <!-- <script src="https://unpkg.com/vue"></script> -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.8/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 
     <!-- Vue2 Filters -->
-    <script src="https://cdn.jsdelivr.net/npm/vue2-filters@0.5.0/dist/vue2-filters.min.js" integrity="sha256-wCAAgWbpyzUZB5/zZYt60xg0VJBb1Berr0eM/5LaJkA="
+    <script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js" integrity="sha256-wCAAgWbpyzUZB5/zZYt60xg0VJBb1Berr0eM/5LaJkA="
         crossorigin="anonymous"></script>
     <!-- ClipboardJS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ="

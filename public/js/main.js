@@ -38,13 +38,20 @@ var app = new Vue({
         showPrivacyModal: false,
         showTermsModal: false,
         showDisclaimerModal: false,
-        wizardStep: 1,
         contentRenderType:1,
+        wizardStep: 1,
+        totalWizardSteps:3,
     },
     methods: {
         selectAllText: function (id) {
             this.contentRenderType = 1
             selectText(id)
+        },
+        nextStep: function () {
+            if(this.wizardStep<=this.totalWizardSteps){ this.wizardStep += 1 }
+        },
+        prevStep: function () {
+            if(this.wizardStep>=1){ this.wizardStep -= 1 }
         },
         checkForThirdPartyServicesEnabled: function () {
             let listOfEnabledThirdPartyServices = []
