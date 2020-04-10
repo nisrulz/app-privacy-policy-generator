@@ -588,7 +588,7 @@
                 @click="toggleTermsModalVisibility"
               ></button>
             </header>
-            <section class="modal-card-body">
+            <section class="modal-card-body modal-box">
               <div id="tandc_content" v-show="contentRenderType==1">
                 <strong>Terms &amp; Conditions</strong>
                 <p>
@@ -760,10 +760,11 @@
                 Markdown
               </button>
               <button
+                v-if="contentRenderType!=1"
                 class="button is-success"
-                @click="selectAllText('tandc_content')"
+                @click="preview()"
               >
-                Select All & Copy
+                Preview
               </button>
             </footer>
           </div>
