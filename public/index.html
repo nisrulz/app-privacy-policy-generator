@@ -36,38 +36,25 @@
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="Material Design Lite" />
-    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png" />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="App Privacy Policy Generator"
+    />
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta
-      name="msapplication-TileImage"
-      content="images/touch/ms-touch-icon-144x144-precomposed.png"
-    />
     <meta name="msapplication-TileColor" content="#3372DF" />
 
     <link rel="shortcut icon" href="images/favicon.ico" />
 
-    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-    <!--
-    <link rel="canonical" href="http://www.example.com/">
-    -->
-
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"
+      rel="stylesheet prefetch"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     />
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet prefetch"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-blue.min.css"
-      integrity="sha256-OKbH0cJaPdPQEySJxelp4+ITDr/pXIsvVhMU58ki7cM="
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/style.css" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
@@ -85,682 +72,770 @@
     </script>
   </head>
 
-  <body class="mdl-appg mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <header
-        class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary hero-pattern-bg"
-      >
-        <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
-        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-          <h3>App Privacy Policy Generator</h3>
-        </div>
-        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-          <p class="text-whitesmoke">
-            Generate a generic Privacy Policy and Terms &amp; Conditions for
-            your apps
-          </p>
-        </div>
-        <div
-          class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark"
-        >
-          <a href="#edit" class="mdl-layout__tab is-active">Edit</a>
-          <a href="#privacypolicy" class="mdl-layout__tab" id="privacy_tab"
-            >Privacy Policy</a
-          >
-          <a href="#tandc" class="mdl-layout__tab">T &amp; C</a>
-          <a href="#about" class="mdl-layout__tab">About</a>
-          <a href="#disclaimer" class="mdl-layout__tab">Disclaimer</a>
-          <div class="spacer"></div>
-          <a
-            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp"
-            id="add"
-            href="https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator"
-            target="_blank"
-          >
-            <img src="images/github.svg" alt="github" class="github-logo" />
-            <span class="visuallyhidden">Add</span>
-          </a>
-        </div>
-      </header>
-      <main class="mdl-layout__content" id="vueapp">
-        <div class="mdl-layout__tab-panel is-active" id="edit">
-          <section class="section mdl-grid">
-            <div
-              class="mdl-card mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-grid--no-spacing mdl-shadow--1dp"
-            >
-              <div class="mdl-card__supporting-text">
-                <h4>
-                  Provide the required information <br /><small
-                    style="color:gray"
-                  >
-                    [Please read the disclaimer before using this project]
-                  </small>
-                </h4>
+  <body class="bg-pattern">
+    <div id="app">
+      <div class="container">
+        <!-- Hero Section -->
+        <section class="hero is-primary">
+          <div class="hero-body">
+            <div class="columns">
+              <div class="column">
+                <div class="content">
+                  <h1 class="title">App <em>Privacy Policy</em> Generator</h1>
+                  <h4 class="subtitle">
+                    Generate a generic Privacy Policy and Terms &amp; Conditions
+                    for your apps
+                    <p>
+                      Built with
+                      <img
+                        src="images/heart.svg"
+                        alt="heart"
+                        class="heart-logo"
+                      />&nbsp;by
+                      <a href="http://www.nisrulz.com/" target="_blank"
+                        >Nishant</a>
+                      <a
+                        href="https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors"
+                        target="_blank"
+                        >and contributors</a
+                      >
+                    </p>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                <div class="mdl-textfield mdl-js-textfield">
+        <!-- Main Generator Section -->
+        <section class="section" id="step-1" v-if="wizardStep==1">
+          <div>
+            <div class="columns">
+              <div class="column is-7 is-information">
+                <img src="images/step_1.svg" class="center-block sidebar-img" />
+                <img
+                  src="images/next.png"
+                  class="center-block nav-btn"
+                  @click="nextStep()"
+                />
+              </div>
+              <div class="column box scrollable">
+                <div class="control is-expanded">
+                  <p class="help form-label">App Name</p>
                   <input
-                    class="mdl-textfield__input"
+                    class="input"
                     type="text"
+                    required
                     v-model="appName"
-                    placeholder="App Name"
+                    placeholder="Awesome App"
                   />
-                  <label class="mdl-textfield__label" for="appName"
-                    >App Name</label
-                  >
                 </div>
 
-                <br />
-
-                <div class="mdl-textfield mdl-js-textfield">
+                <div class="control is-expanded">
+                  <p class="help form-label">Contact Information</p>
                   <input
-                    class="mdl-textfield__input"
-                    type="text"
+                    class="input"
+                    type="email"
+                    required
                     v-model="appContact"
-                    placeholder="App Contact informations (email, address, ... )"
-                  />
-                  <label class="mdl-textfield__label" for="appContact"
-                    >App Contact informations (email, address, ... )</label
-                  >
-                </div>
-                <br />
-
-                <div class="mdl-textfield mdl-js-textfield">
-                  <select v-model="typeOfApp" class="form-control">
-                    <option value="" disabled>Choose Type of App</option>
-                    <option>Free</option>
-                    <option>Open Source</option>
-                    <option>Freemium</option>
-                    <option>Ad Supported</option>
-                    <option>Commercial</option>
-                  </select>
-                </div>
-                <br />
-                <div class="mdl-textfield mdl-js-textfield">
-                  <select v-model="typeOfDev" class="form-control">
-                    <option value="" disabled>Choose Dev Type</option>
-                    <option>Individual</option>
-                    <option>Company</option>
-                  </select>
-                </div>
-
-                <div
-                  class="mdl-textfield mdl-js-textfield"
-                  v-if="typeOfDev=='Company'"
-                >
-                  <input
-                    class="mdl-textfield__input"
-                    type="text"
-                    v-model="companyName"
-                    placeholder="Company Name"
+                    placeholder=""
                   />
                 </div>
 
-                <div
-                  class="mdl-textfield mdl-js-textfield"
-                  v-if="typeOfDev=='Individual'"
-                >
+                <div class="control is-expanded">
+                  <p class="help form-label">
+                    Personally Identifiable Information
+                  </p>
+                  <!-- PII -->
                   <input
-                    class="mdl-textfield__input"
-                    type="text"
-                    v-model="devName"
-                    placeholder="Developer Name"
-                  />
-                </div>
-
-                <div
-                  class="mdl-textfield mdl-js-textfield"
-                  style="width: 100%;"
-                >
-                  <input
-                    class="mdl-textfield__input"
+                    class="input is-primary"
                     type="text"
                     v-model="pidInfoIn"
                     placeholder="Personally Identifiable Information you collect (comma separated)"
                   />
                 </div>
 
-                <div class="mdl-textfield mdl-js-textfield">
-                  <select v-model="osType" class="form-control">
-                    <option value="" disabled>Choose Mobile OS</option>
-                    <option>Android</option>
-                    <option>iOS</option>
-                    <option>Android & iOS</option>
-                  </select>
+                <div class="control is-expanded">
+                  <p class="help form-label">App Type</p>
+                  <!-- Type of App -->
+                  <div class="select is-primary">
+                    <select v-model="typeOfApp">
+                      <option value="" disabled>Select app type</option>
+                      <option>Free</option>
+                      <option>Open Source</option>
+                      <option>Freemium</option>
+                      <option>Ad Supported</option>
+                      <option>Commercial</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div class="mdl-card__actions">
-                <a href="#" class="mdl-button" v-on:click="generate"
-                  >Generate</a
-                >
-              </div>
-            </div>
-            <div
-              class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-grid--no-spacing mdl-shadow--1dp"
-            >
-              <div class="mdl-card__supporting-text">
-                <h4>
-                  Include links to privacy policy of Third Party Services
-                  <small>(Scroll for more)</small>
-                </h4>
-                <ul class="mdl-list">
-                  <li class="mdl-list__item" v-for="item in thirdPartyServices">
-                    <span class="mdl-list__item-primary-content">
-                      <img
-                        :src="item.logo"
-                        :alt="item.name"
-                        class="thirdparty-logo"
-                      />
-                      {{ item.name }}
-                    </span>
-                    <span class="mdl-list__item-secondary-action">
-                      <label
-                        class="mdl-switch mdl-js-switch mdl-js-ripple-effect"
-                        :for="`list-switch-${item.model}`"
-                      >
-                        <input
-                          type="checkbox"
-                          :id="'list-switch-' + item.model"
-                          class="mdl-switch__input"
-                          v-model="item[item.model]"
-                        />
-                      </label>
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-        </div>
 
-        <div class="mdl-layout__tab-panel" id="privacypolicy">
-          <section class="section--center mdl-grid">
-            <div
-              class="mdl-cell mdl-cell--12-col mdl-shadow--2dp"
-              id="fc-container"
-            >
-              <div id="fc-container-text">
-                <div class="fc-title">
-                  Free privacy policy hosting + website for {{ appName }}.
+                <div class="control is-expanded">
+                  <p class="help form-label">Mobile OS</p>
+                  <!-- Mobile OS -->
+                  <div class="select is-primary">
+                    <select v-model="osType">
+                      <option value="" disabled>Select mobile OS</option>
+                      <option>Android</option>
+                      <option>iOS</option>
+                      <option>Android & iOS</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="fc-powered-by">
-                  Powered by
-                  <a
-                    href="https://app.flycricket.com/r/nishant?utm_source=partner&utm_medium=website&utm_campaign=privacy_generator"
-                    target="_blank"
-                    >Flycricket</a
-                  >
-                </div>
-              </div>
-              <div id="fc-callouts">
-                <form
-                  action="https://app.flycricket.com/import/privacy"
-                  method="post"
-                  target="_blank"
-                  id="fc-form"
-                  onsubmit="return fc_submit(event)"
-                >
-                  <input type="hidden" name="fc-referrer" value="nishant" />
-                  <input type="hidden" name="fc-body" id="fc-body" />
+
+                <div class="control">
+                  <p class="help form-label">Policy Effective Date</p>
+                  <!-- Policy Effective Date -->
                   <input
-                    type="hidden"
-                    name="fc-name"
-                    id="fc-name"
-                    v-model="appName"
+                    class="input is-primary"
+                    type="date"
+                    required
+                    v-model="effectiveFromDate"
                   />
-                  <button
-                    class="mdl-button mdl-js-button mdl-button--raised fc-learn-more"
-                  >
-                    Learn More
-                  </button>
-                  <button
-                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
-                  >
-                    Deploy
-                  </button>
-                </form>
+                </div>
+
+                <div class="control is-expanded">
+                  <p class="help form-label">OwnerType</p>
+                  <!-- Owner -->
+                  <div class="select is-primary">
+                    <select v-model="typeOfDev">
+                      <option value="" disabled>Select owner type</option>
+                      <option>Individual</option>
+                      <option>Company</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="control is-expanded" v-if="typeOfDev=='Company'">
+                  <p class="help form-label">Company Name</p>
+
+                  <!-- Company Name -->
+                  <input
+                    class="input is-primary"
+                    type="text"
+                    v-model="companyName"
+                    placeholder="Company Name"
+                  />
+                </div>
+
+                <div class="control is-expanded" v-if="typeOfDev=='Individual'">
+                  <p class="help form-label">Developer Name</p>
+
+                  <!-- Developer Name -->
+                  <input
+                    class="input is-primary"
+                    type="text"
+                    v-model="devName"
+                    placeholder="Developer Name"
+                  />
+                </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            <div class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--2dp">
-              <div class="mdl-card__supporting-text">
-                <div id="privacy_content">
-                  <h2>Privacy Policy</h2>
+        <section class="section" id="step-2" v-if="wizardStep==2">
+          <div>
+            <div class="columns">
+              <div class="column is-7 is-information">
+                <img src="images/step_2.svg" class="center-block sidebar-img" />
+
+                <div class="center-parent">
+                  <img
+                    src="images/prev.png"
+                    class="child nav-btn"
+                    @click="prevStep()"
+                  />
+                  <img
+                    src="images/next.png"
+                    class="child nav-btn"
+                    @click="nextStep()"
+                  />
+                </div>
+              </div>
+              <div class="column box scrollable">
+                <b>
+                  Include links to Third Party Services
+                </b>
+
+                <a v-for="item in thirdPartyServices">
+                  <br />
+
+                  <input
+                    type="checkbox"
+                    :id="'list-switch-' + item.model"
+                    v-model="item[item.model]"
+                  />
+                  <label :for="'list-switch-' + item.model">
+                    &nbsp;<img
+                      :src="item.logo"
+                      :alt="item.name"
+                      class="thirdparty-logo"
+                    /><span class="thirdparty-text">{{ item.name }}</span>
+                  </label>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="step-3" v-if="wizardStep==3">
+          <div>
+            <div class="columns">
+              <div class="column is-7 is-information">
+                <img src="images/step_3.svg" class="center-block sidebar-img" />
+                <img
+                  src="images/prev.png"
+                  class="center-block nav-btn"
+                  @click="prevStep()"
+                />
+              </div>
+              <div class="column">
+                <div class="box" id="fc-container">
+                  <div id="fc-container-text">
+                    <div class="fc-title">
+                      Free privacy policy hosting + website for {{ appName }}.
+                    </div>
+                  </div>
+                  <div id="fc-callouts">
+                    <form
+                      action="https://app.flycricket.com/import/privacy"
+                      method="post"
+                      target="_blank"
+                      id="fc-form"
+                      onsubmit="return fc_submit(event)"
+                    >
+                      <input type="hidden" name="fc-referrer" value="nishant" />
+                      <input type="hidden" name="fc-body" id="fc-body" />
+                      <input
+                        type="hidden"
+                        name="fc-name"
+                        id="fc-name"
+                        v-model="appName"
+                      />
+                    <div style="margin-top: 1em;">
+                        <button
+                        class="button is-light is-small"
+                        >
+                          Learn More
+                        </button>
+                        <button
+                        class="button is-black is-small"
+                        >
+                          Deploy
+                        </button>
+                    </div>
+                      
+                    </form>
+
+                    <div class="fc-powered-by">
+                        Powered by
+                        <a
+                          href="https://app.flycricket.com/r/nishant?utm_source=partner&utm_medium=website&utm_campaign=privacy_generator"
+                          target="_blank"
+                          >Flycricket</a
+                        >
+                      </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <b>All Done!</b>
+                  <br />
                   <p>
-                    {{ devOrCompanyName }} built the {{ appName }} app as
-                    {{ typeOfAppTxt }} app. This SERVICE is provided by
-                    {{ devOrCompanyName }} {{ atNoCost }} and is intended for
-                    use as is.
+                    Now sit back and choose the type of document you want to
+                    generate:
                   </p>
-                  <p>
-                    This page is used to inform visitors regarding
-                    {{ myOrOur }} policies with the collection, use, and
-                    disclosure of Personal Information if anyone decided to use
-                    {{ myOrOur }} Service.
-                  </p>
-                  <p>
-                    If you choose to use {{ myOrOur }} Service, then you agree
-                    to the collection and use of information in relation to this
-                    policy. The Personal Information that {{ iOrWe }} collect is
-                    used for providing and improving the Service.
-                    {{ iOrWe | capitalize }} will not use or share your
-                    information with anyone except as described in this Privacy
-                    Policy.
-                  </p>
-                  <p>
-                    The terms used in this Privacy Policy have the same meanings
-                    as in our Terms and Conditions, which is accessible at
-                    {{ appName }} unless otherwise defined in this Privacy
-                    Policy.
-                  </p>
-                  <p><strong>Information Collection and Use</strong></p>
-                  <p>
-                    For a better experience, while using our Service,
-                    {{ iOrWe }} may require you to provide us with certain
-                    personally identifiable information{{ pidInfo }} The
-                    information that {{ iOrWe }} request will be
-                    {{ retainedInfo }}.
-                  </p>
+                  <br />
+
+                  <a
+                    class="button is-primary"
+                    @click="togglePrivacyModalVisibility"
+                    >Privacy Policy</a
+                  >
+
+                  <a class="button is-info" @click="toggleTermsModalVisibility"
+                    >Terms & Conditions</a
+                  >
+
+                  <br />
+                  <hr />
+                  <div class="field has-addons is-grouped">
+                    <p class="control">
+                      <a
+                        class="button"
+                        href="https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator"
+                        target="_blank"
+                      >
+                        <span>
+                          <img
+                            src="images/github.svg"
+                            alt="github"
+                            class="button-logo"
+                          />
+                        </span>
+                        <span>Github</span>
+                      </a>
+                    </p>
+                    <p class="control">
+                      <a
+                        class="button"
+                        href="https://twitter.com/intent/tweet?text=App%20Privacy%20Policy%20Generator%3A%20A%20simple%20web%20app%20to%20generate%20a%20generic%20privacy%20policy%20for%20your%20Android%2FiOS%20apps%F0%9F%98%8E&url=https://github.com/nisrulz/app-privacy-policy-generator&via=nisrulz&hashtags=Privacy"
+                        target="_blank"
+                      >
+                        <span>
+                          <img
+                            src="images/twitter.svg"
+                            alt="twitter"
+                            class="button-logo"
+                          />
+                        </span>
+                        <span>Tweet</span>
+                      </a>
+                    </p>
+                    <p class="control">
+                      <a
+                        class="button"
+                        @click="toggleDisclaimerModalVisibility"
+                      >
+                        <span>
+                          <img
+                            src="images/disclaimer.svg"
+                            alt="disclaimer"
+                            class="button-logo"
+                          />
+                        </span>
+                        <span>Disclaimer</span>
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Privacy Policy Modal -->
+        <div class="modal" v-bind:class="{ 'is-active': showPrivacyModal }">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title no-select">Privacy Policy</p>
+              <button
+                class="delete"
+                aria-label="close"
+                @click="togglePrivacyModalVisibility"
+              ></button>
+            </header>
+            <section class="modal-card-body modal-box">
+              <div id="privacy_content" v-show="contentRenderType==1">
+                <strong>Privacy Policy</strong>
+                <p>
+                  {{devOrCompanyName}} built the {{appName}} app as
+                  {{typeOfAppTxt}} app. This SERVICE is provided by
+                  {{devOrCompanyName }} {{atNoCost }} and is intended for use as
+                  is.
+                </p>
+                <p>
+                  This page is used to inform visitors regarding {{myOrOur}}
+                  policies with the collection, use, and disclosure of Personal
+                  Information if anyone decided to use {{myOrOur}} Service.
+                </p>
+                <p>
+                  If you choose to use {{myOrOur }} Service, then you agree to
+                  the collection and use of information in relation to this
+                  policy. The Personal Information that {{iOrWe}} collect is
+                  used for providing and improving the Service. {{iOrWe |
+                  capitalize }} will not use or share your information with
+                  anyone except as described in this Privacy Policy.
+                </p>
+                <p>
+                  The terms used in this Privacy Policy have the same meanings
+                  as in our Terms and Conditions, which is accessible at
+                  {{appName }} unless otherwise defined in this Privacy Policy.
+                </p>
+                <p><strong>Information Collection and Use</strong></p>
+                <p>
+                  For a better experience, while using our Service, {{iOrWe }}
+                  may require you to provide us with certain personally
+                  identifiable information{{pidInfo}} The information that
+                  {{iOrWe}} request will be {{retainedInfo}}.
+                </p>
+
+                <div v-if="hasThirdPartyServicesSelected">
                   <p>
                     The app does use third party services that may collect
                     information used to identify you.
                   </p>
-
-                  <div
-                    v-if="isServiceEnabled()"
-                  >
-                    <p>
-                      Link to privacy policy of third party service providers
-                      used by the app
-                    </p>
-                    <ul>
-                      <li
-                        v-if="item[item.model]"
-                        v-for="item in thirdPartyServices"
-                      >
-                        <a :href="item.link.privacy" target="_blank">{{
-                          item.name
-                        }}</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <p><strong>Log Data</strong></p>
                   <p>
-                    {{ iOrWe | capitalize }} want to inform you that whenever
-                    you use {{ myOrOur }} Service, in a case of an error in the
-                    app {{ iOrWe }} collect data and information (through third
-                    party products) on your phone called Log Data. This Log Data
-                    may include information such as your device Internet
-                    Protocol (“IP”) address, device name, operating system
-                    version, the configuration of the app when utilizing
-                    {{ myOrOur }} Service, the time and date of your use of the
-                    Service, and other statistics.
-                  </p>
-                  <p><strong>Cookies</strong></p>
-                  <p>
-                    Cookies are files with a small amount of data that are
-                    commonly used as anonymous unique identifiers. These are
-                    sent to your browser from the websites that you visit and
-                    are stored on your device's internal memory.
-                  </p>
-                  <p>
-                    This Service does not use these “cookies” explicitly.
-                    However, the app may use third party code and libraries that
-                    use “cookies” to collect information and improve their
-                    services. You have the option to either accept or refuse
-                    these cookies and know when a cookie is being sent to your
-                    device. If you choose to refuse our cookies, you may not be
-                    able to use some portions of this Service.
-                  </p>
-                  <p><strong>Service Providers</strong></p>
-                  <p>
-                    {{ iOrWe | capitalize }} may employ third-party companies
-                    and individuals due to the following reasons:
+                    Link to privacy policy of third party service providers used
+                    by the app
                   </p>
                   <ul>
-                    <li>To facilitate our Service;</li>
-                    <li>To provide the Service on our behalf;</li>
-                    <li>To perform Service-related services; or</li>
-                    <li>To assist us in analyzing how our Service is used.</li>
-                  </ul>
-                  <p>
-                    {{ iOrWe | capitalize }} want to inform users of this
-                    Service that these third parties have access to your
-                    Personal Information. The reason is to perform the tasks
-                    assigned to them on our behalf. However, they are obligated
-                    not to disclose or use the information for any other
-                    purpose.
-                  </p>
-                  <p><strong>Security</strong></p>
-                  <p>
-                    {{ iOrWe | capitalize }} value your trust in providing us
-                    your Personal Information, thus we are striving to use
-                    commercially acceptable means of protecting it. But remember
-                    that no method of transmission over the internet, or method
-                    of electronic storage is 100% secure and reliable, and
-                    {{ iOrWe }} cannot guarantee its absolute security.
-                  </p>
-                  <p><strong>Links to Other Sites</strong></p>
-                  <p>
-                    This Service may contain links to other sites. If you click
-                    on a third-party link, you will be directed to that site.
-                    Note that these external sites are not operated by
-                    {{ meOrUs }}. Therefore, {{ iOrWe }} strongly advise you to
-                    review the Privacy Policy of these websites.
-                    {{ iOrWe | capitalize }} have no control over and assume no
-                    responsibility for the content, privacy policies, or
-                    practices of any third-party sites or services.
-                  </p>
-                  <p><strong>Children’s Privacy</strong></p>
-                  <p>
-                    These Services do not address anyone under the age of 13.
-                    {{ iOrWe | capitalize }} do not knowingly collect personally
-                    identifiable information from children under 13. In the case
-                    {{ iOrWe }} discover that a child under 13 has provided
-                    {{ meOrUs }} with personal information,
-                    {{ iOrWe }} immediately delete this from our servers. If you
-                    are a parent or guardian and you are aware that your child
-                    has provided us with personal information, please contact
-                    {{ meOrUs }} so that {{ iOrWe }} will be able to do
-                    necessary actions.
-                  </p>
-                  <p><strong>Changes to This Privacy Policy</strong></p>
-                  <p>
-                    {{ iOrWe | capitalize }} may update our Privacy Policy from
-                    time to time. Thus, you are advised to review this page
-                    periodically for any changes. {{ iOrWe | capitalize }} will
-                    notify you of any changes by posting the new Privacy Policy
-                    on this page. These changes are effective immediately after
-                    they are posted on this page.
-                  </p>
-                  <p><strong>Contact Us</strong></p>
-                  <p>
-                    If you have any questions or suggestions about
-                    {{ myOrOur }} Privacy Policy, do not hesitate to contact
-                    {{ meOrUs }} at {{ appContact }}.
-                  </p>
-                  <p>
-                    This privacy policy page was created at
-                    <a href="https://privacypolicytemplate.net" target="_blank"
-                      >privacypolicytemplate.net</a
+                    <li
+                      v-if="item[item.model]"
+                      v-for="item in thirdPartyServices"
                     >
-                    and modified/generated by
-                    <a
-                      href="https://app-privacy-policy-generator.firebaseapp.com/"
-                      target="_blank"
-                      >App Privacy Policy Generator</a
-                    >
-                  </p>
-                </div>
-              </div>
-              <div class="mdl-card__actions">
-                <a
-                  href="#"
-                  class="mdl-button"
-                  v-on:click="generateHTML('privacy_content', 'privacy_policy')"
-                  >Download HTML</a
-                >
-                /
-                <a
-                  href="#"
-                  class="mdl-button"
-                  v-on:click="generateMD('privacy_content', 'privacy_policy')"
-                  >Download Markdown</a
-                >
-                or
-                <a href="#" v-on:click="selectAllText('privacy_content')"
-                  >Select all</a
-                >
-                and copy
-              </div>
-            </div>
-          </section>
-        </div>
-        <div class="mdl-layout__tab-panel" id="tandc">
-          <section class="section--center mdl-grid">
-            <div class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--2dp">
-              <div class="mdl-card__supporting-text">
-                <div id="tandc_content">
-                  <h2>Terms &amp; Conditions</h2>
-                  <p>
-                    By downloading or using the app, these terms will
-                    automatically apply to you – you should make sure therefore
-                    that you read them carefully before using the app. You’re
-                    not allowed to copy, or modify the app, any part of the app,
-                    or our trademarks in any way. You’re not allowed to attempt
-                    to extract the source code of the app, and you also
-                    shouldn’t try to translate the app into other languages, or
-                    make derivative versions. The app itself, and all the trade
-                    marks, copyright, database rights and other intellectual
-                    property rights related to it, still belong to
-                    {{ devOrCompanyName }}.
-                  </p>
-
-                  <p>
-                    {{ devOrCompanyName }} is committed to ensuring that the app
-                    is as useful and efficient as possible. For that reason, we
-                    reserve the right to make changes to the app or to charge
-                    for its services, at any time and for any reason. We will
-                    never charge you for the app or its services without making
-                    it very clear to you exactly what you’re paying for.
-                  </p>
-
-                  <p>
-                    The {{ appName }} app stores and processes personal data
-                    that you have provided to us, in order to provide
-                    {{ myOrOur }} Service. It’s your responsibility to keep your
-                    phone and access to the app secure. We therefore recommend
-                    that you do not jailbreak or root your phone, which is the
-                    process of removing software restrictions and limitations
-                    imposed by the official operating system of your device. It
-                    could make your phone vulnerable to
-                    malware/viruses/malicious programs, compromise your phone’s
-                    security features and it could mean that the
-                    {{ appName }} app won’t work properly or at all.
-                  </p>
-
-                  <p>
-                    The app does use third party services that declare their own Terms and Conditions.
-                  </p>
-
-                  <div
-                    v-if="isServiceEnabled()"
-                  >
-                    <p>
-                      Link to Terms and Conditions of third party service providers
-                      used by the app
-                    </p>
-                    <ul>
-                      <li
-                        v-if="item[item.model]"
-                        v-for="item in thirdPartyServices"
+                      <a :href="item.link.privacy" target="_blank"
+                        >{{item.name}}</a
                       >
-                        <a :href="item.link.terms" target="_blank">{{
-                          item.name
-                        }}</a>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <p>
-                    You should be aware that there are certain things that
-                    {{ devOrCompanyName }} will not take responsibility for.
-                    Certain functions of the app will require the app to have an
-                    active internet connection. The connection can be Wi-Fi, or
-                    provided by your mobile network provider, but
-                    {{ devOrCompanyName }} cannot take responsibility for the
-                    app not working at full functionality if you don’t have
-                    access to Wi-Fi, and you don’t have any of your data
-                    allowance left.
-                  </p>
-
-                  <p></p>
-
-                  <p>
-                    If you’re using the app outside of an area with Wi-Fi, you
-                    should remember that your terms of the agreement with your
-                    mobile network provider will still apply. As a result, you
-                    may be charged by your mobile provider for the cost of data
-                    for the duration of the connection while accessing the app,
-                    or other third party charges. In using the app, you’re
-                    accepting responsibility for any such charges, including
-                    roaming data charges if you use the app outside of your home
-                    territory (i.e. region or country) without turning off data
-                    roaming. If you are not the bill payer for the device on
-                    which you’re using the app, please be aware that we assume
-                    that you have received permission from the bill payer for
-                    using the app.
-                  </p>
-
-                  <p>
-                    Along the same lines, {{ devOrCompanyName }} cannot always
-                    take responsibility for the way you use the app i.e. You
-                    need to make sure that your device stays charged – if it
-                    runs out of battery and you can’t turn it on to avail the
-                    Service, {{ devOrCompanyName }} cannot accept
-                    responsibility.
-                  </p>
-
-                  <p>
-                    With respect to {{ devOrCompanyName }}’s responsibility for
-                    your use of the app, when you’re using the app, it’s
-                    important to bear in mind that although we endeavour to
-                    ensure that it is updated and correct at all times, we do
-                    rely on third parties to provide information to us so that
-                    we can make it available to you.
-                    {{ devOrCompanyName }} accepts no liability for any loss,
-                    direct or indirect, you experience as a result of relying
-                    wholly on this functionality of the app.
-                  </p>
-
-                  <p>
-                    At some point, we may wish to update the app. The app is
-                    currently available on {{ osType }} – the requirements for
-                    {{ requirementOfSystem }} (and for any additional systems we
-                    decide to extend the availability of the app to) may change,
-                    and you’ll need to download the updates if you want to keep
-                    using the app. {{ devOrCompanyName }} does not promise that
-                    it will always update the app so that it is relevant to you
-                    and/or works with the {{ osType }} version that you have
-                    installed on your device. However, you promise to always
-                    accept updates to the application when offered to you, We
-                    may also wish to stop providing the app, and may terminate
-                    use of it at any time without giving notice of termination
-                    to you. Unless we tell you otherwise, upon any termination,
-                    (a) the rights and licenses granted to you in these terms
-                    will end; (b) you must stop using the app, and (if needed)
-                    delete it from your device.
-                  </p>
-
-                  <p><strong>Changes to This Terms and Conditions</strong></p>
-                  <p>
-                    {{ iOrWe | capitalize }} may update our Terms and Conditions
-                    from time to time. Thus, you are advised to review this page
-                    periodically for any changes. {{ iOrWe | capitalize }} will
-                    notify you of any changes by posting the new Terms and
-                    Conditions on this page. These changes are effective
-                    immediately after they are posted on this page.
-                  </p>
-                  <p><strong>Contact Us</strong></p>
-                  <p>
-                    If you have any questions or suggestions about
-                    {{ myOrOur }} Terms and Conditions, do not hesitate to
-                    contact {{ meOrUs }} at {{ appContact }}.
-                  </p>
-                  <p>
-                    This Terms and Conditions page was generated by
-                    <a
-                      href="https://app-privacy-policy-generator.firebaseapp.com/"
-                      target="_blank"
-                      >App Privacy Policy Generator</a
-                    >
-                  </p>
+                    </li>
+                  </ul>
                 </div>
-              </div>
-              <div class="mdl-card__actions">
-                <a
-                  href="#"
-                  class="mdl-button"
-                  v-on:click="generateHTML('tandc_content','terms_and_conditions')"
-                  >Download HTML
-                </a>
-                /
-                <a
-                  href="#"
-                  class="mdl-button"
-                  v-on:click="generateMD('tandc_content', 'terms_and_conditions')"
-                  >Download Markdown
-                </a>
-                or
-                <a href="#" v-on:click="selectAllText('tandc_content')"
-                  >Select all</a
-                >
-                and copy
-              </div>
-            </div>
-          </section>
-        </div>
-        <div class="mdl-layout__tab-panel" id="about">
-          <section class="section--center mdl-grid mdl-grid--no-spacing">
-            <div class="mdl-cell mdl-cell--12-col">
-              <h4>About</h4>
-              <p>
-                App Privacy Policy Generator is a simple webapp that can be used
-                to generate generic Privacy Policy and Terms &amp; Conditions
-                for your apps.
-              </p>
-              <ul class="unstyle-list">
-                Connect with Nishant at
-                <li>
-                  <a href="https://github.com/nisrulz" target="_blank"
-                    >Github</a
-                  >
-                </li>
-                <li>
-                  <a href="https://www.twitter.com/nisrulz" target="_blank"
-                    >Twitter</a
-                  >
-                </li>
-                <li>
-                  <a href="https://medium.com/@nisrulz" target="_blank"
-                    >Medium</a
-                  >
-                </li>
-                <li>
-                  <a href="https://in.linkedin.com/in/nisrulz" target="_blank"
-                    >Linkedin</a
-                  >
-                </li>
-              </ul>
+                <p><strong>Log Data</strong></p>
+                <p>
+                  {{iOrWe | capitalize }} want to inform you that whenever you
+                  use {{myOrOur}} Service, in a case of an error in the app
+                  {{iOrWe}} collect data and information (through third party
+                  products) on your phone called Log Data. This Log Data may
+                  include information such as your device Internet Protocol
+                  (“IP”) address, device name, operating system version, the
+                  configuration of the app when utilizing {{myOrOur }} Service,
+                  the time and date of your use of the Service, and other
+                  statistics.
+                </p>
+                <p><strong>Cookies</strong></p>
+                <p>
+                  Cookies are files with a small amount of data that are
+                  commonly used as anonymous unique identifiers. These are sent
+                  to your browser from the websites that you visit and are
+                  stored on your device's internal memory.
+                </p>
+                <p>
+                  This Service does not use these “cookies” explicitly. However,
+                  the app may use third party code and libraries that use
+                  “cookies” to collect information and improve their services.
+                  You have the option to either accept or refuse these cookies
+                  and know when a cookie is being sent to your device. If you
+                  choose to refuse our cookies, you may not be able to use some
+                  portions of this Service.
+                </p>
+                <p><strong>Service Providers</strong></p>
+                <p>
+                  {{iOrWe | capitalize }} may employ third-party companies and
+                  individuals due to the following reasons:
+                </p>
+                <ul>
+                  <li>To facilitate our Service;</li>
+                  <li>To provide the Service on our behalf;</li>
+                  <li>To perform Service-related services; or</li>
+                  <li>To assist us in analyzing how our Service is used.</li>
+                </ul>
+                <p>
+                  {{iOrWe | capitalize }} want to inform users of this Service
+                  that these third parties have access to your Personal
+                  Information. The reason is to perform the tasks assigned to
+                  them on our behalf. However, they are obligated not to
+                  disclose or use the information for any other purpose.
+                </p>
+                <p><strong>Security</strong></p>
+                <p>
+                  {{iOrWe | capitalize }} value your trust in providing us your
+                  Personal Information, thus we are striving to use commercially
+                  acceptable means of protecting it. But remember that no method
+                  of transmission over the internet, or method of electronic
+                  storage is 100% secure and reliable, and {{iOrWe }} cannot
+                  guarantee its absolute security.
+                </p>
+                <p><strong>Links to Other Sites</strong></p>
+                <p>
+                  This Service may contain links to other sites. If you click on
+                  a third-party link, you will be directed to that site. Note
+                  that these external sites are not operated by {{meOrUs }}.
+                  Therefore, {{iOrWe }} strongly advise you to review the
+                  Privacy Policy of these websites. {{iOrWe | capitalize }} have
+                  no control over and assume no responsibility for the content,
+                  privacy policies, or practices of any third-party sites or
+                  services.
+                </p>
+                <p><strong>Children’s Privacy</strong></p>
+                <p>
+                  These Services do not address anyone under the age of 13.
+                  {{iOrWe | capitalize }} do not knowingly collect personally
+                  identifiable information from children under 13. In the case
+                  {{iOrWe }} discover that a child under 13 has provided
+                  {{meOrUs }} with personal information, {{iOrWe }} immediately
+                  delete this from our servers. If you are a parent or guardian
+                  and you are aware that your child has provided us with
+                  personal information, please contact {{meOrUs }} so that
+                  {{iOrWe }} will be able to do necessary actions.
+                </p>
+                <p><strong>Changes to This Privacy Policy</strong></p>
+                <p>
+                  {{iOrWe | capitalize }} may update our Privacy Policy from
+                  time to time. Thus, you are advised to review this page
+                  periodically for any changes. {{iOrWe | capitalize }} will
+                  notify you of any changes by posting the new Privacy Policy on
+                  this page.
+                </p>
 
-              <p>
-                Credits to
-                <a href="https://twitter.com/ali_muzaffar" target="_blank"
-                  >Ali Muzaffar</a
-                >
-                for editting out the base template for the Privacy Policy, you
-                should read his blog post about it
-                <a
-                  href="https://medium.com/@ali.muzaffar/did-you-get-one-of-these-google-play-developer-policy-violation-emails-6c529ceb082d#.f10upj3fy"
-                  >here</a
-                >.
-              </p>
-              <p>
-                If you would like to request for more options of choosing
-                privacy policy by third party services, please open an
-                <a
-                  href="https://github.com/nisrulz/app-privacy-policy-generator/issues"
-                  target="_blank"
-                  >request issue on github.</a
-                >. Make sure to include the link to privacy policy you wish to
-                be added.
-              </p>
-            </div>
-          </section>
+                <p>This policy is effective as of {{ effectiveFromDate }}</p>
+
+                <p><strong>Contact Us</strong></p>
+                <p>
+                  If you have any questions or suggestions about {{myOrOur }}
+                  Privacy Policy, do not hesitate to contact {{meOrUs}} at {{
+                  appContact }}.
+                </p>
+                <p>
+                  This privacy policy page was created at
+                  <a href="https://privacypolicytemplate.net" target="_blank"
+                    >privacypolicytemplate.net</a
+                  >
+                  and modified/generated by
+                  <a
+                    href="https://app-privacy-policy-generator.firebaseapp.com/"
+                    target="_blank"
+                    >App Privacy Policy Generator</a
+                  >
+                </p>
+              </div>
+
+              <textarea
+                onclick="this.focus();this.select()"
+                readonly="readonly"
+                class="textarea"
+                id="privacy_txtarea"
+                v-show="contentRenderType==2"
+              >
+              </textarea>
+            </section>
+            <footer class="modal-card-foot">
+              <button
+                class="button is-success"
+                @click="getHtml('privacy_content','privacy_txtarea')"
+              >
+                HTML
+              </button>
+              <button
+                class="button is-success"
+                @click="getMarkdown('privacy_content', 'privacy_txtarea')"
+              >
+                Markdown
+              </button>
+              <button
+                v-if="contentRenderType!=1"
+                class="button is-success"
+                @click="preview()"
+              >
+                Preview
+              </button>
+            </footer>
+          </div>
         </div>
-        <div class="mdl-layout__tab-panel" id="disclaimer">
-          <section class="section--center mdl-grid mdl-grid--no-spacing">
-            <div class="mdl-cell mdl-cell--12-col">
-              <h4>Disclaimer</h4>
+
+        <!-- Terms & Conditions Modal -->
+        <div class="modal" v-bind:class="{ 'is-active': showTermsModal }">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title no-select">Terms & Conditions</p>
+              <button
+                class="delete"
+                aria-label="close"
+                @click="toggleTermsModalVisibility"
+              ></button>
+            </header>
+            <section class="modal-card-body modal-box">
+              <div id="tandc_content" v-show="contentRenderType==1">
+                <strong>Terms &amp; Conditions</strong>
+                <p>
+                  By downloading or using the app, these terms will
+                  automatically apply to you – you should make sure therefore
+                  that you read them carefully before using the app. You’re not
+                  allowed to copy, or modify the app, any part of the app, or
+                  our trademarks in any way. You’re not allowed to attempt to
+                  extract the source code of the app, and you also shouldn’t try
+                  to translate the app into other languages, or make derivative
+                  versions. The app itself, and all the trade marks, copyright,
+                  database rights and other intellectual property rights related
+                  to it, still belong to {{devOrCompanyName}}.
+                </p>
+
+                <p>
+                  {{devOrCompanyName}} is committed to ensuring that the app is
+                  as useful and efficient as possible. For that reason, we
+                  reserve the right to make changes to the app or to charge for
+                  its services, at any time and for any reason. We will never
+                  charge you for the app or its services without making it very
+                  clear to you exactly what you’re paying for.
+                </p>
+
+                <p>
+                  The {{appName}} app stores and processes personal data that
+                  you have provided to us, in order to provide {{myOrOur}}
+                  Service. It’s your responsibility to keep your phone and
+                  access to the app secure. We therefore recommend that you do
+                  not jailbreak or root your phone, which is the process of
+                  removing software restrictions and limitations imposed by the
+                  official operating system of your device. It could make your
+                  phone vulnerable to malware/viruses/malicious programs,
+                  compromise your phone’s security features and it could mean
+                  that the {{appName}} app won’t work properly or at all.
+                </p>
+                {{hasThirdPartyServicesSelected}}
+                <div v-if="hasThirdPartyServicesSelected">
+                  <p>
+                    The app does use third party services that declare their own
+                    Terms and Conditions.
+                  </p>
+                  <p>
+                    Link to Terms and Conditions of third party service
+                    providers used by the app
+                  </p>
+                  <ul>
+                    <li
+                      v-if="item[item.model]"
+                      v-for="item in thirdPartyServices"
+                    >
+                      <a :href="item.link.terms" target="_blank"
+                        >{{item.name}}</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+
+                <p>
+                  You should be aware that there are certain things that
+                  {{devOrCompanyName}} will not take responsibility for. Certain
+                  functions of the app will require the app to have an active
+                  internet connection. The connection can be Wi-Fi, or provided
+                  by your mobile network provider, but {{devOrCompanyName}}
+                  cannot take responsibility for the app not working at full
+                  functionality if you don’t have access to Wi-Fi, and you don’t
+                  have any of your data allowance left.
+                </p>
+
+                <p></p>
+
+                <p>
+                  If you’re using the app outside of an area with Wi-Fi, you
+                  should remember that your terms of the agreement with your
+                  mobile network provider will still apply. As a result, you may
+                  be charged by your mobile provider for the cost of data for
+                  the duration of the connection while accessing the app, or
+                  other third party charges. In using the app, you’re accepting
+                  responsibility for any such charges, including roaming data
+                  charges if you use the app outside of your home territory
+                  (i.e. region or country) without turning off data roaming. If
+                  you are not the bill payer for the device on which you’re
+                  using the app, please be aware that we assume that you have
+                  received permission from the bill payer for using the app.
+                </p>
+
+                <p>
+                  Along the same lines, {{devOrCompanyName}} cannot always take
+                  responsibility for the way you use the app i.e. You need to
+                  make sure that your device stays charged – if it runs out of
+                  battery and you can’t turn it on to avail the Service,
+                  {{devOrCompanyName}} cannot accept responsibility.
+                </p>
+
+                <p>
+                  With respect to {{devOrCompanyName}}’s responsibility for your
+                  use of the app, when you’re using the app, it’s important to
+                  bear in mind that although we endeavour to ensure that it is
+                  updated and correct at all times, we do rely on third parties
+                  to provide information to us so that we can make it available
+                  to you. {{devOrCompanyName}} accepts no liability for any
+                  loss, direct or indirect, you experience as a result of
+                  relying wholly on this functionality of the app.
+                </p>
+
+                <p>
+                  At some point, we may wish to update the app. The app is
+                  currently available on {{osType}} – the requirements for
+                  {{requirementOfSystem}}(and for any additional systems we
+                  decide to extend the availability of the app to) may change,
+                  and you’ll need to download the updates if you want to keep
+                  using the app. {{devOrCompanyName}} does not promise that it
+                  will always update the app so that it is relevant to you
+                  and/or works with the {{osType}} version that you have
+                  installed on your device. However, you promise to always
+                  accept updates to the application when offered to you, We may
+                  also wish to stop providing the app, and may terminate use of
+                  it at any time without giving notice of termination to you.
+                  Unless we tell you otherwise, upon any termination, (a) the
+                  rights and licenses granted to you in these terms will end;
+                  (b) you must stop using the app, and (if needed) delete it
+                  from your device.
+                </p>
+
+                <p><strong>Changes to This Terms and Conditions</strong></p>
+                <p>
+                  {{iOrWe | capitalize }} may update our Terms and Conditions
+                  from time to time. Thus, you are advised to review this page
+                  periodically for any changes. {{iOrWe | capitalize }} will
+                  notify you of any changes by posting the new Terms and
+                  Conditions on this page.
+                </p>
+
+                <p>
+                  These terms and conditions are effective as of {{
+                  effectiveFromDate }}
+                </p>
+
+                <p><strong>Contact Us</strong></p>
+                <p>
+                  If you have any questions or suggestions about {{myOrOur }}
+                  Terms and Conditions, do not hesitate to contact {{meOrUs }}
+                  at {{ appContact }}.
+                </p>
+
+                <p>
+                  This Terms and Conditions page was generated by
+                  <a
+                    href="https://app-privacy-policy-generator.firebaseapp.com/"
+                    target="_blank"
+                    >App Privacy Policy Generator</a
+                  >
+                </p>
+              </div>
+
+              <textarea
+                onclick="this.focus();this.select()"
+                readonly="readonly"
+                class="textarea"
+                id="tandc_txtarea"
+                v-show="contentRenderType==2"
+              ></textarea>
+            </section>
+            <footer class="modal-card-foot">
+              <button
+                class="button is-success"
+                @click="getHtml('tandc_content','tandc_txtarea')"
+              >
+                HTML
+              </button>
+              <button
+                class="button is-success"
+                @click="getMarkdown('tandc_content', 'tandc_txtarea')"
+              >
+                Markdown
+              </button>
+              <button
+                v-if="contentRenderType!=1"
+                class="button is-success"
+                @click="preview()"
+              >
+                Preview
+              </button>
+            </footer>
+          </div>
+        </div>
+
+        <!-- Disclaimer Modal -->
+        <div class="modal" v-bind:class="{ 'is-active': showDisclaimerModal }">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Disclaimer</p>
+              <button
+                class="delete"
+                aria-label="close"
+                @click="toggleDisclaimerModalVisibility"
+              ></button>
+            </header>
+            <section class="modal-card-body">
               <p>
                 This template for privacy policy and terms &amp; conditions is
                 provided on "AS IS" basis, without warranties or conditions of
@@ -769,62 +844,29 @@
                 own privacy policy. The developer of App Privacy Policy
                 Generator does not take any responsibility for the legal
                 consequences associated with the use of this privacy policy or
-                terms &amp; conditions, and I urge you to seek local legal
+                terms &amp; conditions, and urges you to seek independent legal
                 advice ensuring compliance with all rules applicable for the
                 users of your application. The developer of App Privacy Policy
                 Generator can in no way be found liable for any direct or
-                indirect damage or loss suffered by you due to the use of this
-                document.
+                indirect damage/loss suffered by individual/company due to the
+                use of this document.
               </p>
-              <p>
-                This
-                <a
-                  href="https://medium.com/@ali.muzaffar/did-you-get-one-of-these-google-play-developer-policy-violation-emails-6c529ceb082d#.f10upj3fy"
-                  target="_blank"
-                  >blog post</a
-                >
-                explains the whole idea of how the privacy policy was drafted
-                and where it makes sense to use it.
-              </p>
-            </div>
-          </section>
+            </section>
+            <footer class="modal-card-foot">
+              <button
+                class="button is-info"
+                aria-label="close"
+                @click="toggleDisclaimerModalVisibility"
+              >
+                Ok
+              </button>
+            </footer>
+          </div>
         </div>
-
-        <p class="footer-brand center">
-          Built with
-          <img src="images/heart.png" alt="heart" class="heart-logo" /> by
-          <a href="http://www.nisrulz.com/" target="_blank">Nishant</a> (...with
-          lots of caffeine)
-        </p>
-      </main>
+      </div>
     </div>
 
-    <!-- Material Lite -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.min.js"
-      integrity="sha256-PCfu4+fnQrp4wNmVbjN1eaX4LbOvOejab0UOhjLezrw="
-      crossorigin="anonymous"
-    ></script>
-    <!-- VueJs -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"
-      integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc="
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- Vue2 Filters -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/vue2-filters@0.3.0/dist/vue2-filters.min.js"
-      integrity="sha256-2a7X/yi0oEsDuu3zwktpE2oU+kThYyvH8qOLvUnHfJM="
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- ClipboardJS-->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"
-      integrity="sha256-dFEb+kXsOlXDFU4a9+EwfHE8z1hUJhEGTUb3zkhybYM="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 
     <!-- to-markdown -->
     <script

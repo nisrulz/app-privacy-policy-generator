@@ -1,6 +1,6 @@
 /*  Copyright 2017 Nishant Srivastava
 
-    Licensed under the Apache License, Version 2.0 (the "License");
+    Licensed under the Apache License, Version 2.0 (the "License")
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
@@ -12,136 +12,160 @@
     See the License for the specific language governing permissions and
     limitations under the License. */
 
-var vueapp = new Vue({
-  el: '#vueapp',
+var app = new Vue({
+  el: "#app",
   data: {
-    iOrWe: '[I/We]',
-    typeOfApp: '',
-    typeOfAppTxt: '[open source/free/freemium/ad-supported/commercial]',
-    typeOfDev: '',
-    appName: '[App Name]',
-    appContact: '[App Contact informations]',
-    myOrOur: '[my/our]',
-    meOrUs: '[me/us]',
-    atNoCost: '[at no cost]',
+    iOrWe: "[I/We]",
+    typeOfApp: "",
+    typeOfAppTxt: "[open source/free/freemium/ad-supported/commercial]",
+    typeOfDev: "",
+    appName: "[App name]",
+    appContact: "[App contact information]",
+    myOrOur: "[my/our]",
+    meOrUs: "[me/us]",
+    atNoCost: "[at no cost]",
     retainedInfo:
-      '[retained on your device and is not collected by [me/us] in any way]/[retained by us and used as described in this privacy policy]',
-    devName: '',
-    companyName: '',
-    devOrCompanyName: '[Developer/Company name]',
-    pidInfoIn: '',
+      "[retained on your device and is not collected by [me/us] in any way]/[retained by us and used as described in this privacy policy]",
+    devName: "",
+    companyName: "",
+    devOrCompanyName: "[Developer/Company name]",
+    pidInfoIn: "",
     pidInfo:
-      '[add whatever else you collect here, e.g. users name, address, location, pictures]',
-    gps: true,
-    admob: false,
-    firebase: false,
-    facebook: false,
-    fabric: false,
-    crashlytics: false,
-    piwik: false,
-    clicky: false,
-    flurry: false,
-    appodeal: false,
-    fathom: false,
-    unity: false,
-    gameanalytics: false,
-    onesignal: false,
-    sdkbox: false,
-    expo: false,
-    osType: '',
-    requirementOfSystem: 'system',
-    thirdPartyServices: thirdPartyServicesJsonArray
+      "[add whatever else you collect here, e.g. users name, address, location, pictures]",
+    osType: "",
+    effectiveFromDate: new Date().toISOString().slice(0, 10),
+    requirementOfSystem: "system",
+    thirdPartyServices: thirdPartyServicesJsonArray,
+    showPrivacyModal: false,
+    showTermsModal: false,
+    showDisclaimerModal: false,
+    hasThirdPartyServicesSelected: true,
+    contentRenderType: 1,
+    wizardStep: 1,
+    totalWizardSteps: 3,
   },
   methods: {
-    isServiceEnabled:function(){
-      return (this.gps || this.admob || this.firebase || this.facebook || this.fabric || this.crashlytics || this.piwik || this.clicky || this.flurry || this.appodeal || this.fathom || this.unity || this.sdkbox ||  this.gameanalytics || this.onesignal || this.expo)
+    preview: function (id) {
+      this.contentRenderType = 1
     },
-    selectAllText: function (id) {
-      selectText(id)
+    nextStep: function () {
+      if (this.wizardStep <= this.totalWizardSteps) {
+        this.wizardStep += 1
+      }
+    },
+    prevStep: function () {
+      if (this.wizardStep >= 1) {
+        this.wizardStep -= 1
+      }
+    },
+    checkForThirdPartyServicesEnabled: function () {
+      let listOfEnabledThirdPartyServices = []
+      this.thirdPartyServices.forEach((item) => {
+        if (item[item.model] == true) {
+          listOfEnabledThirdPartyServices.push(true)
+        }
+      })
+
+      return listOfEnabledThirdPartyServices.length > 0
     },
     toggleState: function (item) {
       let state = item.model
 
-      console.log('Item:', item.name, item.model, item[state])
+      // console.log('Item:', item.name, item.model, item[state])
       // For reactive update of the json
       // Toggle the state
       Vue.set(thirdPartyServicesJsonArray, item.model, !item[state])
     },
-    generateHTML: function (id, filename) {
+    getHtml: function (id, target) {
       let content = getContent(id)
       let title = getTitle(id)
       let rawHTML = getRawHTML(content, title)
-      downloadHTML(filename, rawHTML)
+      this.contentRenderType = 2
+      loadInTextView(target, rawHTML)
     },
-    generateMD: function (id, filename) {
+    getMarkdown: function (id, target) {
       let content = getContent(id)
       let title = getTitle(id)
       let rawHTML = getRawHTML(content, title)
       let markdown = convertHtmlToMd(rawHTML)
-      downloadMD(filename, markdown)
+      this.contentRenderType = 2
+      loadInTextView(target, markdown)
     },
     generate: function () {
-      if (this.typeOfDev === 'Individual') {
+      if (this.typeOfDev === "Individual") {
         this.devOrCompanyName = this.devName
-        this.iOrWe = 'I'
-        this.myOrOur = 'my'
-        this.meOrUs = 'me'
+        this.iOrWe = "I"
+        this.myOrOur = "my"
+        this.meOrUs = "me"
         this.retainedInfo =
-          'retained on your device and is not collected by ' +
+          "retained on your device and is not collected by " +
           this.meOrUs +
-          ' in any way'
-      } else if (this.typeOfDev === 'Company') {
+          " in any way"
+      } else if (this.typeOfDev === "Company") {
         this.devOrCompanyName = this.companyName
-        this.iOrWe = 'we'
-        this.myOrOur = 'our'
-        this.meOrUs = 'us'
+        this.iOrWe = "we"
+        this.myOrOur = "our"
+        this.meOrUs = "us"
         this.retainedInfo =
-          'retained by us and used as described in this privacy policy'
+          "retained by us and used as described in this privacy policy"
       }
 
-      if (this.typeOfApp === 'Commercial') {
-        this.atNoCost = ''
+      if (this.typeOfApp === "Commercial") {
+        this.atNoCost = ""
       } else {
-        this.atNoCost = 'at no cost'
+        this.atNoCost = "at no cost"
       }
 
-      if (this.pidInfoIn === '') {
-        this.pidInfo = '.'
+      if (this.pidInfoIn === "") {
+        this.pidInfo = "."
       } else {
-        this.pidInfo = ', including but not limited to ' + this.pidInfoIn + '.'
+        this.pidInfo = ", including but not limited to " + this.pidInfoIn + "."
       }
 
       switch (this.typeOfApp) {
-        case 'Free':
-        case 'Freemium':
-        case 'Commercial':
-          this.typeOfAppTxt = 'a ' + this.typeOfApp
+        case "Free":
+        case "Freemium":
+        case "Commercial":
+          this.typeOfAppTxt = "a " + this.typeOfApp
           break
-        case 'Open Source':
-        case 'Ad Supported':
-          this.typeOfAppTxt = 'an ' + this.typeOfApp
+        case "Open Source":
+        case "Ad Supported":
+          this.typeOfAppTxt = "an " + this.typeOfApp
           break
       }
 
       switch (this.osType) {
-        case 'Android': {
-          this.osType = 'Android'
-          this.requirementOfSystem = 'system'
+        case "Android": {
+          this.osType = "Android"
+          this.requirementOfSystem = "system"
           break
         }
-        case 'iOS': {
-          this.osType = 'iOS'
-          this.requirementOfSystem = 'system'
+        case "iOS": {
+          this.osType = "iOS"
+          this.requirementOfSystem = "system"
           break
         }
-        case 'Android & iOS': {
-          this.osType = 'Android & iOS'
-          this.requirementOfSystem = 'both systems'
+        case "Android & iOS": {
+          this.osType = "Android & iOS"
+          this.requirementOfSystem = "both systems"
           break
         }
       }
-
-      document.getElementById('privacy_tab').click()
-    }
-  }
+    },
+    togglePrivacyModalVisibility: function () {
+      this.generate()
+      this.hasThirdPartyServicesSelected = this.checkForThirdPartyServicesEnabled()
+      this.contentRenderType = 1
+      this.showPrivacyModal = !this.showPrivacyModal
+    },
+    toggleTermsModalVisibility: function () {
+      this.generate()
+      this.hasThirdPartyServicesSelected = this.checkForThirdPartyServicesEnabled()
+      this.contentRenderType = 1
+      this.showTermsModal = !this.showTermsModal
+    },
+    toggleDisclaimerModalVisibility: function () {
+      this.showDisclaimerModal = !this.showDisclaimerModal
+    },
+  },
 })
