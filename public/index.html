@@ -33,11 +33,11 @@
 
     <link
       rel="stylesheet prefetch"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     />
     <link
       rel="stylesheet prefetch"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css"
     />
     <link rel="stylesheet" href="css/style.css" />
 
@@ -78,8 +78,7 @@
                         class="heart-logo"
                       />&nbsp;by
                       <a href="http://www.nisrulz.com/" target="_blank"
-                        >Nishant</a
-                      >
+                        >Nishant</a>
                       <a
                         href="https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors"
                         target="_blank"
@@ -246,15 +245,18 @@
 
                 <a v-for="item in thirdPartyServices">
                   <br />
-                
-                  <input type="checkbox" :id="'list-switch-' + item.model"
-                  v-model="item[item.model]">
+
+                  <input
+                    type="checkbox"
+                    :id="'list-switch-' + item.model"
+                    v-model="item[item.model]"
+                  />
                   <label :for="'list-switch-' + item.model">
                     &nbsp;<img
-                    :src="item.logo"
-                    :alt="item.name"
-                    class="thirdparty-logo"
-                  /><span class="thirdparty-text">{{ item.name }}</span>
+                      :src="item.logo"
+                      :alt="item.name"
+                      class="thirdparty-logo"
+                    /><span class="thirdparty-text">{{ item.name }}</span>
                   </label>
                 </a>
               </div>
@@ -273,72 +275,124 @@
                   @click="prevStep()"
                 />
               </div>
-              <div class="column box">
-                <b>All Done!</b>
-                <br />
-                <p>
-                  Now sit back and choose the type of document you want to
-                  generate:
-                </p>
-                <br />
-
-                <a
-                  class="button is-primary"
-                  @click="togglePrivacyModalVisibility"
-                  >Privacy Policy</a
-                >
-
-                <a class="button is-info" @click="toggleTermsModalVisibility"
-                  >Terms & Conditions</a
-                >
-
-                <br />
-                <hr />
-                <div class="field has-addons is-grouped">
-                  <p class="control">
-                    <a
-                      class="button"
-                      href="https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator"
+              <div class="column">
+                <div class="box" id="fc-container">
+                  <div id="fc-container-text">
+                    <div class="fc-title">
+                      Free privacy policy hosting + website for {{ appName }}.
+                    </div>
+                  </div>
+                  <div id="fc-callouts">
+                    <form
+                      action="https://app.flycricket.com/import/privacy"
+                      method="post"
                       target="_blank"
+                      id="fc-form"
+                      onsubmit="return fc_submit(event)"
                     >
-                      <span>
-                        <img
-                          src="images/github.svg"
-                          alt="github"
-                          class="button-logo"
-                        />
-                      </span>
-                      <span>Github</span>
-                    </a>
+                      <input type="hidden" name="fc-referrer" value="nishant" />
+                      <input type="hidden" name="fc-body" id="fc-body" />
+                      <input
+                        type="hidden"
+                        name="fc-name"
+                        id="fc-name"
+                        v-model="appName"
+                      />
+                    <div style="margin-top: 1em;">
+                        <button
+                        class="button is-light is-small"
+                        >
+                          Learn More
+                        </button>
+                        <button
+                        class="button is-black is-small"
+                        >
+                          Deploy
+                        </button>
+                    </div>
+                      
+                    </form>
+
+                    <div class="fc-powered-by">
+                        Powered by
+                        <a
+                          href="https://app.flycricket.com/r/nishant?utm_source=partner&utm_medium=website&utm_campaign=privacy_generator"
+                          target="_blank"
+                          >Flycricket</a
+                        >
+                      </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <b>All Done!</b>
+                  <br />
+                  <p>
+                    Now sit back and choose the type of document you want to
+                    generate:
                   </p>
-                  <p class="control">
-                    <a
-                      class="button"
-                      href="https://twitter.com/intent/tweet?text=App%20Privacy%20Policy%20Generator%3A%20A%20simple%20web%20app%20to%20generate%20a%20generic%20privacy%20policy%20for%20your%20Android%2FiOS%20apps%F0%9F%98%8E&url=https://github.com/nisrulz/app-privacy-policy-generator&via=nisrulz&hashtags=Privacy"
-                      target="_blank"
-                    >
-                      <span>
-                        <img
-                          src="images/twitter.svg"
-                          alt="twitter"
-                          class="button-logo"
-                        />
-                      </span>
-                      <span>Tweet</span>
-                    </a>
-                  </p>
-                  <p class="control">
-                    <a class="button" @click="toggleDisclaimerModalVisibility">
-                      <span>
-                        <img
-                          src="images/disclaimer.svg"
-                          alt="disclaimer"
-                          class="button-logo"
-                        />
-                      </span>
-                      <span>Disclaimer</span>
-                    </a>
-                  </p>
+                  <br />
+
+                  <a
+                    class="button is-primary"
+                    @click="togglePrivacyModalVisibility"
+                    >Privacy Policy</a
+                  >
+
+                  <a class="button is-info" @click="toggleTermsModalVisibility"
+                    >Terms & Conditions</a
+                  >
+
+                  <br />
+                  <hr />
+                  <div class="field has-addons is-grouped">
+                    <p class="control">
+                      <a
+                        class="button"
+                        href="https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator"
+                        target="_blank"
+                      >
+                        <span>
+                          <img
+                            src="images/github.svg"
+                            alt="github"
+                            class="button-logo"
+                          />
+                        </span>
+                        <span>Github</span>
+                      </a>
+                    </p>
+                    <p class="control">
+                      <a
+                        class="button"
+                        href="https://twitter.com/intent/tweet?text=App%20Privacy%20Policy%20Generator%3A%20A%20simple%20web%20app%20to%20generate%20a%20generic%20privacy%20policy%20for%20your%20Android%2FiOS%20apps%F0%9F%98%8E&url=https://github.com/nisrulz/app-privacy-policy-generator&via=nisrulz&hashtags=Privacy"
+                        target="_blank"
+                      >
+                        <span>
+                          <img
+                            src="images/twitter.svg"
+                            alt="twitter"
+                            class="button-logo"
+                          />
+                        </span>
+                        <span>Tweet</span>
+                      </a>
+                    </p>
+                    <p class="control">
+                      <a
+                        class="button"
+                        @click="toggleDisclaimerModalVisibility"
+                      >
+                        <span>
+                          <img
+                            src="images/disclaimer.svg"
+                            alt="disclaimer"
+                            class="button-logo"
+                          />
+                        </span>
+                        <span>Disclaimer</span>
+                      </a>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -522,6 +576,8 @@
               </div>
 
               <textarea
+                onclick="this.focus();this.select()"
+                readonly="readonly"
                 class="textarea"
                 id="privacy_txtarea"
                 v-show="contentRenderType==2"
@@ -721,6 +777,8 @@
               </div>
 
               <textarea
+                onclick="this.focus();this.select()"
+                readonly="readonly"
                 class="textarea"
                 id="tandc_txtarea"
                 v-show="contentRenderType==2"
@@ -778,11 +836,6 @@
                 indirect damage/loss suffered by individual/company due to the
                 use of this document.
               </p>
-              <br />
-              <label class="checkbox">
-                <input type="checkbox" /> &nbsp; I understand and agree to this
-                disclaimer.
-              </label>
             </section>
             <footer class="modal-card-foot">
               <button
@@ -811,5 +864,6 @@
     <script src="js/thirdpartyservices.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/flycricket.js"></script>
   </body>
 </html>

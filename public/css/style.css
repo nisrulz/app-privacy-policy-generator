@@ -15,11 +15,9 @@ li {
   text-align: center;
 }
 
-.hero-body .content > .title {
-  color: black;
-}
-
-.hero-body .content > .subtitle {
+.hero-body .content > .title,
+.hero-body .content > .subtitle,
+.hero.is-primary .subtitle a:not(.button) {
   color: black;
 }
 
@@ -234,6 +232,11 @@ input[type="checkbox"]:checked + label:before {
   border-left-color: transparent;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.fc-powered-by {
+  font-size: 0.6em;
+  color: gray;
 }
 
 .bg-pattern {

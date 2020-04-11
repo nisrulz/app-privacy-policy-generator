@@ -57,44 +57,6 @@ function getTitle(id) {
   return title.innerHTML
 }
 
-function selectText(containerId) {
-  var range
-  if (document.selection) {
-    range = document.body.createTextRange()
-    range.moveToElementText(document.getElementById(containerId))
-    range.select()
-  } else if (window.getSelection) {
-    range = document.createRange()
-    range.selectNode(document.getElementById(containerId))
-    window.getSelection().addRange(range)
-  }
-}
-
 function loadInTextView(id, content) {
   document.getElementById(id).value = content
 }
-
-// function download (filename, text, format) {
-//   format += ';charset=utf-8,'
-//   var pom = document.createElement('a')
-//   pom.setAttribute('href', format + encodeURIComponent(text))
-//   pom.setAttribute('download', filename)
-
-//   if (document.createEvent) {
-//     var event = document.createEvent('MouseEvents')
-//     event.initEvent('click', true, true)
-//     pom.dispatchEvent(event)
-//   } else {
-//     pom.click()
-//   }
-// }
-
-// function downloadHTML (filename, content) {
-//   filename += '.html'
-//   download(filename, content, 'data:text/html')
-// }
-
-// function downloadMD (filename, content) {
-//   filename += '.md'
-//   download(filename, content, 'data:text/markdown')
-// }
