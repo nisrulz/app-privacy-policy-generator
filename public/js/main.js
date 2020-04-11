@@ -66,7 +66,7 @@ var app = new Vue({
         }
       })
 
-      return listOfEnabledThirdPartyServices.size > 0
+      return listOfEnabledThirdPartyServices.length > 0
     },
     toggleState: function (item) {
       let state = item.model

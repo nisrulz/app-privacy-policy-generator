@@ -57,14 +57,14 @@
     </script>
   </head>
 
-  <body class="gradient-bg">
-    <div id="app" class="pattern-bg">
+  <body>
+    <div id="app">
       <div class="container">
         <!-- Hero Section -->
         <section class="hero is-primary">
           <div class="hero-body">
             <div class="columns">
-              <div class="column is-8">
+              <div class="column">
                 <div class="content">
                   <h1 class="title">App <em>Privacy Policy</em> Generator</h1>
                   <h4 class="subtitle">
@@ -86,7 +86,7 @@
                         >and contributors</a
                       >
                     </p>
-                    <p>
+                    <p class="has-text-grey-lighter	">
                       The source code is licensed
                       <a
                         href="https://opensource.org/licenses/Apache-2.0"
@@ -97,12 +97,7 @@
                         href="https://creativecommons.org/licenses/by/4.0/"
                         target="_blank"
                         >CC BY 4.0</a
-                      >.&nbsp;<a
-                        href="https://icons8.com"
-                        target="_blank"
-                        alt="illustration by Ouch.pics"
-                        >Illustration by Ouch.pics</a
-                      >
+                      >.
                     </p>
                   </h4>
                 </div>
@@ -113,134 +108,125 @@
 
         <!-- Main Generator Section -->
         <section class="section" id="step-1" v-if="wizardStep==1">
-          <div class="box">
+          <div>
             <div class="columns">
-              <div class="column is-4 is-information">
-                <img src="images/step_1.png" class="center-block sidebar-img" />
+              <div class="column is-7 is-information">
+                <img src="images/step_1.svg" class="center-block sidebar-img" />
                 <img
                   src="images/next.png"
                   class="center-block nav-btn"
                   @click="nextStep()"
                 />
               </div>
-              <div class="column is-content">
-                <div class="field is-grouped">
-                  <div class="control is-expanded">
-                    <p class="help form-label">App Name</p>
-                    <input
-                      class="input"
-                      type="text"
-                      required
-                      v-model="appName"
-                      placeholder="Awesome App"
-                    />
-                  </div>
-
-                  <div class="control is-expanded">
-                    <p class="help form-label">Contact Information</p>
-                    <input
-                      class="input"
-                      type="email"
-                      required
-                      v-model="appContact"
-                      placeholder=""
-                    />
-                  </div>
+              <div class="column box scrollable">
+                <div class="control is-expanded">
+                  <p class="help form-label">App Name</p>
+                  <input
+                    class="input"
+                    type="text"
+                    required
+                    v-model="appName"
+                    placeholder="Awesome App"
+                  />
                 </div>
-                <div class="field is-grouped">
-                  <div class="control">
-                    <p class="help form-label">App Type</p>
-                    <!-- Type of App -->
-                    <div class="select is-primary">
-                      <select v-model="typeOfApp">
-                        <option value="" disabled>Select app type</option>
-                        <option>Free</option>
-                        <option>Open Source</option>
-                        <option>Freemium</option>
-                        <option>Ad Supported</option>
-                        <option>Commercial</option>
-                      </select>
-                    </div>
-                  </div>
 
-                  <div class="control">
-                    <p class="help form-label">Mobile OS</p>
-                    <!-- Mobile OS -->
-                    <div class="select is-primary">
-                      <select v-model="osType">
-                        <option value="" disabled>Select mobile OS</option>
-                        <option>Android</option>
-                        <option>iOS</option>
-                        <option>Android & iOS</option>
-                      </select>
-                    </div>
-                  </div>
+                <div class="control is-expanded">
+                  <p class="help form-label">Contact Information</p>
+                  <input
+                    class="input"
+                    type="email"
+                    required
+                    v-model="appContact"
+                    placeholder=""
+                  />
+                </div>
 
-                  <div class="control">
-                    <p class="help form-label">Policy Effective Date</p>
-                    <!-- Policy Effective Date -->
-                    <input
-                      class="input is-primary"
-                      type="date"
-                      required
-                      v-model="effectiveFromDate"
-                    />
+                <div class="control is-expanded">
+                  <p class="help form-label">
+                    Personally Identifiable Information
+                  </p>
+                  <!-- PII -->
+                  <input
+                    class="input is-primary"
+                    type="text"
+                    v-model="pidInfoIn"
+                    placeholder="Personally Identifiable Information you collect (comma separated)"
+                  />
+                </div>
+
+                <div class="control is-expanded">
+                  <p class="help form-label">App Type</p>
+                  <!-- Type of App -->
+                  <div class="select is-primary">
+                    <select v-model="typeOfApp">
+                      <option value="" disabled>Select app type</option>
+                      <option>Free</option>
+                      <option>Open Source</option>
+                      <option>Freemium</option>
+                      <option>Ad Supported</option>
+                      <option>Commercial</option>
+                    </select>
                   </div>
                 </div>
 
-                <div class="field is-grouped">
-                  <div class="control">
-                    <p class="help form-label">OwnerType</p>
-                    <!-- Owner -->
-                    <div class="select is-primary">
-                      <select v-model="typeOfDev">
-                        <option value="" disabled>Select owner type</option>
-                        <option>Individual</option>
-                        <option>Company</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="control is-expanded" v-if="typeOfDev=='Company'">
-                    <p class="help form-label">Company Name</p>
-
-                    <!-- Company Name -->
-                    <input
-                      class="input is-primary"
-                      type="text"
-                      v-model="companyName"
-                      placeholder="Company Name"
-                    />
-                  </div>
-
-                  <div
-                    class="control is-expanded"
-                    v-if="typeOfDev=='Individual'"
-                  >
-                    <p class="help form-label">Developer Name</p>
-
-                    <!-- Developer Name -->
-                    <input
-                      class="input is-primary"
-                      type="text"
-                      v-model="devName"
-                      placeholder="Developer Name"
-                    />
+                <div class="control is-expanded">
+                  <p class="help form-label">Mobile OS</p>
+                  <!-- Mobile OS -->
+                  <div class="select is-primary">
+                    <select v-model="osType">
+                      <option value="" disabled>Select mobile OS</option>
+                      <option>Android</option>
+                      <option>iOS</option>
+                      <option>Android & iOS</option>
+                    </select>
                   </div>
                 </div>
-                <div class="field">
-                  <div class="control is-expanded">
-                    <p class="help form-label">
-                      Personally Identifiable Information
-                    </p>
-                    <!-- PII -->
-                    <input
-                      class="input is-primary"
-                      type="text"
-                      v-model="pidInfoIn"
-                      placeholder="Personally Identifiable Information you collect (comma separated)"
-                    />
+
+                <div class="control">
+                  <p class="help form-label">Policy Effective Date</p>
+                  <!-- Policy Effective Date -->
+                  <input
+                    class="input is-primary"
+                    type="date"
+                    required
+                    v-model="effectiveFromDate"
+                  />
+                </div>
+
+                <div class="control is-expanded">
+                  <p class="help form-label">OwnerType</p>
+                  <!-- Owner -->
+                  <div class="select is-primary">
+                    <select v-model="typeOfDev">
+                      <option value="" disabled>Select owner type</option>
+                      <option>Individual</option>
+                      <option>Company</option>
+                    </select>
                   </div>
+                </div>
+
+                <div class="control is-expanded" v-if="typeOfDev=='Company'">
+                  <p class="help form-label">Company Name</p>
+
+                  <!-- Company Name -->
+                  <input
+                    class="input is-primary"
+                    type="text"
+                    v-model="companyName"
+                    placeholder="Company Name"
+                  />
+                </div>
+
+                <div class="control is-expanded" v-if="typeOfDev=='Individual'">
+                  <p class="help form-label">Developer Name</p>
+
+                  <!-- Developer Name -->
+                  <input
+                    class="input is-primary"
+                    type="text"
+                    v-model="devName"
+                    placeholder="Developer Name"
+                  />
                 </div>
               </div>
             </div>
@@ -248,10 +234,10 @@
         </section>
 
         <section class="section" id="step-2" v-if="wizardStep==2">
-          <div class="box">
+          <div>
             <div class="columns">
-              <div class="column is-4 is-information">
-                <img src="images/step_2.png" class="center-block sidebar-img" />
+              <div class="column is-7 is-information">
+                <img src="images/step_2.svg" class="center-block sidebar-img" />
 
                 <div class="center-parent">
                   <img
@@ -266,23 +252,22 @@
                   />
                 </div>
               </div>
-              <div class="column is-content">
+              <div class="column box scrollable">
                 <b>
                   Include links to Third Party Services
                 </b>
 
                 <a v-for="item in thirdPartyServices">
                   <br />
-                  <label class="checkbox">
-                    <input
-                      type="checkbox"
-                      :id="'list-switch-' + item.model"
-                      v-model="item[item.model]"
-                    />&nbsp;<img
-                      :src="item.logo"
-                      :alt="item.name"
-                      class="thirdparty-logo"
-                    />&nbsp;{{ item.name }}
+                
+                  <input type="checkbox" :id="'list-switch-' + item.model"
+                  v-model="item[item.model]">
+                  <label :for="'list-switch-' + item.model">
+                    &nbsp;<img
+                    :src="item.logo"
+                    :alt="item.name"
+                    class="thirdparty-logo"
+                  /><span class="thirdparty-text">{{ item.name }}</span>
                   </label>
                 </a>
               </div>
@@ -291,17 +276,17 @@
         </section>
 
         <section class="section" id="step-3" v-if="wizardStep==3">
-          <div class="box">
+          <div>
             <div class="columns">
-              <div class="column is-4 is-information">
-                <img src="images/step_3.png" class="center-block sidebar-img" />
+              <div class="column is-7 is-information">
+                <img src="images/step_3.svg" class="center-block sidebar-img" />
                 <img
                   src="images/prev.png"
                   class="center-block nav-btn"
                   @click="prevStep()"
                 />
               </div>
-              <div class="column is-content">
+              <div class="column box">
                 <b>All Done!</b>
                 <br />
                 <p>
@@ -549,7 +534,11 @@
                 </p>
               </div>
 
-              <textarea id="privacy_txtarea" v-show="contentRenderType==2">
+              <textarea
+                class="textarea"
+                id="privacy_txtarea"
+                v-show="contentRenderType==2"
+              >
               </textarea>
             </section>
             <footer class="modal-card-foot">
@@ -744,7 +733,11 @@
                 </p>
               </div>
 
-              <textarea id="tandc_txtarea" v-show="contentRenderType==2"></textarea>
+              <textarea
+                class="textarea"
+                id="tandc_txtarea"
+                v-show="contentRenderType==2"
+              ></textarea>
             </section>
             <footer class="modal-card-foot">
               <button
@@ -824,7 +817,8 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/to-markdown/3.1.1/to-markdown.min.js"
       integrity="sha256-2PIa0cHy6lNEesnk4/qokv291Whx/uhAy2V6WL2zmfo="
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Main -->
     <script src="js/thirdpartyservices.js"></script>
