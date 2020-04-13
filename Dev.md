@@ -23,7 +23,7 @@ To serve locally for testing, run: `firebase serve --only hosting`
 > Note: This can only be done by maintainers who have access to Firebase console!
 
 - First, login by executing command: `firebase login`
-- Next,To deploy to production,run: `firebase deploy -m "2.1.11"`
+- Next,To deploy to production,run: `firebase deploy -m "3.0.1"`
 
 # License
 
