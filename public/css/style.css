@@ -10,15 +10,34 @@ li {
 .hero.is-primary {
   background-color: transparent;
 }
+.hero-body {
+  padding: 1.5rem 1.5rem;
+}
 
 .hero-body .content {
   text-align: center;
+}
+
+.hero-body .content h1 {
+  font-size: 1.4em;
+  margin-bottom: 0.8em;
+}
+
+.hero-body .content h4 {
+  margin-bottom: 0;
 }
 
 .hero-body .content > .title,
 .hero-body .content > .subtitle,
 .hero.is-primary .subtitle a:not(.button) {
   color: black;
+}
+
+img.social-logo {
+  display: inline-block;
+  margin-right: 10px;
+  text-indent: -9999px;
+  width: 20px;
 }
 
 #app > :nth-child(2) {
