@@ -44,6 +44,13 @@ var app = new Vue({
     wizardStep: 1,
     totalWizardSteps: 3,
   },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    }
+  },
   methods: {
     preview: function (id) {
       this.contentRenderType = 1
