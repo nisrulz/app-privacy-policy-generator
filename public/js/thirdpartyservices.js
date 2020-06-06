@@ -178,7 +178,7 @@ var thirdPartyServicesJsonArray = [
     name: "Sentry",
     model: "sentry",
     expo: false,
-    logo: "images/sentry.svg",
+    logo: "images/sentry.png",
     link: {
       privacy: "https://sentry.io/privacy/",
       terms: "https://sentry.io/terms/"
