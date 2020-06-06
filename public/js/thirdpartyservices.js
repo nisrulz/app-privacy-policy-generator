@@ -173,5 +173,15 @@ var thirdPartyServicesJsonArray = [
       privacy: "https://expo.io/privacy",
       terms: "https://expo.io/terms"
     }
+  },
+  {
+    name: "Sentry",
+    model: "sentry",
+    expo: false,
+    logo: "images/sentry.svg",
+    link: {
+      privacy: "https://sentry.io/privacy/",
+      terms: "https://sentry.io/terms/"
+    }
   }
 ];
