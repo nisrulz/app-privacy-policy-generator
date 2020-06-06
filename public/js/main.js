@@ -37,6 +37,7 @@ var app = new Vue({
     requirementOfSystem: "system",
     thirdPartyServices: thirdPartyServicesJsonArray,
     showPrivacyModal: false,
+    showGDPRPrivacyModal: false,
     showTermsModal: false,
     showDisclaimerModal: false,
     hasThirdPartyServicesSelected: true,
@@ -164,6 +165,12 @@ var app = new Vue({
       this.hasThirdPartyServicesSelected = this.checkForThirdPartyServicesEnabled()
       this.contentRenderType = 1
       this.showPrivacyModal = !this.showPrivacyModal
+    },
+    toggleGDPRPrivacyModalVisibility: function () {
+      this.generate()
+      this.hasThirdPartyServicesSelected = this.checkForThirdPartyServicesEnabled()
+      this.contentRenderType = 1
+      this.showGDPRPrivacyModal = !this.showGDPRPrivacyModal
     },
     toggleTermsModalVisibility: function () {
       this.generate()
