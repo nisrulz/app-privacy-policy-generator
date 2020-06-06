@@ -387,10 +387,9 @@
                     class="button is-primary"
                     @click="toggleGDPRPrivacyModalVisibility"
                     rel="noopener noreferrer"
-                    >GDPR Privacy Policy</a
+                    >GDPR compliant Privacy Policy</a
                   >
-                  <br/>
-        
+
                   <a class="button is-info" @click="toggleTermsModalVisibility" rel="noopener noreferrer"
                     >Terms & Conditions</a
                   >
@@ -633,145 +632,138 @@
           <div class="modal-card">
             <header class="modal-card-head">
               <p class="modal-card-title no-select">GDPR Compliant Privacy Policy</p>
-              <button
-                class="delete"
-                aria-label="close"
-                @click="toggleGDPRPrivacyModalVisibility"
-              ></button>
+              <button class="delete" aria-label="close" @click="toggleGDPRPrivacyModalVisibility"></button>
             </header>
             <section class="modal-card-body modal-box">
               <div id="gdpr_privacy_content" v-show="contentRenderType==1">
-                <strong>Privacy Policy</strong>
-                <p>
-                  {{devOrCompanyName}} built the {{appName}} app as
-                  {{typeOfAppTxt}} app. This SERVICE is provided by
-                  {{devOrCompanyName }} {{atNoCost }} and is intended for use as
-                  is.
-                </p>
-                <p>
-                  This page is used to inform visitors regarding {{myOrOur}}
-                  policies with the collection, use, and disclosure of Personal
-                  Information if anyone decided to use {{myOrOur}} Service.
-                </p>
-                <p>
-                  If you choose to use {{myOrOur }} Service, then you agree to
-                  the collection and use of information in relation to this
-                  policy. The Personal Information that {{iOrWe}} collect is
-                  used for providing and improving the Service. {{iOrWe |
-                  capitalize }} will not use or share your information with
-                  anyone except as described in this Privacy Policy.
-                </p>
-                <p>
-                  The terms used in this Privacy Policy have the same meanings
-                  as in our Terms and Conditions, which is accessible at
-                  {{appName }} unless otherwise defined in this Privacy Policy.
-                </p>
-                <p><strong>Information Collection and Use</strong></p>
-                <p>
-                  For a better experience, while using our Service, {{iOrWe }}
-                  may require you to provide us with certain personally
-                  identifiable information{{pidInfo}} The information that
-                  {{iOrWe}} request will be {{retainedInfo}}.
-                </p>
+                <strong>GDPR Compliant Privacy Policy</strong>
 
-                <div v-if="hasThirdPartyServicesSelected">
-                  <p>
-                    The app does use third party services that may collect
-                    information used to identify you.
-                  </p>
-                  <p>
-                    Link to privacy policy of third party service providers used
-                    by the app
-                  </p>
-                  <ul>
-                    <li
-                      v-if="item[item.model]"
-                      v-for="item in thirdPartyServices"
-                    >
-                      <a :href="item.link.privacy" target="_blank" rel="noopener noreferrer"
-                        >{{item.name}}</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-                <p><strong>Log Data</strong></p>
-                <p>
-                  {{iOrWe | capitalize }} want to inform you that whenever you
-                  use {{myOrOur}} Service, in a case of an error in the app
-                  {{iOrWe}} collect data and information (through third party
-                  products) on your phone called Log Data. This Log Data may
-                  include information such as your device Internet Protocol
-                  (“IP”) address, device name, operating system version, the
-                  configuration of the app when utilizing {{myOrOur }} Service,
-                  the time and date of your use of the Service, and other
-                  statistics.
-                </p>
-                <p><strong>Cookies</strong></p>
-                <p>
-                  Cookies are files with a small amount of data that are
-                  commonly used as anonymous unique identifiers. These are sent
-                  to your browser from the websites that you visit and are
-                  stored on your device's internal memory.
-                </p>
-                <p>
-                  This Service does not use these “cookies” explicitly. However,
-                  the app may use third party code and libraries that use
-                  “cookies” to collect information and improve their services.
-                  You have the option to either accept or refuse these cookies
-                  and know when a cookie is being sent to your device. If you
-                  choose to refuse our cookies, you may not be able to use some
-                  portions of this Service.
-                </p>
-                <p><strong>Service Providers</strong></p>
-                <p>
-                  {{iOrWe | capitalize }} may employ third-party companies and
-                  individuals due to the following reasons:
-                </p>
+                <p>Our Company is part of the Our Company Group which includes Our Company International and Our Company
+                  Direct. This privacy policy will explain how our organization uses the personal data we collect from you
+                  when you use our website.</p>
+
+                <p> Topics:</p>
                 <ul>
-                  <li>To facilitate our Service;</li>
-                  <li>To provide the Service on our behalf;</li>
-                  <li>To perform Service-related services; or</li>
-                  <li>To assist us in analyzing how our Service is used.</li>
+                  <li>What data do we collect?</li>
+                  <li>How do we collect your data?</li>
+                  <li>How will we use your data?</li>
+                  <li>How do we store your data?</li>
+                  <li>Marketing</li>
+                  <li>What are your data protection rights?</li>
+                  <li>What are cookies?</li>
+                  <li>How do we use cookies?</li>
+                  <li>What types of cookies do we use?</li>
+                  <li>How to manage your cookies</li>
+                  <li>Privacy policies of other websites</li>
+                  <li>Changes to our privacy policy</li>
+                  <li>How to contact us</li>
+                  <li>How to contact the appropriate authorities</li>
                 </ul>
-                <p>
-                  {{iOrWe | capitalize }} want to inform users of this Service
-                  that these third parties have access to your Personal
-                  Information. The reason is to perform the tasks assigned to
-                  them on our behalf. However, they are obligated not to
-                  disclose or use the information for any other purpose.
-                </p>
-                <p><strong>Security</strong></p>
-                <p>
-                  {{iOrWe | capitalize }} value your trust in providing us your
-                  Personal Information, thus we are striving to use commercially
-                  acceptable means of protecting it. But remember that no method
-                  of transmission over the internet, or method of electronic
-                  storage is 100% secure and reliable, and {{iOrWe }} cannot
-                  guarantee its absolute security.
-                </p>
-                <p><strong>Links to Other Sites</strong></p>
-                <p>
-                  This Service may contain links to other sites. If you click on
-                  a third-party link, you will be directed to that site. Note
-                  that these external sites are not operated by {{meOrUs }}.
-                  Therefore, {{iOrWe }} strongly advise you to review the
-                  Privacy Policy of these websites. {{iOrWe | capitalize }} have
-                  no control over and assume no responsibility for the content,
-                  privacy policies, or practices of any third-party sites or
-                  services.
-                </p>
-                <p><strong>Children’s Privacy</strong></p>
-                <p>
-                  These Services do not address anyone under the age of 13.
-                  {{iOrWe | capitalize }} do not knowingly collect personally
-                  identifiable information from children under 13. In the case
-                  {{iOrWe }} discover that a child under 13 has provided
-                  {{meOrUs }} with personal information, {{iOrWe }} immediately
-                  delete this from our servers. If you are a parent or guardian
-                  and you are aware that your child has provided us with
-                  personal information, please contact {{meOrUs }} so that
-                  {{iOrWe }} will be able to do necessary actions.
-                </p>
+
+                <p> What data do we collect? Our Company collects the following data: 0 Personal identification
+                  information (Name, email address, phone number, etc.) 0 [Add any other data your company collects]</p>
+
+                <p> How do we collect your data? You directly provide Our Company with most of the data we collect. We
+                  collect data and process data when you: 0 Register online or place an order for any of our products or
+                  services. 0 Voluntarily complete a customer survey or provide feedback on any of our message boards or
+                  via email. Use or view our website via your browser&rsquo;s cookies. [Add any other ways your company
+                  collects data]</p>
+
+                <p> Our Company may also receive your data indirectly from the following sources: 0 [Add any indirect
+                  source of data your company has]</p>
+
+                <p> How will we use your data? Our Company collects your data so that we can: 0 Process your order, manage
+                  your account. 0 Email you with special offers on other products and services we think you might like. 0
+                  [Add how else your company uses data]</p>
+
+                <p> If you agree, Our Company will share your data with our partner companies so that they may offer you
+                  their products and services. 0 [List organizations that will receive data]</p>
+
+                <p>When Our Company processes your order, it may send your data to, and also use the resulting information
+                  from, credit reference agencies to prevent fraudulent purchases.</p>
+
+                <p> How do we store your data? Our Company securely stores your data at [enter the location and describe
+                  security precautions taken].</p>
+
+                <p> Our Company will keep your [enter type of data] for [enter time period]. Once this time period has
+                  expired, we will delete your data by [enter how you delete users&rsquo; data].</p>
+
+                <p> Marketing Our Company would like to send you information about products and services of ours that we
+                  think you might like, as well as those of our partner companies. 0 [List partner companies here]</p>
+
+                <p> If you have agreed to receive marketing, you may always opt out at a later date.</p>
+
+                <p> You have the right at any time to stop Our Company from contacting you for marketing purposes or
+                  giving your data to other members of the Our Company Group.</p>
+
+                <p>If you no longer wish to be contacted for marketing purposes, please click here.</p>
+
+                <p> What are your data protection rights? Our Company would like to make sure you are fully aware of all
+                  of your data protection rights. Every user is entitled to the following:</p>
+
+                <p> The right to access - You have the right to request Our Company for copies of your personal data. We
+                  may charge you a small fee for this service.</p>
+
+                <p> The right to rectification - You have the right to request that Our Company correct any information
+                  you believe is inaccurate. You also have the right to request Our Company to complete information you
+                  believe is incomplete. The right to erasure &mdash; You have the right to request that Our Company erase
+                  your personal data, under certain conditions.</p>
+
+                <p> The right to restrict processing - You have the right to request that Our Company restrict the
+                  processing of your personal data, under certain conditions.</p>
+
+                <p>The right to object to processing - You have the right to object to Our Company&rsquo;s processing of
+                  your personal data, under certain conditions.</p>
+
+                <p> The right to data portability - You have the right to request that Our Company transfer the data that
+                  we have collected to another organization, or directly to you, under certain conditions.</p>
+
+                <p>If you make a request, we have one month to respond to you. If you would like to exercise any of these
+                  rights, please contact us at our email: Call us at: Or write to us:</p>
+
+                <p> What are cookies? Cookies are text files placed on your computer to collect standard Internet log
+                  information and visitor behavior information. When you visit our websites, we may collect information
+                  from you automatically through cookies or similar technology.</p>
+
+                <p>For further information, visit allaboutcookies.org.</p>
+
+                <p> How do we use cookies? Our Company uses cookies in a range of ways to improve your experience on our
+                  website, including: 0 Keeping you signed in 0 Understanding how you use our website 0 [Add any uses your
+                  company has for cookies]</p>
+
+                <p> What types of cookies do we use? There are a number of different types of cookies, however, our
+                  website uses: 0 Functionality &mdash; Our Company uses these cookies so that we recognize you on our
+                  website and remember your previously selected preferences. These could include what language you prefer
+                  and location you are in. A mix of first-party and third-party cookies are used. 0 Advertising &mdash;
+                  Our Company uses these cookies to collect information about your visit to our website, the content you
+                  viewed, the links you followed and information about your browser, device, and your IP address. Our
+                  Company sometimes shares some limited aspects of this data with third parties for advertising purposes.
+                  We may also share online data collected through cookies with our advertising partners. This means that
+                  when you visit another website, you may be shown advertising based on your browsing patterns on our
+                  website. 0 [Add any other types of cookies your company uses]</p>
+
+                <p> How to manage cookies You can set your browser not to accept cookies, and the above website tells you
+                  how to remove cookies from your browser. However, in a few cases, some of our website features may not
+                  function as a result.</p>
+
+                <p> Privacy policies of other websites The Our Company website contains links to other websites. Our
+                  privacy policy applies only to our website, so if you click on a link to another website, you should
+                  read their privacy policy.</p>
+
+                <p> Changes to our privacy policy Our Company keeps its privacy policy under regular review and places any
+                  updates on this web page. This privacy policy was last updated on 9 January 2019.</p>
+
+                <p> How to contact us If you have any questions about Our Company&rsquo;s privacy policy, the data we hold
+                  on you, or you would like to exercise one of your data protection rights, please do not hesitate to
+                  contact us.</p>
+
+                <p> Email us at: Call us: Or write to us at:</p>
+
+                <p> How to contact the appropriate authority Should you wish to report a complaint or if you feel that Our
+                  Company has not addressed your concern in a satisfactory manner, you may contact the Information
+                  Commissioner&rsquo;s Office.</p>
+
+                <p>Email: Address</p>
                 <p><strong>Changes to This Privacy Policy</strong></p>
                 <p>
                   {{iOrWe | capitalize }} may update our Privacy Policy from
@@ -787,49 +779,30 @@
                 <p>
                   If you have any questions or suggestions about {{myOrOur }}
                   Privacy Policy, do not hesitate to contact {{meOrUs}} at {{
-                  appContact }}.
+                    appContact }}.
                 </p>
                 <p>
                   This privacy policy page was created at
-                  <a href="https://privacypolicytemplate.net" target="_blank" rel="noopener noreferrer"
-                    >privacypolicytemplate.net</a
-                  >
+                  <a href="https://privacypolicytemplate.net" target="_blank"
+                    rel="noopener noreferrer">privacypolicytemplate.net</a>
                   and modified/generated by
-                  <a
-                    href="https://app-privacy-policy-generator.firebaseapp.com/"
-                    target="_blank" rel="noopener noreferrer"
-                    >App Privacy Policy Generator</a
-                  >
+                  <a href="https://app-privacy-policy-generator.firebaseapp.com/" target="_blank"
+                    rel="noopener noreferrer">App Privacy Policy Generator</a>
                 </p>
               </div>
 
-              <textarea
-                onclick="this.focus();this.select()"
-                readonly="readonly"
-                class="textarea"
-                id="gdpr_privacy_txtarea"
-                v-show="contentRenderType==2"
-              >
-              </textarea>
+              <textarea onclick="this.focus();this.select()" readonly="readonly" class="textarea"
+                id="gdpr_privacy_txtarea" v-show="contentRenderType==2">
+                </textarea>
             </section>
             <footer class="modal-card-foot">
-              <button
-                class="button is-success"
-                @click="getHtml('gdpr_privacy_content','gdpr_privacy_txtarea')"
-              >
+              <button class="button is-success" @click="getHtml('gdpr_privacy_content','gdpr_privacy_txtarea')">
                 HTML
               </button>
-              <button
-                class="button is-success"
-                @click="getMarkdown('gdpr_privacy_content', 'gdpr_privacy_txtarea')"
-              >
+              <button class="button is-success" @click="getMarkdown('gdpr_privacy_content', 'gdpr_privacy_txtarea')">
                 Markdown
               </button>
-              <button
-                v-if="contentRenderType!=1"
-                class="button is-success"
-                @click="preview()"
-              >
+              <button v-if="contentRenderType!=1" class="button is-success" @click="preview()">
                 Preview
               </button>
             </footer>
