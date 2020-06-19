@@ -468,7 +468,7 @@
                   </p>
                   <ul>
                     <li
-                      v-if="item[item.model]"
+                      v-if="item[item.model] && item.link.privacy"
                       v-for="item in thirdPartyServices"
                     >
                       <a :href="item.link.privacy" target="_blank" rel="noopener noreferrer"
@@ -679,7 +679,7 @@
                   </p>
                   <ul>
                     <li
-                      v-if="item[item.model]"
+                      v-if="item[item.model] && item.link.terms"
                       v-for="item in thirdPartyServices"
                     >
                       <a :href="item.link.terms" target="_blank" rel="noopener noreferrer"

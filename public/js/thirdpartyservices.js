@@ -183,5 +183,43 @@ var thirdPartyServicesJsonArray = [
       privacy: "https://sentry.io/privacy/",
       terms: "https://sentry.io/terms/"
     }
+  },
+  {
+    name: "AppLovin",
+    model: "applovin",
+    expo: false,
+    logo: "images/applovin.png",
+    link: {
+      privacy: "https://www.applovin.com/privacy/",
+      terms: "https://www.applovin.com/terms/"
+    }
+  },
+  {
+    name: "Vungle",
+    model: "vungle",
+    expo: false,
+    logo: "images/vungle.png",
+    link: {
+      privacy: "https://vungle.com/privacy/"
+    }
+  },
+  {
+    name: "StartApp",
+    model: "startapp",
+    expo: false,
+    logo: "images/startapp.png",
+    link: {
+      privacy: "https://www.startapp.com/privacy/",
+      terms: "https://www.startapp.com/policy/publisher-terms/"
+    }
+  },
+  {
+    name: "AdColony",
+    model: "adcolony",
+    expo: false,
+    logo: "images/adcolony.png",
+    link: {
+      privacy: "https://www.adcolony.com/privacy-policy/"
+    }
   }
 ];
