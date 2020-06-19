@@ -213,5 +213,15 @@ var thirdPartyServicesJsonArray = [
       privacy: "https://www.startapp.com/privacy/",
       terms: "https://www.startapp.com/policy/publisher-terms/"
     }
+  },
+  {
+    name: "AdColony",
+    model: "adcolony",
+    expo: false,
+    logo: "images/adcolony.png",
+    link: {
+      privacy: "https://www.adcolony.com/privacy-policy/",
+      terms: ""
+    }
   }
 ];
