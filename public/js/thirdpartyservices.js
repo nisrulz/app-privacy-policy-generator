@@ -183,5 +183,15 @@ var thirdPartyServicesJsonArray = [
       privacy: "https://sentry.io/privacy/",
       terms: "https://sentry.io/terms/"
     }
+  },
+  {
+    name: "AppLovin",
+    model: "applovin",
+    expo: false,
+    logo: "images/applovin.png",
+    link: {
+      privacy: "https://www.applovin.com/privacy/",
+      terms: "https://www.applovin.com/terms/"
+    }
   }
 ];
