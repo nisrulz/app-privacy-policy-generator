@@ -193,5 +193,15 @@ var thirdPartyServicesJsonArray = [
       privacy: "https://www.applovin.com/privacy/",
       terms: "https://www.applovin.com/terms/"
     }
+  },
+  {
+    name: "Vungle",
+    model: "vungle",
+    expo: false,
+    logo: "images/vungle.png",
+    link: {
+      privacy: "https://vungle.com/privacy/",
+      terms: ""
+    }
   }
 ];
