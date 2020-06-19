@@ -203,5 +203,15 @@ var thirdPartyServicesJsonArray = [
       privacy: "https://vungle.com/privacy/",
       terms: ""
     }
+  },
+  {
+    name: "StartApp",
+    model: "startapp",
+    expo: false,
+    logo: "images/startapp.png",
+    link: {
+      privacy: "https://www.startapp.com/privacy/",
+      terms: "https://www.startapp.com/policy/publisher-terms/"
+    }
   }
 ];
