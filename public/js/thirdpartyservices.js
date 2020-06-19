@@ -200,8 +200,7 @@ var thirdPartyServicesJsonArray = [
     expo: false,
     logo: "images/vungle.png",
     link: {
-      privacy: "https://vungle.com/privacy/",
-      terms: ""
+      privacy: "https://vungle.com/privacy/"
     }
   },
   {
@@ -220,8 +219,7 @@ var thirdPartyServicesJsonArray = [
     expo: false,
     logo: "images/adcolony.png",
     link: {
-      privacy: "https://www.adcolony.com/privacy-policy/",
-      terms: ""
+      privacy: "https://www.adcolony.com/privacy-policy/"
     }
   }
 ];
