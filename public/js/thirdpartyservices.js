@@ -221,5 +221,18 @@ var thirdPartyServicesJsonArray = [
     link: {
       privacy: "https://www.adcolony.com/privacy-policy/"
     }
+  },
+  {
+    name: "Amplitude",
+    model: "amplitude",
+    expo: false,
+    logo: "images/amplitude.svg",
+    link: {
+      privacy: "https://amplitude.com/privacy",
+      terms: "https://amplitude.com/terms"
+    }
   }
+
+
+  
 ];
