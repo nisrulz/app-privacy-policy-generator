@@ -231,6 +231,16 @@ var thirdPartyServicesJsonArray = [
       privacy: "https://amplitude.com/privacy",
       terms: "https://amplitude.com/terms"
     }
+  },
+  {
+    name: "Adjust",
+    model: "adjust",
+    expo: false,
+    logo: "images/adjust.png",
+    link: {
+      privacy: "https://www.adjust.com/terms/privacy-policy",
+      terms: "https://www.adjust.com/terms/general-terms-and-conditions"
+    }
   }
 
 
