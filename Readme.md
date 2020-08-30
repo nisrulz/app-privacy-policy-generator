@@ -58,7 +58,7 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 
 This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisrulz.github.io#nishant-srivastava) but hopefully developed and maintained by many others. See the [the list of contributors here](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
 
-If you appreciate my work, consider [buying me](https://www.paypal.me/nisrulz/5usd) a cup of :coffee: to keep me recharged :metal: [[PayPal](https://www.paypal.me/nisrulz/5usd)]
+If you appreciate my work, consider [buying me](https://www.paypal.me/nisrulz/5usd) a cup of :coffee: to keep me recharged :muscle: [[PayPal](https://www.paypal.me/nisrulz/5usd)]. A comment in the project's [GuestBook](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) is appreciated :blush:
 
 # License
 
