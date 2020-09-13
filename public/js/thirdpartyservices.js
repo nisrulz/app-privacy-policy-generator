@@ -241,8 +241,15 @@ var thirdPartyServicesJsonArray = [
       privacy: "https://www.adjust.com/terms/privacy-policy",
       terms: "https://www.adjust.com/terms/general-terms-and-conditions"
     }
+  },
+  {
+    name: "Mapbox",
+    model: "mapbox",
+    expo: false,
+    logo: "images/mapbox.png",
+    link: {
+      privacy: "https://www.mapbox.com/legal/privacy",
+      terms: "https://www.mapbox.com/legal/tos"
+    }
   }
-
-
-  
 ];
