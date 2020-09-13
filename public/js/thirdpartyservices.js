@@ -245,7 +245,7 @@ var thirdPartyServicesJsonArray = [
   {
     name: "Mapbox",
     model: "mapbox",
-    expo: false,
+    mapbox: false,
     logo: "images/mapbox.png",
     link: {
       privacy: "https://www.mapbox.com/legal/privacy",
