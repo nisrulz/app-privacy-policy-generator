@@ -105,8 +105,7 @@
                       <a
                         href="https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors"
                         target="_blank" rel="noopener noreferrer"
-                        >and contributors</a
-                      >
+                        >and contributors. </a>
                     </p>
                     <p>
                       <a
@@ -117,20 +116,18 @@
                           alt="Twitter"
                           class="social-logo"
                       /></a>
-                      <a
-                        href="https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator"
-                        target="_blank" rel="noopener noreferrer"
-                        ><img
-                          src="images/github.svg"
-                          alt="Github"
-                          class="social-logo"
-                      /></a>
                       <a @click="toggleDisclaimerModalVisibility" rel="noopener noreferrer"
-                        ><img
-                          src="images/disclaimer.svg"
-                          alt="Disclaimer"
-                          class="social-logo"
-                      /></a>
+                      ><img
+                        src="images/disclaimer.svg"
+                        alt="Disclaimer"
+                        class="social-logo"
+                    /></a>
+                      <a
+                        href="https://github.com/nisrulz/app-privacy-policy-generator"
+                        target="_blank" rel="noopener noreferrer"
+                        >
+                        <img alt="GitHub stars" src="https://img.shields.io/github/stars/nisrulz/app-privacy-policy-generator?style=social"/>
+                      </a>
                     </p>
                   </h4>
                 </div>
@@ -143,7 +140,7 @@
         <section class="section" id="step-1" v-if="wizardStep==1">
           <div>
             <div class="columns">
-              <div class="column is-7 is-information">
+              <div class="column is-6 is-information">
                 <img src="images/step_1.svg" class="center-block sidebar-img" />
                 <img
                   src="images/next.png"
@@ -271,7 +268,7 @@
         <section class="section" id="step-2" v-if="wizardStep==2">
           <div>
             <div class="columns">
-              <div class="column is-7 is-information">
+              <div class="column is-6 is-information">
                 <img src="images/step_2.svg" class="center-block sidebar-img" />
 
                 <div class="center-parent">
@@ -316,7 +313,7 @@
         <section class="section" id="step-3" v-if="wizardStep==3">
           <div>
             <div class="columns">
-              <div class="column is-7 is-information">
+              <div class="column is-6 is-information">
                 <img src="images/step_3.svg" class="center-block sidebar-img" />
                 <img
                   src="images/prev.png"
@@ -325,6 +322,48 @@
                 />
               </div>
               <div class="column">
+                <div class="box">
+                  <ol>If you appreciate my work & want to support the project:
+                    <li>Consider <a href="https://github.com/sponsors/nisrulz" target="_blank" rel="noopener noreferrer" style="color: #5cb5f3;">sponsoring me on Github</a> 👨🏻‍💻</li>
+                    <li>Consider <a href="https://www.paypal.me/nisrulz/5usd" target="_blank" rel="noopener noreferrer">buying me a cup of </a>☕</li>
+                    <li>Add a comment in the project's <a href="https://github.com/nisrulz/app-privacy-policy-generator/issues/65" target="_blank" rel="noopener noreferrer">GuestBook</a> 🤗</li>
+                  </ol>
+                </div>
+                <div class="box">
+                  <b>All Done!</b>
+                  <br />
+                  <p>
+                    Now sit back and choose the type of document you want to
+                    generate:
+                  </p>
+                  <br />
+
+                  <a
+                    class="button is-primary"
+                    @click="togglePrivacyModalVisibility"
+                    rel="noopener noreferrer"
+                    >Privacy Policy</a
+                  >
+
+                  <a class="button is-info" @click="toggleTermsModalVisibility" rel="noopener noreferrer"
+                    >Terms & Conditions</a
+                  >
+                  <br />
+                  <br />
+                  <p class="has-text-grey-light">
+                    The accuracy of the generated privacy policy and terms &amp;
+                    conditions on this website is not legally binding. Use at
+                    your own risk.
+                  </p>
+                  <p>
+                    <a
+                      @click="toggleDisclaimerModalVisibility"
+                      class="has-text-danger"
+					  rel="noopener noreferrer"
+                      >Read the full Disclaimer here</a
+                    >
+                  </p>
+                </div>
                 <div class="box" id="fc-container">
                   <div id="fc-container-text">
                     <div class="fc-title">
@@ -366,44 +405,6 @@
                       >
                     </div>
                   </div>
-                </div>
-                <div class="box">
-                  <b>All Done!</b>
-                  <br />
-                  <p>
-                    Now sit back and choose the type of document you want to
-                    generate:
-                  </p>
-                  <br />
-
-                  <a
-                    class="button is-primary"
-                    @click="togglePrivacyModalVisibility"
-                    rel="noopener noreferrer"
-                    >Privacy Policy</a
-                  >
-
-                  <a class="button is-info" @click="toggleTermsModalVisibility" rel="noopener noreferrer"
-                    >Terms & Conditions</a
-                  >
-                  <br />
-                  <br />
-                  <p class="has-text-grey-light">
-                    The accuracy of the generated privacy policy and terms &amp;
-                    conditions on this website is not legally binding. Use at
-                    your own risk.
-                  </p>
-                  <p>
-                    <a
-                      @click="toggleDisclaimerModalVisibility"
-                      class="has-text-danger"
-					  rel="noopener noreferrer"
-                      >Read the full Disclaimer here</a
-                    >
-                  </p>
-                </div>
-                <div class="box">
-                 <p>If you appreciate my work, consider <a href="https://www.paypal.me/nisrulz/5usd" target="_blank" rel="noopener noreferrer">buying me a cup of ☕</a> to keep me recharged 💪🏼.A comment in the project's <a href="https://github.com/nisrulz/app-privacy-policy-generator/issues/65" target="_blank" rel="noopener noreferrer">GuestBook</a> is appreciated 🤗</p>
                 </div>
               </div>
             </div>
