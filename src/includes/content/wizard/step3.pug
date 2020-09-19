@@ -25,20 +25,7 @@
         | The accuracy of the generated privacy policy and terms &amp; conditions on this website is not legally binding. Use at your own risk.
       p
         a.has-text-danger(@click='toggleDisclaimerModalVisibility' rel='noopener noreferrer') Read the full Disclaimer here
-    #fc-container.box
-      #fc-container-text
-        .fc-title
-          | Free privacy policy hosting + website for {{ appName }}.
-      #fc-callouts
-        form#fc-form(action='https://app.flycricket.com/import/privacy' method='post' target='_blank' onsubmit='return fc_submit(event)')
-          input(type='hidden' name='fc-referrer' value='nishant')
-          input#fc-body(type='hidden' name='fc-body')
-          input#fc-name(type='hidden' name='fc-name' v-model='appName')
-          div(style='margin-top: 1em;')
-            button.button.is-light.is-small
-              | Learn More
-            button.button.is-black.is-small
-              | Deploy
-        .fc-powered-by
-          | Powered by 
-          a(href='https://app.flycricket.com/r/nishant?utm_source=partner&utm_medium=website&utm_campaign=privacy_generator' target='_blank' rel='noopener noreferrer') Flycricket
+
+    //- Flycricket
+    if (flycricket)
+      include affliate/flycricket.pug
