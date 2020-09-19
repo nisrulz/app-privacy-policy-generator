@@ -11,12 +11,13 @@
           a(href='https://www.paypal.me/nisrulz/5usd' target='_blank' rel='noopener noreferrer') buying me a cup of &#x2615;
         li Add a comment in the project&apos;s 
           a(href='https://github.com/nisrulz/app-privacy-policy-generator/issues/65' target='_blank' rel='noopener noreferrer') GuestBook &#x1F917;
-    .box
+    .box.final-box
       b All Done!
       br
       p Now sit back and choose the type of document you want to generate: 
       br
       a.button.is-primary(@click='togglePrivacyModalVisibility' rel='noopener noreferrer') Privacy Policy
+      a.button.is-primary(@click='toggleGDPRPrivacyModalVisibility' rel='noopener noreferrer') GDPR compliant Privacy Policy
       a.button.is-info(@click='toggleTermsModalVisibility' rel='noopener noreferrer') Terms &amp; Conditions
       br
       br
