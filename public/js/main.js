@@ -19,8 +19,8 @@ var app = new Vue({
     typeOfApp: "",
     typeOfAppTxt: "[open source/free/freemium/ad-supported/commercial]",
     typeOfDev: "",
-    appName: "[App name]",
-    appContact: "[App contact information]",
+    appName: "",
+    appContact: "",
     myOrOur: "[my/our]",
     meOrUs: "[me/us]",
     atNoCost: "[at no cost]",
@@ -58,6 +58,18 @@ var app = new Vue({
     },
     nextStep: function () {
       if (this.wizardStep <= this.totalWizardSteps) {
+        if (this.wizardStep == 1) {
+          if (this.appName.length == 0 || this.appName == "" || this.appName == null || this.appName == "Please provide an App Name!") {
+            this.appName = "Please provide an App Name!"
+            return
+          }
+
+          if (this.appContact.length == 0 || this.appContact == "" || this.appContact == null || this.appContact == "Please provide contact info!") {
+            this.appContact = "Please provide contact info!"
+            return
+          }
+        }
+
         this.wizardStep += 1
       }
     },

@@ -73,11 +73,11 @@
             <div class="column box scrollable">
               <div class="control is-expanded">
                 <p class="help form-label">App Name</p>
-                <input class="input" type="text" required="" v-model="appName" placeholder="Awesome App">
+                <input class="input" type="text" required v-model="appName" placeholder="Awesome App Name" v-bind:class="{ 'is-danger': (appName == 'Please provide an App Name!' || appName.length == 0) }">
               </div>
               <div class="control is-expanded">
                 <p class="help form-label">Contact Information</p>
-                <input class="input" type="email" required="" v-model="appContact" placeholder="">
+                <input class="input" type="email" required v-model="appContact" placeholder="Email Address" v-bind:class="{ 'is-danger': (appContact == 'Please provide contact info!' || appContact.length == 0) }">
               </div>
               <div class="control is-expanded">
                 <p class="help form-label">Personally Identifiable Information</p>
@@ -700,7 +700,7 @@
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/to-markdown/3.1.1/to-markdown.min.js" integrity="sha256-2PIa0cHy6lNEesnk4/qokv291Whx/uhAy2V6WL2zmfo=" crossorigin="anonymous"></script>
     <script src="js/thirdpartyservices.js"></script>
     <script src="js/utils.js"></script>
