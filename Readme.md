@@ -2,7 +2,7 @@
 
 A simple web app to generate a generic privacy policy for your Android/iOS apps
 
-Check out the [web app](https://app-privacy-policy-generator.firebaseapp.com/)!
+Check out the [web app](https://app-privacy-policy-generator.nisrulz.com/)!
 
 ### Featured in
 
