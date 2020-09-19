@@ -23,8 +23,8 @@ Check out the [web app](https://app-privacy-policy-generator.nisrulz.com/)!
 
 [Read the dev docs](Dev.md) to
 - Add a new 3rd party service to the web app.
-- Development of the web app 
 - Add a new template for Privacy Policy or Terms & Conditions.
+- Update the web app for new features/bugfixes.
 
 # Pull Requests
 
