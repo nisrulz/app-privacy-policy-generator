@@ -1,0 +1,15 @@
+.columns
+  .column.is-6.is-information
+    img.center-block.sidebar-img(src='images/step_2.svg')
+    .center-parent
+      img.child.nav-btn(src='images/prev.png' @click='prevStep()')
+      img.child.nav-btn(src='images/next.png' @click='nextStep()')
+  .column.box.scrollable
+    b
+      | Include links to Third Party Services
+    a(v-for='item in thirdPartyServices' rel='noopener noreferrer')
+      br
+      input(type='checkbox' :id="'list-switch-' + item.model" v-model='item[item.model]')
+      label(:for="'list-switch-' + item.model")
+        img.thirdparty-logo(:src='item.logo' :alt='item.name')
+        span.thirdparty-text {{ item.name }}

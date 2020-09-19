@@ -1,0 +1,58 @@
+.columns
+  .column.is-6.is-information
+    img.center-block.sidebar-img(src='images/step_1.svg')
+    img.center-block.nav-btn(src='images/next.png' @click='nextStep()')
+  .column.box.scrollable
+    .control.is-expanded
+      p.help.form-label App Name
+      input.input(type='text' required='' v-model='appName' placeholder='Awesome App')
+    .control.is-expanded
+      p.help.form-label Contact Information
+      input.input(type='email' required='' v-model='appContact' placeholder='')
+    .control.is-expanded
+      p.help.form-label
+        | Personally Identifiable Information
+      // PII
+      input.input.is-primary(type='text' v-model='pidInfoIn' placeholder='Personally Identifiable Information you collect (comma separated)')
+    .control.is-expanded
+      p.help.form-label App Type
+      // Type of App
+      .select.is-primary
+        select(v-model='typeOfApp')
+          option(value='' disabled='') Select app type
+          option Free
+          option Open Source
+          option Freemium
+          option Ad Supported
+          option Commercial
+    .control.is-expanded
+      p.help.form-label Mobile OS
+      // Mobile OS
+      .select.is-primary
+        select(v-model='osType')
+          option(value='' disabled='') Select mobile OS
+          option Android
+          option iOS
+          option KaiOS
+          option Android &amp; iOS
+          option Android, iOS &amp; KaiOS
+    .control
+      p.help.form-label Policy Effective Date
+      // Policy Effective Date
+      input.input.is-primary(type='date' required='' v-model='effectiveFromDate')
+    .control.is-expanded
+      p.help.form-label OwnerType
+      // Owner
+      .select.is-primary
+        select(v-model='typeOfDev')
+          option(value='' disabled='') Select owner type
+          option Individual
+          option Company
+    .control.is-expanded(v-if="typeOfDev=='Company'")
+      p.help.form-label Company Name
+      // Company Name
+      input.input.is-primary(type='text' v-model='companyName' placeholder='Company Name')
+    .control.is-expanded(v-if="typeOfDev=='Individual'")
+      p.help.form-label Developer Name
+      // Developer Name
+      input.input.is-primary(type='text' v-model='devName' placeholder='Developer Name')
