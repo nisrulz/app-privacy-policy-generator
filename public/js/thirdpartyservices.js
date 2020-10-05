@@ -251,5 +251,15 @@ var thirdPartyServicesJsonArray = [
       privacy: "https://www.mapbox.com/legal/privacy",
       terms: "https://www.mapbox.com/legal/tos"
     }
+  },
+  {
+    name: "Godot",
+    model: "godot",
+    godot: false,
+    logo: "images/godot.png",
+    link: {
+      privacy: "https://godotengine.org/privacy-policy",
+      terms: "https://godotengine.org/license"
+    }
   }
 ];
