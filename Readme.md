@@ -17,9 +17,9 @@
 
 [Read the dev docs](dev-doc.md) to
 
-- Add a new 3rd party service to the web app.
-- Add a new template for Privacy Policy or Terms & Conditions.
-- Update the web app for new features/bugfixes.
+- [Add a new 3rd party service to the web app](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#contributing-more-3rd-party-services-links)
+- [Add a new template for Privacy Policy or Terms & Conditions](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#development)
+- [Update the web app for new features/bugfixes](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#development)
 
 # Pull Requests
 
