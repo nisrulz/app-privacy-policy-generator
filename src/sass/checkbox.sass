@@ -1,0 +1,40 @@
+input[type="checkbox"]
+  display: none
+
+  + label
+    position: relative
+    padding-left: 30px
+    margin-bottom: 20px
+    font: 14px/20px "Open Sans", Arial, sans-serif
+    color: black
+    cursor: pointer
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+
+    &:last-child
+      margin-bottom: 0
+
+    &:before
+      content: ""
+      display: block
+      width: 20px
+      height: 20px
+      border: 1px solid #6cc0e5
+      position: absolute
+      left: 0
+      top: 0
+      opacity: 0.6
+      -webkit-transition: all 0.12s, border-color 0.08s
+      transition: all 0.12s, border-color 0.08s
+
+  &:checked + label:before
+    width: 10px
+    top: -5px
+    left: 5px
+    border-radius: 0
+    opacity: 1
+    border-top-color: transparent
+    border-left-color: transparent
+    -webkit-transform: rotate(45deg)
+    transform: rotate(45deg)

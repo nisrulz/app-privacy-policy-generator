@@ -1,0 +1,163 @@
+.modal(v-bind:class="{ 'is-active': showGDPRPrivacyModal }")
+  .modal-background
+  .modal-card
+    header.modal-card-head
+      p.modal-card-title.no-select GDPR Compliant Privacy Policy
+      button.delete(aria-label='close' @click='toggleGDPRPrivacyModalVisibility')
+    section.modal-card-body.modal-box
+      #gdpr_privacy_content(v-show='contentRenderType==1')
+        strong GDPR Compliant Privacy Policy
+        p
+          | {{ devOrCompanyName }} built the {{ appName }} app as
+          | {{typeOfAppTxt}} app. This SERVICE is provided by
+          | {{ devOrCompanyName }} {{ atNoCost }} and is intended for use as is.
+          | This privacy policy will explain how {{ devOrCompanyName }} uses the personal data {{ iOrWe }} collect from you
+          | when you use {{ appName }} app.
+        p  Topics:
+        ul
+          li What data is collected?
+          li How is your data collected?
+          li How will {{ appName }} use your data?
+          li How is your data stored?
+          li Marketing
+          li What are your data protection rights?
+          li What are cookies?
+          li How does {{ appName }} use cookies?
+          li What types of cookies does {{ appName }} use?
+          li How to manage your cookies
+          li Privacy policies of other websites
+          li Changes to {{ appName }}'s privacy policy
+          li How to contact us
+          li How to contact the appropriate authorities
+        p
+          strong What data is collected? 
+          | {{ myOrOur }} Company collects the following data: 0 Personal identification
+          | information (Name, email address, phone number, etc.) 0 [Add any other data your company collects]
+        p
+          strong How is your data collected?
+          | You directly provide {{ myOrOur }} Company with most of the data {{ iOrWe }} collect. {{ iOrWe | capitalize }}
+          | collect data and process data when you: 0 Register online or place an order for any of {{ myOrOur }} products or
+          | services. 0 Voluntarily complete a customer survey or provide feedback on any of {{ myOrOur }} message boards or
+          | via email. Use or view {{ myOrOur }} website via your browser&rsquo;s cookies. [Add any other ways your company
+          | collects data]
+        p
+          strong How will {{ appName }} use your data?
+          | {{ appName }} collects your data so that {{ iOrWe }} can: Process your order, manage
+          | your account. 0 Email you with special offers on other products and services {{ iOrWe }} think you might like. 0
+          | [Add how else your company uses data]
+          br
+          | If you agree, {{ myOrOur }} Company will share your data with {{ myOrOur }} partner companies so that they may offer you
+          | their products and services.
+        p
+          strong How is your data stored?
+          | {{ myOrOur }} Company securely stores your data at [enter the location and describe
+          | security precautions taken].
+          br
+          | {{ myOrOur }} Company will keep your [enter type of data] for [enter time period]. Once this time period has
+          | expired, {{ iOrWe }} will delete your data by [enter how you delete users&rsquo; data].
+        p
+          strong Marketing
+          | {{ myOrOur }} Company would like to send you information about products and services of ours that {{ iOrWe }}
+          | think you might like, as well as those of {{ myOrOur }} partner companies. 0 [List partner companies here]
+          br
+          | If you have agreed to receive marketing, you may always opt out at a later date.
+          br
+          | You have the right at any time to stop {{ myOrOur }} Company from contacting you for marketing purposes or
+          | giving your data to other members of the {{ myOrOur }} Company Group.
+          br
+          | If you no longer wish to be contacted for marketing purposes, please click here.
+        p
+          strong What are your data protection rights?
+          | {{ myOrOur }} Company would like to make sure you are fully aware of all
+          | of your data protection rights. Every user is entitled to the following:
+          br
+          | The right to access - You have the right to request {{ myOrOur }} Company for copies of your personal data. {{ iOrWe | capitalize }}
+          | may charge you a small fee for this service.
+          br
+          | The right to rectification - You have the right to request that {{ myOrOur }} Company correct any information
+          | you believe is inaccurate. You also have the right to request {{ myOrOur }} Company to complete information you
+          | believe is incomplete. The right to erasure &mdash; You have the right to request that {{ myOrOur }} Company erase
+          | your personal data, under certain conditions.
+          br
+          | The right to restrict processing - You have the right to request that {{ myOrOur }} Company restrict the
+          | processing of your personal data, under certain conditions.
+          br
+          | The right to object to processing - You have the right to object to {{ myOrOur }} Company&rsquo;s processing of
+          | your personal data, under certain conditions.
+          br
+          | The right to data portability - You have the right to request that {{ myOrOur }} Company transfer the data that
+          | {{ iOrWe }} have collected to another organization, or directly to you, under certain conditions.
+          br
+          | If you make a request, {{ iOrWe }} have one month to respond to you. If you would like to exercise any of these
+          | rights, please contact us at {{ myOrOur }} email: Call us at: Or write to us:
+        p
+          strong What are cookies?
+          | Cookies are text files placed on your computer to collect standard Internet log
+          | information and visitor behavior information. When you visit {{ myOrOur }} websites, {{ iOrWe }} may collect information
+          | from you automatically through cookies or similar technology.
+          p For further information, visit allaboutcookies.org.
+        p
+          strong How do {{ iOrWe }} use cookies?
+          | {{ myOrOur }} Company uses cookies in a range of ways to improve your experience on {{ myOrOur }}
+          | website, including: 0 Keeping you signed in 0 Understanding how you use {{ myOrOur }} website 0 [Add any uses your
+          | company has for cookies]
+        p
+          strong What types of cookies do {{ iOrWe }} use?
+          | There are a number of different types of cookies, however, {{ myOrOur }}
+          | website uses: 0 Functionality &mdash; {{ myOrOur }} Company uses these cookies so that {{ iOrWe }} recognize you on {{ myOrOur }}
+          | website and remember your previously selected preferences. These could include what language you prefer
+          | and location you are in. A mix of first-party and third-party cookies are used. 0 Advertising &mdash;
+          | {{ myOrOur }} Company uses these cookies to collect information about your visit to {{ myOrOur }} website, the content you
+          | viewed, the links you followed and information about your browser, device, and your IP address. {{ myOrOur }}
+          | Company sometimes shares some limited aspects of this data with third parties for advertising purposes.
+          | {{ iOrWe | capitalize }} may also share online data collected through cookies with {{ myOrOur }} advertising partners. This means that
+          | when you visit another website, you may be shown advertising based on your browsing patterns on {{ myOrOur }}
+          | website. 0 [Add any other types of cookies your company uses]
+        p
+          strong How to manage cookies
+          | You can set your browser not to accept cookies, and the above website tells you
+          | how to remove cookies from your browser. However, in a few cases, some of {{ myOrOur }} website features may not
+          | function as a result.
+        p
+          strong Privacy policies of other websites
+          | The {{ myOrOur }} Company website contains links to other websites. {{ myOrOur }}
+          | privacy policy applies only to {{ myOrOur }} website, so if you click on a link to another website, you should
+          | read their privacy policy.
+        p
+          strong Changes to {{ myOrOur }} privacy policy
+          | {{ myOrOur }} Company keeps its privacy policy under regular review and places any
+          | updates on this web page. This privacy policy was last updated on 9 January 2019.
+        p
+          strong How to contact us
+          p If you have any questions or suggestions about {{ myOrOur }}
+          | Privacy Policy, do not hesitate to contact {{meOrUs}} at {{
+          | appContact }}.
+          br
+          | If you have any questions about {{ myOrOur }} Company&rsquo;s privacy policy, the data {{ iOrWe }} hold
+          | on you, or you would like to exercise one of your data protection rights, please do not hesitate to
+          | contact us.
+          p  Email us at: Call us: Or write to us at:
+        p
+          | How to contact the appropriate authority Should you wish to report a complaint or if you feel that {{ myOrOur }}
+          | Company has not addressed your concern in a satisfactory manner, you may contact the Information
+          | Commissioner&rsquo;s Office.
+        p Email: Address
+        p
+          strong Changes to This Privacy Policy
+          | {{iOrWe | capitalize }} may update {{ myOrOur }} Privacy Policy from
+          | time to time. Thus, you are advised to review this page
+          | periodically for any changes. {{iOrWe | capitalize }} will
+          | notify you of any changes by posting the new Privacy Policy on
+          | this page.
+          p This policy is effective as of {{ effectiveFromDate }}
+        p
+          | This privacy policy page was generated by 
+          a(href='https://app-privacy-policy-generator.nisrulz.com/' target='_blank' rel='noopener noreferrer') App Privacy Policy Generator
+      textarea#gdpr_privacy_txtarea.textarea(onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+    footer.modal-card-foot
+      button.button.is-success(@click="getHtml('gdpr_privacy_content','gdpr_privacy_txtarea')")
+        | HTML
+      button.button.is-success(@click="getMarkdown('gdpr_privacy_content', 'gdpr_privacy_txtarea')")
+        | Markdown
+      button.button.is-success(v-if='contentRenderType!=1' @click='preview()')
+        | Preview

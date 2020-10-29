@@ -1,0 +1,31 @@
+.columns
+  .column.is-6.is-information
+    img.center-block.sidebar-img(src='images/step_3.svg')
+    img.center-block.nav-btn(src='images/prev.png' @click='prevStep()')
+  .column
+    .box
+      ol If you appreciate my work &amp; want to support the project:
+        li Consider 
+          a(href='https://github.com/sponsors/nisrulz' target='_blank' rel='noopener noreferrer') sponsoring me on Github &#x1F468;&#x1F3FB;&zwj;&#x1F4BB;
+        li Consider 
+          a(href='https://www.paypal.me/nisrulz/5usd' target='_blank' rel='noopener noreferrer') buying me a cup of &#x2615;
+        li Add a comment in the project&apos;s 
+          a(href='https://github.com/nisrulz/app-privacy-policy-generator/issues/65' target='_blank' rel='noopener noreferrer') GuestBook &#x1F917;
+    .box.final-box
+      b All Done!
+      br
+      p Now sit back and choose the type of document you want to generate: 
+      br
+      a.button.is-primary(@click='togglePrivacyModalVisibility' rel='noopener noreferrer') Privacy Policy
+      a.button.is-primary(@click='toggleGDPRPrivacyModalVisibility' rel='noopener noreferrer') GDPR compliant Privacy Policy
+      a.button.is-info(@click='toggleTermsModalVisibility' rel='noopener noreferrer') Terms &amp; Conditions
+      br
+      br
+      p.has-text-grey-light
+        | The accuracy of the generated privacy policy and terms &amp; conditions on this website is not legally binding. Use at your own risk.
+      p
+        a.has-text-danger(@click='toggleDisclaimerModalVisibility' rel='noopener noreferrer') Read the full Disclaimer here
+
+    //- Flycricket
+    if (flycricket)
+      include affliate/flycricket.pug

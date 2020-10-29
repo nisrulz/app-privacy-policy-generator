@@ -2,7 +2,7 @@
 
 A simple web app to generate a generic privacy policy for your Android/iOS apps
 
-Check out the [web app](https://app-privacy-policy-generator.firebaseapp.com/)!
+Check out the [web app](https://app-privacy-policy-generator.nisrulz.com/)!
 
 ### Featured in
 
@@ -19,30 +19,12 @@ Check out the [web app](https://app-privacy-policy-generator.firebaseapp.com/)!
 
 ![screenshot](/img/sc2.png)
 
-# Contributing more 3rd Party Service's Privacy links
+# Contribution
 
-The webapp uses a JSON array to populate the list of 3rd party services section. If you want contribute a new 3rd party service for the section then open a Pull Request which simply adds a new JSON item to the JSON Array in [`public/js/thirdpartyservices.js`](public/js/thirdpartyservices.js)
-
-The format is very simple and you only need to provide fill the fields as follows:
-
-```
-[
-  ..
-  }, // Donot forget to add a ',' before adding your new item in the array
-  {
-    name: "Google Play Services",
-    model: "gps", // this is stores the name of the model
-    gps: false, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
-    logo: "images/gps.png",
-    link: {
-      privacy: "https://www.google.com/policies/privacy/",
-      terms: ""
-    }
-  }
-]
-```
-
-> Note: You also will have to drop the logo image into the [`public/images/`](public/images/) folder. Make sure the logo is 160 × 160 in size.
+[Read the dev docs](dev-doc.md) to
+- Add a new 3rd party service to the web app.
+- Add a new template for Privacy Policy or Terms & Conditions.
+- Update the web app for new features/bugfixes.
 
 # Pull Requests
 
