@@ -32,7 +32,7 @@ The format is very simple and you only need to provide fill the fields as follow
   {
     name: "Google Play Services",
     model: "gps", // this is stores the name of the model
-    gps: true, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
+    gps: false, // this stores the state of the model, notice the key is the same as the model above. It is required by code.
     logo: "images/gps.png",
     link: {
       privacy: "https://www.google.com/policies/privacy/",
