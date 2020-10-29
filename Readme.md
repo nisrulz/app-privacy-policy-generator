@@ -60,18 +60,6 @@ This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisr
 
 If you appreciate my work, consider [buying me](https://www.paypal.me/nisrulz/5usd) a cup of :coffee: to keep me recharged :muscle: [[PayPal](https://www.paypal.me/nisrulz/5usd)]. A comment in the project's [GuestBook](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) is appreciated :blush:
 
-# License
+### License
 
-    Copyright 2017 Nishant Srivastava
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+App Privacy Policy Generator is open-source under the GNU Affero General Public License Version 3 (AGPLv3) or any later version. You can [find it in its complete form here](LICENSE.md).
