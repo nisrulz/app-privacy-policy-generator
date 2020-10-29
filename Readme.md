@@ -1,4 +1,4 @@
-<center><img src="img/sc_1.png" alt="App Privacy Policy Generator">
+<center><img src="img/banner.png" alt="App Privacy Policy Generator">
 <b><i>A simple web app to generate a generic privacy policy for your Android/iOS apps</i>
 <br>
 <a href="https://app-privacy-policy-generator.nisrulz.com/" target="_blank">Click here to access the webapp online</a></b>
