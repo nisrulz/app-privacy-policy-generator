@@ -1,12 +1,12 @@
 <center><img src="img/banner.png" alt="App Privacy Policy Generator">
+<br>
 <b><i>A simple web app to generate a generic privacy policy for your Android/iOS apps</i>
 <br>
 <a href="https://app-privacy-policy-generator.nisrulz.com/" target="_blank">Click here to access the webapp online</a></b>
 <br>
 <a hre="https://www.androiddevdigest.com/digest-133/">
   <img src="https://img.shields.io/badge/AndroidDev%20Digest-%23133-blue.svg">
-</a>
-</center>
+</a></center>
 
 # Show some :heart:
 
@@ -31,11 +31,26 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 4. Check for existing [issues](https://github.com/nisrulz/app-privacy-policy-generator/issues) first, before filing an issue.
 5. Have fun!
 
-## Author & Support
+# Author & Contributors
 
 This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisrulz.github.io#nishant-srivastava) but hopefully developed and maintained by many others. See the [the list of contributors here](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
 
-If you appreciate my work, consider [buying me](https://www.paypal.me/nisrulz/5usd) a cup of :coffee: to keep me recharged :muscle: [[PayPal](https://www.paypal.me/nisrulz/5usd)]. A comment in the project's [GuestBook](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) is appreciated :blush:
+# Ways You Can Help/Support this project
+
+- **Star** this repository and tell all your friends about it.
+- **Watch** for new releases to get an update if something happens.
+- If you can spare a few 💵:
+
+  - [Buy me a coffee :coffee:](https://www.paypal.me/nisrulz/5usd) (one-time),
+  - or [Sponsor me on GitHub](https://github.com/sponsors/nisrulz) (recurring monthly).
+
+- Tell me you're :like: this project!
+
+  - [Comment in the project's guestbook](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) :blush:,
+  - Reach out on [Twitter](https://twitter.com/nisrulz),
+  - or [send a nice email my way](mailto:nisrulz@gmail.com)!
+
+Thanks for your interest in this software :heart:
 
 ## Screenshots
 
