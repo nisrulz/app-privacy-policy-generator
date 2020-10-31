@@ -12,6 +12,10 @@
 [![GitHub stars](https://img.shields.io/github/stars/nisrulz/app-privacy-policy-generator.svg?style=social&label=Star)](https://github.com/nisrulz/app-privacy-policy-generator) [![GitHub forks](https://img.shields.io/github/forks/nisrulz/app-privacy-policy-generator.svg?style=social&label=Fork)](https://github.com/nisrulz/app-privacy-policy-generator/fork) [![GitHub watchers](https://img.shields.io/github/watchers/nisrulz/app-privacy-policy-generator.svg?style=social&label=Watch)](https://github.com/nisrulz/app-privacy-policy-generator) [![GitHub followers](https://img.shields.io/github/followers/nisrulz.svg?style=social&label=Follow)](https://github.com/nisrulz/app-privacy-policy-generator)<br>
 [![Twitter Follow](https://img.shields.io/twitter/follow/nisrulz.svg?style=social)](https://twitter.com/nisrulz)
 
+<br>
+
+<a href="https://www.buymeacoffee.com/nisrulz" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 </center>
 
 # Contribution
@@ -45,7 +49,7 @@ This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisr
 
 - If you can spare a few 💵:
 
-  - [Buy me a coffee :coffee:](https://www.paypal.me/nisrulz/5usd) (one-time),
+  - [Buy me a coffee :coffee:](https://www.buymeacoffee.com/nisrulz) (one-time),
   - or [Sponsor me on GitHub](https://github.com/sponsors/nisrulz) (recurring monthly).
 
 - Tell me you like this project or how it helped you out!
