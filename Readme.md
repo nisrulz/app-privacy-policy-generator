@@ -1,20 +1,28 @@
-<center>
+<div align="center">
+  <img src="img/banner.png" alt="App Privacy Policy Generator">
+</div>
 
-![App Privacy Policy Generator](img/banner.png)
-<br>
-**_A simple web app to generate a generic privacy policy for your Android/iOS apps_**
-<br>
-[Click here to access the webapp online](https://app-privacy-policy-generator.nisrulz.com/)
-<br>
-
-[![AndroidDevDigest](https://img.shields.io/badge/AndroidDev%20Digest-%23133-blue.svg)](https://www.androiddevdigest.com/digest-133/)
-
-[![GitHub stars](https://img.shields.io/github/stars/nisrulz/app-privacy-policy-generator.svg?style=social&label=Star)](https://github.com/nisrulz/app-privacy-policy-generator) [![GitHub forks](https://img.shields.io/github/forks/nisrulz/app-privacy-policy-generator.svg?style=social&label=Fork)](https://github.com/nisrulz/app-privacy-policy-generator/fork) [![GitHub watchers](https://img.shields.io/github/watchers/nisrulz/app-privacy-policy-generator.svg?style=social&label=Watch)](https://github.com/nisrulz/app-privacy-policy-generator) [![GitHub followers](https://img.shields.io/github/followers/nisrulz.svg?style=social&label=Follow)](https://github.com/nisrulz/app-privacy-policy-generator)<br>
-[![Twitter Follow](https://img.shields.io/twitter/follow/nisrulz.svg?style=social)](https://twitter.com/nisrulz)
+<div align="center"><strong>
+  <em>A simple web app to generate a generic privacy policy for your Android/iOS apps</em>
+</strong><br>
+<a href="https://app-privacy-policy-generator.nisrulz.com/">Click here to access the webapp online</a></div>
 
 <br>
 
-</center>
+<div align="center"><a href="https://www.androiddevdigest.com/digest-133/">
+  <img src="https://img.shields.io/badge/AndroidDev%20Digest-%23133-blue.svg" alt="AndroidDevDigest">
+</a><a href="https://github.com/nisrulz/app-privacy-policy-generator">
+  <img src="https://img.shields.io/github/stars/nisrulz/app-privacy-policy-generator.svg?style=social&amp;label=Star" alt="GitHub stars">
+</a> <a href="https://github.com/nisrulz/app-privacy-policy-generator/fork">
+  <img src="https://img.shields.io/github/forks/nisrulz/app-privacy-policy-generator.svg?style=social&amp;label=Fork" alt="GitHub forks">
+</a> <a href="https://github.com/nisrulz/app-privacy-policy-generator">
+  <img src="https://img.shields.io/github/watchers/nisrulz/app-privacy-policy-generator.svg?style=social&amp;label=Watch" alt="GitHub watchers">
+</a> <a href="https://github.com/nisrulz/app-privacy-policy-generator">
+  <img src="https://img.shields.io/github/followers/nisrulz.svg?style=social&amp;label=Follow" alt="GitHub followers">
+</a><a href="https://twitter.com/nisrulz">
+  <img src="https://img.shields.io/twitter/follow/nisrulz.svg?style=social" alt="Twitter Follow">
+</a>
+</div>
 
 # Contribution
 
@@ -60,7 +68,7 @@ Thanks for your interest in this software :heart:
 
 ## Screenshots
 
-<img src="img/sc_1.png" alt="App Privacy Policy Generator" width=480 /><img src="img/sc_2.png" alt="App Privacy Policy Generator" width=480 /><img src="img/sc_3.png" alt="App Privacy Policy Generator" width=480 />
+<img src="img/sc_1.png" alt="App Privacy Policy Generator" width=360 /><img src="img/sc_2.png" alt="App Privacy Policy Generator" width=360 /><img src="img/sc_3.png" alt="App Privacy Policy Generator" width=360 />
 
 ### License
 
