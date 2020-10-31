@@ -1,17 +1,18 @@
-<center><img src="img/banner.png" alt="App Privacy Policy Generator">
-<br>
-<b><i>A simple web app to generate a generic privacy policy for your Android/iOS apps</i>
-<br>
-<a href="https://app-privacy-policy-generator.nisrulz.com/" target="_blank">Click here to access the webapp online</a></b>
-<br>
-<a hre="https://www.androiddevdigest.com/digest-133/">
-  <img src="https://img.shields.io/badge/AndroidDev%20Digest-%23133-blue.svg">
-</a></center>
+<center>
 
-# Show some :heart:
+![App Privacy Policy Generator](img/banner.png)
+<br>
+**_A simple web app to generate a generic privacy policy for your Android/iOS apps_**
+<br>
+[Click here to access the webapp online](https://app-privacy-policy-generator.nisrulz.com/)
+<br>
+
+[![AndroidDevDigest](https://img.shields.io/badge/AndroidDev%20Digest-%23133-blue.svg)](https://www.androiddevdigest.com/digest-133/)
 
 [![GitHub stars](https://img.shields.io/github/stars/nisrulz/app-privacy-policy-generator.svg?style=social&label=Star)](https://github.com/nisrulz/app-privacy-policy-generator) [![GitHub forks](https://img.shields.io/github/forks/nisrulz/app-privacy-policy-generator.svg?style=social&label=Fork)](https://github.com/nisrulz/app-privacy-policy-generator/fork) [![GitHub watchers](https://img.shields.io/github/watchers/nisrulz/app-privacy-policy-generator.svg?style=social&label=Watch)](https://github.com/nisrulz/app-privacy-policy-generator) [![GitHub followers](https://img.shields.io/github/followers/nisrulz.svg?style=social&label=Follow)](https://github.com/nisrulz/app-privacy-policy-generator)<br>
 [![Twitter Follow](https://img.shields.io/twitter/follow/nisrulz.svg?style=social)](https://twitter.com/nisrulz)
+
+</center>
 
 # Contribution
 
@@ -39,6 +40,9 @@ This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisr
 
 - **Star** this repository and tell all your friends about it.
 - **Watch** for new releases to get an update if something happens.
+- [**Open an Issue**](https://github.com/nisrulz/app-privacy-policy-generator/issues/new/choose) if you catch any error in copy text or within the project itself.
+- **Open a Pull Request** to include support for adding more 3rd party service's links or fixes against [existing issues](https://github.com/nisrulz/app-privacy-policy-generator/issues).
+
 - If you can spare a few 💵:
 
   - [Buy me a coffee :coffee:](https://www.paypal.me/nisrulz/5usd) (one-time),
