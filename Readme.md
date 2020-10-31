@@ -44,7 +44,7 @@ This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisr
   - [Buy me a coffee :coffee:](https://www.paypal.me/nisrulz/5usd) (one-time),
   - or [Sponsor me on GitHub](https://github.com/sponsors/nisrulz) (recurring monthly).
 
-- Tell me you're :like: this project!
+- Tell me you like this project or how it helped you out!
 
   - [Comment in the project's guestbook](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) :blush:,
   - Reach out on [Twitter](https://twitter.com/nisrulz),
