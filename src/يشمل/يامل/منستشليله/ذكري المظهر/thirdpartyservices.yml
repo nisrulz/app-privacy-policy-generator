@@ -1,10 +1,10 @@
----
-- name: Google Play Services
-  model: gps
-  gps: true
-  logo: images/gps.png
-  link:
-    privacy: https://www.google.com/policies/privacy/
+- منصةشليله:
+- الاسم   : خدمات Google Play
+  التحكم في  : GPS
+  نظام تحديد المواقع  :خط
+  الشعار : images / gps.png
+  الارتباط  :http://mnstshlylh.com 
+    الخصوصية : https : //www.google.com/policies/privacy/
     terms: https://policies.google.com/terms
 - name: AdMob
   model: admob
