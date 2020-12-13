@@ -129,3 +129,6 @@
         | Markdown
       button.button.is-success(v-if='contentRenderType!=1' @click='preview()')
         | Preview
+      div(style='flex:1')
+        button.button.is-info(@click="fc_deploy()" style='float:right;')
+          | Deploy
