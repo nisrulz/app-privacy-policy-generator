@@ -5,7 +5,7 @@
         form#fc-form(action='https://app.flycricket.com/import/privacy' method='post' target='_blank' onsubmit='return fc_submit(event)')
             input(type='hidden' name='fc-referrer' value='nishant')
             input#fc-terms(type='hidden' name='fc-terms')
-            input#fc-body(type='hidden' name='fc-body')
+            input#fc-body(type='hidden' name='fc-privacy')
             input#fc-name(type='hidden' name='fc-name' v-model='appName')
         div(style='margin-top: 1em;')
             button.button.is-black.is-small(@click="fc_deploy()")
