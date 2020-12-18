@@ -62,6 +62,3 @@ js-yaml $YAML_DIR/thirdpartyservices.yml >$TEMP_JSON_FILE
 JSON_DATA=$(cat $TEMP_JSON_FILE)
 echo "var thirdPartyServicesJsonArray = $JSON_DATA" >>$JS_FILE
 rm $TEMP_JSON_FILE
-
-echo ""
-echo "✅ Done!"
