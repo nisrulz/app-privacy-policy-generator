@@ -171,23 +171,12 @@
                 <p class="has-text-grey-light">The accuracy of the generated privacy policy and terms &amp; conditions on this website is not legally binding. Use at your own risk.</p>
                 <p><a class="has-text-danger" @click="toggleDisclaimerModalVisibility" rel="noopener noreferrer">Read the full Disclaimer here</a></p>
               </div>
-              <div class="box" id="fc-container">
-                <div id="fc-container-text">
-                  <div class="fc-title">Free privacy policy hosting + website for {{ appName }}.</div>
-                </div>
-                <div id="fc-callouts">
-                  <form id="fc-form" action="https://app.flycricket.com/import/privacy" method="post" target="_blank" onsubmit="return fc_submit(event)">
-                    <input type="hidden" name="fc-referrer" value="nishant">
-                    <input id="fc-terms" type="hidden" name="fc-terms">
-                    <input id="fc-body" type="hidden" name="fc-body">
-                    <input id="fc-name" type="hidden" name="fc-name" v-model="appName">
-                  </form>
-                  <div style="margin-top: 1em;">
-                    <button class="button is-black is-small" @click="fc_deploy()">Deploy</button>
-                  </div>
-                  <div class="fc-powered-by" style="margin-top:0.25em;">Powered by <a href="https://app.flycricket.com/r/nishant?utm_source=partner&amp;utm_medium=website&amp;utm_campaign=privacy_generator" target="_blank" rel="noopener noreferrer">Flycricket</a></div>
-                </div>
-              </div>
+              <form id="fc-form" action="https://app.flycricket.com/import/privacy" method="post" target="_blank">
+                <input type="hidden" name="fc-referrer" value="nishant">
+                <input id="fc-terms" type="hidden" name="fc-terms">
+                <input id="fc-body" type="hidden" name="fc-privacy">
+                <input id="fc-name" type="hidden" name="fc-name" v-model="appName">
+              </form>
             </div>
           </div>
         </section>
@@ -346,7 +335,7 @@
               <button class="button is-success" @click="getMarkdown('privacy_content', 'privacy_txtarea')">Markdown</button>
               <button class="button is-success" v-if="contentRenderType!=1" @click="preview()">Preview</button>
               <div style="flex:1">
-                <button class="button is-info" @click="fc_deploy()" style="float:right;">Deploy</button>
+                <button class="button is-info" @click="fc_deploy()" style="float:right;">Deploy to Flycricket</button>
               </div>
             </footer>
           </div>
@@ -492,7 +481,7 @@
               <button class="button is-success" @click="getMarkdown('tandc_content', 'tandc_txtarea')">Markdown</button>
               <button class="button is-success" v-if="contentRenderType!=1" @click="preview()">Preview</button>
               <div style="flex:1">
-                <button class="button is-info" @click="fc_deploy()" style="float:right;">Deploy</button>
+                <button class="button is-info" @click="fc_deploy()" style="float:right;">Deploy to Flycricket</button>
               </div>
             </footer>
           </div>
