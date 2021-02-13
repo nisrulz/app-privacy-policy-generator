@@ -266,5 +266,15 @@ var thirdPartyServicesJsonArray = [
       "privacy": "https://godotengine.org/privacy-policy",
       "terms": "https://godotengine.org/license"
     }
+  },
+  {
+    "name": "Segment",
+    "model": "segment",
+    "sentry": false,
+    "logo": "images/segment.png",
+    "link": {
+      "privacy": "https://segment.com/legal/privacy/",
+      "terms": "https://segment.com/legal/terms/"
+    }
   }
 ]
