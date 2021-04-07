@@ -181,7 +181,7 @@
     terms: https://segment.com/legal/terms/
 - name: Mixpanel
   model: mixpanel
-  sentry: false
+  mixpanel: false
   logo: images/mixpanel.png
   link:
     privacy: https://mixpanel.com/legal/privacy-policy/
