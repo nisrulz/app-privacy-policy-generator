@@ -179,3 +179,10 @@
   link:
     privacy: https://segment.com/legal/privacy/
     terms: https://segment.com/legal/terms/
+- name: Mixpanel
+  model: mixpanel
+  sentry: false
+  logo: images/mixpanel.png
+  link:
+    privacy: https://mixpanel.com/legal/privacy-policy/
+    terms: https://mixpanel.com/legal/terms-of-use/
