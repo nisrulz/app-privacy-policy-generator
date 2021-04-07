@@ -75,4 +75,4 @@ Thanks for your interest in this software :heart:
 
 ### License
 
-App Privacy Policy Generator is open-source under the GNU Affero General Public License Version 3 (AGPLv3) or any later version. You can [find it in its complete form here](LICENSE.md).
+AGPLv3: https://www.gnu.org/licenses/agpl-3.0.html
