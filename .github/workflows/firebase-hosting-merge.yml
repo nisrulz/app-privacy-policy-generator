@@ -11,7 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: './render.sh'
+      # Install Node
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      # Install Pug CLI
+      - run: npm install -g pug-cli
+      # Install SASS CLI
+      - run: npm install -g sass
+      # Install JS-YAML CLI
+      - run: npm install -g js-yaml
+      # Render the website from templates
+      - run: |
+          chmod +x ./render.sh
+          ./render.sh
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
