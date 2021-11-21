@@ -10,22 +10,30 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      # Install Node
-      - uses: actions/setup-node@v2
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      
+      - name: Install Node
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
-      # Install Pug CLI
-      - run: npm install -g pug-cli
-      # Install SASS CLI
-      - run: npm install -g sass
-      # Install JS-YAML CLI
-      - run: npm install -g js-yaml
-      # Render the website from templates
-      - run: |
+      
+      - name: Install Pug CLI
+        run: npm install -g pug-cli
+      
+      - name: Install SASS CLI
+        run: npm install -g sass
+      
+      - name: Install JS-YAML CLI
+        run: npm install -g js-yaml
+      
+      - name: Render the website from templates
+        run: |
           chmod +x ./render.sh
           ./render.sh
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+
+      - name: Firebase Deploy to Production
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_PRIVACY_POLICY_GENERATOR }}'
