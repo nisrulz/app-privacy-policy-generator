@@ -186,3 +186,10 @@
   link:
     privacy: https://mixpanel.com/legal/privacy-policy/
     terms: https://mixpanel.com/legal/terms-of-use/
+- name: RevenueCat
+  model: revenuecat
+  revenuecat: false
+  logo: images/third_party_logos/revenuecat.png
+  link:
+    privacy: https://www.revenuecat.com/privacy
+    terms: https://www.revenuecat.com/terms
