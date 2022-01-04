@@ -29,7 +29,7 @@
 
 ## Status Badges
 
-[![Deploy to Firebase Hosting on PR](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml)
+[![Deploy to Production](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml) [![Deploy to Firebase Hosting on PR](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml)
 
 ## Contribution
 
@@ -45,9 +45,8 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 
 1. If its a feature, bugfix, or anything please only change code to what you specify.
 2. Please keep PR titles easy to read and descriptive of changes, this will make them easier to merge :)
-3. Pull requests _must_ be made against `develop` branch. Any other branch (unless specified by the maintainers) will get rejected.
-4. Check for existing [issues](https://github.com/nisrulz/app-privacy-policy-generator/issues) first, before filing an issue.
-5. Have fun!
+3. Check for existing [issues](https://github.com/nisrulz/app-privacy-policy-generator/issues) first, before filing an issue.
+4. Have fun!
 
 ## Author & Contributors
 
@@ -79,6 +78,4 @@ Thanks for your interest in this software :heart:
 
 ## License
 
-Copyright 2017-Present Nishant Srivastava
-
-AGPLv3: https://www.gnu.org/licenses/agpl-3.0.html
+[AGPLv3 | Copyright 2017 Nishant Srivastava](LICENSE)
