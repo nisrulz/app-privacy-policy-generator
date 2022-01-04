@@ -27,7 +27,11 @@
 
 </div>
 
-# Contribution
+## Status Badges
+
+[![Deploy to Firebase Hosting on PR](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml)
+
+## Contribution
 
 [Read the dev docs](dev-doc.md) to
 
@@ -35,7 +39,7 @@
 - [Add a new template for Privacy Policy or Terms & Conditions](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#development)
 - [Update the web app for new features/bugfixes](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#development)
 
-# Pull Requests
+## Pull Requests
 
 I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
 
@@ -45,11 +49,11 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 4. Check for existing [issues](https://github.com/nisrulz/app-privacy-policy-generator/issues) first, before filing an issue.
 5. Have fun!
 
-# Author & Contributors
+## Author & Contributors
 
 This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisrulz.github.io#nishant-srivastava) but hopefully developed and maintained by many others. See the [the list of contributors here](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
 
-# Ways You Can Help/Support this project
+## Ways You Can Help/Support this project
 
 - **Star** this repository and tell all your friends about it.
 - **Watch** for new releases to get an update if something happens.
@@ -73,7 +77,7 @@ Thanks for your interest in this software :heart:
 
 <img src="img/sc_1.png" alt="App Privacy Policy Generator" width=360 /><img src="img/sc_2.png" alt="App Privacy Policy Generator" width=360 /><img src="img/sc_3.png" alt="App Privacy Policy Generator" width=360 />
 
-### License
+## License
 
 Copyright 2017-Present Nishant Srivastava
 
