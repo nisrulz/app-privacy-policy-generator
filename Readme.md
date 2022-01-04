@@ -78,6 +78,4 @@ Thanks for your interest in this software :heart:
 
 ## License
 
-Copyright 2017-Present Nishant Srivastava
-
-AGPLv3: https://www.gnu.org/licenses/agpl-3.0.html
+[AGPLv3 | Copyright 2017 Nishant Srivastava](LICENSE)
