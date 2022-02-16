@@ -100,7 +100,7 @@
 - name: One Signal
   model: onesignal
   onesignal: false
-  logo: images/third_party_logos/one_signal.svg
+  logo: images/third_party_logos/one_signal.png
   link:
     privacy: https://onesignal.com/privacy_policy
     terms: https://onesignal.com/tos
@@ -147,7 +147,7 @@
 - name: Amplitude
   model: amplitude
   amplitude: false
-  logo: images/third_party_logos/amplitude.svg
+  logo: images/third_party_logos/amplitude.png
   link:
     privacy: https://amplitude.com/privacy
     terms: https://amplitude.com/terms
