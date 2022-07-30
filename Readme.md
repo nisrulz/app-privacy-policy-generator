@@ -67,8 +67,7 @@ This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisr
 - Tell me you like this project or how it helped you out!
 
   - [Comment in the project's guestbook](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) :blush:,
-  - Reach out on [Twitter](https://twitter.com/nisrulz),
-  - or [send a nice email my way](mailto:nisrulz@gmail.com)!
+  - Reach out on [Twitter](https://twitter.com/nisrulz)
 
 Thanks for your interest in this software :heart:
 
