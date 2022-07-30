@@ -60,9 +60,9 @@ This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisr
 - **Open a Pull Request** to include support for adding more 3rd party service's links or fixes against [existing issues](https://github.com/nisrulz/app-privacy-policy-generator/issues).
 
 - If you can spare a few 💵:
+[![Sponsor](img/sponsor_banner.png)](https://github.com/sponsors/nisrulz)
 
-  - [Buy me a coffee :coffee:](https://www.buymeacoffee.com/nisrulz) (one-time),
-  - or [Sponsor me on GitHub](https://github.com/sponsors/nisrulz) (recurring monthly).
+  or alternatively you can fuel my late night coding sessions by [buying me coffee :coffee:](https://www.buymeacoffee.com/nisrulz).
 
 - Tell me you like this project or how it helped you out!
 
