@@ -31,49 +31,59 @@
 
 [![Deploy to Production](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml) [![Deploy to Firebase Hosting on PR](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml)
 
-## Contribution
+## Screenshots
 
-[Read the dev docs](dev-doc.md) to
+<img src="img/sc_1.png" alt="App Privacy Policy Generator" width=360 /><img src="img/sc_2.png" alt="App Privacy Policy Generator" width=360 /><img src="img/sc_3.png" alt="App Privacy Policy Generator" width=360 />
+
+## Project Support
+
+- Before contacting me with issues, please visit the [Issue Tracker](https://github.com/nisrulz/app-privacy-policy-generator/issues) and see if issue was already added there. Just in case.
+- If you want to report a bug in the project, please use the [Issue Tracker](https://github.com/nisrulz/app-privacy-policy-generator/issues) to [**open an issue**](https://github.com/nisrulz/app-privacy-policy-generator/issues/new/choose).
+- If you want to discuss the project with the community, join the [Discussion](https://github.com/nisrulz/app-privacy-policy-generator/discussions).
+- If needed, you can also contact me on [Twitter](https://twitter.com/nisrulz).
+
+## Contributing
+
+This project's contributions work a little different than most GitHub projects. If you
+have a small bug fix or typo fix, please open a Pull Request(PR) directly to this repository.
+
+If you would like to contribute a feature, please follow these steps:
+
+1. Check for existing [issues](https://github.com/nisrulz/app-privacy-policy-generator/issues) first, before filing an issue.
+2. Discuss the feature in the (new/existing)issue.
+3. Create a pull request from **your fork** to this repository, once details are clear.
+4. Post a link to your pull request in the issue for consideration.
+
+It's likely that code style and implementation details will need to be tweaked so it's easier to for me to grab your
+implementation as a starting point when implementing a feature.
+
+Additionally, make sure to [read the dev docs](dev-doc.md) to
 
 - [Add a new 3rd party service to the web app](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#contributing-more-3rd-party-services-links)
 - [Add a new template for Privacy Policy or Terms & Conditions](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#development)
 - [Update the web app for new features/bugfixes](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#development)
 
-## Pull Requests
+## Support this project
 
-I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
+- App Privacy Policy Generator is available as **pay-what-you-can** project. If it’s useful to you, [please pay what you’re able to.](https://www.buymeacoffee.com/nisrulz)
+  
+  If you’d like to offer continued support, please consider [sponsoring monthly](https://github.com/sponsors/nisrulz)!
+  [![sponsoring monthly](img/sponsor_banner.png)](https://github.com/sponsors/nisrulz)
 
-1. If its a feature, bugfix, or anything please only change code to what you specify.
-2. Please keep PR titles easy to read and descriptive of changes, this will make them easier to merge :)
-3. Check for existing [issues](https://github.com/nisrulz/app-privacy-policy-generator/issues) first, before filing an issue.
-4. Have fun!
+  or alternatively you can fuel my late night programming sessions by [buying me coffee :coffee:](https://www.buymeacoffee.com/nisrulz).
+
+- Tell me you like this project or how it helped you out!
+  - **Star** this repository and tell all your friends about it.
+  - [Comment in the project's guestbook](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) :blush:
+  - Reach out on [Twitter](https://twitter.com/nisrulz)
+
+Thanks for your interest in this project :heart:
 
 ## Author & Contributors
 
-This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisrulz.github.io#nishant-srivastava) but hopefully developed and maintained by many others. See the [the list of contributors here](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
+This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisrulz.github.io#nishant-srivastava) but hopefully developed and maintained by many others.
 
-## Ways You Can Help/Support this project
-
-- **Star** this repository and tell all your friends about it.
-- **Watch** for new releases to get an update if something happens.
-- [**Open an Issue**](https://github.com/nisrulz/app-privacy-policy-generator/issues/new/choose) if you catch any error in copy text or within the project itself.
-- **Open a Pull Request** to include support for adding more 3rd party service's links or fixes against [existing issues](https://github.com/nisrulz/app-privacy-policy-generator/issues).
-
-- If you can spare a few 💵:
-[![Sponsor](img/sponsor_banner.png)](https://github.com/sponsors/nisrulz)
-
-  or alternatively you can fuel my late night coding sessions by [buying me coffee :coffee:](https://www.buymeacoffee.com/nisrulz).
-
-- Tell me you like this project or how it helped you out!
-
-  - [Comment in the project's guestbook](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) :blush:,
-  - Reach out on [Twitter](https://twitter.com/nisrulz)
-
-Thanks for your interest in this software :heart:
-
-## Screenshots
-
-<img src="img/sc_1.png" alt="App Privacy Policy Generator" width=360 /><img src="img/sc_2.png" alt="App Privacy Policy Generator" width=360 /><img src="img/sc_3.png" alt="App Privacy Policy Generator" width=360 />
+See the [the list of contributors here](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
 
 ## License
 
