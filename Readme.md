@@ -44,14 +44,15 @@
 
 ## Contributing
 
-This project's contributions work a little different than most GitHub projects. If you
-have a small bug fix or typo fix, please open a Pull Request(PR) directly to this repository.
+This project's contributions work a little different than most GitHub projects. If you have a small bug fix or typo fix, please open a Pull Request(PR) directly to this repository.
+
+In order to reduce burnout by limiting the maintenance overhead of reviewing and validating third-party code, this project is open to code contributions for **bug fixes only**. Features carry a long-term maintenance burden so they will not be accepted at this time.
 
 If you would like to contribute a feature, please follow these steps:
 
 1. Check for existing [issues](https://github.com/nisrulz/app-privacy-policy-generator/issues) first, before filing an issue.
-2. Discuss the feature in the (new/existing)issue.
-3. Create a pull request from **your fork** to this repository, once details are clear.
+2. Discuss the feature in the new/existing issue.
+3. Create a pull request from **your fork** to this repository, once details are clear and approved by maintainer.
 4. Post a link to your pull request in the issue for consideration.
 
 It's likely that code style and implementation details will need to be tweaked so it's easier to for me to grab your
