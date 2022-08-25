@@ -73,7 +73,7 @@ To serve locally for testing, run: `firebase serve --only hosting`
 
 ### Deploy to Production
 
-> *Warning*
+> **Warning**
 > This can only be done by maintainers who have access to Firebase console!
 
 - First, login by executing command: `firebase login`
