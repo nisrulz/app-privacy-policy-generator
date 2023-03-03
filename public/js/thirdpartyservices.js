@@ -163,7 +163,7 @@ var thirdPartyServicesJsonArray = [
     "name": "One Signal",
     "model": "onesignal",
     "onesignal": false,
-    "logo": "images/third_party_logos/one_signal.svg",
+    "logo": "images/third_party_logos/one_signal.png",
     "link": {
       "privacy": "https://onesignal.com/privacy_policy",
       "terms": "https://onesignal.com/tos"
@@ -231,7 +231,7 @@ var thirdPartyServicesJsonArray = [
     "name": "Amplitude",
     "model": "amplitude",
     "amplitude": false,
-    "logo": "images/third_party_logos/amplitude.svg",
+    "logo": "images/third_party_logos/amplitude.png",
     "link": {
       "privacy": "https://amplitude.com/privacy",
       "terms": "https://amplitude.com/terms"
@@ -285,6 +285,16 @@ var thirdPartyServicesJsonArray = [
     "link": {
       "privacy": "https://mixpanel.com/legal/privacy-policy/",
       "terms": "https://mixpanel.com/legal/terms-of-use/"
+    }
+  },
+  {
+    "name": "RevenueCat",
+    "model": "revenuecat",
+    "revenuecat": false,
+    "logo": "images/third_party_logos/revenuecat.png",
+    "link": {
+      "privacy": "https://www.revenuecat.com/privacy",
+      "terms": "https://www.revenuecat.com/terms"
     }
   }
 ]
