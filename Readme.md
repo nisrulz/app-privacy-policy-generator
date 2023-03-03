@@ -64,14 +64,17 @@ Additionally, make sure to [read the dev docs](dev-doc.md) to
 - [Add a new template for Privacy Policy or Terms & Conditions](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#development)
 - [Update the web app for new features/bugfixes](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#development)
 
+## Contribute financially
+
+Servers aren't free and running/maintaining this project isn't free either.
+
+Please consider contributing on [GitHub sponsor](https://github.com/sponsors/nisrulz) to offer continued support. You can do a one-time contribution or set up a recurring monthly contribution.
+
+[![sponsoring monthly](img/sponsor_banner.png)](https://github.com/sponsors/nisrulz)
+
+_Alternatively you can fuel my late night programming sessions by [buying me coffee :coffee:](https://www.buymeacoffee.com/nisrulz)._
+
 ## Support this project
-
-- App Privacy Policy Generator is available as **pay-what-you-can** project. If it’s useful to you, [please pay what you’re able to.](https://www.buymeacoffee.com/nisrulz)
-  
-  If you’d like to offer continued support, please consider [sponsoring monthly](https://github.com/sponsors/nisrulz)!
-  [![sponsoring monthly](img/sponsor_banner.png)](https://github.com/sponsors/nisrulz)
-
-  or alternatively you can fuel my late night programming sessions by [buying me coffee :coffee:](https://www.buymeacoffee.com/nisrulz).
 
 - Tell me you like this project or how it helped you out!
   - **Star** this repository and tell all your friends about it.
