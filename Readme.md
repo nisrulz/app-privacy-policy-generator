@@ -23,7 +23,7 @@
   <img src="https://img.shields.io/twitter/follow/nisrulz.svg?style=social" alt="Twitter Follow">
 </a>
 
-<a href="https://www.buymeacoffee.com/nisrulz" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A443EQ6)
 
 </div>
 
@@ -72,7 +72,7 @@ Please consider contributing on [GitHub sponsor](https://github.com/sponsors/nis
 
 [![sponsoring monthly](img/sponsor_banner.png)](https://github.com/sponsors/nisrulz)
 
-_Alternatively you can fuel my late night programming sessions by [buying me coffee :coffee:](https://www.buymeacoffee.com/nisrulz)._
+_Alternatively you can fuel my late night programming sessions by [buying me coffee :coffee:](https://ko-fi.com/nisrulz)._
 
 ## Support this project
 

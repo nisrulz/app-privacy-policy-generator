@@ -11,13 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v2
-      
-      - name: Install Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          cache: 'npm'
+        uses: actions/checkout@v3
       
       - name: Install Pug CLI
         run: npm install -g pug-cli

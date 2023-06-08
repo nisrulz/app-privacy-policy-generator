@@ -3,10 +3,17 @@
 The web app uses
 
 - [VueJs](https://vuejs.org/) - For templating and reactive updates in the DOM
-- [Pug-CLI](https://github.com/pugjs/pug-cli) - To convert pug templates to html and merge partials into single [`index.html`](public/index.html) file.
-- [SASS-CLI](https://sass-lang.com/documentation/cli) - To convert sass templates to css and merge partials into single [`style.css`](public/css/style.css) file.
-- [js-yaml-CLI](https://github.com/nodeca/js-yaml#cli-executable) - To convert yaml templates to json and generate the [`thirdpartyservices.js`](public/js/thirdpartyservices.js) file.
-- [Firebase Hosting](https://firebase.google.com/docs/hosting/) - For Hosting
+- [Firebase Hosting](https://firebase.google.com/docs/hosting/) - For hosting the static web app
+- CLI Tools
+  - [pug](https://github.com/pugjs/pug-cli) - To convert pug templates to html and merge partials into single [`index.html`](public/index.html) file.
+  - [sass](https://sass-lang.com/documentation/cli) - To convert sass templates to css and merge partials into single [`style.css`](public/css/style.css) file.
+  - [js-yaml](https://github.com/nodeca/js-yaml#cli-executable) - To convert yaml templates to json and generate the [`thirdpartyservices.js`](public/js/thirdpartyservices.js) file.
+  - [firebase-tools](https://github.com/firebase/firebase-tools) - To interact with Firebase as a service from command line.
+  ---
+  > Install the CLI tools using
+  >
+  > ```npm install -g pug-cli sass js-yaml firebase-tools```
+
 
 If you wish to modify the code for the webapp, then look into [`src`](src) directory.
 
@@ -29,11 +36,11 @@ To compile the code under `src` folder, simply execute the helper bash script [`
 
 This will generate the `index.html`, `style.css` and `thirdpartyservices.js` files at their required directory path.
 
-Open `index.html` to view the full webapp 🎉
+Open `index.html` to view the full web app 🎉
 
 ## Contributing more 3rd Party Service's links
 
-The webapp uses a JSON array to populate the list of 3rd party services section. This JSON array is generated from another yaml file.
+The web app uses a JSON array to populate the list of 3rd party services section. This JSON array is generated from another yaml file.
 
 If you want contribute a new 3rd party service for the section then open a Pull Request which simply adds a new item in the YAML file [`src/includes/yaml/thirdpartyservices.yml`](src/includes/yaml/thirdpartyservices.yml)
 
@@ -53,19 +60,7 @@ The format is very simple and you only need to provide the below fields:
 
 Additionally, you also will have to drop the logo image into the [`public/images/third_party_logos/`](public/images/third_party_logos/) folder. Make sure the logo is **160 × 160** in size.
 
-### Deployment
-
-In order to deploy with the web app and Firebase hosting you would need to setup Firebase CLI.
-
-### Setup Firebase CLI
-
-The instructions to set it up differ based on the operating system, which is explained [here](https://firebase.google.com/docs/cli).
-
-However you can also use the below command to setup/update the Firebase CLI, which will take care of everything (including detecting the OS you are running):
-
-```bash
-curl -sL firebase.tools | bash
-```
+## Deployment
 
 ### Server and test locally
 
