@@ -5,14 +5,14 @@ The web app uses
 - [VueJs](https://vuejs.org/) - For templating and reactive updates in the DOM
 - [Firebase Hosting](https://firebase.google.com/docs/hosting/) - For hosting the static web app
 - CLI Tools
-  - [pug](https://github.com/pugjs/pug-cli) - To convert pug templates to html and merge partials into single [`index.html`](public/index.html) file.
+  - [pug](https://github.com/Anduh/pug-cli) - To convert pug templates to html and merge partials into single [`index.html`](public/index.html) file.
   - [sass](https://sass-lang.com/documentation/cli) - To convert sass templates to css and merge partials into single [`style.css`](public/css/style.css) file.
   - [js-yaml](https://github.com/nodeca/js-yaml#cli-executable) - To convert yaml templates to json and generate the [`thirdpartyservices.js`](public/js/thirdpartyservices.js) file.
   - [firebase-tools](https://github.com/firebase/firebase-tools) - To interact with Firebase as a service from command line.
   ---
   > Install the CLI tools using
   >
-  > ```npm install -g pug-cli sass js-yaml firebase-tools```
+  > ```npm install -g @anduh/pug-cli sass js-yaml firebase-tools```
 
 
 If you wish to modify the code for the webapp, then look into [`src`](src) directory.

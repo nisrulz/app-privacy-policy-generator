@@ -21,8 +21,13 @@
 echo "⚙️ STEP 1: RENDER PUG > HTML"
 
 # Using pug-cli to render from pug to html
-# Install pug-cli: npm install -g pug-cli
-pug src/index.pug --pretty --out public
+# Specifically a fork
+# - NPM: https://www.npmjs.com/package/@anduh/pug-cli
+# - Github: https://github.com/Anduh/pug-cli
+# because the original is not maintained anymore!
+# Install pug-cli: npm install -g @anduh/pug-cli
+
+pug3 src/index.pug --pretty --out public
 
 echo "⚙️ STEP 2: RENDER SASS > CSS"
 # Using sass-cli to render from sass to css
