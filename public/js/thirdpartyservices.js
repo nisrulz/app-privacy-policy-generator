@@ -296,5 +296,15 @@ var thirdPartyServicesJsonArray = [
       "privacy": "https://www.revenuecat.com/privacy",
       "terms": "https://www.revenuecat.com/terms"
     }
+  },
+  {
+    "name": "Clerk",
+    "model": "clerk",
+    "clerk": false,
+    "logo": "images/third_party_logos/clerk.png",
+    "link": {
+      "privacy": "https://clerk.com/privacy",
+      "terms": "https://clerk.com/terms"
+    }
   }
 ]
