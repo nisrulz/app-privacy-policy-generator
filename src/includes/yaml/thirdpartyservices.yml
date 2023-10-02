@@ -1,4 +1,4 @@
----
+--tryalice/app-privacy-policy-generator-
 - name: Google Play Services
   model: gps
   gps: true
