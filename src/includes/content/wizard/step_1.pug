@@ -1,0 +1,75 @@
+section#step-1.columns.box(v-if="wizardStep==1")
+    .column.is-two-fifths
+        progress.progress.is-small.is-link(value='20' max='100')
+        .scrollable
+            .control
+                | Type:
+                label.radio
+                    input(
+                        v-model="typeOfPolicyInt" 
+                        value="1" 
+                        type="radio"
+                        )
+                    |   Simple
+                label.radio
+                    input(
+                        v-model="typeOfPolicyInt" 
+                        value="2" 
+                        type="radio"
+                        )
+                    |   No Tracking
+                label.radio
+                    input(
+                        v-model="typeOfPolicyInt" 
+                        value="3" 
+                        type="radio"
+                        )
+                    |   GDPR
+            br
+            .control
+                .field
+                    label.label App Name
+                    .control
+                        input#appName.input(
+                            v-bind:class="{ 'is-danger': (appName == 'Please provide an App Name!' || appName.length == 0) }" 
+                            placeholder="Awesome App Name" 
+                            v-model="appName" 
+                            required="" 
+                            type="text"
+                            )
+            br
+            .control
+                .field
+                    label.label Contact Information
+                    .control
+                        input#appContact.input(
+                            v-bind:class="{ 'is-danger': (appContact == 'Please provide contact info!' || appContact.length == 0) }" 
+                            placeholder="Email Address" 
+                            v-model="appContact" 
+                            required="" 
+                            type="email"
+                            )
+            br
+            .control
+                .field
+                    label.label Policy Effective Date
+                    .control
+                        input#effectiveFromDate.input.is-primary(
+                            v-model="effectiveFromDate" 
+                            required="" 
+                            type="date"
+                            )
+            br
+            .control(v-show="typeOfPolicyInt==1")
+                .field
+                    label.label Personally Identifiable Information
+                    .control
+                        input#pidInfoIn.input(
+                            placeholder="Personally Identifiable Information you collect (comma separated)" 
+                            v-model="pidInfoIn" 
+                            type="text"
+                            )
+        .buttons.has-addons.is-right
+            button.button.is-link.is-selected(@click="nextStep()") Next
+    .column.is-information
+        img.center-block.sidebar-img(src="images/app_graphics/step_1.svg")

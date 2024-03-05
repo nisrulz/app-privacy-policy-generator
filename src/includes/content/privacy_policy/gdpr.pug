@@ -1,4 +1,4 @@
-.modal(v-bind:class="{ 'is-active': showGDPRPrivacyModal }")
+.modal(v-bind:class="{ 'is-active': showGDPRPrivacyModal }" v-show='typeOfPolicyInt==3')
   .modal-background
   .modal-card
     header.modal-card-head
@@ -133,10 +133,9 @@
           | Privacy Policy, do not hesitate to contact {{meOrUs}} at {{
           | appContact }}.
           br
-          | If you have any questions about {{ myOrOur }} Company&rsquo;s privacy policy, the data {{ iOrWe }} hold
+          | If you have any questions about {{ myOrOur }} privacy policy, the data {{ iOrWe }} hold
           | on you, or you would like to exercise one of your data protection rights, please do not hesitate to
-          | contact us.
-          p  Email us at: Call us: Or write to us at:
+          | contact {{meOrUs}} at {{appContact }}
         p
           | How to contact the appropriate authority Should you wish to report a complaint or if you feel that {{ myOrOur }}
           | Company has not addressed your concern in a satisfactory manner, you may contact the Information

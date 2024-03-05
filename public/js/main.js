@@ -22,9 +22,9 @@ var app = new Vue({
   el: "#app",
   data: {
     iOrWe: "[I/We]",
-    typeOfApp: "",
+    typeOfApp: "Free",
     typeOfAppTxt: "[open source/free/freemium/ad-supported/commercial]",
-    typeOfDev: "",
+    typeOfDev: "Individual",
     appName: "",
     appContact: "",
     myOrOur: "[my/our]",
@@ -38,7 +38,7 @@ var app = new Vue({
     pidInfoIn: "",
     pidInfo:
       "[add whatever else you collect here, e.g. users name, address, location, pictures]",
-    osType: "",
+    osType: "Android",
     effectiveFromDate: new Date().toISOString().slice(0, 10),
     requirementOfSystem: "system",
     thirdPartyServices: thirdPartyServicesJsonArray,
@@ -46,10 +46,13 @@ var app = new Vue({
     showGDPRPrivacyModal: false,
     showTermsModal: false,
     showDisclaimerModal: false,
+    showNoTrackingPrivacyPolicyModal: false,
     hasThirdPartyServicesSelected: true,
-    contentRenderType: 1,
+    contentRenderType: 1, // contentRenderType=1 is Preview, contentRenderType=2 is HTML/Markdown
     wizardStep: 1,
-    totalWizardSteps: 3,
+    totalWizardSteps: 6,
+    typeOfPolicy: 'Simple',
+    typeOfPolicyInt: 1,
   },
   filters: {
     capitalize: function (value) {
@@ -61,6 +64,20 @@ var app = new Vue({
   methods: {
     preview: function (id) {
       this.contentRenderType = 1
+    },
+
+    setTypeOfPolicyInt: function(){
+      switch (this.typeOfPolicy) {
+        case "Simple":
+          this.typeOfPolicyInt = 1
+          break
+        case "No Tracking":
+          this.typeOfPolicyInt = 2
+          break
+        case "GDPR":
+          this.typeOfPolicyInt = 3
+          break 
+      }
     },
     nextStep: function () {
       if (this.wizardStep <= this.totalWizardSteps) {
@@ -76,13 +93,24 @@ var app = new Vue({
           }
         }
 
-        this.wizardStep += 1
+        if(this.typeOfPolicyInt==2){
+          this.wizardStep = 3
+        }else{
+          this.wizardStep += 1
+
+        }
       }
     },
     prevStep: function () {
       if (this.wizardStep >= 1) {
-        this.wizardStep -= 1
+        if(this.typeOfPolicyInt==2){
+          this.wizardStep = 1
+        }else{
+          this.wizardStep -= 1
+        }
       }
+
+      console.log(this.wizardStep, this.typeOfPolicyInt)
     },
     checkForThirdPartyServicesEnabled: function () {
       let listOfEnabledThirdPartyServices = []
@@ -177,6 +205,11 @@ var app = new Vue({
           break
         }
       }
+    },
+    toggleNoTrackingPrivacyPolicyModalVisibility: function () {
+      this.generate()
+      this.contentRenderType==1
+      this.showNoTrackingPrivacyPolicyModal = !this.showNoTrackingPrivacyPolicyModal
     },
     togglePrivacyModalVisibility: function () {
       this.generate()

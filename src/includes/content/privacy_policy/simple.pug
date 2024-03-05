@@ -1,4 +1,4 @@
-.modal(v-bind:class="{ 'is-active': showPrivacyModal }")
+.modal(v-bind:class="{ 'is-active': showPrivacyModal }" v-show='typeOfPolicyInt==1')
   .modal-background
   .modal-card
     header.modal-card-head

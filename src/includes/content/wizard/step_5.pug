@@ -1,0 +1,23 @@
+section#step-5.columns.box(v-if="wizardStep==5")
+    .column.is-two-fifths
+        progress.progress.is-small.is-link(value='100' max='100')
+        .scrollable
+            b Include links to Third Party Services
+            i Scroll to find more services in list
+            a(rel="noopener noreferrer" v-for="item in thirdPartyServices")
+                input(
+                    v-model="item[item.model]" 
+                    :id="'list-switch-' + item.model" 
+                    type="checkbox"
+                    )
+                label(:for="'list-switch-' + item.model")
+                    img.thirdparty-logo(
+                        :alt="item.name" 
+                        :src="item.logo"
+                        )
+                    span.thirdparty-text {{ item.name }}
+        .buttons.has-addons.is-right
+            button.button(@click="prevStep()") Prev
+            button.button.is-link.is-selected(@click="nextStep()") Generate
+    .column.is-information
+        img.center-block.sidebar-img(src="images/app_graphics/step_2.svg")

@@ -1,0 +1,53 @@
+section#step-3.columns.box(v-if="wizardStep==3")
+    .column.is-two-fifths
+        progress.progress.is-small.is-link(value='60' max='100')
+        .scrollable
+            .control(v-show="typeOfPolicyInt==1")
+                | Select Mobile OS:
+                span.tag.is-primary.is-light {{osType}}
+                br
+                label.radio
+                    input(
+                        v-model="osType" 
+                        value="Android" 
+                        type="radio"
+                        )
+                    |   Android
+                br
+                label.radio
+                    input(
+                        v-model="osType" 
+                        value="iOS" 
+                        type="radio"
+                        )
+                    |   iOS
+                br
+                label.radio
+                    input(
+                        v-model="osType" 
+                        value="KaiOS" 
+                        type="radio"
+                        )
+                    |   KaiOS
+                br
+                label.radio
+                    input(
+                        v-model="osType" 
+                        value="Android & iOS" 
+                        type="radio"
+                        )
+                    |   Android & iOS
+                br
+                label.radio
+                    input(
+                        v-model="osType" 
+                        value="Android, iOS & KaiOS" 
+                        type="radio"
+                        )
+                    |   Android, iOS & KaiOS
+            br
+        .buttons.has-addons.is-right
+            button.button(@click="prevStep()") Prev
+            button.button.is-link.is-selected(@click="nextStep()") Next
+    .column.is-information
+        img.center-block.sidebar-img(src="images/app_graphics/step_1.svg")

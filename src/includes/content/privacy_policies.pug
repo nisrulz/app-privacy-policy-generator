@@ -2,4 +2,8 @@
 
 include privacy_policy/simple.pug
 
-//- include privacy_policy/gdpr.pug
+if noTracking
+    include privacy_policy/no_tracking.pug
+
+if gdpr
+    include privacy_policy/gdpr.pug

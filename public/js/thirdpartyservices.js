@@ -45,8 +45,8 @@ var thirdPartyServicesJsonArray = [
     "firebase": false,
     "logo": "images/third_party_logos/firebase.png",
     "link": {
-      "privacy": "https://firebase.google.com/policies/analytics",
-      "terms": "https://firebase.google.com/terms/analytics"
+      "privacy": "https://firebase.google.com/support/privacy",
+      "terms": "https://www.google.com/analytics/terms/"
     }
   },
   {
