@@ -75,10 +75,11 @@ section#step-2.columns(v-if='wizardStep==2')
                         label.label Personally Identifiable Information
                         .control
                             input#pidInfoIn.input(
-                                placeholder="Personally Identifiable Information you collect (comma separated)" 
+                                placeholder="Email, userId, age, gender, etc" 
                                 v-model="pidInfoIn" 
                                 type="text"
                                 )
+                        p.help.has-text-grey Personally Identifiable Information you collect (comma separated)
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep') Next
