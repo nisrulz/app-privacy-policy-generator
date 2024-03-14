@@ -1,0 +1,58 @@
+section#step-3.columns(v-if='wizardStep==3')
+    .column.card
+        .card-content
+            p
+                a(
+                    href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+                    target='_blank' 
+                    rel='noopener noreferrer') App Privacy Policy Generator
+            progress.progress.is-small.is-link(value='32' max='100')
+            .scrollable.content
+                .control
+                    | Select App Type:
+                    span.tag.is-primary.is-light {{typeOfApp}}
+                    br
+                    label.radio
+                        input(
+                            v-model="typeOfApp" 
+                            value="Free" 
+                            type="radio"
+                            )
+                        |   Free
+                    br
+                    label.radio
+                        input(
+                            v-model="typeOfApp" 
+                            value="Open Source" 
+                            type="radio"
+                            )
+                        |   Open Source
+                    br
+                    label.radio
+                        input(
+                            v-model="typeOfApp" 
+                            value="Freemium" 
+                            type="radio"
+                            )
+                        |   Freemium
+                    br
+                    label.radio
+                        input(
+                            v-model="typeOfApp" 
+                            value="Ad Supported" 
+                            type="radio"
+                            )
+                        |   Ad Supported
+                    br
+                    label.radio
+                        input(
+                            v-model="typeOfApp" 
+                            value="Commercial" 
+                            type="radio"
+                            )
+                        |   Commercial
+        footer.card-footer
+            a.card-footer-item(@click='prevStep') Previous
+            a.card-footer-item(@click='nextStep') Next
+    .column.is-information.is-hidden-touch
+        img.center-block.sidebar-img(src='images/app_graphics/side_image.svg')

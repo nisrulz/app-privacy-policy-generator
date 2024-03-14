@@ -1,137 +1,57 @@
 .modal(v-bind:class="{ 'is-active': showTermsModal }")
-  .modal-background
-  .modal-card
-    header.modal-card-head
-      p.modal-card-title.no-select Terms &amp; Conditions
-      button.delete(aria-label='close' @click='toggleTermsModalVisibility')
-    section.modal-card-body.modal-box
-      #tandc_content(v-show='contentRenderType==1')
-        strong Terms &amp; Conditions
-        p
-          | By downloading or using the app, these terms will
-          | automatically apply to you &ndash; you should make sure therefore
-          | that you read them carefully before using the app. You&rsquo;re not
-          | allowed to copy or modify the app, any part of the app, or
-          | our trademarks in any way. You&rsquo;re not allowed to attempt to
-          | extract the source code of the app, and you also shouldn&rsquo;t try
-          | to translate the app into other languages or make derivative
-          | versions. The app itself, and all the trademarks, copyright,
-          | database rights, and other intellectual property rights related
-          | to it, still belong to {{devOrCompanyName}}.
-        p
-          | {{devOrCompanyName}} is committed to ensuring that the app is
-          | as useful and efficient as possible. For that reason, we
-          | reserve the right to make changes to the app or to charge for
-          | its services, at any time and for any reason. We will never
-          | charge you for the app or its services without making it very
-          | clear to you exactly what you&rsquo;re paying for.
-        p
-          | The {{appName}} app stores and processes personal data that
-          | you have provided to us, to provide {{myOrOur}}
-          | Service. It&rsquo;s your responsibility to keep your phone and
-          | access to the app secure. We therefore recommend that you do
-          | not jailbreak or root your phone, which is the process of
-          | removing software restrictions and limitations imposed by the
-          | official operating system of your device. It could make your
-          | phone vulnerable to malware/viruses/malicious programs,
-          | compromise your phone&rsquo;s security features and it could mean
-          | that the {{appName}} app won&rsquo;t work properly or at all.
-        div(v-if='hasThirdPartyServicesSelected')
-          p
-            | The app does use third-party services that declare their
-            | Terms and Conditions.
-          p
-            | Link to Terms and Conditions of third-party service
-            | providers used by the app
-          ul
-            li(v-if='item[item.model] && item.link.terms' v-for='item in thirdPartyServices')
-              a(:href='item.link.terms' target='_blank' rel='noopener noreferrer') {{item.name}}
-        p
-          | You should be aware that there are certain things that
-          | {{devOrCompanyName}} will not take responsibility for. Certain
-          | functions of the app will require the app to have an active
-          | internet connection. The connection can be Wi-Fi or provided
-          | by your mobile network provider, but {{devOrCompanyName}}
-          | cannot take responsibility for the app not working at full
-          | functionality if you don&rsquo;t have access to Wi-Fi, and you don&rsquo;t
-          | have any of your data allowance left.
-        p
-        p
-          | If you&rsquo;re using the app outside of an area with Wi-Fi, you
-          | should remember that the terms of the agreement with your
-          | mobile network provider will still apply. As a result, you may
-          | be charged by your mobile provider for the cost of data for
-          | the duration of the connection while accessing the app, or
-          | other third-party charges. In using the app, you&rsquo;re accepting
-          | responsibility for any such charges, including roaming data
-          | charges if you use the app outside of your home territory
-          | (i.e. region or country) without turning off data roaming. If
-          | you are not the bill payer for the device on which you&rsquo;re
-          | using the app, please be aware that we assume that you have
-          | received permission from the bill payer for using the app.
-        p
-          | Along the same lines, {{devOrCompanyName}} cannot always take
-          | responsibility for the way you use the app i.e. You need to
-          | make sure that your device stays charged &ndash; if it runs out of
-          | battery and you can&rsquo;t turn it on to avail the Service,
-          | {{devOrCompanyName}} cannot accept responsibility.
-        p
-          | With respect to {{devOrCompanyName}}&rsquo;s responsibility for your
-          | use of the app, when you&rsquo;re using the app, it&rsquo;s important to
-          | bear in mind that although we endeavor to ensure that it is
-          | updated and correct at all times, we do rely on third parties
-          | to provide information to us so that we can make it available
-          | to you. {{devOrCompanyName}} accepts no liability for any
-          | loss, direct or indirect, you experience as a result of
-          | relying wholly on this functionality of the app.
-        p
-          | At some point, we may wish to update the app. The app is
-          | currently available on {{osType}} &ndash; the requirements for the 
-          | {{requirementOfSystem}}(and for any additional systems we
-          | decide to extend the availability of the app to) may change,
-          | and you&rsquo;ll need to download the updates if you want to keep
-          | using the app. {{devOrCompanyName}} does not promise that it
-          | will always update the app so that it is relevant to you
-          | and/or works with the {{osType}} version that you have
-          | installed on your device. However, you promise to always
-          | accept updates to the application when offered to you, We may
-          | also wish to stop providing the app, and may terminate use of
-          | it at any time without giving notice of termination to you.
-          | Unless we tell you otherwise, upon any termination, (a) the
-          | rights and licenses granted to you in these terms will end;
-          | (b) you must stop using the app, and (if needed) delete it
-          | from your device.
-        p
-          strong Changes to This Terms and Conditions
-        p
-          | {{iOrWe | capitalize }} may update our Terms and Conditions
-          | from time to time. Thus, you are advised to review this page
-          | periodically for any changes. {{iOrWe | capitalize }} will
-          | notify you of any changes by posting the new Terms and
-          | Conditions on this page.
-        p
-          | These terms and conditions are effective as of {{
-          | effectiveFromDate }}
-        p
-          strong Contact Us
-        p
-          | If you have any questions or suggestions about {{ myOrOur }}
-          | Terms and Conditions, do not hesitate to contact {{ meOrUs }}
-          | at {{ appContact }}.
-        p
-          | This Terms and Conditions page was generated by 
-          a(href='https://app-privacy-policy-generator.nisrulz.com/' target='_blank' rel='noopener noreferrer') App Privacy Policy Generator
-      textarea#tandc_txtarea.textarea(onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
-    footer.modal-card-foot
-      button.button.is-success(@click="getHtml('tandc_content','tandc_txtarea')")
-        | HTML
-      button.button.is-success(@click="getMarkdown('tandc_content', 'tandc_txtarea')")
-        | Markdown
-      button.button.is-success(v-if='contentRenderType!=1' @click='preview()')
-        | Preview
-      //- Flycricket
-      if (flycricket)
-        div(style='flex:1')
-          button.button.is-info(@click="fc_deploy()" style='float:right;')
-            | Deploy to Flycricket
+    .modal-background
+    .modal-card
+        header.modal-card-head
+            p.modal-card-title.no-select Terms &amp; Conditions
+            button.delete(aria-label='close' @click='toggleTermsModalVisibility')
+        section.modal-card-body.modal-box
+            #tandc_content(v-show='contentRenderType==1')
+                strong Terms & Conditions
+                br 
+                p These terms and conditions applies to the {{ appName }} app (hereby referred to as "Application") for mobile devices that was created by {{ devOrCompanyName }} (hereby referred to as "Service Provider") as {{typeOfAppTxt}} service.
+                br 
+                p Upon downloading or utilizing the Application, you are automatically agreeing to the following terms. It is strongly advised that you thoroughly read and understand these terms prior to using the Application. Unauthorized copying, modification of the Application, any part of the Application, or our trademarks is strictly prohibited. Any attempts to extract the source code of the Application, translate the Application into other languages, or create derivative versions are not permitted. All trademarks, copyrights, database rights, and other intellectual property rights related to the Application remain the property of the Service Provider.
+                br
+                p The Service Provider is dedicated to ensuring that the Application is as beneficial and efficient as possible. As such, they reserve the right to modify the Application or charge for their services at any time and for any reason. The Service Provider assures you that any charges for the Application or its services will be clearly communicated to you.
+                br
+                p The Application stores and processes personal data that you have provided to the Service Provider in order to provide the Service. It is your responsibility to maintain the security of your phone and access to the Application. The Service Provider strongly advise against jailbreaking or rooting your phone, which involves removing software restrictions and limitations imposed by the official operating system of your device. Such actions could expose your phone to malware, viruses, malicious programs, compromise your phone's security features, and may result in the Application not functioning correctly or at all.
+                div(v-if='hasThirdPartyServicesSelected')
+                    p Please note that the Application utilizes third-party services that have their own Terms and Conditions. Below are the links to the Terms and Conditions of the third-party service providers used by the Application:
+                    ul
+                        li(v-if='item[item.model] && item.link.terms' v-for='item in thirdPartyServices')
+                            a(:href='item.link.terms' target='_blank' rel='noopener noreferrer') {{item.name}}
+                br
+                p Please be aware that the Service Provider does not assume responsibility for certain aspects. Some functions of the Application require an active internet connection, which can be Wi-Fi or provided by your mobile network provider. The Service Provider cannot be held responsible if the Application does not function at full capacity due to lack of access to Wi-Fi or if you have exhausted your data allowance.
+                br
+                p If you are using the application outside of a Wi-Fi area, please be aware that your mobile network provider's agreement terms still apply. Consequently, you may incur charges from your mobile provider for data usage during the connection to the application, or other third-party charges. By using the application, you accept responsibility for any such charges, including roaming data charges if you use the application outside of your home territory (i.e., region or country) without disabling data roaming. If you are not the bill payer for the device on which you are using the application, they assume that you have obtained permission from the bill payer.
+                br
+                p Similarly, the Service Provider cannot always assume responsibility for your usage of the application. For instance, it is your responsibility to ensure that your device remains charged. If your device runs out of battery and you are unable to access the Service, the Service Provider cannot be held responsible.
+                br
+                p In terms of the Service Provider's responsibility for your use of the application, it is important to note that while they strive to ensure that it is updated and accurate at all times, they do rely on third parties to provide information to them so that they can make it available to you. The Service Provider accepts no liability for any loss, direct or indirect, that you experience as a result of relying entirely on this functionality of the application.
+                br
+                p The Service Provider may wish to update the application at some point. The application is currently available as per the requirements for the operating system (and for any additional systems they decide to extend the availability of the application to) may change, and you will need to download the updates if you want to continue using the application. The Service Provider does not guarantee that it will always update the application so that it is relevant to you and/or compatible with the particular operating system version installed on your device. However, you agree to always accept updates to the application when offered to you. The Service Provider may also wish to cease providing the application and may terminate its use at any time without providing termination notice to you. Unless they inform you otherwise, upon any termination, (a) the rights and licenses granted to you in these terms will end; (b) you must cease using the application, and (if necessary) delete it from your device.
+                br
+                strong Changes to These Terms and Conditions
+                p The Service Provider may periodically update their Terms and Conditions. Therefore, you are advised to review this page regularly for any changes. The Service Provider will notify you of any changes by posting the new Terms and Conditions on this page.
+                br
+                p These terms and conditions are effective as of {{ effectiveFromDate }}
+                br
+                strong Contact Us
+                p If you have any questions or suggestions about the Terms and Conditions, please do not hesitate to contact the Service Provider at {{ appContact }}.
+                hr
+                p This Terms and Conditions page was generated by 
+                    a(href='https://app-privacy-policy-generator.nisrulz.com/' target='_blank' rel='noopener noreferrer') App Privacy Policy Generator
+            textarea#tandc_txtarea.textarea(onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+        footer.modal-card-foot
+            button.button.is-primary(@click="getHtml('tandc_content','tandc_txtarea')")
+                | HTML
+            button.button.is-primary(@click="getMarkdown('tandc_content', 'tandc_txtarea')")
+                | Markdown
+            button.button.is-primary(v-if='contentRenderType!=1' @click='preview()')
+                | Preview
+            //- Flycricket
+            if (flycricket)
+                div(style='flex:1')
+                    button.button.is-info(@click="fc_deploy_simple()" style='float:right;')
+                        | Deploy to Flycricket
 

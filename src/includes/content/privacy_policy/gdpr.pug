@@ -1,163 +1,128 @@
-.modal(v-bind:class="{ 'is-active': showGDPRPrivacyModal }")
-  .modal-background
-  .modal-card
-    header.modal-card-head
-      p.modal-card-title.no-select GDPR Compliant Privacy Policy
-      button.delete(aria-label='close' @click='toggleGDPRPrivacyModalVisibility')
-    section.modal-card-body.modal-box
-      #gdpr_privacy_content(v-show='contentRenderType==1')
-        strong GDPR Compliant Privacy Policy
-        p
-          | {{ devOrCompanyName }} built the {{ appName }} app as
-          | {{typeOfAppTxt}} app. This SERVICE is provided by
-          | {{ devOrCompanyName }} {{ atNoCost }} and is intended for use as is.
-          | This privacy policy will explain how {{ devOrCompanyName }} uses the personal data {{ iOrWe }} collect from you
-          | when you use {{ appName }} app.
-        p  Topics:
-        ul
-          li What data is collected?
-          li How is your data collected?
-          li How will {{ appName }} use your data?
-          li How is your data stored?
-          li Marketing
-          li What are your data protection rights?
-          li What are cookies?
-          li How does {{ appName }} use cookies?
-          li What types of cookies does {{ appName }} use?
-          li How to manage your cookies
-          li Privacy policies of other websites
-          li Changes to {{ appName }}'s privacy policy
-          li How to contact us
-          li How to contact the appropriate authorities
-        p
-          strong What data is collected? 
-          | {{ myOrOur }} Company collects the following data: 0 Personal identification
-          | information (Name, email address, phone number, etc.) 0 [Add any other data your company collects]
-        p
-          strong How is your data collected?
-          | You directly provide {{ myOrOur }} Company with most of the data {{ iOrWe }} collect. {{ iOrWe | capitalize }}
-          | collect data and process data when you: 0 Register online or place an order for any of {{ myOrOur }} products or
-          | services. 0 Voluntarily complete a customer survey or provide feedback on any of {{ myOrOur }} message boards or
-          | via email. Use or view {{ myOrOur }} website via your browser&rsquo;s cookies. [Add any other ways your company
-          | collects data]
-        p
-          strong How will {{ appName }} use your data?
-          | {{ appName }} collects your data so that {{ iOrWe }} can: Process your order, manage
-          | your account. 0 Email you with special offers on other products and services {{ iOrWe }} think you might like. 0
-          | [Add how else your company uses data]
-          br
-          | If you agree, {{ myOrOur }} Company will share your data with {{ myOrOur }} partner companies so that they may offer you
-          | their products and services.
-        p
-          strong How is your data stored?
-          | {{ myOrOur }} Company securely stores your data at [enter the location and describe
-          | security precautions taken].
-          br
-          | {{ myOrOur }} Company will keep your [enter type of data] for [enter time period]. Once this time period has
-          | expired, {{ iOrWe }} will delete your data by [enter how you delete users&rsquo; data].
-        p
-          strong Marketing
-          | {{ myOrOur }} Company would like to send you information about products and services of ours that {{ iOrWe }}
-          | think you might like, as well as those of {{ myOrOur }} partner companies. 0 [List partner companies here]
-          br
-          | If you have agreed to receive marketing, you may always opt out at a later date.
-          br
-          | You have the right at any time to stop {{ myOrOur }} Company from contacting you for marketing purposes or
-          | giving your data to other members of the {{ myOrOur }} Company Group.
-          br
-          | If you no longer wish to be contacted for marketing purposes, please click here.
-        p
-          strong What are your data protection rights?
-          | {{ myOrOur }} Company would like to make sure you are fully aware of all
-          | of your data protection rights. Every user is entitled to the following:
-          br
-          | The right to access - You have the right to request {{ myOrOur }} Company for copies of your personal data. {{ iOrWe | capitalize }}
-          | may charge you a small fee for this service.
-          br
-          | The right to rectification - You have the right to request that {{ myOrOur }} Company correct any information
-          | you believe is inaccurate. You also have the right to request {{ myOrOur }} Company to complete information you
-          | believe is incomplete. The right to erasure &mdash; You have the right to request that {{ myOrOur }} Company erase
-          | your personal data, under certain conditions.
-          br
-          | The right to restrict processing - You have the right to request that {{ myOrOur }} Company restrict the
-          | processing of your personal data, under certain conditions.
-          br
-          | The right to object to processing - You have the right to object to {{ myOrOur }} Company&rsquo;s processing of
-          | your personal data, under certain conditions.
-          br
-          | The right to data portability - You have the right to request that {{ myOrOur }} Company transfer the data that
-          | {{ iOrWe }} have collected to another organization, or directly to you, under certain conditions.
-          br
-          | If you make a request, {{ iOrWe }} have one month to respond to you. If you would like to exercise any of these
-          | rights, please contact us at {{ myOrOur }} email: Call us at: Or write to us:
-        p
-          strong What are cookies?
-          | Cookies are text files placed on your computer to collect standard Internet log
-          | information and visitor behavior information. When you visit {{ myOrOur }} websites, {{ iOrWe }} may collect information
-          | from you automatically through cookies or similar technology.
-          p For further information, visit allaboutcookies.org.
-        p
-          strong How do {{ iOrWe }} use cookies?
-          | {{ myOrOur }} Company uses cookies in a range of ways to improve your experience on {{ myOrOur }}
-          | website, including: 0 Keeping you signed in 0 Understanding how you use {{ myOrOur }} website 0 [Add any uses your
-          | company has for cookies]
-        p
-          strong What types of cookies do {{ iOrWe }} use?
-          | There are a number of different types of cookies, however, {{ myOrOur }}
-          | website uses: 0 Functionality &mdash; {{ myOrOur }} Company uses these cookies so that {{ iOrWe }} recognize you on {{ myOrOur }}
-          | website and remember your previously selected preferences. These could include what language you prefer
-          | and location you are in. A mix of first-party and third-party cookies are used. 0 Advertising &mdash;
-          | {{ myOrOur }} Company uses these cookies to collect information about your visit to {{ myOrOur }} website, the content you
-          | viewed, the links you followed and information about your browser, device, and your IP address. {{ myOrOur }}
-          | Company sometimes shares some limited aspects of this data with third parties for advertising purposes.
-          | {{ iOrWe | capitalize }} may also share online data collected through cookies with {{ myOrOur }} advertising partners. This means that
-          | when you visit another website, you may be shown advertising based on your browsing patterns on {{ myOrOur }}
-          | website. 0 [Add any other types of cookies your company uses]
-        p
-          strong How to manage cookies
-          | You can set your browser not to accept cookies, and the above website tells you
-          | how to remove cookies from your browser. However, in a few cases, some of {{ myOrOur }} website features may not
-          | function as a result.
-        p
-          strong Privacy policies of other websites
-          | The {{ myOrOur }} Company website contains links to other websites. {{ myOrOur }}
-          | privacy policy applies only to {{ myOrOur }} website, so if you click on a link to another website, you should
-          | read their privacy policy.
-        p
-          strong Changes to {{ myOrOur }} privacy policy
-          | {{ myOrOur }} Company keeps its privacy policy under regular review and places any
-          | updates on this web page. This privacy policy was last updated on 9 January 2019.
-        p
-          strong How to contact us
-          p If you have any questions or suggestions about {{ myOrOur }}
-          | Privacy Policy, do not hesitate to contact {{meOrUs}} at {{
-          | appContact }}.
-          br
-          | If you have any questions about {{ myOrOur }} Company&rsquo;s privacy policy, the data {{ iOrWe }} hold
-          | on you, or you would like to exercise one of your data protection rights, please do not hesitate to
-          | contact us.
-          p  Email us at: Call us: Or write to us at:
-        p
-          | How to contact the appropriate authority Should you wish to report a complaint or if you feel that {{ myOrOur }}
-          | Company has not addressed your concern in a satisfactory manner, you may contact the Information
-          | Commissioner&rsquo;s Office.
-        p Email: Address
-        p
-          strong Changes to This Privacy Policy
-          | {{iOrWe | capitalize }} may update {{ myOrOur }} Privacy Policy from
-          | time to time. Thus, you are advised to review this page
-          | periodically for any changes. {{iOrWe | capitalize }} will
-          | notify you of any changes by posting the new Privacy Policy on
-          | this page.
-          p This policy is effective as of {{ effectiveFromDate }}
-        p
-          | This privacy policy page was generated by 
-          a(href='https://app-privacy-policy-generator.nisrulz.com/' target='_blank' rel='noopener noreferrer') App Privacy Policy Generator
-      textarea#gdpr_privacy_txtarea.textarea(onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
-    footer.modal-card-foot
-      button.button.is-success(@click="getHtml('gdpr_privacy_content','gdpr_privacy_txtarea')")
-        | HTML
-      button.button.is-success(@click="getMarkdown('gdpr_privacy_content', 'gdpr_privacy_txtarea')")
-        | Markdown
-      button.button.is-success(v-if='contentRenderType!=1' @click='preview()')
-        | Preview
+.modal(v-bind:class="{ 'is-active': showGDPRPrivacyModal }" v-show='typeOfPolicyInt==3')
+    .modal-background
+    .modal-card
+        header.modal-card-head
+            p.modal-card-title.no-select GDPR Compliant Privacy Policy
+            button.delete(aria-label='close' @click='toggleGDPRPrivacyModalVisibility')
+        section.modal-card-body.modal-box
+            #privacy_gdpr_content(v-show='contentRenderType==1')
+                strong Privacy Policy
+
+                p This privacy policy is applicable to the {{ appName }} app (hereinafter referred to as "Application") for mobile devices, which was developed by {{ devOrCompanyName }} (hereinafter referred to as "Service Provider") as a {{typeOfAppTxt}} service. This service is provided "AS IS".
+
+                br
+                strong What information does the Application obtain and how is it used?
+                br
+                strong User Provided Information
+
+                p The Application acquires the information you supply when you download and register the Application. Registration with the Service Provider is not mandatory. However, bear in mind that you might not be able to utilize some of the features offered by the Application unless you register with them.
+
+                p The Service Provider may also use the information you provided them to contact you from time to time to provide you with important information, required notices and marketing promotions.
+
+                br
+                strong Automatically Collected Information 
+
+                p In addition, the Application may collect certain information automatically, including, but not limited to, the type of mobile device you use, your mobile devices unique device ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browsers you use, and information about the way you use the Application.
+
+                br
+                strong Does the Application collect precise real time location information of the device?
+
+                p This Application does not gather precise information about the location of your mobile device.
+
+                br
+                strong Do third parties see and/or have access to information obtained by the Application?
+
+                p Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.
+
+                div(v-if='hasThirdPartyServicesSelected')
+                    br
+                    p Please note that the Application utilizes third-party services that have their own Privacy Policy about handling data. Below are the links to the Privacy Policy of the third-party service providers used by the Application:
+                    ul
+                        li(v-if='item[item.model] && item.link.privacy' v-for='item in thirdPartyServices')
+                            a(:href='item.link.privacy' target='_blank' rel='noopener noreferrer') {{item.name}}
+                p The Service Provider may disclose User Provided and Automatically Collected Information:
+                    ul
+
+                        li as required by law, such as to comply with a subpoena, or similar legal process;
+                        li when they believe in good faith that disclosure is necessary to protect their rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;
+                        li with their trusted services providers who work on their behalf, do not have an independent use of the information we disclose to them, and have agreed to adhere to the rules set forth in this privacy statement.
+
+                br
+                strong What are my opt-out rights?
+
+                p You can halt all collection of information by the Application easily by uninstalling the Application. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.
+
+                br
+                strong Data Retention Policy, Managing Your Information
+
+                p The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. The Service Provider will retain Automatically Collected information for up to 24 months and thereafter may store it in aggregate. If you'd like the Service Provider to delete User Provided Data that you have provided via the Application, please contact them at {{ appContact }} and we will respond in a reasonable time. Please note that some or all of the User Provided Data may be required in order for the Application to function properly.
+
+                br
+                strong Children
+
+                p The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 13.
+                div(v-if='hasThirdPartyServicesSelected')
+                    br
+                    p
+                        | The Application does not address anyone under the age of 13.
+                        | The Service Provider does not knowingly collect personally
+                        | identifiable information from children under 13 years of age. In the case
+                        | the Service Provider discover that a child under 13 has provided
+                        | personal information, the Service Provider will immediately
+                        | delete this from their servers. If you are a parent or guardian
+                        | and you are aware that your child has provided us with
+                        | personal information, please contact the Service Provider ({{ appContact }}) so that
+                        | they will be able to take the necessary actions.
+                div(v-if='!hasThirdPartyServicesSelected')
+                    br
+                    p
+                        | The Service Provider does not knowingly collect personally
+                        | identifiable information from children. The Service Provider 
+                        | encourages all children to never submit any personally
+                        | identifiable information through the Application and/or Services.
+                        | The Service Provider encourage parents and legal guardians to monitor 
+                        | their children's Internet usage and to help enforce this Policy by instructing 
+                        | their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child 
+                        | has provided personally identifiable information to the Service Provider through the Application and/or Services, 
+                        | please contact the Service Provider ({{ appContact }}) so that they will be able to take the necessary actions. 
+                        | You must also be at least 16 years of age to consent to the processing 
+                        | of your personally identifiable information in your country (in some countries we may allow your parent 
+                        | or guardian to do so on your behalf).
+                
+                br
+                strong Security
+
+                p The Service Provider are concerned about safeguarding the confidentiality of your information. The Service Provider provide physical, electronic, and procedural safeguards to protect information we process and maintain. For example, we limit access to this information to authorized employees and contractors who need to know that information in order to operate, develop or improve their Application. Please be aware that, although we endeavor provide reasonable security for information we process and maintain, no security system can prevent all potential security breaches.
+
+                br
+                strong Changes
+
+                p This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.
+                br
+                p This privacy policy is effective as of {{ effectiveFromDate }}
+
+                br
+                strong Your Consent
+
+                p By using the Application, you are giving your consent to the Service Provider processing of your information as set forth in this Privacy Policy now and as amended by us. "Processing,” means using cookies on a computer/hand held device or using or touching information in any way, including, but not limited to, collecting, storing, deleting, using, combining and disclosing information.
+
+                br
+                strong Contact us
+
+                p If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at {{ appContact }}.
+                hr
+                p This privacy policy page was generated by 
+                    a(href='https://app-privacy-policy-generator.nisrulz.com/' target='_blank' rel='noopener noreferrer') App Privacy Policy Generator
+            textarea#privacy_gdpr_txtarea.textarea(onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+        footer.modal-card-foot
+            button.button.is-primary(@click="getHtml('privacy_gdpr_content','privacy_gdpr_txtarea')")
+                | HTML
+            button.button.is-primary(@click="getMarkdown('privacy_gdpr_content', 'privacy_gdpr_txtarea')")
+                | Markdown
+            button.button.is-primary(v-if='contentRenderType!=1' @click='preview()')
+                | Preview
+            //- Flycricket
+            if (flycricket)
+                div(style='flex:1')
+                    button.button.is-info(@click="fc_deploy_gdpr()" style='float:right;')
+                        | Deploy to Flycricket

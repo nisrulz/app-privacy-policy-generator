@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="img/banner.png" alt="App Privacy Policy Generator">
+  <img src="img/banner.jpg" alt="App Privacy Policy Generator">
 </div>
 
 <div align="center"><strong>
@@ -30,10 +30,6 @@
 ## Status Badges
 
 [![Deploy to Production](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml) [![Deploy to Firebase Hosting on PR](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml)
-
-## Screenshots
-
-<img src="img/sc_1.png" alt="App Privacy Policy Generator" width=360 /><img src="img/sc_2.png" alt="App Privacy Policy Generator" width=360 /><img src="img/sc_3.png" alt="App Privacy Policy Generator" width=360 />
 
 ## Project Support
 

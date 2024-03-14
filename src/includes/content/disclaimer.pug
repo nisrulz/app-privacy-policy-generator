@@ -1,25 +1,16 @@
 //- Disclaimer Modal
 .modal(v-bind:class="{ 'is-active': showDisclaimerModal }")
-  .modal-background
-  .modal-card
-    header.modal-card-head
-      p.modal-card-title Disclaimer
-      button.delete(aria-label='close' @click='toggleDisclaimerModalVisibility')
-    section.modal-card-body
-      p
-        | This template for privacy policy and terms &amp; conditions is
-        | provided on &quot;AS IS&quot; basis, without warranties or conditions of
-        | any kind, either expressed or implied. It is intended for you as
-        | an inspirational document and you may use it when compiling your
-        | own privacy policy. The developer of App Privacy Policy
-        | Generator does not take any responsibility for the legal
-        | consequences associated with the use of this privacy policy or
-        | terms &amp; conditions, and urges you to seek independent legal
-        | advice ensuring compliance with all rules applicable for the
-        | users of your application. The developer of App Privacy Policy
-        | Generator can in no way be found liable for any direct or
-        | indirect damage/loss suffered by individual/company due to the
-        | use of this document.
-    footer.modal-card-foot
-      button.button.is-info(aria-label='close' @click='toggleDisclaimerModalVisibility')
-        | Ok
+    .modal-background
+    .modal-card
+        header.modal-card-head
+            p.modal-card-title Disclaimer
+            button.delete(aria-label='close' @click='toggleDisclaimerModalVisibility')
+        section.modal-card-body
+            p This template for Privacy Policy and Terms & Conditions is furnished on an "AS IS" basis, devoid of any express or implied warranties or conditions.
+            p It serves as a reference document for you while drafting your own privacy policy.
+            p The developer of the App Privacy Policy Generator disclaims any liability for the legal implications arising from the utilization of this privacy policy or terms & conditions.
+            p It is strongly recommended to obtain independent legal counsel to ensure compliance with all regulations applicable to the users of your application.
+            p The developer of the App Privacy Policy Generator cannot be held accountable for any direct or indirect damage/loss incurred by an individual/company as a result of using this document.
+        footer.modal-card-foot
+            button.button.is-info(aria-label='close' @click='toggleDisclaimerModalVisibility')
+                | Ok

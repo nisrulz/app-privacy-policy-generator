@@ -61,6 +61,11 @@ img.social-logo
 .menu-list li a:hover
   background: #d9d9d9
 
+.notification a:not(.button):not(.dropdown-item)
+  text-decoration: none
+  font-weight: bolder
+  color: mediumvioletred
+
 .token.number
   display: inline
   padding: inherit
@@ -74,10 +79,31 @@ img.social-logo
   background: inherit
   margin: inherit
 
+#effectiveFromDate
+  display: block
+
+.card-content p:first-child
+  margin-bottom: 1em
+  font-size: 1.1em
+  font-style: italic
+  font-weight: bolder
+
+.card-content p:first-child a
+  color: #c5c5c5
+
+.heart
+  color: red
+
 .scrollable
-  height: 65vh
+  height: 62vh
   display: flex
-  overflow-y: auto
+  overflow-y: scroll
+  flex-direction: column
+
+.scrollable-thirdparty
+  height: 59vh
+  display: flex
+  overflow-y: scroll
   flex-direction: column
 
 .heart-logo
@@ -92,10 +118,6 @@ img.social-logo
   padding-right: 8px
   vertical-align: middle
 
-#step-1, #step-2, #step-3
-  padding-bottom: 0.3em
-  padding-top: 0.4em
-
 .column.box
   padding: 1em
 
@@ -105,12 +127,12 @@ img.social-logo
     vertical-align: middle
     margin: 2em auto
 
-  color: #888
-  display: table
-  font-family: sans-serif
-  height: 100%
-  text-align: center
-  width: 100%
+    color: #888
+    display: table
+    font-family: sans-serif
+    height: 100%
+    text-align: center
+    width: 100%
 
   h1
     color: white
@@ -145,6 +167,13 @@ img.social-logo
     display: inline-block
     margin: 2px
 
+.hero-image
+  height: 50vh
+
+.start-btn
+  padding-left: 5em
+  padding-right: 5em
+
 .column.is-information
   .nav-btn
     cursor: grab
@@ -153,8 +182,8 @@ img.social-logo
 
   .sidebar-img
     pointer-events: none
-    height: 21em
-    padding: 2em
+    height: 65vh
+    margin-top: 12vh
 
 .subtitle p
   font-size: 0.7em

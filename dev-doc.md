@@ -9,11 +9,24 @@ The web app uses
   - [sass](https://sass-lang.com/documentation/cli) - To convert sass templates to css and merge partials into single [`style.css`](public/css/style.css) file.
   - [js-yaml](https://github.com/nodeca/js-yaml#cli-executable) - To convert yaml templates to json and generate the [`thirdpartyservices.js`](public/js/thirdpartyservices.js) file.
   - [firebase-tools](https://github.com/firebase/firebase-tools) - To interact with Firebase as a service from command line.
-  ---
-  > Install the CLI tools using
-  >
-  > ```npm install -g @anduh/pug-cli sass js-yaml firebase-tools```
+  - [png-minify](https://www.npmjs.com/package/png-minify) - To compress png files.
+  - [svgo](https://www.npmjs.com/package/svgo) - To compress svg files.
+  - [uglifycss](https://www.npmjs.com/package/uglifycss) - To compress css files.
+  - [uglify-js](https://www.npmjs.com/package/uglify-js) - To compress js files.
+  - [html-minifier](https://www.npmjs.com/package/html-minifier) - To compress html files.
+  - [purgecss](https://purgecss.com/CLI.html) - To compress css files.
+  
+---
 
+Install the CLI tools using
+
+```sh
+npm install -g @anduh/pug-cli sass js-yaml \
+firebase-tools \
+svgo png-minify \
+uglifycss uglify-js html-minifier \
+purgecss
+```
 
 If you wish to modify the code for the webapp, then look into [`src`](src) directory.
 
@@ -34,9 +47,17 @@ To compile the code under `src` folder, simply execute the helper bash script [`
 ./render.sh
 ```
 
-This will generate the `index.html`, `style.css` and `thirdpartyservices.js` files at their required directory path.
+This will generate the `index.html`, `style.min.css`, `main.min.js`, `utils.min.js` and `thirdpartyservices.min.js` files at their required directory path.
 
 Open `index.html` to view the full web app 🎉
+
+## Compress Images
+
+Run
+
+```sh
+./compress_images.sh
+```
 
 ## Contributing more 3rd Party Service's links
 

@@ -1,0 +1,58 @@
+section#step-4.columns(v-if="wizardStep==4")
+    .column.card
+        .card-content
+            p
+                a(
+                    href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+                    target='_blank' 
+                    rel='noopener noreferrer') App Privacy Policy Generator
+            progress.progress.is-small.is-link(value='48' max='100')
+            .scrollable.content
+                .control
+                    | Select Mobile OS:
+                    span.tag.is-primary.is-light {{osType}}
+                    br
+                    label.radio
+                        input(
+                            v-model="osType" 
+                            value="Android" 
+                            type="radio"
+                            )
+                        |   Android
+                    br
+                    label.radio
+                        input(
+                            v-model="osType" 
+                            value="iOS" 
+                            type="radio"
+                            )
+                        |   iOS
+                    br
+                    label.radio
+                        input(
+                            v-model="osType" 
+                            value="KaiOS" 
+                            type="radio"
+                            )
+                        |   KaiOS
+                    br
+                    label.radio
+                        input(
+                            v-model="osType" 
+                            value="Android & iOS" 
+                            type="radio"
+                            )
+                        |   Android & iOS
+                    br
+                    label.radio
+                        input(
+                            v-model="osType" 
+                            value="Android, iOS & KaiOS" 
+                            type="radio"
+                            )
+                        |   Android, iOS & KaiOS
+        footer.card-footer
+            a.card-footer-item(@click='prevStep') Previous
+            a.card-footer-item(@click='nextStep') Next
+    .column.is-information.is-hidden-touch
+        img.center-block.sidebar-img(src='images/app_graphics/side_image.svg')

@@ -9,16 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install Pug CLI
-        run: npm install -g @anduh/pug-cli
-      
-      - name: Install SASS CLI
-        run: npm install -g sass
-      
-      - name: Install JS-YAML CLI
-        run: npm install -g js-yaml
+      - name: Install all CLI tools
+        run: npm install -g @anduh/pug-cli sass js-yaml firebase-tools svgo png-minify uglifycss uglify-js html-minifier purgecss
       
       - name: Render the website from templates
         run: |

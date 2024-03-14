@@ -1,0 +1,35 @@
+section#step-6.columns(v-if="wizardStep==6")
+    .column.card
+        .card-content
+            p
+                a(
+                    href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+                    target='_blank' 
+                    rel='noopener noreferrer') App Privacy Policy Generator
+            progress.progress.is-small.is-link(value='80' max='100')
+            div(v-show='typeOfPolicyInt!=2')
+                p
+                    b Include links to Third Party Services 
+                    span.tag.is-primary.is-light Scroll for more
+                .scrollable-thirdparty.content
+                    a(rel="noopener noreferrer" v-for="item in thirdPartyServices")
+                        input(
+                            v-model="item[item.model]" 
+                            :id="'list-switch-' + item.model" 
+                            type="checkbox"
+                            )
+                        label(:for="'list-switch-' + item.model")
+                            img.thirdparty-logo(
+                                :alt="item.name" 
+                                :src="item.logo"
+                                )
+                            span.thirdparty-text {{ item.name }}
+            div(v-show='typeOfPolicyInt==2')
+                p No third party services to choose. Goto 
+                    b Next step.
+                div.scrollable-thirdparty.content
+        footer.card-footer
+            a.card-footer-item(@click='prevStep') Previous
+            a.card-footer-item(@click='nextStep') Next
+    .column.is-information.is-hidden-touch
+        img.center-block.sidebar-img(src='images/app_graphics/side_image.svg')
