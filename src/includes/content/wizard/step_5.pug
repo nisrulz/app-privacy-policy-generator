@@ -1,23 +1,53 @@
-section#step-5.columns.box(v-if="wizardStep==5")
-    .column.is-two-fifths
-        progress.progress.is-small.is-link(value='100' max='100')
-        .scrollable
-            b Include links to Third Party Services
-            i Scroll to find more services in list
-            a(rel="noopener noreferrer" v-for="item in thirdPartyServices")
-                input(
-                    v-model="item[item.model]" 
-                    :id="'list-switch-' + item.model" 
-                    type="checkbox"
-                    )
-                label(:for="'list-switch-' + item.model")
-                    img.thirdparty-logo(
-                        :alt="item.name" 
-                        :src="item.logo"
-                        )
-                    span.thirdparty-text {{ item.name }}
-        .buttons.has-addons.is-right
-            button.button(@click="prevStep()") Prev
-            button.button.is-link.is-selected(@click="nextStep()") Generate
-    .column.is-information
-        img.center-block.sidebar-img(src="images/app_graphics/step_2.svg")
+section#step-5.columns(v-if="wizardStep==5")
+    .column.card
+        .card-content
+            p
+                a(
+                    href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+                    target='_blank' 
+                    rel='noopener noreferrer') App Privacy Policy Generator
+            progress.progress.is-small.is-link(value='64' max='100')
+            .scrollable.content
+                .control
+                    | Select owner type:
+                    span.tag.is-primary.is-light {{typeOfDev}}
+                    br
+                    label.radio
+                        input(
+                            v-model="typeOfDev" 
+                            value="Individual" 
+                            type="radio"
+                            )
+                        |   Individual
+                    br
+                    label.radio
+                        input(
+                            v-model="typeOfDev" 
+                            value="Company" 
+                            type="radio"
+                            )
+                        |   Company
+                br
+                .control(v-if="typeOfDev=='Company'")
+                    .field
+                        label.label Company Name
+                        .control
+                            input#companyName.input.is-primary(
+                                placeholder="Company Name" 
+                                v-model="companyName" 
+                                type="text"
+                                )
+                .control(v-if="typeOfDev=='Individual'")
+                    .field
+                        label.label Developer Name
+                        .control
+                            input#devName.input.is-primary(
+                                placeholder="Developer Name" 
+                                v-model="devName" 
+                                type="text"
+                                )
+        footer.card-footer
+            a.card-footer-item(@click='prevStep') Previous
+            a.card-footer-item(@click='nextStep') Next
+    .column.is-information.is-hidden-touch
+        img.center-block.sidebar-img(src='images/app_graphics/side_image.svg')

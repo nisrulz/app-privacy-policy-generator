@@ -1,46 +1,58 @@
-section#step-4.columns.box(v-if="wizardStep==4")
-    .column.is-two-fifths
-        progress.progress.is-small.is-link(value='80' max='100')
-        .scrollable
-            .control(v-show="typeOfPolicyInt==1")
-                | Select owner type:
-                span.tag.is-primary.is-light {{typeOfDev}}
-                br
-                label.radio
-                    input(
-                        v-model="typeOfDev" 
-                        value="Individual" 
-                        type="radio"
-                        )
-                    |   Individual
-                br
-                label.radio
-                    input(
-                        v-model="typeOfDev" 
-                        value="Company" 
-                        type="radio"
-                        )
-                    |   Company
-            .control(v-if="typeOfDev=='Company'")
-                .field
-                    label.label Company Name
-                    .control
-                        input#companyName.input.is-primary(
-                            placeholder="Company Name" 
-                            v-model="companyName" 
-                            type="text"
+section#step-4.columns(v-if="wizardStep==4")
+    .column.card
+        .card-content
+            p
+                a(
+                    href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+                    target='_blank' 
+                    rel='noopener noreferrer') App Privacy Policy Generator
+            progress.progress.is-small.is-link(value='48' max='100')
+            .scrollable.content
+                .control
+                    | Select Mobile OS:
+                    span.tag.is-primary.is-light {{osType}}
+                    br
+                    label.radio
+                        input(
+                            v-model="osType" 
+                            value="Android" 
+                            type="radio"
                             )
-            .control(v-if="typeOfDev=='Individual'")
-                .field
-                    label.label Developer Name
-                    .control
-                        input#devName.input.is-primary(
-                            placeholder="Developer Name" 
-                            v-model="devName" 
-                            type="text"
+                        |   Android
+                    br
+                    label.radio
+                        input(
+                            v-model="osType" 
+                            value="iOS" 
+                            type="radio"
                             )
-        .buttons.has-addons.is-right
-            button.button(@click="prevStep()") Prev
-            button.button.is-link.is-selected(@click="nextStep()") Next
-    .column.is-information
-        img.center-block.sidebar-img(src="images/app_graphics/step_1.svg")
+                        |   iOS
+                    br
+                    label.radio
+                        input(
+                            v-model="osType" 
+                            value="KaiOS" 
+                            type="radio"
+                            )
+                        |   KaiOS
+                    br
+                    label.radio
+                        input(
+                            v-model="osType" 
+                            value="Android & iOS" 
+                            type="radio"
+                            )
+                        |   Android & iOS
+                    br
+                    label.radio
+                        input(
+                            v-model="osType" 
+                            value="Android, iOS & KaiOS" 
+                            type="radio"
+                            )
+                        |   Android, iOS & KaiOS
+        footer.card-footer
+            a.card-footer-item(@click='prevStep') Previous
+            a.card-footer-item(@click='nextStep') Next
+    .column.is-information.is-hidden-touch
+        img.center-block.sidebar-img(src='images/app_graphics/side_image.svg')

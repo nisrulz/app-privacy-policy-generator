@@ -1,53 +1,86 @@
-section#step-2.columns.box(v-if="wizardStep==2")
-    .column.is-two-fifths
-        progress.progress.is-small.is-link(value='40' max='100')
-        .scrollable
-            .control
-                | Select App Type:
-                span.tag.is-primary.is-light {{typeOfApp}}
+section#step-2.columns(v-if='wizardStep==2')
+    .column.card
+        .card-content
+            p
+                a(
+                    href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+                    target='_blank' 
+                    rel='noopener noreferrer') App Privacy Policy Generator
+            progress.progress.is-small.is-link(value='16' max='100')
+            .scrollable.content
+                .control
+                    | Type: 
+                    label.radio
+                        input(
+                            v-model="typeOfPolicyInt" 
+                            value="1" 
+                            type="radio"
+                            )
+                        |   Simple
+                    if noTracking
+                        label.radio
+                            input(
+                                v-model="typeOfPolicyInt" 
+                                value="2" 
+                                type="radio"
+                                )
+                            |   No Tracking
+                    if gdpr
+                        label.radio
+                            input(
+                                v-model="typeOfPolicyInt" 
+                                value="3" 
+                                type="radio"
+                                )
+                            |   GDPR
                 br
-                label.radio
-                    input(
-                        v-model="typeOfApp" 
-                        value="Free" 
-                        type="radio"
-                        )
-                    |   Free
+                .control
+                    .field
+                        label.label App Name
+                        .control
+                            input#appName.input(
+                                v-bind:class="{ 'is-danger': (appName.length == 0) }" 
+                                placeholder="Awesome App Name" 
+                                v-model="appName" 
+                                required="" 
+                                type="text"
+                                )
+                        p.help(v-bind:class="{ 'is-danger': (appName.length == 0) }" v-show="(appName.length == 0)") Application Name is required.
                 br
-                label.radio
-                    input(
-                        v-model="typeOfApp" 
-                        value="Open Source" 
-                        type="radio"
-                        )
-                    |   Open Source
+                .control
+                    .field
+                        label.label Contact Information
+                        .control
+                            input#appContact.input(
+                                v-bind:class="{ 'is-danger': (appContact.length == 0) }" 
+                                placeholder="Email Address" 
+                                v-model="appContact" 
+                                required="" 
+                                type="email"
+                                )
+                        p.help(v-bind:class="{ 'is-danger': (appContact.length == 0) }" v-show="(appContact.length == 0)") Email address is required.
                 br
-                label.radio
-                    input(
-                        v-model="typeOfApp" 
-                        value="Freemium" 
-                        type="radio"
-                        )
-                    |   Freemium
+                .control
+                    .field
+                        label.label Policy Effective Date
+                        .control
+                            input#effectiveFromDate.input.is-primary(
+                                v-model="effectiveFromDate" 
+                                required="" 
+                                type="date"
+                                )
                 br
-                label.radio
-                    input(
-                        v-model="typeOfApp" 
-                        value="Ad Supported" 
-                        type="radio"
-                        )
-                    |   Ad Supported
-                br
-                label.radio
-                    input(
-                        v-model="typeOfApp" 
-                        value="Commercial" 
-                        type="radio"
-                        )
-                    |   Commercial
-            br
-        .buttons.has-addons.is-right
-            button.button(@click="prevStep()") Prev
-            button.button.is-link.is-selected(@click="nextStep()") Next
-    .column.is-information
-        img.center-block.sidebar-img(src="images/app_graphics/step_1.svg")
+                .control(v-show="typeOfPolicyInt!=2")
+                    .field
+                        label.label Personally Identifiable Information
+                        .control
+                            input#pidInfoIn.input(
+                                placeholder="Personally Identifiable Information you collect (comma separated)" 
+                                v-model="pidInfoIn" 
+                                type="text"
+                                )
+        footer.card-footer
+            a.card-footer-item(@click='prevStep') Previous
+            a.card-footer-item(@click='nextStep') Next
+    .column.is-information.is-hidden-touch
+        img.center-block.sidebar-img(src='images/app_graphics/side_image.svg')
