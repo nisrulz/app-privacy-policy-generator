@@ -1,25 +1,11 @@
-<!-- * Please fill out the blanks below describing your pull request 
+<!-- * Please fill out the blanks below describing your pull request -->
 
-     * Checked checkbox should look like this: [x]
--->
+# Pull Request
 
-**What does this implement/fix? Explain your changes**
+## Description
 
-**Does this close any currently open issues?**
-- [ ] Yes
-- [ ] No
+Please provide a brief description of the changes proposed in this pull request.
 
-**Any relevant logs, error output, bug-report etc?**
-<!-- * If it’s long, please paste to https://ghostbin.com/ and insert the link here.) * -->
+## Related Issue
 
-**Any other comments?**
-
-+ **Where has this been tested?**
-
-+ **Target Platform:**
-
-+ **Configuration Information:**
-
-+ **Misc:** 
-
-<!-- * More related information if you have can provide * -->
+If applicable, reference the related issue in your repository (e.g., "Fixes #123")
