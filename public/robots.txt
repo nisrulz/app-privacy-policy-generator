@@ -1,5 +1,31 @@
 # www.robotstxt.org/
 
-# Allow crawling of all content
-User-agent: *
-Disallow:
+# List generated from https://darkvisitors.com/
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Google-Extended
+User-agent: AdsBot-Google
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: omgili
+Disallow: /
