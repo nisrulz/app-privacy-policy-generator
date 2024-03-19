@@ -306,5 +306,15 @@ var thirdPartyServicesJsonArray = [
       "privacy": "https://clerk.com/privacy",
       "terms": "https://clerk.com/terms"
     }
+  },
+  {
+    "name": "Adapty",
+    "model": "adapty",
+    "clerk": false,
+    "logo": "images/third_party_logos/adapty.png",
+    "link": {
+      "privacy": "https://adapty.io/privacy",
+      "terms": "https://adapty.io/terms"
+    }
   }
 ]
