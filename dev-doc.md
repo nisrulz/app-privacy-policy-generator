@@ -81,6 +81,10 @@ The format is very simple and you only need to provide the below fields:
 
 Additionally, you also will have to drop the logo image into the [`public/images/third_party_logos/`](public/images/third_party_logos/) folder. Make sure the logo is **160 × 160** in size.
 
+- To remove background from the logo image, [you can use this online tool](https://www.remove.bg/).
+
+- To trim excess space around the logo image, [you can use this online tool](https://www.imagetools.org/trim).
+
 ## Deployment
 
 ### Server and test locally
