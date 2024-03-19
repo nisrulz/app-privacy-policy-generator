@@ -19,11 +19,11 @@ section#step-6.columns(v-if="wizardStep==6")
                             type="checkbox"
                             )
                         label(:for="'list-switch-' + item.model")
-                            img.thirdparty-logo(
+                            img.checkbox-logo(
                                 :alt="item.name" 
                                 :src="item.logo"
                                 )
-                            span.thirdparty-text {{ item.name }}
+                            span {{ item.name }}
             div(v-show='typeOfPolicyInt==2')
                 p No third party services to choose. Goto 
                     b Next step.

@@ -48,6 +48,7 @@ var app = new Vue({
 		totalWizardSteps: 7,
 		typeOfPolicy: 'Simple',
 		typeOfPolicyInt: 1,
+		isLocationTracked: false,
 	},
 	filters: {
 		capitalize: function (value) {
