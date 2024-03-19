@@ -55,6 +55,10 @@ section#step-7.columns(v-if="wizardStep==7")
                             )  GuestBook 🤗
                 p Now sit back and choose the type of document you want to generate.
                     br
+                    a.has-info(
+                            rel="noopener noreferrer" 
+                            @click="toggleFaqModalVisibility"
+                             ) Read FAQ
                     p.has-text-grey-light
                         | The accuracy of the generated privacy policy and terms & conditions on this website is not legally binding. Use at your own risk.
                     p

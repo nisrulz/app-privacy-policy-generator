@@ -41,6 +41,7 @@ var app = new Vue({
 		showGDPRPrivacyModal: false,
 		showTermsModal: false,
 		showDisclaimerModal: false,
+		showFaqModal: false,
 		showNoTrackingPrivacyPolicyModal: false,
 		hasThirdPartyServicesSelected: true,
 		contentRenderType: 1, // contentRenderType=1 is Preview, contentRenderType=2 is HTML/Markdown
@@ -192,6 +193,9 @@ var app = new Vue({
 		},
 		toggleDisclaimerModalVisibility: function () {
 			this.showDisclaimerModal = !this.showDisclaimerModal
+		},
+		toggleFaqModalVisibility: function () {
+			this.showFaqModal = !this.showFaqModal
 		},
 	},
 })
