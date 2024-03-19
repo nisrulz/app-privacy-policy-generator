@@ -23,7 +23,7 @@ section#step-6.columns(v-if="wizardStep==6")
                                 :alt="item.name" 
                                 :src="item.logo"
                                 )
-                            span.checkbox-label {{ item.name }}
+                            span {{ item.name }}
             div(v-show='typeOfPolicyInt==2')
                 p No third party services to choose. Goto 
                     b Next step.
