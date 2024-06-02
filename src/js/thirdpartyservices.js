@@ -316,5 +316,15 @@ var thirdPartyServicesJsonArray = [
       "privacy": "https://adapty.io/privacy",
       "terms": "https://adapty.io/terms"
     }
+  },
+  {
+    "name": "ConfigCat",
+    "model": "configcat",
+    "configcat": false,
+    "logo": "images/third_party_logos/configcat.png",
+    "link": {
+      "privacy": "https://configcat.com/policies/privacy/",
+      "terms": "https://configcat.com/policies/"
+    }
   }
 ]
