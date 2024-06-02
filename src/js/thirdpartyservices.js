@@ -326,5 +326,15 @@ var thirdPartyServicesJsonArray = [
       "privacy": "https://configcat.com/policies/privacy/",
       "terms": "https://configcat.com/policies/"
     }
+  },
+  {
+    "name": "Instabug",
+    "model": "instabug",
+    "instabug": false,
+    "logo": "images/third_party_logos/instabug.png",
+    "link": {
+      "privacy": "https://www.instabug.com/privacy",
+      "terms": "https://www.instabug.com/terms"
+    }
   }
 ]
