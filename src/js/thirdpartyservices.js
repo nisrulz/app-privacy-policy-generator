@@ -316,5 +316,25 @@ var thirdPartyServicesJsonArray = [
       "privacy": "https://adapty.io/privacy",
       "terms": "https://adapty.io/terms"
     }
+  },
+  {
+    "name": "ConfigCat",
+    "model": "configcat",
+    "configcat": false,
+    "logo": "images/third_party_logos/configcat.png",
+    "link": {
+      "privacy": "https://configcat.com/policies/privacy/",
+      "terms": "https://configcat.com/policies/"
+    }
+  },
+  {
+    "name": "Instabug",
+    "model": "instabug",
+    "instabug": false,
+    "logo": "images/third_party_logos/instabug.png",
+    "link": {
+      "privacy": "https://www.instabug.com/privacy",
+      "terms": "https://www.instabug.com/terms"
+    }
   }
 ]
