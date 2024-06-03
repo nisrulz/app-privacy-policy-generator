@@ -8,6 +8,7 @@ name: Deploy to Production
       - master
 jobs:
   build_and_deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
