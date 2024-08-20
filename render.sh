@@ -18,6 +18,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Calculate the size before minification in bytes
+size_before=$(du -s public | cut -f1)
+
 echo ""
 echo " 👨🏻‍💻 Starting..."
 echo ""
@@ -84,3 +87,14 @@ uglifyjs src/js/main.js --output public/js/main.min.js
 uglifyjs src/js/utils.js --output public/js/utils.min.js
 uglifyjs src/js/flycricket.js --output public/js/flycricket.min.js
 echo " ✅  STEP 6: Minify JS"
+
+
+# Calculate the size after minification in bytes
+size_after=$(du -s public | cut -f1)
+
+# Calculate the size difference
+size_diff=$((size_before - size_after))
+
+# Display the size difference in a nice message
+echo ""
+echo " 📈  STEP 7: Size difference of optimized website: $size_diff bytes"
