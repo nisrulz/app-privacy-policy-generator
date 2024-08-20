@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install all CLI tools
-        run: npm install -g @anduh/pug-cli sass js-yaml firebase-tools svgo png-minify uglifycss uglify-js html-minifier purgecss
+        run: npm install -g @tokilabs/pug3-cli sass js-yaml firebase-tools svgo png-minify uglifycss uglify-js html-minifier purgecss
       
       - name: Render the website from templates
         run: |

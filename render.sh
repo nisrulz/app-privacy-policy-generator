@@ -23,10 +23,10 @@ echo " 👨🏻‍💻 Starting..."
 echo ""
 # Using pug-cli to render from pug to html
 # Specifically a fork
-# - NPM: https://www.npmjs.com/package/@anduh/pug-cli
-# - Github: https://github.com/Anduh/pug-cli
+# - NPM: https://www.npmjs.com/package/@tokilabs/pug3-cli
+# - Github: https://github.com/tokilabs/pug3-cli
 # because the original is not maintained anymore!
-# Install pug-cli: npm install -g @anduh/pug-cli
+# Install pug-cli: npm install -g @tokilabs/pug3-cli
 pug3 src/index.pug --out public --silent
 echo " ✅  STEP 1: RENDER PUG > HTML"
 
