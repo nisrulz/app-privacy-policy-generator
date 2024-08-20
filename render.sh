@@ -84,9 +84,3 @@ uglifyjs src/js/main.js --output public/js/main.min.js
 uglifyjs src/js/utils.js --output public/js/utils.min.js
 uglifyjs src/js/flycricket.js --output public/js/flycricket.min.js
 echo " ✅  STEP 6: Minify JS"
-
-echo ""
-html-minifier public/index.html \
---collapse-whitespace --keep-closing-slash --remove-comments \
---output public/index.html
-echo " ✅  STEP 7: Minify HTML"
