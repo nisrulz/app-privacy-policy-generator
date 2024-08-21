@@ -11,9 +11,15 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # has to be LTS
+          cache: 'npm'
 
       - name: Install all CLI tools
-        run: npm install -g @anduh/pug-cli sass js-yaml firebase-tools svgo png-minify uglifycss uglify-js html-minifier purgecss
+        run: npm install -g @tokilabs/pug3-cli sass js-yaml firebase-tools svgo png-minify uglifycss uglify-js purgecss
       
       - name: Render the website from templates
         run: |
@@ -25,4 +31,5 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_PRIVACY_POLICY_GENERATOR }}'
+          expires: 30d
           projectId: app-privacy-policy-generator

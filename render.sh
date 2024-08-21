@@ -18,15 +18,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Calculate the size before minification in bytes
+size_before=$(du -s public | cut -f1)
+
 echo ""
 echo " 👨🏻‍💻 Starting..."
 echo ""
 # Using pug-cli to render from pug to html
 # Specifically a fork
-# - NPM: https://www.npmjs.com/package/@anduh/pug-cli
-# - Github: https://github.com/Anduh/pug-cli
+# - NPM: https://www.npmjs.com/package/@tokilabs/pug3-cli
+# - Github: https://github.com/tokilabs/pug3-cli
 # because the original is not maintained anymore!
-# Install pug-cli: npm install -g @anduh/pug-cli
+# Install pug-cli: npm install -g @tokilabs/pug3-cli
 pug3 src/index.pug --out public --silent
 echo " ✅  STEP 1: RENDER PUG > HTML"
 
@@ -85,8 +88,13 @@ uglifyjs src/js/utils.js --output public/js/utils.min.js
 uglifyjs src/js/flycricket.js --output public/js/flycricket.min.js
 echo " ✅  STEP 6: Minify JS"
 
+
+# Calculate the size after minification in bytes
+size_after=$(du -s public | cut -f1)
+
+# Calculate the size difference
+size_diff=$((size_before - size_after))
+
+# Display the size difference in a nice message
 echo ""
-html-minifier public/index.html \
---collapse-whitespace --keep-closing-slash --remove-comments \
---output public/index.html
-echo " ✅  STEP 7: Minify HTML"
+echo " 📈  STEP 7: Size difference of optimized website: $size_diff bytes"

@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@anduh/pug-cli": "^1.0.0-alpha8"
+    "@tokilabs/pug3-cli": "3.0.1"
   }
 }
