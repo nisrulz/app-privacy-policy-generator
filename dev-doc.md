@@ -85,6 +85,10 @@ Additionally, you also will have to drop the logo image into the [`public/images
 
 - To trim excess space around the logo image, [you can use this online tool](https://www.imagetools.org/trim).
 
+## Update
+
+To update packages in the project, run: `npm update`
+
 ## Deployment
 
 ### Server and test locally
