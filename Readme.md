@@ -19,8 +19,8 @@
   <img src="https://img.shields.io/github/watchers/nisrulz/app-privacy-policy-generator.svg?style=social&amp;label=Watch" alt="GitHub watchers">
 </a> <a href="https://github.com/nisrulz/app-privacy-policy-generator">
   <img src="https://img.shields.io/github/followers/nisrulz.svg?style=social&amp;label=Follow" alt="GitHub followers">
-</a><a href="https://twitter.com/nisrulz">
-  <img src="https://img.shields.io/twitter/follow/nisrulz.svg?style=social" alt="Twitter Follow">
+</a><a href="https://bsky.app/profile/nisrulz.com">
+  <img src="https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff" alt="Follow on Bluesky">
 </a>
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A443EQ6)
@@ -36,7 +36,7 @@
 - Before contacting me with issues, please visit the [Issue Tracker](https://github.com/nisrulz/app-privacy-policy-generator/issues) and see if issue was already added there. Just in case.
 - If you want to report a bug in the project, please use the [Issue Tracker](https://github.com/nisrulz/app-privacy-policy-generator/issues) to [**open an issue**](https://github.com/nisrulz/app-privacy-policy-generator/issues/new/choose).
 - If you want to discuss the project with the community, join the [Discussion](https://github.com/nisrulz/app-privacy-policy-generator/discussions).
-- If needed, you can also contact me on [Twitter](https://twitter.com/nisrulz).
+- If needed, you can also contact me on [Bluesky](https://bsky.app/profile/nisrulz.com).
 
 ## Contributing
 
@@ -75,7 +75,7 @@ _Alternatively you can fuel my late night programming sessions by [buying me cof
 - Tell me you like this project or how it helped you out!
   - **Star** this repository and tell all your friends about it.
   - [Comment in the project's guestbook](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) :blush:
-  - Reach out on [Twitter](https://twitter.com/nisrulz)
+  - Reach out on [Bluesky](https://bsky.app/profile/nisrulz.com)
 
 Thanks for your interest in this project :heart:
 
