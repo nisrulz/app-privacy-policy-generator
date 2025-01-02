@@ -7,7 +7,7 @@ The web app uses
 - CLI Tools
   - [pug](https://github.com/tokilabs/pug3-cli) - To convert pug templates to html and merge partials into single [`index.html`](public/index.html) file.
   - [sass](https://sass-lang.com/documentation/cli) - To convert sass templates to css and merge partials into single [`style.css`](public/css/style.css) file.
-  - [js-yaml](https://github.com/nodeca/js-yaml#cli-executable) - To convert yaml templates to json and generate the [`thirdpartyservices.js`](public/js/thirdpartyservices.js) file.
+  - [js-yaml](https://github.com/nodeca/js-yaml#cli-executable) - To convert yaml templates to json and generate the [`thirdpartyservices.js`](src/js/thirdpartyservices.js) file.
   - [firebase-tools](https://github.com/firebase/firebase-tools) - To interact with Firebase as a service from command line.
   - [png-minify](https://www.npmjs.com/package/png-minify) - To compress png files.
   - [svgo](https://www.npmjs.com/package/svgo) - To compress svg files.
