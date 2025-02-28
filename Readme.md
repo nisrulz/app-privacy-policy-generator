@@ -1,11 +1,13 @@
 <div align="center">
-  <img src="img/banner.jpg" alt="App Privacy Policy Generator">
+  <img src="img/hero.png" alt="App Privacy Policy Generator">
 </div>
 
 <div align="center"><strong>
   <em>A simple web app to generate a generic privacy policy for your Android/iOS apps</em>
 </strong><br>
-<a href="https://app-privacy-policy-generator.nisrulz.com/">Click here to access the webapp online</a></div>
+<a href="https://app-privacy-policy-generator.nisrulz.com/">Web App</a> | 
+<a href="https://app-privacy-policy-generator.nisrulz.com/reviews.html" target="_blank" rel="noopener noreferrer">Guestbook for reviews</a>
+</div>
 
 <br>
 
