@@ -15,7 +15,7 @@ The web app uses
   - [uglify-js](https://www.npmjs.com/package/uglify-js) - To compress js files.
   - [html-minifier](https://www.npmjs.com/package/html-minifier) - To compress html files.
   - [purgecss](https://purgecss.com/CLI.html) - To compress css files.
-  
+
 ---
 
 Install the CLI tools using
@@ -102,3 +102,9 @@ To serve locally for testing, run: `firebase serve --only hosting`
 
 - First, login by executing command: `firebase login`
 - Next,To deploy to production,run: `firebase deploy -m "3.0.9"`
+
+### Tools
+
+This web app has some of its own tools.
+
+- [Reviews Page Generator Tool](tools/reviews-page-generator/readme.md)
