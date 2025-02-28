@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="public, max-age=604800">
+    <meta http-equiv="Pragma" content="cache">
+    <title>📖 Guest Book 🙇🏻‍♂️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        .reviews {
+            columns: 1;
+            column-gap: 20px;
+        }
+        .review-card {
+            background-color: #ffffff;
+            border: 1px solid #e1e4e8;
+            border-radius: 10px;
+            margin: 0 0 20px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+            text-decoration: none;
+            color: inherit;
+        }
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .review-avatar {
+            border-radius: 50%;
+            margin-right: 10px;
+            width: 48px;
+            height: 48px;
+        }
+        .review-author {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .review-timestamp {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            background-color: #e1e4e8;
+            color: #757575;
+            font-size: 0.75em;
+            margin-left: 10px;
+        }
+        .review-body {
+            margin-top: 10px;
+            color: #333333;
+            line-height: 1.5;
+        }
+        .review-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .review-reactions {
+            margin-top: 10px;
+        }
+        .header-box {
+            background-color: #d3026e;
+        }
+        .header-box p{
+          color: white;
+        }
+        .header-box p.click-here{
+            color: #ffce00;
+            font-weight: bolder;
+            font-style: italic;
+            font-size: 1.2em;
+        }
+        .reaction-chip {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px 5px 0 0;
+            border-radius: 15px;
+            background-color: #e1e4e8;
+            color: #333333;
+            font-size: 0.85em;
+        }
+        /* Media queries for responsive design */
+        @media (min-width: 600px) {
+            .reviews {
+                columns: 2;
+            }
+        }
+        @media (min-width: 900px) {
+            .reviews {
+                columns: 3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📖 Guest Book 🙇🏻‍♂️</h1>
+        <div class="reviews">
+            <a href="https://github.com/nisrulz/app-privacy-policy-generator/issues/65" target="_blank" class="review-card header-box">
+                <div class="review-body">
+                  <img src="./downloaded_images/banner.jpg" />
+                  <p>Welcome to our virtual Guest Book! Feel free to leave some kind words about App Privacy Policy Generator, share your success stories, or even brag about the big names using our app.<br/><br/>We love hearing how we've made your life easier!</p>
+                  <p class="click-here">↘ Click on this card to comment</p>
+                </div>
+            </a>
+            {{#comments}}
+            <a href="{{html_url}}" target="_blank" class="review-card">
+                <div class="review-header">
+                    <img src="{{user.avatar_local}}" alt="{{user.login}}" class="review-avatar">
+                    <div class="review-author">{{user.login}}</div>
+                    <div class="review-timestamp">{{created_at_formatted}}</div>
+                </div>
+                <div class="review-body">{{{body}}}</div> <!-- Use triple braces to render HTML -->
+                {{#reactions}}
+                <div class="review-reactions">
+                    {{#heart}}
+                    <span class="reaction-chip">❤️ {{heart}}</span>
+                    {{/heart}}
+                    {{#thumbs_up}}
+                    <span class="reaction-chip">👍 {{thumbs_up}}</span>
+                    {{/thumbs_up}}
+                    {{#thumbs_down}}
+                    <span class="reaction-chip">👎 {{thumbs_down}}</span>
+                    {{/thumbs_down}}
+                    {{#laugh}}
+                    <span class="reaction-chip">😄 {{laugh}}</span>
+                    {{/laugh}}
+                    {{#hooray}}
+                    <span class="reaction-chip">🎉 {{hooray}}</span>
+                    {{/hooray}}
+                    {{#confused}}
+                    <span class="reaction-chip">😕 {{confused}}</span>
+                    {{/confused}}
+                    {{#rocket}}
+                    <span class="reaction-chip">🚀 {{rocket}}</span>
+                    {{/rocket}}
+                    {{#eyes}}
+                    <span class="reaction-chip">👀 {{eyes}}</span>
+                    {{/eyes}}
+                </div>
+                {{/reactions}}
+            </a>
+            {{/comments}}
+        </div>
+    </div>
+</body>
+</html>
