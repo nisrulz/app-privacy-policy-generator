@@ -3,7 +3,7 @@
 </div>
 
 <div align="center"><strong>
-  <em>A simple web app to generate a generic privacy policy for your Android/iOS apps</em>
+  <em>A web app that is free, open-source, and perfect for generating a generic or GDPR-compliant privacy policy and terms of use for your mobile apps. 📄✨</em>
 </strong><br>
 <a href="https://app-privacy-policy-generator.nisrulz.com/">Web App</a> | 
 <a href="https://app-privacy-policy-generator.nisrulz.com/reviews.html" target="_blank" rel="noopener noreferrer">Guestbook for reviews</a>
