@@ -97,14 +97,22 @@ img.social-logo
 .scrollable
   height: 62vh
   display: flex
-  overflow-y: scroll
+  overflow-y: auto
   flex-direction: column
+  padding: 1em
 
 .scrollable-thirdparty
   height: 59vh
   display: flex
   overflow-y: scroll
   flex-direction: column
+  border: solid #f3f3f3 2px
+  border-radius: 8px
+  padding: 0.5em
+
+.scrollable-thirdparty.content
+  > a
+    padding-bottom: 1em
 
 .heart-logo
   height: 1em
@@ -201,3 +209,28 @@ img.social-logo
 
 .no-select
   user-select: none
+
+.title-logo
+  margin: 0 0.5em
+
+// Scrollbar Overrides
+\::-webkit-scrollbar
+  width: 0.3em
+
+\::-webkit-scrollbar-track
+  background: #ebecef
+  border-radius: 8px
+
+\::-webkit-scrollbar-thumb
+  background: #0bbdff
+  border-radius: 8px
+
+  &:hover
+    background: #65cdf4
+
+// Bulma Overrides
+.button
+  margin: 0.5em
+
+.checkbox, .radio
+  margin: 0.3em

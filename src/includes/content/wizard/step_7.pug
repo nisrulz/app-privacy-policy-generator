@@ -5,7 +5,8 @@ section#step-7.columns(v-if="wizardStep==7")
                 a(
                     href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
                     target='_blank' 
-                    rel='noopener noreferrer') App Privacy Policy Generator
+                    rel='noopener noreferrer')
+                    img.is-size-1(src='images/text_logo.svg')
             progress.progress.is-small.is-primary(value='100' max='100')
             .scrollable.content
                 .notification.is-warning
@@ -61,7 +62,7 @@ section#step-7.columns(v-if="wizardStep==7")
                              ) Read FAQ
                     p.has-text-grey-light
                         | The accuracy of the generated privacy policy and terms & conditions on this website is not legally binding. Use at your own risk.
-                    p
+                    p(style='margin-bottom: 0;')
                         a.has-text-danger(
                             rel="noopener noreferrer" 
                             @click="toggleDisclaimerModalVisibility"
