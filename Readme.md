@@ -88,6 +88,16 @@ This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisr
 
 See the [the list of contributors here](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
 
+## Star History
+
+<a href="https://www.star-history.com/#nisrulz/app-privacy-policy-generator&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=nisrulz/app-privacy-policy-generator&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=nisrulz/app-privacy-policy-generator&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=nisrulz/app-privacy-policy-generator&type=Timeline" />
+ </picture>
+</a>
+
 ## License
 
 [AGPLv3 | Copyright 2017 Nishant Srivastava](LICENSE)
