@@ -19,7 +19,7 @@ if [ -d "$ENV_DIR" ]; then
   echo "Virtual environment activated."
 else
   echo "Virtual environment directory '$ENV_DIR' not found. Creating a new virtual environment."
-  python3 -m venv "$ENV_DIR" || error_exit "Failed to create the virtual environment."
+  python -m venv "$ENV_DIR" || error_exit "Failed to create the virtual environment."
   source "$ENV_DIR/bin/activate" || error_exit "Failed to activate the virtual environment after creation."
   echo "Virtual environment created and activated."
 fi
