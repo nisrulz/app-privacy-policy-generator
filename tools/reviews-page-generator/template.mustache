@@ -115,18 +115,84 @@
         max-width: 100%;
         overflow: hidden;
       }
+
+      .header {
+        text-align: center;
+        max-width: 800px;
+        margin: 8px auto;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(-5px); }
+      }
+      
+      /* Style for the search box */
+      .search-box {
+        width: 95%;
+        max-width: 600px;
+        padding: 15px;
+        margin: 10px auto;
+        display: block;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        outline: none;
+        margin-left: auto;
+        margin-right: auto;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .search-box:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+
+      /* Style for the review count */
+      .review-count {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        padding: 8px;
+        background: #f1f1f1;
+        border-radius: 8px;
+        display: inline-block;
+        margin-left: 10px;
+      }
+
+      /* Style for the action bar */
+      .action-bar {
+        width: 90%;
+        max-width: 800px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        gap: 2em;
+        margin: 0 auto 1em auto;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>App Privacy Policy Generator's 📖 Guest Book 🙇🏻‍♂️</h1>
-      <h3>
-        <a href="/" class="link">Back to Web App ↩️</a> |
-        <a href="https://ko-fi.com/A443EQ6" target="_blank" class="link"
-          >Buy Me a Coffee ☕️</a
-        >
-      </h3>
-      <div class="review-columns">
+      <div class="header">
+      <h1>📖 App Privacy Policy Generator's Guest Book 🙇🏻‍♂️</h1>
+        <div class="action-bar">
+          <a href="/" class="link">↩️ Back to Web App</a>
+          <a href="https://ko-fi.com/A443EQ6" target="_blank" class="link">☕️ Buy Me a Coffee</a>
+          <span class="review-count">📊 Total Reviews: <span id="reviewCount">450</span></span>
+        </div>
+        <input type="text" id="searchInput" class="search-box" placeholder="Search reviews..." />
+      </div>
+      <div class="review-columns" id="reviewContainer">
         <a
           href="https://github.com/nisrulz/app-privacy-policy-generator/issues/65"
           target="_blank"
@@ -188,5 +254,66 @@
         {{/comments}}
       </div>
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const reviewCountElement = document.getElementById("reviewCount");
+        const searchInput = document.getElementById("searchInput");
+
+        function getReviewCards() {
+          return document.querySelectorAll(".review-card:not(.header-card)");
+        }
+
+        function updateReviewCount(count) {
+          reviewCountElement.textContent = typeof count === "number" ? count : getReviewCards().length;
+        }
+
+        function showCard(card, show) {
+          card.style.display = show ? "inline-block" : "none";
+        }
+
+        function filterReviews(query) {
+          const cards = getReviewCards();
+          query = query.trim().toLowerCase();
+          let visible = 0;
+          // Process cards in chunks to avoid blocking the UI
+          let index = 0;
+          const chunkSize = 100; // Adjust based on performance
+          function processChunk() {
+            const end = Math.min(index + chunkSize, cards.length);
+            for (; index < end; index++) {
+              const card = cards[index];
+              const match = card.innerText.toLowerCase().includes(query);
+              showCard(card, match);
+              if (match) visible++;
+            }
+            if (index < cards.length) {
+              requestAnimationFrame(processChunk);
+            } else {
+              updateReviewCount(visible);
+            }
+          }
+          processChunk();
+        }
+
+        function debounce(fn, delay) {
+          let timer;
+          return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => fn.apply(this, args), delay);
+          };
+        }
+
+        function setupSearch() {
+          searchInput.addEventListener("input", debounce(function () {
+            filterReviews(searchInput.value);
+          }, 200));
+        }
+
+        // Initialize
+        updateReviewCount();
+        setupSearch();
+      });
+    </script>
   </body>
 </html>
