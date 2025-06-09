@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pip3 install requests chevron markdown pillow
+pip install requests chevron markdown pillow
