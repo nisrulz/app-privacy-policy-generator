@@ -18,184 +18,195 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var app = new Vue({
-	el: "#app",
-	data: {
-		iOrWe: "[I/We]",
-		typeOfApp: "Free",
-		typeOfAppTxt: "[open source/free/freemium/ad-supported/commercial]",
-		typeOfDev: "Individual",
-		appName: "",
-		appContact: "",
-		devName: "",
-		companyName: "",
-		devOrCompanyName: "[Developer/Company name]",
-		pidInfoIn: "",
-		pidInfo:
-			"[add whatever else you collect here, e.g. users name, address, location, pictures]",
-		osType: "Android",
-		effectiveFromDate: new Date().toISOString().slice(0, 10),
-		requirementOfSystem: "system",
-		thirdPartyServices: thirdPartyServicesJsonArray,
-		showPrivacyModal: false,
-		showGDPRPrivacyModal: false,
-		showTermsModal: false,
-		showDisclaimerModal: false,
-		showFaqModal: false,
-		showNoTrackingPrivacyPolicyModal: false,
-		hasThirdPartyServicesSelected: true,
-		contentRenderType: 1, // contentRenderType=1 is Preview, contentRenderType=2 is HTML/Markdown
-		wizardStep: 1,
-		totalWizardSteps: 7,
-		typeOfPolicy: 'Simple',
-		typeOfPolicyInt: 1,
-		isLocationTracked: false,
-	},
-	filters: {
-		capitalize: function (value) {
-			if (!value) return ''
-			value = value.toString()
-			return value.charAt(0).toUpperCase() + value.slice(1)
-		}
-	},
-	methods: {
-		showPrivacyModal: function () {
-			this.showPrivacyModal = true
-		},
-		showNoTrackingPrivacyPolicyModal: function () {
-			this.showNoTrackingPrivacyPolicyModal = true
-		},
-		showGDPRPrivacyModal: function () {
-			this.showGDPRPrivacyModal = true
-		},
-		preview: function (id) {
-			this.contentRenderType = 1
-		},
+const { createApp } = Vue;
 
-		setTypeOfPolicyInt: function () {
-			switch (this.typeOfPolicy) {
-				case "Simple":
-					this.typeOfPolicyInt = 1
-					break
-				case "No Tracking":
-					this.typeOfPolicyInt = 2
-					break
-				case "GDPR":
-					this.typeOfPolicyInt = 3
-					break
-			}
-		},
-		nextStep: function () {
-			this.wizardStep += 1
-		},
-		prevStep: function () {
-			this.wizardStep -= 1
-		},
-		checkForThirdPartyServicesEnabled: function () {
-			let listOfEnabledThirdPartyServices = []
-			this.thirdPartyServices.forEach((item) => {
-				if (item[item.model] == true) {
-					listOfEnabledThirdPartyServices.push(true)
-				}
-			})
+const app = createApp({
+  data() {
+    return {
+      iOrWe: "[I/We]",
+      typeOfApp: "Free",
+      typeOfAppTxt: "[open source/free/freemium/ad-supported/commercial]",
+      typeOfDev: "Individual",
+      appName: "",
+      appContact: "",
+      devName: "",
+      companyName: "",
+      devOrCompanyName: "[Developer/Company name]",
+      pidInfoIn: "",
+      pidInfo:
+        "[add whatever else you collect here, e.g. users name, address, location, pictures]",
+      osType: "Android",
+      effectiveFromDate: new Date().toISOString().slice(0, 10),
+      requirementOfSystem: "system",
 
-			return listOfEnabledThirdPartyServices.length > 0
-		},
-		toggleState: function (item) {
-			let state = item.model
+      // Third-party services array and UI flags
+      thirdPartyServices: thirdPartyServicesJsonArray,
+      showPrivacyModal: false,
+      showGDPRPrivacyModal: false,
+      showTermsModal: false,
+      showDisclaimerModal: false,
+      showFaqModal: false,
+      showNoTrackingPrivacyPolicyModal: false,
+      hasThirdPartyServicesSelected: true,
 
-			// For reactive update of the json
-			// Toggle the state
-			Vue.set(thirdPartyServicesJsonArray, item.model, !item[state])
-		},
-		getHtml: function (id, target) {
-			let content = getContent(id)
-			let title = getTitle(id)
-			let rawHTML = getRawHTML(content, title)
-			this.contentRenderType = 2
-			loadInTextView(target, rawHTML)
-		},
-		getMarkdown: function (id, target) {
-			let content = getContent(id)
-			let title = getTitle(id)
-			let rawHTML = getRawHTML(content, title)
-			let markdown = convertHtmlToMd(rawHTML)
-			this.contentRenderType = 2
-			loadInTextView(target, markdown)
-		},
-		generate: function () {
-			// Dev/Company Name
-			if (this.typeOfDev === "Individual") {
-				this.devOrCompanyName = this.devName
-			} else if (this.typeOfDev === "Company") {
-				this.devOrCompanyName = this.companyName
-			}
+      // UI wizard state
+      contentRenderType: 1, // 1 = Preview, 2 = HTML/Markdown
+      wizardStep: 1,
+      totalWizardSteps: 7,
+      typeOfPolicy: "Simple",
+      typeOfPolicyInt: 1,
+      isLocationTracked: false,
+    };
+  },
 
-			// PID Info
-			if (this.pidInfoIn === "") {
-				this.pidInfo = "."
-			} else {
-				this.pidInfo = ", including but not limited to " + this.pidInfoIn + "."
-			}
+  computed: {
+    enabledThirdPartyServicesWithPrivacy() {
+      return this.thirdPartyServices.filter(
+        (item) => item.enabled && item.link?.privacy
+      );
+    },
+    enabledThirdPartyServicesWithTerms() {
+      return this.thirdPartyServices.filter(
+        (item) => item.enabled && item.link?.terms
+      );
+    },
+	thirdPartyServicesWithPrivacyOrTerms() {
+      return this.thirdPartyServices.filter(
+        (item) => (item.link?.privacy || item.link?.terms)
+      );
+    },
+  },
 
-			switch (this.typeOfApp) {
-				case "Free":
-				case "Freemium":
-				case "Commercial":
-					this.typeOfAppTxt = "a " + this.typeOfApp
-					break
-				case "Open Source":
-				case "Ad Supported":
-					this.typeOfAppTxt = "an " + this.typeOfApp
-					break
-			}
+  methods: {
+    capitalize(value) {
+      if (!value) return "";
+      return value.charAt(0).toUpperCase() + value.slice(1);
+    },
 
-			switch (this.osType) {
-				case "Android": {
-					this.osType = "Android"
-					this.requirementOfSystem = "system"
-					break
-				}
-				case "iOS": {
-					this.osType = "iOS"
-					this.requirementOfSystem = "system"
-					break
-				}
-				case "Android & iOS": {
-					this.osType = "Android & iOS"
-					this.requirementOfSystem = "both systems"
-					break
-				}
-			}
-		},
-		toggleNoTrackingPrivacyPolicyModalVisibility: function () {
-			this.generate()
-			this.contentRenderType == 1
-			this.showNoTrackingPrivacyPolicyModal = !this.showNoTrackingPrivacyPolicyModal
-		},
-		togglePrivacyModalVisibility: function () {
-			this.generate()
-			this.hasThirdPartyServicesSelected = this.checkForThirdPartyServicesEnabled()
-			this.contentRenderType = 1
-			this.showPrivacyModal = !this.showPrivacyModal
-		},
-		toggleGDPRPrivacyModalVisibility: function () {
-			this.generate()
-			this.hasThirdPartyServicesSelected = this.checkForThirdPartyServicesEnabled()
-			this.contentRenderType = 1
-			this.showGDPRPrivacyModal = !this.showGDPRPrivacyModal
-		},
-		toggleTermsModalVisibility: function () {
-			this.generate()
-			this.hasThirdPartyServicesSelected = this.checkForThirdPartyServicesEnabled()
-			this.contentRenderType = 1
-			this.showTermsModal = !this.showTermsModal
-		},
-		toggleDisclaimerModalVisibility: function () {
-			this.showDisclaimerModal = !this.showDisclaimerModal
-		},
-		toggleFaqModalVisibility: function () {
-			this.showFaqModal = !this.showFaqModal
-		},
-	},
-})
+    // Preview view switch
+    preview(id) {
+      this.contentRenderType = 1;
+    },
+
+    // Set numeric policy type
+    setTypeOfPolicyInt() {
+      switch (this.typeOfPolicy) {
+        case "Simple":
+          this.typeOfPolicyInt = 1;
+          break;
+        case "No Tracking":
+          this.typeOfPolicyInt = 2;
+          break;
+        case "GDPR":
+          this.typeOfPolicyInt = 3;
+          break;
+      }
+    },
+
+    // Step navigator
+    nextStep() {
+      this.wizardStep += 1;
+    },
+    prevStep() {
+      this.wizardStep -= 1;
+    },
+
+    // Check enabled 3rd party services
+    checkForThirdPartyServicesEnabled() {
+      return this.thirdPartyServices.some((item) => item.enabled === true);
+    },
+
+    // For reactive update of the JSON - toggle state
+    toggleState(item) {
+      item.enabled = !item.enabled;
+    },
+
+    // Render HTML content
+    getHtml(id, target) {
+      let content = getContent(id);
+      let title = getTitle(id);
+      let rawHTML = getRawHTML(content, title);
+      this.contentRenderType = 2;
+      loadInTextView(target, rawHTML);
+    },
+
+    // Render Markdown content
+    getMarkdown(id, target) {
+      let content = getContent(id);
+      let title = getTitle(id);
+      let rawHTML = getRawHTML(content, title);
+      let markdown = convertHtmlToMd(rawHTML);
+      this.contentRenderType = 2;
+      loadInTextView(target, markdown);
+    },
+
+    // Generate output data based on inputs
+    generate() {
+      // Dev/Company Name
+      this.devOrCompanyName =
+        this.typeOfDev === "Individual" ? this.devName : this.companyName;
+
+      // PID Info
+      this.pidInfo =
+        this.pidInfoIn === ""
+          ? "."
+          : ", including but not limited to " + this.pidInfoIn + ".";
+
+      // App Type Text
+      this.typeOfAppTxt = ["Open Source", "Ad Supported"].includes(
+        this.typeOfApp
+      )
+        ? "an " + this.typeOfApp
+        : "a " + this.typeOfApp;
+
+      // OS system requirement
+      switch (this.osType) {
+        case "Android":
+        case "iOS":
+          this.requirementOfSystem = "system";
+          break;
+        case "Android & iOS":
+          this.requirementOfSystem = "both systems";
+          break;
+      }
+    },
+
+    // Toggle modals & refresh data
+    toggleNoTrackingPrivacyPolicyModalVisibility() {
+      this.generate();
+      this.contentRenderType = 1;
+      this.showNoTrackingPrivacyPolicyModal =
+        !this.showNoTrackingPrivacyPolicyModal;
+    },
+    togglePrivacyModalVisibility() {
+      this.generate();
+      this.hasThirdPartyServicesSelected =
+        this.checkForThirdPartyServicesEnabled();
+      this.contentRenderType = 1;
+      this.showPrivacyModal = !this.showPrivacyModal;
+    },
+    toggleGDPRPrivacyModalVisibility() {
+      this.generate();
+      this.hasThirdPartyServicesSelected =
+        this.checkForThirdPartyServicesEnabled();
+      this.contentRenderType = 1;
+      this.showGDPRPrivacyModal = !this.showGDPRPrivacyModal;
+    },
+    toggleTermsModalVisibility() {
+      this.generate();
+      this.hasThirdPartyServicesSelected =
+        this.checkForThirdPartyServicesEnabled();
+      this.contentRenderType = 1;
+      this.showTermsModal = !this.showTermsModal;
+    },
+    toggleDisclaimerModalVisibility() {
+      this.showDisclaimerModal = !this.showDisclaimerModal;
+    },
+    toggleFaqModalVisibility() {
+      this.showFaqModal = !this.showFaqModal;
+    },
+  },
+});
+
+// Mount the Vue app
+app.mount("#app");

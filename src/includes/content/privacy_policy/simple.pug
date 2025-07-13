@@ -29,7 +29,7 @@
                         li Geolocation Services: The Service Provider utilizes location data to provide features such as personalized content, relevant recommendations, and location-based services.
                         li Analytics and Improvements: Aggregated and anonymized location data helps the Service Provider to analyze user behavior, identify trends, and improve the overall performance and functionality of the Application.
                         li Third-Party Services: Periodically, the Service Provider may transmit anonymized location data to external services. These services assist them in enhancing the Application and optimizing their offerings.
-                
+
                 br
                 p The Service Provider may use the information you provided to contact you from time to time to provide you with important information, required notices and marketing promotions.
                 br
@@ -37,14 +37,14 @@
 
                 br
                 strong Third Party Access
-                
+
                 p Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.
-                
+
                 div(v-if='hasThirdPartyServicesSelected')
                     br
                     p Please note that the Application utilizes third-party services that have their own Privacy Policy about handling data. Below are the links to the Privacy Policy of the third-party service providers used by the Application:
                     ul
-                        li(v-if='item[item.model] && item.link.privacy' v-for='item in thirdPartyServices')
+                        li(v-for="item in enabledThirdPartyServicesWithPrivacy" :key="item.name")
                             a(:href='item.link.privacy' target='_blank' rel='noopener noreferrer') {{item.name}}
                 br
 

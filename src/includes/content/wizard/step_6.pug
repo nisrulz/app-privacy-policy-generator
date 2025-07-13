@@ -13,13 +13,13 @@ section#step-6.columns(v-if="wizardStep==6")
                     b Include links to Third Party Services 
                     span.tag.is-primary.is-light Scroll for more
                 .scrollable-thirdparty.content
-                    a(rel="noopener noreferrer" v-for="item in thirdPartyServices")
+                    a(rel="noopener noreferrer" v-for="item in thirdPartyServicesWithPrivacyOrTerms" :key="item.name")
                         input(
-                            v-model="item[item.model]" 
-                            :id="'list-switch-' + item.model" 
+                            v-model="item.enabled"
+                            :id="'list-switch-' + item.name"
                             type="checkbox"
                             )
-                        label(:for="'list-switch-' + item.model")
+                        label(:for="'list-switch-' + item.name")
                             img.checkbox-logo(
                                 :alt="item.name" 
                                 :src="item.logo"
