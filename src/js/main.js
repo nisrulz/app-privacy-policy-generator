@@ -70,9 +70,9 @@ const app = createApp({
         (item) => item.enabled && item.link?.terms
       );
     },
-	thirdPartyServicesWithPrivacyOrTerms() {
+    thirdPartyServicesWithPrivacyOrTerms() {
       return this.thirdPartyServices.filter(
-        (item) => (item.link?.privacy || item.link?.terms)
+        (item) => item.link?.privacy || item.link?.terms
       );
     },
   },
