@@ -69,15 +69,12 @@ The format is very simple and you only need to provide the below fields:
 
 ```yml
 - name: Google Play Services
-  model: gps
-  gps: false
+  enabled: false
   logo: images/third_party_logos/gps.png
   link:
     privacy: https://www.google.com/policies/privacy/
     terms: https://policies.google.com/terms
 ```
-
-> Note: The value of model is the same as the the field below it. i.e `model: gps` and `gps: false`. This is required by the code. Make sure this is maintained.
 
 Additionally, you also will have to drop the logo image into the [`public/images/third_party_logos/`](public/images/third_party_logos/) folder. Make sure the logo is **160 × 160** in size.
 

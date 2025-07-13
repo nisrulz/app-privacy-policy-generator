@@ -21,8 +21,7 @@
 var thirdPartyServicesJsonArray = [
   {
     "name": "Google Play Services",
-    "model": "gps",
-    "gps": true,
+    "enabled": false,
     "logo": "images/third_party_logos/gps.png",
     "link": {
       "privacy": "https://www.google.com/policies/privacy/",
@@ -31,8 +30,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "AdMob",
-    "model": "admob",
-    "admob": false,
+    "enabled": false,
     "logo": "images/third_party_logos/admob.png",
     "link": {
       "privacy": "https://support.google.com/admob/answer/6128543?hl=en",
@@ -41,8 +39,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Google Analytics for Firebase",
-    "model": "firebase",
-    "firebase": false,
+    "enabled": false,
     "logo": "images/third_party_logos/firebase.png",
     "link": {
       "privacy": "https://firebase.google.com/support/privacy",
@@ -51,8 +48,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Firebase Crashlytics",
-    "model": "crashlytics",
-    "crashlytics": false,
+    "enabled": false,
     "logo": "images/third_party_logos/firebase.png",
     "link": {
       "privacy": "https://firebase.google.com/support/privacy/",
@@ -61,8 +57,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Facebook",
-    "model": "facebook",
-    "facebook": false,
+    "enabled": false,
     "logo": "images/third_party_logos/facebook.png",
     "link": {
       "privacy": "https://www.facebook.com/about/privacy/update/printable",
@@ -71,8 +66,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Fabric",
-    "model": "fabric",
-    "fabric": false,
+    "enabled": false,
     "logo": "images/third_party_logos/fabric.png",
     "link": {
       "privacy": "https://policies.google.com/privacy",
@@ -81,8 +75,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Matomo",
-    "model": "piwik",
-    "piwik": false,
+    "enabled": false,
     "logo": "images/third_party_logos/piwik.png",
     "link": {
       "privacy": "https://matomo.org/privacy-policy/",
@@ -91,8 +84,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Clicky",
-    "model": "clicky",
-    "clicky": false,
+    "enabled": false,
     "logo": "images/third_party_logos/clicky.png",
     "link": {
       "privacy": "https://clicky.com/terms#privacy",
@@ -101,8 +93,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Flurry Analytics",
-    "model": "flurry",
-    "flurry": false,
+    "enabled": false,
     "logo": "images/third_party_logos/flurry.png",
     "link": {
       "privacy": "https://privacy.oath.com",
@@ -111,8 +102,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Appodeal",
-    "model": "appodeal",
-    "appodeal": false,
+    "enabled": false,
     "logo": "images/third_party_logos/appodeal.png",
     "link": {
       "privacy": "https://www.appodeal.com/home/privacy-policy/",
@@ -121,8 +111,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Fathom Analytics",
-    "model": "fathom",
-    "fathom": false,
+    "enabled": false,
     "logo": "images/third_party_logos/fathom.png",
     "link": {
       "privacy": "https://usefathom.com/privacy/",
@@ -131,8 +120,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Unity",
-    "model": "unity",
-    "unity": false,
+    "enabled": false,
     "logo": "images/third_party_logos/unity.png",
     "link": {
       "privacy": "https://unity3d.com/legal/privacy-policy",
@@ -141,8 +129,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "SDKBOX",
-    "model": "sdkbox",
-    "sdkbox": false,
+    "enabled": false,
     "logo": "images/third_party_logos/sdkbox.png",
     "link": {
       "privacy": "https://www.sdkbox.com/privacy",
@@ -151,8 +138,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "GameAnalytics",
-    "model": "gameanalytics",
-    "gameanalytics": false,
+    "enabled": false,
     "logo": "images/third_party_logos/gameanalytics.png",
     "link": {
       "privacy": "https://gameanalytics.com/privacy",
@@ -161,8 +147,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "One Signal",
-    "model": "onesignal",
-    "onesignal": false,
+    "enabled": false,
     "logo": "images/third_party_logos/one_signal.png",
     "link": {
       "privacy": "https://onesignal.com/privacy_policy",
@@ -171,8 +156,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Expo",
-    "model": "expo",
-    "expo": false,
+    "enabled": false,
     "logo": "images/third_party_logos/expo.png",
     "link": {
       "privacy": "https://expo.io/privacy",
@@ -181,8 +165,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Sentry",
-    "model": "sentry",
-    "sentry": false,
+    "enabled": false,
     "logo": "images/third_party_logos/sentry.png",
     "link": {
       "privacy": "https://sentry.io/privacy/",
@@ -191,8 +174,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "AppLovin",
-    "model": "applovin",
-    "applovin": false,
+    "enabled": false,
     "logo": "images/third_party_logos/applovin.png",
     "link": {
       "privacy": "https://www.applovin.com/privacy/",
@@ -201,8 +183,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Vungle",
-    "model": "vungle",
-    "vungle": false,
+    "enabled": false,
     "logo": "images/third_party_logos/vungle.png",
     "link": {
       "privacy": "https://vungle.com/privacy/"
@@ -210,8 +191,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "StartApp",
-    "model": "startapp",
-    "startapp": false,
+    "enabled": false,
     "logo": "images/third_party_logos/startapp.png",
     "link": {
       "privacy": "https://www.startapp.com/privacy/",
@@ -220,8 +200,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "AdColony",
-    "model": "adcolony",
-    "adcolony": false,
+    "enabled": false,
     "logo": "images/third_party_logos/adcolony.png",
     "link": {
       "privacy": "https://www.adcolony.com/privacy-policy/"
@@ -229,8 +208,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Amplitude",
-    "model": "amplitude",
-    "amplitude": false,
+    "enabled": false,
     "logo": "images/third_party_logos/amplitude.png",
     "link": {
       "privacy": "https://amplitude.com/privacy",
@@ -239,8 +217,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Adjust",
-    "model": "adjust",
-    "adjust": false,
+    "enabled": false,
     "logo": "images/third_party_logos/adjust.png",
     "link": {
       "privacy": "https://www.adjust.com/terms/privacy-policy",
@@ -249,8 +226,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Mapbox",
-    "model": "mapbox",
-    "mapbox": false,
+    "enabled": false,
     "logo": "images/third_party_logos/mapbox.png",
     "link": {
       "privacy": "https://www.mapbox.com/legal/privacy",
@@ -259,8 +235,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Godot",
-    "model": "godot",
-    "godot": false,
+    "enabled": false,
     "logo": "images/third_party_logos/godot.png",
     "link": {
       "privacy": "https://godotengine.org/privacy-policy",
@@ -269,8 +244,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Segment",
-    "model": "segment",
-    "sentry": false,
+    "enabled": false,
     "logo": "images/third_party_logos/segment.png",
     "link": {
       "privacy": "https://segment.com/legal/privacy/",
@@ -279,8 +253,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Mixpanel",
-    "model": "mixpanel",
-    "mixpanel": false,
+    "enabled": false,
     "logo": "images/third_party_logos/mixpanel.png",
     "link": {
       "privacy": "https://mixpanel.com/legal/privacy-policy/",
@@ -289,8 +262,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "RevenueCat",
-    "model": "revenuecat",
-    "revenuecat": false,
+    "enabled": false,
     "logo": "images/third_party_logos/revenuecat.png",
     "link": {
       "privacy": "https://www.revenuecat.com/privacy",
@@ -299,8 +271,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Clerk",
-    "model": "clerk",
-    "clerk": false,
+    "enabled": false,
     "logo": "images/third_party_logos/clerk.png",
     "link": {
       "privacy": "https://clerk.com/privacy",
@@ -309,8 +280,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Adapty",
-    "model": "adapty",
-    "clerk": false,
+    "enabled": false,
     "logo": "images/third_party_logos/adapty.png",
     "link": {
       "privacy": "https://adapty.io/privacy",
@@ -319,8 +289,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "ConfigCat",
-    "model": "configcat",
-    "configcat": false,
+    "enabled": false,
     "logo": "images/third_party_logos/configcat.png",
     "link": {
       "privacy": "https://configcat.com/policies/privacy/",
@@ -329,8 +298,7 @@ var thirdPartyServicesJsonArray = [
   },
   {
     "name": "Instabug",
-    "model": "instabug",
-    "instabug": false,
+    "enabled": false,
     "logo": "images/third_party_logos/instabug.png",
     "link": {
       "privacy": "https://www.instabug.com/privacy",
