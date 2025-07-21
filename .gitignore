@@ -5,3 +5,5 @@ node_modules/
 dist/
 .DS_Store
 .env
+
+public/downloaded_images/banner.jpg
