@@ -52,9 +52,9 @@ function getRawHTML(content, title) {
   return html
 }
 
-function getContent(id) {
-  var content = document.getElementById(id)
-  return content.innerHTML
+window.getContent = function(id) {
+  const content = document.getElementById(id);
+  return content ? content.innerHTML : '';
 }
 
 function getTitle(id) {
