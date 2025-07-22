@@ -205,6 +205,9 @@ const app = createApp({
     toggleFaqModalVisibility() {
       this.showFaqModal = !this.showFaqModal;
     },
+    fc_deploy_simple() {
+      fc_deploy_simple();
+    }
   },
 });
 

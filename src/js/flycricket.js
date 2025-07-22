@@ -1,4 +1,4 @@
-function fc_deploy_simple() {
+window.fc_deploy_simple = function () {
   var form = document.getElementById("fc-form");
 
   // fill in the body with the html content
