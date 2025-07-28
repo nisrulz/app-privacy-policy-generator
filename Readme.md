@@ -11,9 +11,11 @@
 
 <br>
 
-<div align="center"><a href="https://www.androiddevdigest.com/digest-133/">
-  <img src="https://img.shields.io/badge/AndroidDev%20Digest-%23133-blue.svg" alt="AndroidDevDigest">
-</a><a href="https://github.com/nisrulz/app-privacy-policy-generator">
+
+
+
+<div align="center">
+  <a href="https://mailchi.mp/kotlinweekly/kotlin-weekly-469#:~:text=app%2Dprivacy%2Dpolicy%2Dgenerator"><img src="https://img.shields.io/badge/Kotlin_Weekly-%23469-9d2beb?logo=kotlin&amp;logoColor=white" alt="Kotlin Weekly Newsletter Issue #469"></a><a href="https://github.com/nisrulz/app-privacy-policy-generator">
   <img src="https://img.shields.io/github/stars/nisrulz/app-privacy-policy-generator.svg?style=social&amp;label=Star" alt="GitHub stars">
 </a> <a href="https://github.com/nisrulz/app-privacy-policy-generator/fork">
   <img src="https://img.shields.io/github/forks/nisrulz/app-privacy-policy-generator.svg?style=social&amp;label=Fork" alt="GitHub forks">
