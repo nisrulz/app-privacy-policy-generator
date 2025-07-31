@@ -162,6 +162,22 @@ def resize_image(avatar_file):
         img = img.resize((48, 48), Image.LANCZOS)
         img.save(avatar_file)
 
+# Remap Reactions
+def remap_reactions(comment):
+    raw = comment.get("reactions", {})
+    mapped = {
+        "thumbs_up": raw.get("+1", 0),
+        "thumbs_down": raw.get("-1", 0),
+        "laugh": raw.get("laugh", 0),
+        "hooray": raw.get("hooray", 0),
+        "confused": raw.get("confused", 0),
+        "heart": raw.get("heart", 0),
+        "rocket": raw.get("rocket", 0),
+        "eyes": raw.get("eyes", 0)
+    }
+    # Only include reactions with a count > 0
+    comment["reactions"] = {k: v for k, v in mapped.items() if v > 0}
+
 
 # Process and download images in comment bodies
 def process_comment_images(comments):
@@ -169,6 +185,7 @@ def process_comment_images(comments):
         r"(https?://(?:[^\s/$.?#].[^\s]*)\.(?:png|jpg|jpeg|gif))"
     )
     for comment in comments:
+        remap_reactions(comment)
         comment["created_at_formatted"] = datetime.strptime(
             comment["created_at"], "%Y-%m-%dT%H:%M:%SZ"
         ).strftime("%d %b %Y")
