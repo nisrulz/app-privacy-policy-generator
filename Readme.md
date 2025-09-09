@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="img/hero.png" alt="App Privacy Policy Generator">
+  <img src="img/hero.jpg" alt="App Privacy Policy Generator">
 </div>
 
 <div align="center"><strong>
@@ -10,9 +10,6 @@
 </div>
 
 <br>
-
-
-
 
 <div align="center">
   <a href="https://mailchi.mp/kotlinweekly/kotlin-weekly-469#:~:text=app%2Dprivacy%2Dpolicy%2Dgenerator"><img src="https://img.shields.io/badge/Kotlin_Weekly-%23469-9d2beb?logo=kotlin&amp;logoColor=white" alt="Kotlin Weekly Newsletter Issue #469"></a><a href="https://github.com/nisrulz/app-privacy-policy-generator">
