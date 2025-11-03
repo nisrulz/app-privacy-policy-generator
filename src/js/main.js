@@ -207,7 +207,10 @@ const app = createApp({
     },
     fc_deploy_simple() {
       fc_deploy_simple();
-    }
+    },
+    isAppOpenSource() {
+      return this.typeOfApp === "Open Source";
+    },
   },
 });
 
