@@ -57,7 +57,12 @@ section#step-3.columns(v-if='wizardStep==3')
                     input(v-model="isLocationTracked" id="locationcheckbox" type="checkbox")
                     label(for="locationcheckbox")
                         img.checkbox-logo(src="images/app_graphics/location.svg")
-                        strong Is Location tracked
+                        strong Is Location tracked ?
+                    br
+                    input(v-model="isAIUsed" id="aicheckbox" type="checkbox")
+                    label(for="aicheckbox")
+                        img.checkbox-logo(src="images/app_graphics/ai.svg")
+                        strong Is AI used ?
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep') Next
