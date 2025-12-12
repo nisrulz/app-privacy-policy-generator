@@ -1,13 +1,12 @@
 section#step-2.columns(v-if='wizardStep==2')
     .column.card
         .card-content
-            p
-                a(
-                    href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+            p.is-hidden-desktop
+                a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
                     target='_blank' 
                     rel='noopener noreferrer')
                     img.is-size-1(src='images/text_logo.svg')
-                
+
             progress.progress.is-small.is-link(value='16' max='100')
             .scrollable.content
                 .control
