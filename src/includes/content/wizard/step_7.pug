@@ -1,9 +1,8 @@
 section#step-7.columns(v-if="wizardStep==7")
     .column.card
         .card-content
-            p
-                a(
-                    href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+            p.is-hidden-desktop
+                a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
                     target='_blank' 
                     rel='noopener noreferrer')
                     img.is-size-1(src='images/text_logo.svg')
@@ -53,9 +52,9 @@ section#step-7.columns(v-if="wizardStep==7")
                 p Now sit back and choose the type of document you want to generate.
                     br
                     a.has-info(
-                            rel="noopener noreferrer" 
-                            @click="toggleFaqModalVisibility"
-                             ) Read FAQ
+                        rel="noopener noreferrer" 
+                        @click="toggleFaqModalVisibility"
+                            ) Read FAQ
                     p.has-text-grey-light
                         | The accuracy of the generated privacy policy and terms & conditions on this website is not legally binding. Use at your own risk.
                     p(style='margin-bottom: 0;')
@@ -81,4 +80,7 @@ section#step-7.columns(v-if="wizardStep==7")
                     ) Privacy Policy
             a.card-footer-item(@click='toggleTermsModalVisibility' rel="noopener noreferrer") Terms & Conditions
     .column.is-information.is-hidden-touch
-        img.center-block.sidebar-img(src='images/app_graphics/side_image.svg')
+        a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+            target='_blank' 
+            rel='noopener noreferrer')
+            img.center-block.sidebar-img(src='images/app_graphics/side_image.webp')

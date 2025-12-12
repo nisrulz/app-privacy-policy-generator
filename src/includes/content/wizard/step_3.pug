@@ -1,9 +1,8 @@
 section#step-3.columns(v-if='wizardStep==3')
     .column.card
         .card-content
-            p
-                a(
-                    href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+            p.is-hidden-desktop
+                a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
                     target='_blank' 
                     rel='noopener noreferrer')
                     img.is-size-1(src='images/text_logo.svg')
@@ -67,4 +66,7 @@ section#step-3.columns(v-if='wizardStep==3')
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep') Next
     .column.is-information.is-hidden-touch
-        img.center-block.sidebar-img(src='images/app_graphics/side_image.svg')
+        a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
+            target='_blank' 
+            rel='noopener noreferrer')
+            img.center-block.sidebar-img(src='images/app_graphics/side_image.webp')
