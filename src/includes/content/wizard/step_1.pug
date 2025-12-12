@@ -1,8 +1,7 @@
 section#step-1.columns.has-text-centered(v-if='wizardStep==1')
     .column.is-full
         a.title(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' target='_blank' rel='noopener noreferrer')
-            img.is-size-3.title-logo(src='images/text_logo.svg')
-        img.center-block.hero-image(src='images/app_graphics/side_image.svg')
+        img.center-block.hero-image(src='images/app_graphics/side_image.webp')
         p.is-size-8.mt-2
             | Generate a customized Privacy Policy and Terms of Use document for your mobile apps
         p.mt-2
@@ -20,12 +19,12 @@ section#step-1.columns.has-text-centered(v-if='wizardStep==1')
             a.has-info(rel="noopener noreferrer" @click="toggleFaqModalVisibility") Read FAQ
         p.mt-2
             a(href='https://bsky.app/intent/compose?text=%F0%9F%93%9D%20App%20Privacy%20Policy%20Generator:%20A%20free%20web-app%20to%20generate%20a%20generic%20privacy%20policy%20for%20your%20Android/iOS/KaiOS%20apps%0A%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BB%20by%20@nisrulz.com%20%0A%0A%E2%9C%85%20Web%20App:%20https://app-privacy-policy-generator.nisrulz.com%20%0A%0A%E2%9C%85%20Reviews:%20https://app-privacy-policy-generator.nisrulz.com/reviews.html%20%0A%0A#free%20#app%20#privacy%20#policy%20#generator' target='_blank' rel='noopener noreferrer')
-                img(style='margin-right: 6px',src='https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff&label=Share%20on&color=0285FF' alt='Bluesky')
+                img(style='margin-right: 6px' src='https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff&label=Share%20on&color=0285FF' alt='Bluesky')
             a(@click='toggleDisclaimerModalVisibility' rel='noopener noreferrer')
                 img.social-logo(src='images/app_icons/disclaimer.svg' alt='Disclaimer')
             a(href='https://github.com/nisrulz/app-privacy-policy-generator' target='_blank' rel='noopener noreferrer')
                 img(alt='GitHub stars' src='https://img.shields.io/github/stars/nisrulz/app-privacy-policy-generator?style=social')
-            a(href='https://ko-fi.com/A443EQ6', target='_blank')
-                img(style='border: 0px;height: 1.2em;margin-left: 6px', src='https://storage.ko-fi.com/cdn/kofi1.png?v=3', alt='Buy Me a Coffee at ko-fi.com')
+            a(href='https://ko-fi.com/A443EQ6' target='_blank')
+                img(style='border: 0px;height: 1.2em;margin-left: 6px' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' alt='Buy Me a Coffee at ko-fi.com')
         hr
         button.button.is-primary.start-btn(@click='nextStep') Start
