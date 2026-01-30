@@ -1,3 +1,4 @@
+
 <div align="center">
   <img src="img/hero.jpg" alt="App Privacy Policy Generator">
 </div>
