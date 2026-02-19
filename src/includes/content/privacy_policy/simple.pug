@@ -21,9 +21,9 @@
                         li The operating system you use on your mobile device
 
                 br
-                p(v-show='!isLocationTracked') The Application does not gather precise information about the location of your mobile device.
+                p(v-if='!isLocationTracked') The Application does not gather precise information about the location of your mobile device.
 
-                div(v-show='isLocationTracked')
+                div(v-if='isLocationTracked')
                     p The Application collects your device's location, which helps the Service Provider determine your approximate geographical location and make use of in below ways:
                     ul
                         li Geolocation Services: The Service Provider utilizes location data to provide features such as personalized content, relevant recommendations, and location-based services.
@@ -31,6 +31,10 @@
                         li Third-Party Services: Periodically, the Service Provider may transmit anonymized location data to external services. These services assist them in enhancing the Application and optimizing their offerings.
 
                 br
+                p(v-if='!isAIUsed') The Application does not use Artificial Intelligence (AI) technologies to process your data or provide features.
+                p(v-else) The Application uses Artificial Intelligence (AI) technologies to enhance user experience and provide certain features. The AI components may process user data to deliver personalized content, recommendations, or automated functionalities. All AI processing is performed in accordance with this privacy policy and applicable laws. If you have questions about the AI features or data processing, please contact the Service Provider.
+                br
+
                 p The Service Provider may use the information you provided to contact you from time to time to provide you with important information, required notices and marketing promotions.
                 br
                 p For a better experience, while using the Application, the Service Provider may require you to provide us with certain personally identifiable information{{pidInfo}} The information that the Service Provider request will be retained by them and used as described in this privacy policy.
@@ -55,11 +59,7 @@
                         li when they believe in good faith that disclosure is necessary to protect their rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;
                         li with their trusted services providers who work on their behalf, do not have an independent use of the information we disclose to them, and have agreed to adhere to the rules set forth in this privacy statement.
                 br
-                //- AI Usage Section
-                div(v-if="isAIUsed")
-                    strong Use of Artificial Intelligence
-                    p The Application uses Artificial Intelligence (AI) technologies to enhance user experience and provide certain features. The AI components may process user data to deliver personalized content, recommendations, or automated functionalities. All AI processing is performed in accordance with this privacy policy and applicable laws. If you have questions about the AI features or data processing, please contact the Service Provider.
-                    br
+
                 strong Opt-Out Rights
                 p You can stop all collection of information by the Application easily by uninstalling it. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.
 
@@ -82,7 +82,7 @@
                         | and you are aware that your child has provided us with
                         | personal information, please contact the Service Provider ({{ appContact }}) so that
                         | they will be able to take the necessary actions.
-                div(v-if='!hasThirdPartyServicesSelected')
+                div(v-else)
                     br
                     p
                         | The Service Provider does not knowingly collect personally
@@ -93,7 +93,7 @@
                         | their children's Internet usage and to help enforce this Policy by instructing 
                         | their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child 
                         | has provided personally identifiable information to the Service Provider through the Application and/or Services, 
-                        | please contact the Service Provider ({{ appContact }}) so that they will be able to take the necessary actions. 
+                        | please contact the Service Provider <span v-if="appContact">({{ appContact }})</span> so that they will be able to take the necessary actions. 
                         | You must also be at least 16 years of age to consent to the processing 
                         | of your personally identifiable information in your country (in some countries we may allow your parent 
                         | or guardian to do so on your behalf).
