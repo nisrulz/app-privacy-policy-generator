@@ -11,6 +11,18 @@
                 p This privacy policy is applicable to the {{ appName }} app (hereinafter referred to as "Application") for mobile devices, which was developed by {{ devOrCompanyName }} (hereinafter referred to as "Service Provider") as a {{typeOfAppTxt}} service. This service is provided "AS IS".
 
                 br
+                strong Data Controller Information
+
+                p The Data Controller responsible for the processing of your personal data is:
+                ul
+                    li Name: {{ devOrCompanyName }}
+                    li Address: [Please provide your full business address including street, city, postal code, and country]
+                    li Email: {{ appContact }}
+                    li(v-if='dataControllerPhone') Phone: {{ dataControllerPhone }}
+
+                p For all data protection inquiries and to exercise your GDPR rights, please contact the Data Controller using the information above.
+
+                br
                 strong What information does the Application obtain and how is it used?
 
                 p The Application acquires the information you supply when you download and register the Application. Registration with the Service Provider is not mandatory. However, bear in mind that you might not be able to utilize some of the features offered by the Application unless you register with them.
