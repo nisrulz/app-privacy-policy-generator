@@ -11,11 +11,43 @@
                 p This privacy policy is applicable to the {{ appName }} app (hereinafter referred to as "Application") for mobile devices, which was developed by {{ devOrCompanyName }} (hereinafter referred to as "Service Provider") as a {{typeOfAppTxt}} service. This service is provided "AS IS".
 
                 br
+                strong Data Controller Information
+
+                p The Data Controller responsible for the processing of your personal data is:
+                ul
+                    li Name: {{ devOrCompanyName }}
+                    li Address: [REPLACE WITH YOUR BUSINESS ADDRESS: street, city, postal code, country]
+                    li Email: {{ appContact }}
+                    li(v-if='dataControllerPhone') Phone: {{ dataControllerPhone }}
+
+                p For all data protection inquiries and to exercise your GDPR rights, please contact the Data Controller using the information above.
+
+                br
                 strong What information does the Application obtain and how is it used?
 
                 p The Application acquires the information you supply when you download and register the Application. Registration with the Service Provider is not mandatory. However, bear in mind that you might not be able to utilize some of the features offered by the Application unless you register with them.
 
                 p The Service Provider may also use the information you provided them to contact you from time to time to provide you with important information, required notices and marketing promotions.
+
+                br
+                strong Legal basis for processing your personal data
+
+                p Where the GDPR applies, the Service Provider relies on one or more lawful bases to process your personal data, including:
+                ul
+                    li Contract performance: processing necessary to provide the Application or fulfil a contract with you.
+                    li Consent: where you have given explicit consent (for example for marketing, analytics or certain optional features). You may withdraw consent at any time without affecting processing that occurred prior to withdrawal.
+                    li Legitimate interests: for operating and improving the Application, preventing fraud, and ensuring security, where such interests are not overridden by your rights.
+                    li Legal obligation: to comply with laws or government requests.
+
+                br
+                strong Cookies and similar technologies
+
+                p The Application and its third-party service providers may use cookies, SDKs, pixels, and similar technologies to collect usage information, analytics, and to deliver features. You can control or delete cookies through your device or marketplace settings. For analytics or tracking that requires consent, the Service Provider will obtain your consent where required by law.
+
+                br
+                strong Automated decision-making and profiling
+
+                p Where the Application uses automated decision-making (including profiling) that produces legal effects or similarly significantly affects you, you have the right to request human review, to express your point of view, and to contest the decision. If such processing is used, specific information about the logic involved and the likely consequences will be provided where required by law.
 
                 br
                 strong What information does the Application collect automatically?
@@ -48,6 +80,16 @@
 
                 p Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.
 
+                br
+                strong International Data Transfers
+
+                p The Service Provider may transfer your personal data to countries outside the European Economic Area (EEA), including to the United States and other countries. When data is transferred outside the EEA, the Service Provider implements appropriate safeguards such as:
+                ul
+                    li Adequacy decisions, Binding Corporate Rules, or Standard Contractual Clauses (SCCs) approved by the European Commission
+                    li Other appropriate safeguards recognized under GDPR Chapter 5; in limited circumstances and where permitted by law, transfers may also rely on your explicit consent.
+
+                p Please note that countries outside the EEA may not provide the same level of data protection as the EEA. Where required by law, the Service Provider will obtain your explicit consent prior to transferring personal data to countries without an adequate level of protection; otherwise transfers rely on appropriate safeguards as described above. By using the Application you acknowledge the transfer mechanisms described.
+
                 div(v-if='hasThirdPartyServicesSelected')
                     br
                     p Please note that the Application utilizes third-party services that have their own Privacy Policy about handling data. Below are the links to the Privacy Policy of the third-party service providers used by the Application:
@@ -64,24 +106,31 @@
                 br
                 strong What are my opt-out rights?
 
-                p You can halt all collection of information by the Application easily by uninstalling the Application. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.
+                p You can stop further collection of information from your device by uninstalling the Application. Uninstalling will stop the Application from collecting data on your device, but it does not automatically delete information that has already been transmitted to the Service Provider or to third parties. To request deletion of your personal data, to withdraw consent, or to exercise any of your rights, contact the Service Provider at {{ appContact }} (see "How can you contact us?").
 
                 br
                 strong What is the data retention policy and how can you manage your information?
 
-                p The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. The Service Provider will retain Automatically Collected information for up to 24 months and thereafter may store it in aggregate. If you'd like the Service Provider to delete User Provided Data that you have provided via the Application, please contact them at {{ appContact }} and we will respond in a reasonable time. Please note that some or all of the User Provided Data may be required in order for the Application to function properly.
+                p The Service Provider retains personal data based on its necessity for the stated purposes:
+                ul
+                    li User Provided Data: Retained for the duration of your account and 30 days thereafter, unless longer retention is required by law
+                    li Automatically Collected Data: Retained for up to 12 months
+                    li Aggregated and Anonymized Data: May be retained indefinitely
+                    li Data required for legal compliance: Retained as long as required by applicable law
+
+                p You have the right to request deletion of your personal data at any time, except where retention is required by law. If you'd like the Service Provider to delete User Provided Data that you have provided via the Application, please contact them at {{ appContact }} and they will respond within 30 days. Please note that some User Provided Data may be required in order for the Application to function properly.
 
                 br
                 strong How does the Application address children's privacy?
 
-                p The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 13.
+                p The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 16.
                 div(v-if='hasThirdPartyServicesSelected')
                     br
                     p
-                        | The Application does not address anyone under the age of 13.
+                        | The Application does not address anyone under the age of 16.
                         | The Service Provider does not knowingly collect personally
-                        | identifiable information from children under 13 years of age. In the case
-                        | the Service Provider discover that a child under 13 has provided
+                        | identifiable information from children under 16 years of age. In the case
+                        | the Service Provider discover that a child under 16 has provided
                         | personal information, the Service Provider will immediately
                         | delete this from their servers. If you are a parent or guardian
                         | and you are aware that your child has provided us with
@@ -94,7 +143,7 @@
                         | identifiable information from children. The Service Provider 
                         | encourages all children to never submit any personally
                         | identifiable information through the Application and/or Services.
-                        | The Service Provider encourage parents and legal guardians to monitor 
+                        | The Service Provider encourages parents and legal guardians to monitor 
                         | their children's Internet usage and to help enforce this Policy by instructing 
                         | their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child 
                         | has provided personally identifiable information to the Service Provider through the Application and/or Services, 
@@ -106,24 +155,45 @@
                 br
                 strong How is your information kept secure?
 
-                p The Service Provider are concerned about safeguarding the confidentiality of your information. The Service Provider provide physical, electronic, and procedural safeguards to protect information we process and maintain. For example, we limit access to this information to authorized employees and contractors who need to know that information in order to operate, develop or improve their Application. Please be aware that, although we endeavor provide reasonable security for information we process and maintain, no security system can prevent all potential security breaches.
+                p The Service Provider is committed to safeguarding the confidentiality of your information. The Service Provider implements physical, electronic, and procedural safeguards to protect information it processes and maintains. For example, access is limited to authorized employees and contractors who need to know that information to operate, develop, or improve the Application. However, no security system can prevent all potential security breaches.
 
                 br
                 strong How will you be informed of changes to this Privacy Policy?
 
-                p This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.
+                p The Service Provider may update this Privacy Policy from time to time. The Service Provider will notify you of material changes by posting the updated Privacy Policy with an effective date. Continued use of the Application after the effective date of any revised Privacy Policy constitutes acceptance of the changes.
                 br
                 p This privacy policy is effective as of {{ effectiveFromDate }}
 
                 br
+                strong What are your GDPR data protection rights?
+
+                p Under the GDPR, you have the following rights:
+                ul
+                    li Right of Access: You can request access to your personal data
+                    li Right to Rectification: You can request correction of inaccurate data
+                    li Right to Erasure: You can request deletion of your personal data
+                    li Right to Restrict Processing: You can request that we limit how we use your data
+                    li Right to Data Portability: You can request a copy of your data in a structured, commonly used format
+                    li Right to Object: You can object to certain types of processing
+                    li Rights Regarding Automated Decision-Making: You have rights related to automated decisions that affect you
+
+                p If you believe your data protection rights have been violated, you have the right to lodge a complaint with your local Data Protection Authority. You can find contact details for your country's Data Protection Authority at: 
+                    a(href='https://edpb.ec.europa.eu/about-edpb/members_en' target='_blank' rel='noopener noreferrer') https://edpb.ec.europa.eu/about-edpb/members_en
+
+                br  
                 strong How do you give your consent?
 
-                p By using the Application, you are giving your consent to the Service Provider processing of your information as set forth in this Privacy Policy now and as amended by us. "Processing,” means using cookies on a computer/hand held device or using or touching information in any way, including, but not limited to, collecting, storing, deleting, using, combining and disclosing information.
+                p Where processing is based on your consent, you give consent by opting in to the relevant feature or action (for example by enabling a feature or ticking a consent box). You may withdraw consent at any time without affecting processing carried out prior to withdrawal. For processing based on other lawful bases (such as contract performance or legitimate interests), processing is carried out as described above.
 
                 br
                 strong How can you contact us?
 
                 p If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at {{ appContact }}.
+
+                br
+                strong How can you contact us?
+
+                p If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at {{ appContact }}. To request deletion of your personal data or to exercise any of your rights, contact the Data Controller using the details provided above; the Service Provider will respond within 30 days.
                 hr
                 p This privacy policy page was generated by 
                     a(href='https://app-privacy-policy-generator.nisrulz.com/' target='_blank' rel='noopener noreferrer') App Privacy Policy Generator
