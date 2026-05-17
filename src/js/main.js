@@ -23,6 +23,7 @@ const { createApp } = Vue;
 const app = createApp({
   data() {
     return {
+      // === Wizard Form Inputs ===
       iOrWe: "[I/We]",
       typeOfApp: "Free",
       typeOfAppTxt: "a Free",
@@ -41,25 +42,34 @@ const app = createApp({
       effectiveFromDate: new Date().toISOString().slice(0, 10),
       requirementOfSystem: "system",
 
-      // Third-party services array and UI flags
+      // === Third-Party Services ===
       thirdPartyServices: thirdPartyServicesJsonArray,
+      hasThirdPartyServicesSelected: true,
+
+      // === Privacy Policy Modal Flags ===
       showPrivacyModal: false,
       showGDPRPrivacyModal: false,
+      showNoTrackingPrivacyPolicyModal: false,
+
+      // === Other Modal Flags ===
       showTermsModal: false,
       showDisclaimerModal: false,
       showFaqModal: false,
-      showNoTrackingPrivacyPolicyModal: false,
-      hasThirdPartyServicesSelected: true,
 
-      // UI wizard state
+      // === UI State ===
       contentRenderType: 1, // 1 = Preview, 2 = HTML/Markdown
       wizardStep: 1,
       totalWizardSteps: 7,
+
+      // === Policy Content Settings ===
       typeOfPolicy: "Simple",
       typeOfPolicyInt: 1,
       isLocationTracked: false,
       ageOfDigitalConsent: 16,
-      isAIUsed: true,
+      isAIUsed: false,
+
+      // === Platform-Aware Text (set by generate()) ===
+      // These defaults assume Mobile App; generate() overrides for Web/Both
       platformType: "Mobile App",
       deviceType: "mobile device",
       deviceTypePlural: "mobile devices",
@@ -72,6 +82,7 @@ const app = createApp({
   },
 
   computed: {
+    // Filter third-party services based on what links they provide
     enabledThirdPartyServicesWithPrivacy() {
       return this.thirdPartyServices.filter(
         (item) => item.enabled && item.link?.privacy
@@ -87,6 +98,8 @@ const app = createApp({
         (item) => item.link?.privacy || item.link?.terms
       );
     },
+
+    // Platform type matchers used across all templates
     isMobileApp() {
       return this.platformType === "Mobile App";
     },
@@ -96,6 +109,8 @@ const app = createApp({
     isBothPlatforms() {
       return this.platformType === "Both";
     },
+
+    // Guards the Next button: blocks advance until required fields are filled
     canAdvance() {
       switch (this.wizardStep) {
         case 2:
@@ -111,17 +126,34 @@ const app = createApp({
   },
 
   methods: {
+    // ==================== Utility ====================
+
     capitalize(value) {
       if (!value) return "";
       return value.charAt(0).toUpperCase() + value.slice(1);
     },
+    isAppOpenSource() {
+      return this.typeOfApp === "Open Source";
+    },
 
-    // Preview view switch
+    // ==================== UI Helpers ====================
+
+    // Check whether the user has enabled at least one third-party service
+    checkForThirdPartyServicesEnabled() {
+      return this.thirdPartyServices.some((item) => item.enabled === true);
+    },
+
+    // Toggle a third-party service checkbox (mutates the array item in place)
+    toggleState(item) {
+      item.enabled = !item.enabled;
+    },
+
+    // Switch content view to preview mode
     preview(id) {
       this.contentRenderType = 1;
     },
 
-    // Set numeric policy type
+    // Map policy type name to the numeric value used in v-show/v-if conditions
     setTypeOfPolicyInt() {
       switch (this.typeOfPolicy) {
         case "Simple":
@@ -136,7 +168,9 @@ const app = createApp({
       }
     },
 
-    // Step navigator
+    // ==================== Wizard Navigation ====================
+
+    // Advance to next step; canAdvance blocks until required fields are filled
     nextStep() {
       if (!this.canAdvance) return;
       this.wizardStep += 1;
@@ -145,17 +179,9 @@ const app = createApp({
       this.wizardStep -= 1;
     },
 
-    // Check enabled 3rd party services
-    checkForThirdPartyServicesEnabled() {
-      return this.thirdPartyServices.some((item) => item.enabled === true);
-    },
+    // ==================== Content Rendering ====================
 
-    // For reactive update of the JSON - toggle state
-    toggleState(item) {
-      item.enabled = !item.enabled;
-    },
-
-    // Render HTML content
+    // Render the generated content as raw HTML for copy/paste
     getHtml(id, target) {
       let content = getContent(id);
       let title = getTitle(id);
@@ -164,7 +190,7 @@ const app = createApp({
       loadInTextView(target, rawHTML);
     },
 
-    // Render Markdown content
+    // Render the generated content as Markdown for copy/paste
     getMarkdown(id, target) {
       let content = getContent(id);
       let title = getTitle(id);
@@ -174,42 +200,72 @@ const app = createApp({
       loadInTextView(target, markdown);
     },
 
-    // Generate output data based on inputs
+    // ==================== Data Generation ====================
+
+    // Validate required fields, then compute all derived template variables.
+    // Called by every modal toggle; returns true only when all checks pass.
     generate() {
+      if (!this._validateRequiredFields()) return false;
+
+      this._setDevOrCompanyName();
+      this._setPidInfo();
+      this._setAppTypeText();
+      this._setOsRequirement();
+      this._setPlatformText();
+      return true;
+    },
+
+    // -- Private helpers (prefixed with _) --
+
+    // Ensure the user filled every field the modals depend on.
+    // The wizard's canAdvance already prevents reaching step 7 without these,
+    // but this serves as a safety net for edge cases (e.g. direct URL access).
+    _validateRequiredFields() {
       if (!this.appName.trim()) return false;
       if (!this.appContact.trim()) return false;
       if (this.typeOfDev === "Individual" && !this.devName.trim()) return false;
       if (this.typeOfDev === "Company" && !this.companyName.trim()) return false;
+      return true;
+    },
 
-      // Dev/Company Name
+    // Set display name: use developer name for individuals, company name otherwise
+    _setDevOrCompanyName() {
       this.devOrCompanyName =
         this.typeOfDev === "Individual" ? this.devName : this.companyName;
+    },
 
-      // PID Info
+    // PII text: empty → "." (no extra info), non-empty → ", including but not limited to ..."
+    _setPidInfo() {
       this.pidInfo =
         this.pidInfoIn === ""
           ? "."
           : ", including but not limited to " + this.pidInfoIn + ".";
+    },
 
-      // App Type Text
+    // "Open Source" and "Ad Supported" take "an" instead of "a" before the type
+    _setAppTypeText() {
       this.typeOfAppTxt = ["Open Source", "Ad Supported"].includes(
         this.typeOfApp
       )
         ? "an " + this.typeOfApp
         : "a " + this.typeOfApp;
+    },
 
-      // OS system requirement
+    // Map selected OS combo to the system requirement phrase used in T&C
+    _setOsRequirement() {
       switch (this.osType) {
-        case "Android":
-        case "iOS":
-          this.requirementOfSystem = "system";
-          break;
         case "Android & iOS":
           this.requirementOfSystem = "both systems";
           break;
+        default:
+          this.requirementOfSystem = "system";
       }
+    },
 
-      // Platform-specific text
+    // Derive device/language vocabulary from the platform type selection.
+    // All templates reference these variables so the text reads naturally
+    // whether the app targets mobile, web, or both.
+    _setPlatformText() {
       switch (this.platformType) {
         case "Web App":
           this.deviceType = "device";
@@ -229,7 +285,7 @@ const app = createApp({
           this.browserDesc = "the type of browser you use";
           this.uninstallDesc = "by uninstalling the Application or ceasing to use the website";
           break;
-        default: // Mobile App
+        default:
           this.deviceType = "mobile device";
           this.deviceTypePlural = "mobile devices";
           this.platformDesc = "mobile devices";
@@ -239,51 +295,52 @@ const app = createApp({
           this.uninstallDesc = "by uninstalling the Application";
           break;
       }
-      return true;
     },
 
-    // Toggle modals & refresh data
+    // ==================== Modal Toggles ====================
+
+    // Open or close a policy modal, guarded by generate().
+    // generate() returns early (false) if required fields are missing,
+    // which prevents the modal from opening with placeholder text.
+    _toggleModal(modalFlag) {
+      if (!this.generate()) return;
+      this.hasThirdPartyServicesSelected =
+        this.checkForThirdPartyServicesEnabled();
+      this.contentRenderType = 1;
+      this[modalFlag] = !this[modalFlag];
+    },
+
     toggleNoTrackingPrivacyPolicyModalVisibility() {
       if (!this.generate()) return;
       this.contentRenderType = 1;
       this.showNoTrackingPrivacyPolicyModal =
         !this.showNoTrackingPrivacyPolicyModal;
     },
+
     togglePrivacyModalVisibility() {
-      if (!this.generate()) return;
-      this.hasThirdPartyServicesSelected =
-        this.checkForThirdPartyServicesEnabled();
-      this.contentRenderType = 1;
-      this.showPrivacyModal = !this.showPrivacyModal;
+      this._toggleModal("showPrivacyModal");
     },
     toggleGDPRPrivacyModalVisibility() {
-      if (!this.generate()) return;
-      this.hasThirdPartyServicesSelected =
-        this.checkForThirdPartyServicesEnabled();
-      this.contentRenderType = 1;
-      this.showGDPRPrivacyModal = !this.showGDPRPrivacyModal;
+      this._toggleModal("showGDPRPrivacyModal");
     },
     toggleTermsModalVisibility() {
-      if (!this.generate()) return;
-      this.hasThirdPartyServicesSelected =
-        this.checkForThirdPartyServicesEnabled();
-      this.contentRenderType = 1;
-      this.showTermsModal = !this.showTermsModal;
+      this._toggleModal("showTermsModal");
     },
+
+    // Disclaimer and FAQ don't need generate() — they're static content
     toggleDisclaimerModalVisibility() {
       this.showDisclaimerModal = !this.showDisclaimerModal;
     },
     toggleFaqModalVisibility() {
       this.showFaqModal = !this.showFaqModal;
     },
+
+    // ==================== Third-Party Integration ====================
+
     deployFcSimple() {
       fc_deploy_simple();
-    },
-    isAppOpenSource() {
-      return this.typeOfApp === "Open Source";
     },
   },
 });
 
-// Mount the Vue app
 app.mount("#app");
