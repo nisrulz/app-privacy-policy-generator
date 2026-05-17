@@ -16,19 +16,18 @@
                         li {{ osDesc }} you use
 
                 br
-                p(v-if='!isLocationTracked') The Application does not gather precise information about the location of your {{ deviceType }}.
+                strong Cookies and tracking technologies
+
+                p The Application or its third-party SDKs may use cookies, SDKs, pixels, and similar technologies to support functionality, analytics, or service delivery. Where required by applicable law, the Service Provider will obtain consent before using non-essential tracking technologies.
 
                 div(v-if='isLocationTracked')
+                    br
+                    strong Location Information
                     p The Application collects your device's location to provide location-based features, improve the Application, and support related services.
                     ul
                         li Geolocation Services: The Service Provider may use location data to provide location-based features or content.
                         li Analytics and Improvements: Aggregated location data may help the Service Provider understand usage patterns and improve performance.
                         li Third-Party Services: Location data may be shared with third-party services used to support Application functionality, subject to this privacy policy and applicable law.
-
-                br
-                strong Cookies and tracking technologies
-
-                p The Application or its third-party SDKs may use cookies, SDKs, pixels, and similar technologies to support functionality, analytics, or service delivery. Where required by applicable law, the Service Provider will obtain consent before using non-essential tracking technologies.
 
                 br
                 strong Your Rights
@@ -38,10 +37,11 @@
                 strong Your California privacy rights (CCPA/CPRA)
                 p If you are a California resident, you have the right to know what personal information is collected, the right to delete personal information, the right to opt out of the sale or sharing of personal information, and the right to non-discrimination for exercising these rights. To exercise your CCPA/CPRA rights, contact the Service Provider at {{ appContact }}.
 
-                br
-                p(v-if='!isAIUsed') The Application does not use Artificial Intelligence (AI) technologies to process your data or provide features.
-                p(v-else) The Application uses Artificial Intelligence (AI) technologies to enhance user experience and provide certain features. The AI components may process user data to deliver personalized content, recommendations, or automated functionalities. All AI processing is performed in accordance with this privacy policy and applicable laws. If you have questions about the AI features or data processing, please contact the Service Provider.
-                br
+                div(v-if='isAIUsed')
+                    br
+                    strong Artificial Intelligence
+                    p The Application uses Artificial Intelligence (AI) technologies to enhance user experience and provide certain features. The AI components may process user data to deliver personalized content, recommendations, or automated functionalities. All AI processing is performed in accordance with this privacy policy and applicable laws. If you have questions about the AI features or data processing, please contact the Service Provider.
+                    br
 
                 p The Service Provider may use the information you provide to send important information, required notices, and, where permitted by law, marketing communications.
                 br
