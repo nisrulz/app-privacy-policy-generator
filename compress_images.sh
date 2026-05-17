@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # App Privacy Policy Generator: A simple web app to generate a generic 
-# privacy policy for your Android/iOS apps
+# privacy policy for your Android, iOS, and Web apps
 # 
 # Copyright 2017-Present Nishant Srivastava
 # 
@@ -18,22 +18,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-echo "Navigate to Images directory"
+TEMP_DIR=$(mktemp -d)
+trap 'rm -rf "$TEMP_DIR"' EXIT
+
 cd public/images
 
-#--------------------------------- Compress SVG files ---------------------------------#
-svgo -f app_graphics temp
-mv temp/*.svg app_graphics
+# Compress SVG files
+npx -q svgo -f app_graphics "$TEMP_DIR"
+mv "$TEMP_DIR"/*.svg app_graphics
 
-svgo -f app_icons temp
-mv temp/*.svg app_icons
+npx -q svgo -f app_icons "$TEMP_DIR"
+mv "$TEMP_DIR"/*.svg app_icons
 
-svgo -f social_icons temp
-mv temp/*.svg social_icons
+npx -q svgo -f social_icons "$TEMP_DIR"
+mv "$TEMP_DIR"/*.svg social_icons
 
-# Delete Temp directory
-rm -rf temp
-
-#--------------------------------- Compress PNG files ---------------------------------#
-npx png-minify minify third_party_logos/*.png
+# Compress PNG files
+npx -q png-minify minify third_party_logos/*.png
 
