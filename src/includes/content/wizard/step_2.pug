@@ -46,6 +46,7 @@ section#step-2.columns(v-if='wizardStep==2')
                                 required="" 
                                 type="text"
                                 )
+                        p.help.has-text-grey(v-show="!(appName.length == 0)") Name of the app or service covered by the generated document.
                         p.help(v-bind:class="{ 'is-danger': (appName.length == 0) }" v-show="(appName.length == 0)") Application Name is required.
                 br
                 .control
@@ -59,7 +60,32 @@ section#step-2.columns(v-if='wizardStep==2')
                                 required="" 
                                 type="email"
                                 )
+                        p.help.has-text-grey(v-show="!(appContact.length == 0)") Email address for privacy, legal, and support inquiries.
                         p.help(v-bind:class="{ 'is-danger': (appContact.length == 0) }" v-show="(appContact.length == 0)") Email address is required.
+                br
+                .control
+                    .field
+                        label.label Business Address
+                        .control
+                            input#businessAddress.input(
+                                v-bind:class="{ 'is-danger': (typeOfPolicyInt==3 && businessAddress.length == 0) }"
+                                placeholder="Street, City, Postal Code, Country"
+                                v-model="businessAddress"
+                                type="text"
+                                )
+                        p.help.has-text-grey(v-show="!(typeOfPolicyInt==3 && businessAddress.length == 0)") Registered business or contact address for legal notices and GDPR disclosures.
+                        p.help.is-danger(v-show="(typeOfPolicyInt==3 && businessAddress.length == 0)") Business address is strongly recommended for GDPR policies.
+                br
+                .control(v-show="typeOfPolicyInt==3")
+                    .field
+                        label.label EU Representative (optional)
+                        .control
+                            input#euRepresentative.input(
+                                placeholder="EU Representative Name and Contact"
+                                v-model="euRepresentative" 
+                                type="text"
+                                )
+                        p.help.has-text-grey Name and contact details of your EU representative, if required under GDPR Article 27.
                 br
                 .control
                     .field
@@ -81,9 +107,22 @@ section#step-2.columns(v-if='wizardStep==2')
                                 type="text"
                                 )
                         p.help.has-text-grey Personally Identifiable Information you collect (comma separated)
+                br
+                .control
+                    .field
+                        label.label Age of Digital Consent
+                        .control
+                            input#ageOfDigitalConsent.input(
+                                placeholder="16"
+                                v-model="ageOfDigitalConsent" 
+                                type="number"
+                                min="13"
+                                max="18"
+                                )
+                        p.help.has-text-grey Minimum age for digital consent in your jurisdiction (16 for EU/Germany, 13 for US COPPA).
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep') Next
+            a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") Next
     .column.is-information.is-hidden-touch
         a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
             target='_blank' 

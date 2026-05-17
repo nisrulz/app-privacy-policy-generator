@@ -9,48 +9,77 @@ section#step-4.columns(v-if="wizardStep==4")
             progress.progress.is-small.is-link(value='48' max='100')
             .scrollable.content
                 .control
-                    | Select Mobile OS:
-                    span.tag.is-primary.is-light {{osType}}
+                    | Platform Type:
+                    span.tag.is-primary.is-light {{platformType}}
                     br
                     label.radio
                         input(
-                            v-model="osType" 
-                            value="Android" 
+                            v-model="platformType"
+                            value="Mobile App"
                             type="radio"
                             )
-                        |   Android
+                        |   Mobile App
                     br
                     label.radio
                         input(
-                            v-model="osType" 
-                            value="iOS" 
+                            v-model="platformType"
+                            value="Web App"
                             type="radio"
                             )
-                        |   iOS
+                        |   Web App
                     br
                     label.radio
                         input(
-                            v-model="osType" 
-                            value="KaiOS" 
+                            v-model="platformType"
+                            value="Both"
                             type="radio"
                             )
-                        |   KaiOS
+                        |   Both
                     br
-                    label.radio
-                        input(
-                            v-model="osType" 
-                            value="Android & iOS" 
-                            type="radio"
-                            )
-                        |   Android & iOS
                     br
-                    label.radio
-                        input(
-                            v-model="osType" 
-                            value="Android, iOS & KaiOS" 
-                            type="radio"
-                            )
-                        |   Android, iOS & KaiOS
+                    .control(v-if="platformType !== 'Web App'")
+                        | Select Mobile OS:
+                        span.tag.is-primary.is-light {{osType}}
+                        br
+                        label.radio
+                            input(
+                                v-model="osType"
+                                value="Android"
+                                type="radio"
+                                )
+                            |   Android
+                        br
+                        label.radio
+                            input(
+                                v-model="osType"
+                                value="iOS"
+                                type="radio"
+                                )
+                            |   iOS
+                        br
+                        label.radio
+                            input(
+                                v-model="osType"
+                                value="KaiOS"
+                                type="radio"
+                                )
+                            |   KaiOS
+                        br
+                        label.radio
+                            input(
+                                v-model="osType"
+                                value="Android & iOS"
+                                type="radio"
+                                )
+                            |   Android & iOS
+                        br
+                        label.radio
+                            input(
+                                v-model="osType"
+                                value="Android, iOS & KaiOS"
+                                type="radio"
+                                )
+                            |   Android, iOS & KaiOS
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep') Next

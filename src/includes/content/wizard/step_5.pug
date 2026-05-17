@@ -32,23 +32,29 @@ section#step-5.columns(v-if="wizardStep==5")
                     .field
                         label.label Company Name
                         .control
-                            input#companyName.input.is-primary(
+                            input#companyName.input(
+                                v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }"
                                 placeholder="Company Name" 
                                 v-model="companyName" 
+                                required=""
                                 type="text"
                                 )
+                        p.help(v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }" v-show="(companyName.length == 0 && typeOfDev=='Company')") Company Name is required.
                 .control(v-if="typeOfDev=='Individual'")
                     .field
                         label.label Developer Name
                         .control
-                            input#devName.input.is-primary(
+                            input#devName.input(
+                                v-bind:class="{ 'is-danger': (devName.length == 0 && typeOfDev=='Individual') }"
                                 placeholder="Developer Name" 
                                 v-model="devName" 
+                                required=""
                                 type="text"
                                 )
+                        p.help(v-bind:class="{ 'is-danger': (devName.length == 0 && typeOfDev=='Individual') }" v-show="(devName.length == 0 && typeOfDev=='Individual')") Developer Name is required.
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep') Next
+            a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") Next
     .column.is-information.is-hidden-touch
         a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
             target='_blank' 

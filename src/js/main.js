@@ -1,6 +1,6 @@
 /*  
   App Privacy Policy Generator: A simple web app to generate a generic 
-  privacy policy for your Android/iOS apps
+  privacy policy for your Android, iOS, and Web apps
 
   Copyright 2017-Present Nishant Srivastava
 
@@ -25,10 +25,12 @@ const app = createApp({
     return {
       iOrWe: "[I/We]",
       typeOfApp: "Free",
-      typeOfAppTxt: "[open source/free/freemium/ad-supported/commercial]",
+      typeOfAppTxt: "a Free",
       typeOfDev: "Individual",
       appName: "",
       appContact: "",
+      businessAddress: "",
+      euRepresentative: "",
       devName: "",
       companyName: "",
       devOrCompanyName: "[Developer/Company name]",
@@ -56,7 +58,16 @@ const app = createApp({
       typeOfPolicy: "Simple",
       typeOfPolicyInt: 1,
       isLocationTracked: false,
-      isAIUsed: false,
+      ageOfDigitalConsent: 16,
+      isAIUsed: true,
+      platformType: "Mobile App",
+      deviceType: "mobile device",
+      deviceTypePlural: "mobile devices",
+      platformDesc: "mobile devices",
+      deviceIdDesc: "your mobile device's unique device ID",
+      osDesc: "your mobile operating system",
+      browserDesc: "the type of mobile Internet browsers you use",
+      uninstallDesc: "by uninstalling the Application",
     };
   },
 
@@ -75,6 +86,27 @@ const app = createApp({
       return this.thirdPartyServices.filter(
         (item) => item.link?.privacy || item.link?.terms
       );
+    },
+    isMobileApp() {
+      return this.platformType === "Mobile App";
+    },
+    isWebApp() {
+      return this.platformType === "Web App";
+    },
+    isBothPlatforms() {
+      return this.platformType === "Both";
+    },
+    canAdvance() {
+      switch (this.wizardStep) {
+        case 2:
+          return !!(this.appName.trim() && this.appContact.trim());
+        case 5:
+          if (this.typeOfDev === "Individual") return !!this.devName.trim();
+          if (this.typeOfDev === "Company") return !!this.companyName.trim();
+          return false;
+        default:
+          return true;
+      }
     },
   },
 
@@ -106,6 +138,7 @@ const app = createApp({
 
     // Step navigator
     nextStep() {
+      if (!this.canAdvance) return;
       this.wizardStep += 1;
     },
     prevStep() {
@@ -143,6 +176,11 @@ const app = createApp({
 
     // Generate output data based on inputs
     generate() {
+      if (!this.appName.trim()) return false;
+      if (!this.appContact.trim()) return false;
+      if (this.typeOfDev === "Individual" && !this.devName.trim()) return false;
+      if (this.typeOfDev === "Company" && !this.companyName.trim()) return false;
+
       // Dev/Company Name
       this.devOrCompanyName =
         this.typeOfDev === "Individual" ? this.devName : this.companyName;
@@ -170,31 +208,63 @@ const app = createApp({
           this.requirementOfSystem = "both systems";
           break;
       }
+
+      // Platform-specific text
+      switch (this.platformType) {
+        case "Web App":
+          this.deviceType = "device";
+          this.deviceTypePlural = "devices";
+          this.platformDesc = "web browsers";
+          this.deviceIdDesc = "your device's unique identifier (e.g., IP address or browser fingerprint)";
+          this.osDesc = "your operating system";
+          this.browserDesc = "the type of web browser you use";
+          this.uninstallDesc = "by ceasing to use the website";
+          break;
+        case "Both":
+          this.deviceType = "mobile device or computer";
+          this.deviceTypePlural = "mobile devices and computers";
+          this.platformDesc = "mobile devices and web browsers";
+          this.deviceIdDesc = "your device's unique device ID or identifier";
+          this.osDesc = "your operating system";
+          this.browserDesc = "the type of browser you use";
+          this.uninstallDesc = "by uninstalling the Application or ceasing to use the website";
+          break;
+        default: // Mobile App
+          this.deviceType = "mobile device";
+          this.deviceTypePlural = "mobile devices";
+          this.platformDesc = "mobile devices";
+          this.deviceIdDesc = "your mobile device's unique device ID";
+          this.osDesc = "your mobile operating system";
+          this.browserDesc = "the type of mobile Internet browsers you use";
+          this.uninstallDesc = "by uninstalling the Application";
+          break;
+      }
+      return true;
     },
 
     // Toggle modals & refresh data
     toggleNoTrackingPrivacyPolicyModalVisibility() {
-      this.generate();
+      if (!this.generate()) return;
       this.contentRenderType = 1;
       this.showNoTrackingPrivacyPolicyModal =
         !this.showNoTrackingPrivacyPolicyModal;
     },
     togglePrivacyModalVisibility() {
-      this.generate();
+      if (!this.generate()) return;
       this.hasThirdPartyServicesSelected =
         this.checkForThirdPartyServicesEnabled();
       this.contentRenderType = 1;
       this.showPrivacyModal = !this.showPrivacyModal;
     },
     toggleGDPRPrivacyModalVisibility() {
-      this.generate();
+      if (!this.generate()) return;
       this.hasThirdPartyServicesSelected =
         this.checkForThirdPartyServicesEnabled();
       this.contentRenderType = 1;
       this.showGDPRPrivacyModal = !this.showGDPRPrivacyModal;
     },
     toggleTermsModalVisibility() {
-      this.generate();
+      if (!this.generate()) return;
       this.hasThirdPartyServicesSelected =
         this.checkForThirdPartyServicesEnabled();
       this.contentRenderType = 1;
@@ -206,7 +276,7 @@ const app = createApp({
     toggleFaqModalVisibility() {
       this.showFaqModal = !this.showFaqModal;
     },
-    fc_deploy_simple() {
+    deployFcSimple() {
       fc_deploy_simple();
     },
     isAppOpenSource() {
