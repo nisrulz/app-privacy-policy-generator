@@ -4,28 +4,29 @@ The web app uses
 
 - [VueJs](https://vuejs.org/) - For templating and reactive updates in the DOM
 - [Firebase Hosting](https://firebase.google.com/docs/hosting/) - For hosting the static web app
-- CLI Tools
+- CLI Tools (installed via `npm install`, invoked via `npx` in scripts)
   - [pug](https://github.com/tokilabs/pug3-cli) - To convert pug templates to html and merge partials into single [`index.html`](public/index.html) file.
   - [sass](https://sass-lang.com/documentation/cli) - To convert sass templates to css and merge partials into single [`style.css`](public/css/style.css) file.
   - [js-yaml](https://github.com/nodeca/js-yaml#cli-executable) - To convert yaml templates to json and generate the [`thirdpartyservices.js`](src/js/thirdpartyservices.js) file.
-  - [firebase-tools](https://github.com/firebase/firebase-tools) - To interact with Firebase as a service from command line.
+  - [firebase-tools](https://github.com/firebase/firebase-tools) - To interact with Firebase as a service from command line (install globally).
   - [png-minify](https://www.npmjs.com/package/png-minify) - To compress png files.
   - [svgo](https://www.npmjs.com/package/svgo) - To compress svg files.
   - [uglifycss](https://www.npmjs.com/package/uglifycss) - To compress css files.
   - [uglify-js](https://www.npmjs.com/package/uglify-js) - To compress js files.
-  - [html-minifier](https://www.npmjs.com/package/html-minifier) - To compress html files.
   - [purgecss](https://purgecss.com/CLI.html) - To compress css files.
 
 ---
 
-Install the CLI tools using
+Install build CLI tools using
 
 ```sh
-npm install -g @tokilabs/pug3-cli sass js-yaml \
-firebase-tools \
-svgo png-minify \
-uglifycss uglify-js html-minifier \
-purgecss
+npm install
+```
+
+Additional tools (image compression, deployment) still need global install:
+
+```sh
+npm install -g firebase-tools svgo png-minify
 ```
 
 If you wish to modify the code for the webapp, then look into [`src`](src) directory.
@@ -41,7 +42,13 @@ The webapp is setup in a way that it is made up of
 
 ...all of which is compiled into a single `index.html` file which lives under [`public`](public) directory. Styles are compiled into a single `style.css` file under [`public/css`](public/css) directory and third party services info is compiled into a single `thirdpartyservices.js` under [`public/js`](public/js) referenced directly in the `index.html` file.
 
-To compile the code under `src` folder, simply execute the helper bash script [`render.sh`](render.sh) at the root of the repo inside a terminal:
+To compile the code under `src` folder, run:
+
+```sh
+npm run build
+```
+
+Or directly execute the helper bash script:
 
 ```sh
 ./render.sh
@@ -90,7 +97,7 @@ To update packages in the project, run: `npm update`
 
 ### Server and test locally
 
-To serve locally for testing, run: `firebase serve --only hosting`
+To serve locally for testing, run: `npm run serve`
 
 ### Deploy to Production
 
