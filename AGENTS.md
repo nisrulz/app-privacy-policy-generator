@@ -10,6 +10,8 @@ Static web app (Vue.js + Pug + Sass) that generates privacy policies and terms &
 - `src/includes/content/privacy_policy/` — privacy templates: `gdpr.pug`, `simple.pug`, `no_tracking.pug`
 - `src/includes/content/tnc/` — T&C template: `simple.pug`
 - `src/includes/content/wizard/` — wizard steps: `step_1.pug`–`step_7.pug`
+- `src/includes/content/faq.pug` — FAQ modal with Vue-controlled visibility
+- `src/includes/content/disclaimer.pug` — Disclaimer modal
 - `src/js/main.js` — Vue app: data, computed properties, `generate()` function
 - `src/js/utils.js` — utility helpers
 - `src/includes/yaml/thirdpartyservices.yml` — 3rd-party service definitions (source of truth); JS is auto-generated during build
@@ -66,6 +68,8 @@ Dev: open `public/index.html` in browser after render. No dev server.
 | `src/includes/content/tnc/simple.pug` | Terms & Conditions |
 | `src/includes/content/wizard/step_4.pug` | Platform type selector |
 | `src/includes/content/wizard/step_2.pug` | EU Representative field |
+| `src/includes/content/faq.pug` | FAQ modal content |
+| `src/includes/content/disclaimer.pug` | Disclaimer modal content |
 
 ## Testing
 
