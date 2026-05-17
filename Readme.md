@@ -3,7 +3,7 @@
 </div>
 
 <div align="center"><strong>
-  <em>A web app that is free, open-source, and perfect for generating a generic or GDPR-compliant privacy policy and terms of use for your mobile apps. 📄✨</em>
+  <em>A free, open-source web app to generate privacy policies and terms & conditions for your Android, iOS, KaiOS, and Web apps. Supports Simple, No-Tracking, and GDPR-compliant policies with DSA compliance. 📄✨</em>
 </strong><br>
 <a href="https://app-privacy-policy-generator.nisrulz.com/">Web App</a> | 
 <a href="https://app-privacy-policy-generator.nisrulz.com/reviews.html" target="_blank" rel="noopener noreferrer">Guestbook for reviews</a>
@@ -33,6 +33,16 @@
 
 [![Deploy to Production](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml) [![Deploy to Firebase Hosting on PR](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml)
 
+## Features
+
+- **3 Policy Types**: Simple, No-Tracking, and GDPR-compliant privacy policies
+- **Terms & Conditions**: Full T&C generation with UGC policy, DSA Compliance section, governing law, and limitation of liability
+- **Platform-aware**: Text adapts to Mobile App, Web App, or Both
+- **8-step Wizard**: Guided form with validation, inline error highlighting, and conditional fields
+- **Configurable**: Age of digital consent, AI disclosure toggle, location tracking, PII fields, business address, EU representative
+- **Third-party Services**: 50+ pre-loaded service entries with privacy/terms links
+- **Multiple Outputs**: Preview, HTML, or Markdown
+
 ## Project Support
 
 - Before contacting me with issues, please visit the [Issue Tracker](https://github.com/nisrulz/app-privacy-policy-generator/issues) and see if issue was already added there. Just in case.
@@ -56,11 +66,11 @@ If you would like to contribute a feature, please follow these steps:
 It's likely that code style and implementation details will need to be tweaked so it's easier to for me to grab your
 implementation as a starting point when implementing a feature.
 
-Additionally, make sure to [read the dev docs](dev-doc.md) to
+Before contributing, make sure to:
 
-- [Add a new 3rd party service to the web app](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#contributing-more-3rd-party-services-links)
-- [Add a new template for Privacy Policy or Terms & Conditions](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#development)
-- [Update the web app for new features/bugfixes](https://github.com/nisrulz/app-privacy-policy-generator/blob/master/dev-doc.md#development)
+- Read the [dev docs](dev-doc.md) for setup and build instructions
+- Read [AGENTS.md](AGENTS.md) for project conventions, source layout, and key files
+- Build with `npm install && npm run build` (edit source under `src/` only, never `public/` directly)
 
 ## Contribute financially
 
