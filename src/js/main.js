@@ -59,7 +59,7 @@ const app = createApp({
       // === UI State ===
       contentRenderType: 1, // 1 = Preview, 2 = HTML/Markdown
       wizardStep: 1,
-      totalWizardSteps: 7,
+      totalWizardSteps: 8,
 
       // === Policy Content Settings ===
       typeOfPolicy: "Simple",
@@ -115,7 +115,7 @@ const app = createApp({
       switch (this.wizardStep) {
         case 2:
           return !!(this.appName.trim() && this.appContact.trim());
-        case 5:
+        case 6:
           if (this.typeOfDev === "Individual") return !!this.devName.trim();
           if (this.typeOfDev === "Company") return !!this.companyName.trim();
           return false;

@@ -6,55 +6,83 @@ section#step-5.columns(v-if="wizardStep==5")
                     target='_blank' 
                     rel='noopener noreferrer')
                     img.is-size-1(src='images/text_logo.svg')
-            progress.progress.is-small.is-link(value='64' max='100')
+            progress.progress.is-small.is-link(value='56' max='100')
             .scrollable.content
                 .control
-                    | Select owner type:
-                    span.tag.is-primary.is-light {{typeOfDev}}
+                    | Platform Type:
+                    span.tag.is-primary.is-light {{platformType}}
                     br
                     label.radio
                         input(
-                            v-model="typeOfDev" 
-                            value="Individual" 
+                            v-model="platformType"
+                            value="Mobile App"
                             type="radio"
                             )
-                        |   Individual
+                        |   Mobile App
                     br
                     label.radio
                         input(
-                            v-model="typeOfDev" 
-                            value="Company" 
+                            v-model="platformType"
+                            value="Web App"
                             type="radio"
                             )
-                        |   Company
-                br
-                .control(v-if="typeOfDev=='Company'")
-                    .field
-                        label.label Company Name
-                        .control
-                            input#companyName.input(
-                                v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }"
-                                placeholder="Company Name" 
-                                v-model="companyName" 
-                                required=""
-                                type="text"
+                        |   Web App
+                    br
+                    label.radio
+                        input(
+                            v-model="platformType"
+                            value="Both"
+                            type="radio"
+                            )
+                        |   Both
+                    br
+                    br
+                    .control(v-if="platformType !== 'Web App'")
+                        | Select Mobile OS:
+                        span.tag.is-primary.is-light {{osType}}
+                        br
+                        label.radio
+                            input(
+                                v-model="osType"
+                                value="Android"
+                                type="radio"
                                 )
-                        p.help(v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }" v-show="(companyName.length == 0 && typeOfDev=='Company')") Company Name is required.
-                .control(v-if="typeOfDev=='Individual'")
-                    .field
-                        label.label Developer Name
-                        .control
-                            input#devName.input(
-                                v-bind:class="{ 'is-danger': (devName.length == 0 && typeOfDev=='Individual') }"
-                                placeholder="Developer Name" 
-                                v-model="devName" 
-                                required=""
-                                type="text"
+                            |   Android
+                        br
+                        label.radio
+                            input(
+                                v-model="osType"
+                                value="iOS"
+                                type="radio"
                                 )
-                        p.help(v-bind:class="{ 'is-danger': (devName.length == 0 && typeOfDev=='Individual') }" v-show="(devName.length == 0 && typeOfDev=='Individual')") Developer Name is required.
+                            |   iOS
+                        br
+                        label.radio
+                            input(
+                                v-model="osType"
+                                value="KaiOS"
+                                type="radio"
+                                )
+                            |   KaiOS
+                        br
+                        label.radio
+                            input(
+                                v-model="osType"
+                                value="Android & iOS"
+                                type="radio"
+                                )
+                            |   Android & iOS
+                        br
+                        label.radio
+                            input(
+                                v-model="osType"
+                                value="Android, iOS & KaiOS"
+                                type="radio"
+                                )
+                            |   Android, iOS & KaiOS
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") Next
+            a.card-footer-item(@click='nextStep') Next
     .column.is-information.is-hidden-touch
         a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
             target='_blank' 

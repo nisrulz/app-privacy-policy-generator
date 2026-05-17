@@ -6,80 +6,62 @@ section#step-4.columns(v-if="wizardStep==4")
                     target='_blank' 
                     rel='noopener noreferrer')
                     img.is-size-1(src='images/text_logo.svg')
-            progress.progress.is-small.is-link(value='48' max='100')
+            progress.progress.is-small.is-link(value='42' max='100')
             .scrollable.content
                 .control
-                    | Platform Type:
-                    span.tag.is-primary.is-light {{platformType}}
+                    | Select App Type:
+                    span.tag.is-primary.is-light {{typeOfApp}}
                     br
                     label.radio
                         input(
-                            v-model="platformType"
-                            value="Mobile App"
+                            v-model="typeOfApp" 
+                            value="Free" 
                             type="radio"
                             )
-                        |   Mobile App
+                        |   Free
                     br
                     label.radio
                         input(
-                            v-model="platformType"
-                            value="Web App"
+                            v-model="typeOfApp" 
+                            value="Open Source" 
                             type="radio"
                             )
-                        |   Web App
+                        |   Open Source
                     br
                     label.radio
                         input(
-                            v-model="platformType"
-                            value="Both"
+                            v-model="typeOfApp" 
+                            value="Freemium" 
                             type="radio"
                             )
-                        |   Both
+                        |   Freemium
                     br
+                    label.radio
+                        input(
+                            v-model="typeOfApp" 
+                            value="Ad Supported" 
+                            type="radio"
+                            )
+                        |   Ad Supported
                     br
-                    .control(v-if="platformType !== 'Web App'")
-                        | Select Mobile OS:
-                        span.tag.is-primary.is-light {{osType}}
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="Android"
-                                type="radio"
-                                )
-                            |   Android
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="iOS"
-                                type="radio"
-                                )
-                            |   iOS
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="KaiOS"
-                                type="radio"
-                                )
-                            |   KaiOS
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="Android & iOS"
-                                type="radio"
-                                )
-                            |   Android & iOS
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="Android, iOS & KaiOS"
-                                type="radio"
-                                )
-                            |   Android, iOS & KaiOS
+                    label.radio
+                        input(
+                            v-model="typeOfApp" 
+                            value="Commercial" 
+                            type="radio"
+                            )
+                        |   Commercial
+                br
+                div.block(v-show='typeOfPolicyInt!=2')
+                    input(v-model="isLocationTracked" id="locationcheckbox" type="checkbox")
+                    label(for="locationcheckbox")
+                        img.checkbox-logo(src="images/app_graphics/location.svg")
+                        strong Is Location tracked ?
+                    br
+                    input(v-model="isAIUsed" id="aicheckbox" type="checkbox")
+                    label(for="aicheckbox")
+                        img.checkbox-logo(src="images/app_graphics/ai.svg")
+                        strong Is AI used ?
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep') Next

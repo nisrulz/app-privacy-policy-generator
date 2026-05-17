@@ -6,31 +6,55 @@ section#step-6.columns(v-if="wizardStep==6")
                     target='_blank' 
                     rel='noopener noreferrer')
                     img.is-size-1(src='images/text_logo.svg')
-            progress.progress.is-small.is-link(value='80' max='100')
-            div(v-show='typeOfPolicyInt!=2')
-                p
-                    b Include links to Third Party Services 
-                    span.tag.is-primary.is-light Scroll for more
-                .scrollable-thirdparty.content
-                    a(rel="noopener noreferrer" v-for="item in thirdPartyServicesWithPrivacyOrTerms" :key="item.name")
+            progress.progress.is-small.is-link(value='70' max='100')
+            .scrollable.content
+                .control
+                    | Select owner type:
+                    span.tag.is-primary.is-light {{typeOfDev}}
+                    br
+                    label.radio
                         input(
-                            v-model="item.enabled"
-                            :id="'list-switch-' + item.name"
-                            type="checkbox"
+                            v-model="typeOfDev" 
+                            value="Individual" 
+                            type="radio"
                             )
-                        label(:for="'list-switch-' + item.name")
-                            img.checkbox-logo(
-                                :alt="item.name" 
-                                :src="item.logo"
+                        |   Individual
+                    br
+                    label.radio
+                        input(
+                            v-model="typeOfDev" 
+                            value="Company" 
+                            type="radio"
+                            )
+                        |   Company
+                br
+                .control(v-if="typeOfDev=='Company'")
+                    .field
+                        label.label Company Name
+                        .control
+                            input#companyName.input(
+                                v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }"
+                                placeholder="Company Name" 
+                                v-model="companyName" 
+                                required=""
+                                type="text"
                                 )
-                            span {{ item.name }}
-            div(v-show='typeOfPolicyInt==2')
-                p No third party services to choose. Goto 
-                    b Next step.
-                div.scrollable-thirdparty.content
+                        p.help(v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }" v-show="(companyName.length == 0 && typeOfDev=='Company')") Company Name is required.
+                .control(v-if="typeOfDev=='Individual'")
+                    .field
+                        label.label Developer Name
+                        .control
+                            input#devName.input(
+                                v-bind:class="{ 'is-danger': (devName.length == 0 && typeOfDev=='Individual') }"
+                                placeholder="Developer Name" 
+                                v-model="devName" 
+                                required=""
+                                type="text"
+                                )
+                        p.help(v-bind:class="{ 'is-danger': (devName.length == 0 && typeOfDev=='Individual') }" v-show="(devName.length == 0 && typeOfDev=='Individual')") Developer Name is required.
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep') Next
+            a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") Next
     .column.is-information.is-hidden-touch
         a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
             target='_blank' 

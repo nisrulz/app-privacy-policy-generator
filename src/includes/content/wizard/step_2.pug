@@ -63,19 +63,6 @@ section#step-2.columns(v-if='wizardStep==2')
                         p.help.has-text-grey(v-show="!(appContact.length == 0)") Email address for privacy, legal, and support inquiries.
                         p.help(v-bind:class="{ 'is-danger': (appContact.length == 0) }" v-show="(appContact.length == 0)") Email address is required.
                 br
-                .control
-                    .field
-                        label.label Business Address
-                        .control
-                            input#businessAddress.input(
-                                v-bind:class="{ 'is-danger': (typeOfPolicyInt==3 && businessAddress.length == 0) }"
-                                placeholder="Street, City, Postal Code, Country"
-                                v-model="businessAddress"
-                                type="text"
-                                )
-                        p.help.has-text-grey(v-show="!(typeOfPolicyInt==3 && businessAddress.length == 0)") Registered business or contact address for legal notices and GDPR disclosures.
-                        p.help.is-danger(v-show="(typeOfPolicyInt==3 && businessAddress.length == 0)") Business address is strongly recommended for GDPR policies.
-                br
                 .control(v-show="typeOfPolicyInt==3")
                     .field
                         label.label EU Representative (optional)
@@ -86,40 +73,6 @@ section#step-2.columns(v-if='wizardStep==2')
                                 type="text"
                                 )
                         p.help.has-text-grey Name and contact details of your EU representative, if required under GDPR Article 27.
-                br
-                .control
-                    .field
-                        label.label Policy Effective Date
-                        .control
-                            input#effectiveFromDate.input.is-primary(
-                                v-model="effectiveFromDate" 
-                                required="" 
-                                type="date"
-                                )
-                br
-                .control(v-show="typeOfPolicyInt!=2")
-                    .field
-                        label.label Personally Identifiable Information
-                        .control
-                            input#pidInfoIn.input(
-                                placeholder="Email, userId, age, gender, etc" 
-                                v-model="pidInfoIn" 
-                                type="text"
-                                )
-                        p.help.has-text-grey Personally Identifiable Information you collect (comma separated)
-                br
-                .control
-                    .field
-                        label.label Age of Digital Consent
-                        .control
-                            input#ageOfDigitalConsent.input(
-                                placeholder="16"
-                                v-model="ageOfDigitalConsent" 
-                                type="number"
-                                min="13"
-                                max="18"
-                                )
-                        p.help.has-text-grey Minimum age for digital consent in your jurisdiction (16 for EU/Germany, 13 for US COPPA).
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") Next
