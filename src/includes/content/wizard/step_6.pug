@@ -1,12 +1,8 @@
 section#step-6.columns(v-if="wizardStep==6")
     .column.card
         .card-content
-            p.is-hidden-desktop
-                a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-                    target='_blank' 
-                    rel='noopener noreferrer')
-                    img.is-size-1(src='images/text_logo.svg')
-            progress.progress.is-small.is-link(value='70' max='100')
+            +wizardMobileLogo
+            +wizardProgress(70)
             .scrollable.content
                 .control
                     | Select owner type:
@@ -55,8 +51,4 @@ section#step-6.columns(v-if="wizardStep==6")
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") Next
-    .column.is-information.is-hidden-touch
-        a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-            target='_blank' 
-            rel='noopener noreferrer')
-            img.center-block.sidebar-img(src='images/app_graphics/side_image.webp')
+    +wizardSidebar

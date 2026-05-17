@@ -1,12 +1,8 @@
 section#step-8.columns(v-if="wizardStep==8")
     .column.card
         .card-content
-            p.is-hidden-desktop
-                a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-                    target='_blank' 
-                    rel='noopener noreferrer')
-                    img.is-size-1(src='images/text_logo.svg')
-            progress.progress.is-small.is-primary(value='100' max='100')
+            +wizardMobileLogo
+            +wizardProgress(100)
             .scrollable.content
                 .notification.is-warning
                     p While App Privacy Policy Generator is completely FREE
@@ -79,8 +75,4 @@ section#step-8.columns(v-if="wizardStep==8")
                     v-if="typeOfPolicyInt==3"
                     ) Privacy Policy
             a.card-footer-item(@click='toggleTermsModalVisibility' rel="noopener noreferrer") Terms & Conditions
-    .column.is-information.is-hidden-touch
-        a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-            target='_blank' 
-            rel='noopener noreferrer')
-            img.center-block.sidebar-img(src='images/app_graphics/side_image.webp')
+    +wizardSidebar

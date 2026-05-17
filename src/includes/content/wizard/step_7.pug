@@ -1,12 +1,8 @@
 section#step-7.columns(v-if="wizardStep==7")
     .column.card
         .card-content
-            p.is-hidden-desktop
-                a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-                    target='_blank' 
-                    rel='noopener noreferrer')
-                    img.is-size-1(src='images/text_logo.svg')
-            progress.progress.is-small.is-link(value='84' max='100')
+            +wizardMobileLogo
+            +wizardProgress(84)
             div(v-show='typeOfPolicyInt!=2')
                 p
                     b Include links to Third Party Services 
@@ -31,8 +27,4 @@ section#step-7.columns(v-if="wizardStep==7")
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep') Next
-    .column.is-information.is-hidden-touch
-        a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-            target='_blank' 
-            rel='noopener noreferrer')
-            img.center-block.sidebar-img(src='images/app_graphics/side_image.webp')
+    +wizardSidebar
