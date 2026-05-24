@@ -8,19 +8,14 @@
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
 const { createApp } = Vue;
 
 const app = createApp({
+  // Composition: Registering decoupled mixins
+  mixins: [window.wizardMixin, window.platformMixin],
+
   data() {
     return {
       // === Wizard Form Inputs ===
@@ -38,9 +33,7 @@ const app = createApp({
       pidInfoIn: "",
       pidInfo:
         "[add whatever else you collect here, e.g. users name, address, location, pictures]",
-      osType: "Android",
       effectiveFromDate: new Date().toISOString().slice(0, 10),
-      requirementOfSystem: "system",
 
       // === Third-Party Services ===
       thirdPartyServices: thirdPartyServicesJsonArray,
@@ -56,28 +49,12 @@ const app = createApp({
       showDisclaimerModal: false,
       showFaqModal: false,
 
-      // === UI State ===
-      contentRenderType: 1, // 1 = Preview, 2 = HTML/Markdown
-      wizardStep: 1,
-      totalWizardSteps: 8,
-
       // === Policy Content Settings ===
       typeOfPolicy: "Simple",
       typeOfPolicyInt: 1,
       isLocationTracked: false,
       ageOfDigitalConsent: 16,
       isAIUsed: false,
-
-      // === Platform-Aware Text (set by generate()) ===
-      // These defaults assume Mobile App; generate() overrides for Web/Both
-      platformType: "Mobile App",
-      deviceType: "mobile device",
-      deviceTypePlural: "mobile devices",
-      platformDesc: "mobile devices",
-      deviceIdDesc: "your mobile device's unique device ID",
-      osDesc: "your mobile operating system",
-      browserDesc: "the type of mobile Internet browsers you use",
-      uninstallDesc: "by uninstalling the Application",
     };
   },
 
@@ -97,31 +74,6 @@ const app = createApp({
       return this.thirdPartyServices.filter(
         (item) => item.link?.privacy || item.link?.terms
       );
-    },
-
-    // Platform type matchers used across all templates
-    isMobileApp() {
-      return this.platformType === "Mobile App";
-    },
-    isWebApp() {
-      return this.platformType === "Web App";
-    },
-    isBothPlatforms() {
-      return this.platformType === "Both";
-    },
-
-    // Guards the Next button: blocks advance until required fields are filled
-    canAdvance() {
-      switch (this.wizardStep) {
-        case 2:
-          return !!(this.appName.trim() && this.appContact.trim());
-        case 6:
-          if (this.typeOfDev === "Individual") return !!this.devName.trim();
-          if (this.typeOfDev === "Company") return !!this.companyName.trim();
-          return false;
-        default:
-          return true;
-      }
     },
   },
 
@@ -148,11 +100,6 @@ const app = createApp({
       item.enabled = !item.enabled;
     },
 
-    // Switch content view to preview mode
-    preview(id) {
-      this.contentRenderType = 1;
-    },
-
     // Map policy type name to the numeric value used in v-show/v-if conditions
     setTypeOfPolicyInt() {
       switch (this.typeOfPolicy) {
@@ -166,17 +113,6 @@ const app = createApp({
           this.typeOfPolicyInt = 3;
           break;
       }
-    },
-
-    // ==================== Wizard Navigation ====================
-
-    // Advance to next step; canAdvance blocks until required fields are filled
-    nextStep() {
-      if (!this.canAdvance) return;
-      this.wizardStep += 1;
-    },
-    prevStep() {
-      this.wizardStep -= 1;
     },
 
     // ==================== Content Rendering ====================
@@ -249,52 +185,6 @@ const app = createApp({
       )
         ? "an " + this.typeOfApp
         : "a " + this.typeOfApp;
-    },
-
-    // Map selected OS combo to the system requirement phrase used in T&C
-    _setOsRequirement() {
-      switch (this.osType) {
-        case "Android & iOS":
-          this.requirementOfSystem = "both systems";
-          break;
-        default:
-          this.requirementOfSystem = "system";
-      }
-    },
-
-    // Derive device/language vocabulary from the platform type selection.
-    // All templates reference these variables so the text reads naturally
-    // whether the app targets mobile, web, or both.
-    _setPlatformText() {
-      switch (this.platformType) {
-        case "Web App":
-          this.deviceType = "device";
-          this.deviceTypePlural = "devices";
-          this.platformDesc = "web browsers";
-          this.deviceIdDesc = "your device's unique identifier (e.g., IP address or browser fingerprint)";
-          this.osDesc = "your operating system";
-          this.browserDesc = "the type of web browser you use";
-          this.uninstallDesc = "by ceasing to use the website";
-          break;
-        case "Both":
-          this.deviceType = "mobile device or computer";
-          this.deviceTypePlural = "mobile devices and computers";
-          this.platformDesc = "mobile devices and web browsers";
-          this.deviceIdDesc = "your device's unique device ID or identifier";
-          this.osDesc = "your operating system";
-          this.browserDesc = "the type of browser you use";
-          this.uninstallDesc = "by uninstalling the Application or ceasing to use the website";
-          break;
-        default:
-          this.deviceType = "mobile device";
-          this.deviceTypePlural = "mobile devices";
-          this.platformDesc = "mobile devices";
-          this.deviceIdDesc = "your mobile device's unique device ID";
-          this.osDesc = "your mobile operating system";
-          this.browserDesc = "the type of mobile Internet browsers you use";
-          this.uninstallDesc = "by uninstalling the Application";
-          break;
-      }
     },
 
     // ==================== Modal Toggles ====================
