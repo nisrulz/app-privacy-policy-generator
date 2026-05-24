@@ -6,7 +6,7 @@ section#step-3.columns(v-if='wizardStep==3')
             .scrollable.content
                 .control
                     .field
-                        label.label Business Address
+                        label.label(for="businessAddress") Business Address
                         .control
                             input#businessAddress.input(
                                 v-bind:class="{ 'is-danger': (typeOfPolicyInt==3 && businessAddress.length == 0) }"
@@ -19,7 +19,7 @@ section#step-3.columns(v-if='wizardStep==3')
                 br
                 .control
                     .field
-                        label.label Policy Effective Date
+                        label.label(for="effectiveFromDate") Policy Effective Date
                         .control
                             input#effectiveFromDate.input.is-primary(
                                 v-model="effectiveFromDate" 
@@ -29,7 +29,7 @@ section#step-3.columns(v-if='wizardStep==3')
                 br
                 .control(v-show="typeOfPolicyInt!=2")
                     .field
-                        label.label Personally Identifiable Information
+                        label.label(for="pidInfoIn") Personally Identifiable Information
                         .control
                             input#pidInfoIn.input(
                                 placeholder="Email, userId, age, gender, etc" 
@@ -40,7 +40,7 @@ section#step-3.columns(v-if='wizardStep==3')
                 br
                 .control
                     .field
-                        label.label Age of Digital Consent
+                        label.label(for="ageOfDigitalConsent") Age of Digital Consent
                         .control
                             input#ageOfDigitalConsent.input(
                                 placeholder="16"

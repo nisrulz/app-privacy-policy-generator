@@ -32,7 +32,7 @@ section#step-2.columns(v-if='wizardStep==2')
                 br
                 .control
                     .field
-                        label.label App Name
+                        label.label(for="appName") App Name
                         .control
                             input#appName.input(
                                 v-bind:class="{ 'is-danger': (appName.length == 0) }" 
@@ -46,7 +46,7 @@ section#step-2.columns(v-if='wizardStep==2')
                 br
                 .control
                     .field
-                        label.label Contact Information
+                        label.label(for="appContact") Contact Information
                         .control
                             input#appContact.input(
                                 v-bind:class="{ 'is-danger': (appContact.length == 0) }" 
@@ -60,7 +60,7 @@ section#step-2.columns(v-if='wizardStep==2')
                 br
                 .control(v-show="typeOfPolicyInt==3")
                     .field
-                        label.label EU Representative (optional)
+                        label.label(for="euRepresentative") EU Representative (optional)
                         .control
                             input#euRepresentative.input(
                                 placeholder="EU Representative Name and Contact"

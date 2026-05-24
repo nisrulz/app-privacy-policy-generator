@@ -26,7 +26,7 @@ section#step-6.columns(v-if="wizardStep==6")
                 br
                 .control(v-if="typeOfDev=='Company'")
                     .field
-                        label.label Company Name
+                        label.label(for="companyName") Company Name
                         .control
                             input#companyName.input(
                                 v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }"
@@ -38,7 +38,7 @@ section#step-6.columns(v-if="wizardStep==6")
                         p.help(v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }" v-show="(companyName.length == 0 && typeOfDev=='Company')") Company Name is required.
                 .control(v-if="typeOfDev=='Individual'")
                     .field
-                        label.label Developer Name
+                        label.label(for="devName") Developer Name
                         .control
                             input#devName.input(
                                 v-bind:class="{ 'is-danger': (devName.length == 0 && typeOfDev=='Individual') }"
