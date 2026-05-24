@@ -8,13 +8,13 @@
                 br
                 strong Data Controller Information
 
-                p The Service Provider is the data controller responsible for processing your personal data.
+                p {{ devOrCompanyName }} acts as the Data Controller responsible for the processing of your personal data.
                 ul
                     li Name: {{ devOrCompanyName }}
                     li(v-if='businessAddress') Address: {{ businessAddress }}
                     li Email: {{ appContact }}
 
-                p For data protection inquiries and to exercise your GDPR rights, please contact the Service Provider using the contact information above.
+                p For data protection inquiries and to exercise your GDPR rights, please contact the Data Controller using the contact information above.
 
                 p(v-if='euRepresentative') EU Representative: {{ euRepresentative }}
 
@@ -98,7 +98,7 @@
 
                         li as required by law, such as to comply with a subpoena, or similar legal process;
                         li when they believe in good faith that disclosure is necessary to protect their rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;
-                        li with their trusted services providers who work on their behalf, do not have an independent use of the information we disclose to them, and have agreed to adhere to the rules set forth in this privacy statement.
+                        li with their trusted services providers who work on their behalf, do not have an independent use of the information the Service Provider discloses to them, and have agreed to adhere to the rules set forth in this privacy statement.
 
                 p Where the GDPR applies, the Service Provider enters into Data Processing Agreements (DPAs) with third-party service providers that process personal data on its behalf, as required by Article 28 of the GDPR. These DPAs impose the same data protection obligations on those service providers as described in this Privacy Policy.
 
@@ -136,7 +136,7 @@
                         | the Service Provider discovers that a child has provided
                         | personal information, the Service Provider will immediately
                         | delete this from their servers. If you are a parent or guardian
-                        | and you are aware that your child has provided us with
+                        | and you are aware that your child has provided the Service Provider with
                         | personal information, please contact the Service Provider ({{ appContact }}) so that
                         | they will be able to take the necessary actions.
                 div(v-else)
@@ -176,13 +176,14 @@
 
                 p Under the GDPR, you have the following rights:
                 ul
-                    li Right of Access: You can request access to your personal data
-                    li Right to Rectification: You can request correction of inaccurate data
-                    li Right to Erasure: You can request deletion of your personal data
-                    li Right to Restrict Processing: You can request that we limit how we use your data
-                    li Right to Data Portability: You can request a copy of your data in a structured, commonly used format
-                    li Right to Object: You can object to certain types of processing
-                    li Rights Regarding Automated Decision-Making: You have rights related to automated decisions that affect you
+                    li Right of Access: You can request access to your personal data.
+                    li Right to Rectification: You can request correction of inaccurate data.
+                    li Right to Erasure: You can request deletion of your personal data (the "right to be forgotten").
+                    li Right to Restrict Processing: You can request that the Data Controller limits how they use your data.
+                    li Right to Data Portability: You can request a copy of your data in a structured, commonly used, machine-readable format.
+                    li Right to Object: You can object to processing based on legitimate interests. You have an absolute right to object to processing for direct marketing purposes at any time.
+                    li Right to Withdraw Consent: Where processing is based on your consent, you can withdraw it at any time. Withdrawal is as simple as toggling preferences in the Application's settings or contacting the Data Controller.
+                    li Rights Regarding Automated Decision-Making: You have rights related to automated decisions that affect you.
 
                 p If you believe your data protection rights have been violated, you have the right to lodge a complaint with your local Data Protection Authority. Contact details for each country's Data Protection Authority can be found at: 
                     a(href='https://edpb.ec.europa.eu/about-edpb/members_en' target='_blank' rel='noopener noreferrer') https://edpb.ec.europa.eu/about-edpb/members_en
@@ -194,8 +195,8 @@
 
                 p If you are a resident of California, the California Consumer Privacy Act (CCPA) and the California Privacy Rights Act (CPRA) provide you with additional rights regarding your personal information:
                 ul
-                    li Right to Know: You can request disclosure of the categories and specific pieces of personal information we have collected about you.
-                    li Right to Delete: You can request deletion of personal information we have collected from you, subject to certain exceptions.
+                    li Right to Know: You can request disclosure of the categories and specific pieces of personal information the Service Provider has collected about you.
+                    li Right to Delete: You can request deletion of personal information the Service Provider has collected from you, subject to certain exceptions.
                     li Right to Correct: You can request correction of inaccurate personal information.
                     li Right to Opt-Out: You can opt out of the sale or sharing of your personal information for cross-context behavioral advertising.
                     li Right to Limit Use of Sensitive Personal Information: You can limit the use of your sensitive personal information to essential purposes.
@@ -209,7 +210,7 @@
                 p Where processing is based on consent, you provide that consent by affirmatively opting in to the relevant feature or action. You may withdraw consent at any time without affecting processing carried out before withdrawal. Processing based on other lawful bases, including contract performance, legitimate interests, or legal obligations, is carried out as described above.
 
                 br
-                strong How can you contact us?
+                strong How can you contact the Data Controller?
 
                 p If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at {{ appContact }}.
 
