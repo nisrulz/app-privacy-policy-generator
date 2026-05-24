@@ -12,10 +12,16 @@ Static web app (Vue.js + Pug + Sass) that generates privacy policies and terms &
 - `src/includes/content/wizard/` — wizard steps: `step_1.pug`–`step_7.pug`
 - `src/includes/content/faq.pug` — FAQ modal with Vue-controlled visibility
 - `src/includes/content/disclaimer.pug` — Disclaimer modal
-- `src/js/main.js` — Vue app: data, computed properties, `generate()` function
+- `src/js/main.js` — Vue app entry point: registers mixins, form state, and modal toggles
+- `src/js/wizardMixin.js` — Vue mixin: wizard navigation, step validation, and content rendering
+- `src/js/platformMixin.js` — Vue mixin: platform-aware text descriptors and device vocabulary
 - `src/js/utils.js` — utility helpers
 - `src/includes/yaml/thirdpartyservices.yml` — 3rd-party service definitions (source of truth); JS is auto-generated during build
+- `src/includes/vendor/` — vendored third-party CSS (normalize.css), JS (Vue.js, to-markdown), and images served locally
 - `src/sass/` — Sass partials compiled to a single stylesheet
+- `src/sass/vendor/` — vendored third-party CSS (bulma) compiled and purged via Sass pipeline
+- `public/site.webmanifest` — PWA manifest (tracked, edit directly)
+- `public/sw.js` — service worker with offline caching (tracked, edit directly)
 
 ## Build
 
@@ -28,10 +34,11 @@ Compiles `src/` → `public/index.html`, `public/css/style.min.css`, `public/js/
 
 Build pipeline:
 1. `pug3` renders `src/index.pug` → `public/index.html`
-2. `sass` compiles `src/sass/` → `public/css/style.css`
+2. `sass` compiles `src/sass/` (including locally-vendored bulma) → `public/css/style.css`; `pug3` inlines `src/includes/vendor/normalize.min.css` into `public/index.html`
 3. `js-yaml` converts `src/includes/yaml/thirdpartyservices.yml` → temp JS (intermediate file, not tracked)
-4. `uglifycss` + `purgecss` minify CSS → `public/css/style.min.css`
+4. `uglifycss` + `purgecss` minify and purge unused CSS → `public/css/style.min.css`
 5. `uglifyjs` minifies JS → `public/js/*.min.js`
+6. Vendor JS files (Vue, to-markdown) copied to `public/js/vendor/`; vendor images copied to `public/images/vendor/`
 
 Additional global tools (image compression, deployment):
 ```sh
@@ -52,7 +59,7 @@ Dev: open `public/index.html` in browser after render. No dev server.
 
 - **No comments** in source code unless documenting a complex legal rationale
 - **Commit style**: `type(scope): Description` — e.g. `fix(privacy): Add data breach notification`, `feat(platform): Add platform type selection`
-- **Vue** is loaded via CDN (not npm); all state is on a single Vue instance in `main.js`
+- **Vue** is self-hosted (served from `public/js/vendor/`); all state is on a single Vue instance in `main.js`
 - **Pug** templates use `{{ variable }}` interpolation (Vue mustache syntax), not Pug's native interpolation
 - **Computed properties** for conditional logic (e.g. `isMobileApp`, `isWebApp`, `isBothPlatforms`) — prefer over inline string matching in templates
 - **Derived text** (e.g. `deviceType`, `platformDesc`) computed inside `generate()` following existing pattern, not watchers
@@ -61,7 +68,9 @@ Dev: open `public/index.html` in browser after render. No dev server.
 
 | File | Purpose |
 |------|---------|
-| `src/js/main.js` | Vue app — data, computed, `generate()`, validation |
+| `src/js/main.js` | Vue app — data, computed, `generate()`, validation, mixin registration |
+| `src/js/wizardMixin.js` | Wizard flow, step navigation, and preview state |
+| `src/js/platformMixin.js` | Platform type vocabulary and conditional flags |
 | `src/includes/content/privacy_policy/gdpr.pug` | GDPR/CCPA-compliant policy |
 | `src/includes/content/privacy_policy/simple.pug` | Simple/standard policy |
 | `src/includes/content/privacy_policy/no_tracking.pug` | No-tracking policy |
@@ -70,6 +79,8 @@ Dev: open `public/index.html` in browser after render. No dev server.
 | `src/includes/content/wizard/step_2.pug` | EU Representative field |
 | `src/includes/content/faq.pug` | FAQ modal content |
 | `src/includes/content/disclaimer.pug` | Disclaimer modal content |
+| `public/site.webmanifest` | PWA manifest for installability |
+| `public/sw.js` | Service worker with offline caching |
 
 ## Testing
 
@@ -108,4 +119,5 @@ Key docs to read first: `dev-doc.md`, `render.sh`, `src/includes/content/*`, `sr
 - New 3rd-party service: load the `add-thirdparty-service` skill or manually add entry to `src/includes/yaml/thirdpartyservices.yml` + logo (160×160) to `public/images/third_party_logos/`
 - Do NOT commit `public/index.html`, `public/js/main.min.js`, or other generated files
 - `render.sh` uses `npx` to resolve all CLI tools from devDependencies (`@tokilabs/pug3-cli` is the required pug fork)
-- Build outputs expected (do not remove unless intentional): `public/index.html`, `public/css/style.min.css`, `public/js/*.min.js`
+- Build outputs expected (do not remove unless intentional): `public/index.html`, `public/css/style.min.css`, `public/js/*.min.js`, `public/js/vendor/`, `public/images/vendor/`
+- `public/sw.js` and `public/site.webmanifest` are tracked source files (not generated)
