@@ -33,17 +33,13 @@
 
 ## Features
 
-- **3 Policy Types**: Simple, No-Tracking, and GDPR-compliant privacy policies
-- **Terms & Conditions**: Full T&C generation with UGC policy, DSA Compliance section, governing law, open-source license toggle, termination provisions, and limitation of liability
-- **Platform-aware**: Text adapts to Mobile App, Web App, or Both throughout both policies and T&C
-- **8-step Wizard**: Guided form with validation, inline error highlighting, and conditional fields (plus a final step with support/sponsor options)
-- **Configurable**: Age of digital consent, AI disclosure toggle, location tracking, PII fields, business address, EU representative, open-source toggle
-- **Third-party Services**: 50+ pre-loaded service entries with privacy/terms links
-- **Multiple Outputs**: Preview, HTML, or Markdown
-- **PWA-ready**: Installable web app with offline caching via service worker, proper manifest and icons
-- **Self-hosted**: All dependencies (Vue.js, bulma, normalize.css, to-markdown) served locally — no CDN tracking
-- **FAQ & Disclaimer**: In-app FAQ modal and full legal disclaimer with indemnification clause
-- **Accessibility**: ARIA labels, alt text, main landmark, form label associations, zoom support
+- **3 policy types**: Simple, No-Tracking, and GDPR-compliant privacy policies
+- **Terms & Conditions** with DSA compliance, UGC policy, and governing law
+- **Platform-aware**: Text adapts to Mobile, Web, or both
+- **Configurable**: Age of consent, AI disclosure, location tracking, PII fields, EU representative, open-source toggle
+- **Output**: Preview, HTML, or Markdown
+- **PWA-ready**: Installable, works offline
+- **FAQ & Disclaimer** included
 
 ## Contributing
 
