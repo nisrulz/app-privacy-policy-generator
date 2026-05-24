@@ -81,11 +81,20 @@ echo " ✅  STEP 5: Cleanup unused CSS"
 
 echo ""
 npx -q uglifyjs "$TS_JS_FILE" --output public/js/thirdpartyservices.min.js
-npx -q uglifyjs src/js/main.js --output public/js/main.min.js
+npx -q uglifyjs src/js/wizardMixin.js src/js/platformMixin.js src/js/main.js --output public/js/main.min.js
 npx -q uglifyjs src/js/utils.js --output public/js/utils.min.js
 npx -q uglifyjs src/js/flycricket.js --output public/js/flycricket.min.js
 echo " ✅  STEP 6: Minify JS"
 
+echo ""
+# Copy vendored third-party JS to public
+mkdir -p public/js/vendor
+cp src/includes/vendor/vue.global.prod.js public/js/vendor/vue.global.prod.js
+cp src/includes/vendor/to-markdown.min.js public/js/vendor/to-markdown.min.js
+# Copy vendored third-party images to public
+mkdir -p public/images/vendor
+cp src/includes/vendor/kofi1.png public/images/vendor/kofi1.png
+echo " ✅  STEP 7: Copy vendor assets"
 
 echo ""
-echo " 📈  STEP 7: Optimized website is ready"
+echo " 📈  STEP 8: Optimized website is ready"
