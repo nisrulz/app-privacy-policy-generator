@@ -38,7 +38,8 @@ echo " ✅  STEP 2: RENDER SASS > CSS"
 echo ""
 # Using js-yaml to convert yaml to json
 TS_JS_FILE=$(mktemp /tmp/thirdpartyservices.XXXXXX.js)
-trap 'rm -f "$TS_JS_FILE"' EXIT
+LOCALE_JS_FILE=$(mktemp /tmp/locale.XXXXXX.js)
+trap 'rm -f "$TS_JS_FILE" "$LOCALE_JS_FILE"' EXIT
 YAML_DIR="src/includes/yaml"
 echo "/*  
     App Privacy Policy Generator: A simple web app to generate a generic 
@@ -80,8 +81,10 @@ npx -q purgecss --css public/css/style.min.css \
 echo " ✅  STEP 5: Cleanup unused CSS"
 
 echo ""
+echo "window.__locale = $(cat src/locales/en.json);" > "$LOCALE_JS_FILE"
+npx -q uglifyjs "$LOCALE_JS_FILE" --output public/js/locale.min.js
 npx -q uglifyjs "$TS_JS_FILE" --output public/js/thirdpartyservices.min.js
-npx -q uglifyjs src/js/wizardMixin.js src/js/platformMixin.js src/js/main.js --output public/js/main.min.js
+npx -q uglifyjs src/js/wizardMixin.js src/js/platformMixin.js src/js/localeMixin.js src/js/main.js --output public/js/main.min.js
 npx -q uglifyjs src/js/utils.js --output public/js/utils.min.js
 npx -q uglifyjs src/js/flycricket.js --output public/js/flycricket.min.js
 echo " ✅  STEP 6: Minify JS"

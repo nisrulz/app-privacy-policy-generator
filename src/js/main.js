@@ -14,7 +14,7 @@ const { createApp } = Vue;
 
 const app = createApp({
   // Composition: Registering decoupled mixins
-  mixins: [window.wizardMixin, window.platformMixin],
+  mixins: [window.wizardMixin, window.platformMixin, window.localeMixin],
 
   data() {
     return {
@@ -181,10 +181,13 @@ const app = createApp({
 
     // PII text: empty → "." (no extra info), non-empty → ", including but not limited to ..."
     _setPidInfo() {
-      this.pidInfo =
-        this.pidInfoIn === ""
-          ? "."
-          : ", including but not limited to " + this.pidInfoIn + ".";
+      if (this.pidInfoIn === "") {
+        this.pidInfo = ".";
+      } else {
+        var prefix = this.$t("misc.pidInfoPrefix");
+        var suffix = this.$t("misc.pidInfoSuffix");
+        this.pidInfo = prefix + this.pidInfoIn + suffix;
+      }
     },
 
     // "Open Source" and "Ad Supported" take "an" instead of "a" before the type
