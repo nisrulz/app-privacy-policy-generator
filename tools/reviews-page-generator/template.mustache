@@ -31,12 +31,13 @@
         margin: 0 0 20px;
         padding: 20px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
         display: inline-block;
         width: 100%;
         box-sizing: border-box;
         text-decoration: none;
         color: inherit;
+        cursor: pointer;
       }
       .review-card:hover {
         transform: translateY(-5px);
@@ -75,6 +76,18 @@
         max-width: 100%;
         height: auto;
         border-radius: 5px;
+      }
+      .review-body blockquote {
+        margin: 8px 0;
+        padding: 6px 12px;
+        border-left: 3px solid #ccc;
+        color: #666;
+        font-style: italic;
+        background: #f9f9f9;
+        border-radius: 0 4px 4px 0;
+      }
+      .review-body blockquote p {
+        margin: 0;
       }
       .review-reactions {
         margin-top: 10px;
@@ -133,24 +146,52 @@
       }
       
       /* Style for the search box */
-      .search-box {
+      .search-wrapper {
+        position: relative;
         width: 95%;
         max-width: 600px;
-        padding: 15px;
         margin: 10px auto;
+      }
+
+      .search-box {
+        width: 100%;
+        padding: 15px 44px 15px 15px;
         display: block;
         border-radius: 8px;
         border: 1px solid #ccc;
         font-size: 16px;
         outline: none;
-        margin-left: auto;
-        margin-right: auto;
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box;
       }
 
       .search-box:focus {
         border-color: #007bff;
         box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+
+      .clear-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #999;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+        cursor: pointer;
+        display: none;
+        transition: background 0.2s;
+        padding: 0;
+      }
+
+      .clear-btn:hover {
+        background: #666;
       }
 
       /* Style for the review count */
@@ -163,6 +204,49 @@
         border-radius: 8px;
         display: inline-block;
         margin-left: 10px;
+      }
+
+      /* No results message */
+      .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: #888;
+        font-size: 1.1em;
+        display: none;
+      }
+
+      /* Pagination */
+      .pagination {
+        text-align: center;
+        margin: 0 auto 20px;
+        display: none;
+      }
+
+      .pagination button {
+        padding: 8px 18px;
+        margin: 0 6px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+      }
+
+      .pagination button:hover:not(:disabled) {
+        background: #e9ecef;
+      }
+
+      .pagination button:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+
+      .pagination .page-info {
+        display: inline-block;
+        padding: 8px 12px;
+        font-size: 14px;
+        color: #555;
       }
 
       /* Style for the action bar */
@@ -188,9 +272,20 @@
         <div class="action-bar">
           <a href="/" class="link">↩️ Back to Web App</a>
           <a href="https://ko-fi.com/A443EQ6" target="_blank" class="link">☕️ Buy Me a Coffee</a>
-          <span class="review-count">📊 Total Reviews: <span id="reviewCount">450</span></span>
+          <span class="review-count">📊 Total Reviews: <span id="reviewCount">{{ total_comments }}</span></span>
         </div>
-        <input type="text" id="searchInput" class="search-box" placeholder="Search reviews..." />
+        <div class="search-wrapper">
+          <input type="text" id="searchInput" class="search-box" placeholder="Search reviews..." />
+          <button id="clearBtn" class="clear-btn" aria-label="Clear search">&times;</button>
+        </div>
+      </div>
+      <div class="no-results" id="noResults">No reviews match your search.</div>
+      <div class="pagination" id="pagination">
+        <button id="firstBtn">&#9198;</button>
+        <button id="prevBtn">&#9664;</button>
+        <span class="page-info" id="pageInfo"></span>
+        <button id="nextBtn">&#9654;</button>
+        <button id="lastBtn">&#9197;</button>
       </div>
       <div class="review-columns" id="reviewContainer">
         <a
@@ -210,7 +305,7 @@
           </div>
         </a>
         {{#comments}}
-        <a href="{{ html_url }}" target="_blank" class="review-card">
+        <div class="review-card" data-url="{{ html_url }}">
           <div class="review-header">
             <img
               src="{{ user.avatar_local }}"
@@ -250,67 +345,182 @@
             {{/eyes}}
           </div>
           {{/reactions}}
-        </a>
+        </div>
         {{/comments}}
       </div>
     </div>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const reviewCountElement = document.getElementById("reviewCount");
-        const searchInput = document.getElementById("searchInput");
+        // --- DOM refs ---
+        const el = {
+          count: document.getElementById("reviewCount"),
+          input: document.getElementById("searchInput"),
+          clear: document.getElementById("clearBtn"),
+          noResults: document.getElementById("noResults"),
+          pagination: document.getElementById("pagination"),
+          firstBtn: document.getElementById("firstBtn"),
+          prevBtn: document.getElementById("prevBtn"),
+          nextBtn: document.getElementById("nextBtn"),
+          lastBtn: document.getElementById("lastBtn"),
+          pageInfo: document.getElementById("pageInfo"),
+        };
+        const cards = Array.from(
+          document.querySelectorAll(".review-card:not(.header-card)")
+        );
+        const total = cards.length;
+        const PAGE_SIZE = 15;
+        const totalPages = Math.ceil(total / PAGE_SIZE);
+        let currentPage = 1;
+        let isSearching = false;
 
-        function getReviewCards() {
-          return document.querySelectorAll(".review-card:not(.header-card)");
+        // --- Helpers ---
+        function matches(card, query) {
+          return card.innerText.toLowerCase().includes(query);
         }
 
-        function updateReviewCount(count) {
-          reviewCountElement.textContent = typeof count === "number" ? count : getReviewCards().length;
+        function toggleCard(card, visible) {
+          if (visible) {
+            card.style.display = "inline-block";
+            card.style.opacity = "0";
+            requestAnimationFrame(function () {
+              card.style.opacity = "1";
+            });
+          } else {
+            card.style.opacity = "0";
+            setTimeout(function () {
+              if (card.style.opacity === "0") {
+                card.style.display = "none";
+              }
+            }, 200);
+          }
         }
 
-        function showCard(card, show) {
-          card.style.display = show ? "inline-block" : "none";
-        }
-
-        function filterReviews(query) {
-          const cards = getReviewCards();
-          query = query.trim().toLowerCase();
+        function filterCards(cards, predicate, onDone) {
           let visible = 0;
-          // Process cards in chunks to avoid blocking the UI
-          let index = 0;
-          const chunkSize = 100; // Adjust based on performance
-          function processChunk() {
-            const end = Math.min(index + chunkSize, cards.length);
-            for (; index < end; index++) {
-              const card = cards[index];
-              const match = card.innerText.toLowerCase().includes(query);
-              showCard(card, match);
-              if (match) visible++;
+          let i = 0;
+          const CHUNK = 100;
+
+          function nextChunk() {
+            const end = Math.min(i + CHUNK, cards.length);
+            for (; i < end; i++) {
+              const show = predicate(cards[i], i);
+              toggleCard(cards[i], show);
+              if (show) visible++;
             }
-            if (index < cards.length) {
-              requestAnimationFrame(processChunk);
+            if (i < cards.length) {
+              requestAnimationFrame(nextChunk);
+            } else {
+              onDone(visible);
             }
           }
-          processChunk();
+          nextChunk();
+        }
+
+        function updatePagination() {
+          el.pageInfo.textContent = currentPage + " of " + totalPages;
+          el.firstBtn.disabled = currentPage <= 1;
+          el.prevBtn.disabled = currentPage <= 1;
+          el.nextBtn.disabled = currentPage >= totalPages;
+          el.lastBtn.disabled = currentPage >= totalPages;
+        }
+
+        function showPagination() {
+          el.pagination.style.display = "block";
+          updatePagination();
+        }
+
+        function hidePagination() {
+          el.pagination.style.display = "none";
+        }
+
+        function goToPage(page) {
+          isSearching = false;
+          currentPage = page;
+          const start = (page - 1) * PAGE_SIZE;
+          const end = Math.min(start + PAGE_SIZE, total);
+          filterCards(cards, function (card, index) {
+            return index >= start && index < end;
+          }, function (visible) {
+            el.count.textContent = visible + " of " + total;
+            el.noResults.style.display = "none";
+            showPagination();
+          });
+        }
+
+        function search(query) {
+          const q = query.trim().toLowerCase();
+          if (q) {
+            isSearching = true;
+            hidePagination();
+            filterCards(cards, function (card) {
+              return matches(card, q);
+            }, function (visible) {
+              el.count.textContent = visible + " of " + total;
+              el.noResults.style.display = visible === 0 ? "block" : "none";
+            });
+          } else {
+            goToPage(currentPage);
+          }
+        }
+
+        function clearSearch() {
+          el.input.value = "";
+          el.clear.style.display = "none";
+          goToPage(1);
+          el.input.focus();
         }
 
         function debounce(fn, delay) {
           let timer;
+          let leading = false;
           return function (...args) {
+            const ctx = this;
+            if (!leading) {
+              leading = true;
+              fn.apply(ctx, args);
+            }
             clearTimeout(timer);
-            timer = setTimeout(() => fn.apply(this, args), delay);
+            timer = setTimeout(function () {
+              leading = false;
+              fn.apply(ctx, args);
+            }, delay);
           };
         }
 
-        function setupSearch() {
-          searchInput.addEventListener("input", debounce(function () {
-            filterReviews(searchInput.value);
-          }, 200));
+        function onInput() {
+          el.clear.style.display = el.input.value ? "block" : "none";
+          search(el.input.value);
         }
 
-        // Initialize
-        updateReviewCount();
-        setupSearch();
+        function onKeydown(e) {
+          if (e.key === "Escape") clearSearch();
+        }
+
+        function onCardClick(e) {
+          var card = e.target.closest(".review-card");
+          if (card && card.dataset.url) {
+            window.open(card.dataset.url, "_blank");
+          }
+        }
+
+        function init() {
+          document.addEventListener("click", onCardClick);
+          el.input.addEventListener("input", debounce(onInput, 300));
+          el.clear.addEventListener("click", clearSearch);
+          el.input.addEventListener("keydown", onKeydown);
+          el.firstBtn.addEventListener("click", function () { goToPage(1); });
+          el.prevBtn.addEventListener("click", function () {
+            if (currentPage > 1) goToPage(currentPage - 1);
+          });
+          el.nextBtn.addEventListener("click", function () {
+            if (currentPage < totalPages) goToPage(currentPage + 1);
+          });
+          el.lastBtn.addEventListener("click", function () { goToPage(totalPages); });
+          goToPage(1);
+        }
+
+        init();
       });
     </script>
   </body>

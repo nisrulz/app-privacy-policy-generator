@@ -49,12 +49,22 @@ const app = createApp({
       showDisclaimerModal: false,
       showFaqModal: false,
 
+      // === Platform Selection ===
+      platforms: {
+        Android: true,
+        iOS: false,
+        KaiOS: false,
+        Windows: false,
+        Web: false,
+      },
+
       // === Policy Content Settings ===
       typeOfPolicy: "Simple",
       typeOfPolicyInt: 1,
       isLocationTracked: false,
       ageOfDigitalConsent: 16,
       isAIUsed: false,
+      hasDataDeletion: false,
     };
   },
 
@@ -146,7 +156,6 @@ const app = createApp({
       this._setDevOrCompanyName();
       this._setPidInfo();
       this._setAppTypeText();
-      this._setOsRequirement();
       this._setPlatformText();
       return true;
     },
