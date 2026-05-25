@@ -76,7 +76,7 @@ echo " ✅  STEP 4: Minify CSS"
 
 # --- Shared: Minify JS (except locale) ---
 npx -q uglifyjs "$TS_JS_FILE" --output "$BASE_DIR/js/thirdpartyservices.min.js"
-npx -q uglifyjs src/js/wizardMixin.js src/js/platformMixin.js src/js/localeMixin.js src/js/main.js --output "$BASE_DIR/js/main.min.js"
+npx -q uglifyjs src/js/wizardMixin.js src/js/platformMixin.js src/js/localeMixin.js src/js/formDataMixin.js src/js/generatorMixin.js src/js/modalMixin.js src/js/thirdPartyMixin.js src/js/contentMixin.js src/js/main.js --output "$BASE_DIR/js/main.min.js"
 npx -q uglifyjs src/js/utils.js --output "$BASE_DIR/js/utils.min.js"
 npx -q uglifyjs src/js/flycricket.js --output "$BASE_DIR/js/flycricket.min.js"
 echo " ✅  STEP 5: Minify JS"
