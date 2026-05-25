@@ -9,6 +9,7 @@
 
 import re
 import json
+import time
 import shutil
 import requests
 import chevron
@@ -41,38 +42,13 @@ ONE_WEEK = timedelta(weeks=1)
 CONCURRENCY = 8
 
 
-def main():
-    args = ArgumentParser(description="Generate reviews page from GitHub issue comments")
-    args.add_argument("--force-fetch", action="store_true", help="Ignore cached JSON, re-fetch from GitHub")
-    args = args.parse_args()
-
+def setup_dirs():
     for d in (JSON_DIR, PROFILE_DIR, IMAGES_DIR):
         d.mkdir(exist_ok=True)
 
-    session = requests.Session()
-    session.headers.update({"User-Agent": REPO})
 
-    print("Fetching comments...")
-    comments = fetch_comments(session, args.force_fetch)
-    print(f"Processing {len(comments)} comments...")
-
-    download_avatars(session, comments)
-    download_images(session, comments)
-    prepare_comments(comments)
-
-    print("Rendering template...")
-    OUTPUT.write_text(chevron.render(TEMPLATE.read_text(), {
-        "issue_number": ISSUE_NUMBER,
-        "comments": comments,
-        "total_comments": len(comments),
-    }))
-    print(f"  Generated: {OUTPUT}")
-
-    shutil.copytree(IMAGES_DIR, PUBLIC / IMAGES_DIR.name, dirs_exist_ok=True)
-    shutil.copytree(PROFILE_DIR, PUBLIC / PROFILE_DIR.name, dirs_exist_ok=True)
-    shutil.copy2(OUTPUT, PUBLIC / OUTPUT.name)
-    print("  Copied assets → public/")
-    print("Done.")
+def format_reactions(raw):
+    return {REACTION_MAP[k]: v for k, v in raw.items() if k in REACTION_MAP and v > 0}
 
 
 def fetch_comments(session, force):
@@ -90,6 +66,7 @@ def fetch_comments(session, force):
                 break
             path.write_text(json.dumps(data))
             print(f"  Fetched {path.name} ({len(data)} comments)")
+            time.sleep(1)
         if not data:
             break
         comments.extend(data)
@@ -103,7 +80,6 @@ def fetch_page(session, page):
         resp = session.get(API_URL, params={"per_page": 100, "page": page})
         if resp.status_code == 403:
             print("  Rate limited, waiting 60s...")
-            import time
             time.sleep(60)
             continue
         if resp.status_code != 200:
@@ -155,13 +131,53 @@ def download_images(session, comments):
 
 def prepare_comments(comments):
     for c in comments:
-        c["reactions"] = {REACTION_MAP[k]: v for k, v in c.get("reactions", {}).items() if k in REACTION_MAP and v > 0}
+        c["reactions"] = format_reactions(c.get("reactions", {}))
         c["created_at_formatted"] = datetime.strptime(c["created_at"], "%Y-%m-%dT%H:%M:%SZ").strftime("%d %b %Y")
         c["body"] = markdown.markdown(c["body"])
         c["user"]["avatar_local"] = str(PROFILE_DIR / f"{c['user']['login']}.png")
         for url in re.findall(r"https?://[^\s]+\.(?:png|jpg|jpeg|gif)", c["body"]):
             name = url.rsplit("/", 1)[-1].split("?")[0]
             c["body"] = c["body"].replace(url, str(IMAGES_DIR / name))
+
+
+def render(comments):
+    OUTPUT.write_text(chevron.render(TEMPLATE.read_text(), {
+        "issue_number": ISSUE_NUMBER,
+        "comments": comments,
+        "total_comments": len(comments),
+    }))
+    print(f"  Generated: {OUTPUT}")
+
+
+def copy_to_public():
+    shutil.copytree(IMAGES_DIR, PUBLIC / IMAGES_DIR.name, dirs_exist_ok=True)
+    shutil.copytree(PROFILE_DIR, PUBLIC / PROFILE_DIR.name, dirs_exist_ok=True)
+    shutil.copy2(OUTPUT, PUBLIC / OUTPUT.name)
+    print("  Copied assets → public/")
+
+
+def main():
+    args = ArgumentParser(description="Generate reviews page from GitHub issue comments")
+    args.add_argument("--force-fetch", action="store_true", help="Ignore cached JSON, re-fetch from GitHub")
+    args = args.parse_args()
+
+    setup_dirs()
+
+    session = requests.Session()
+    session.headers.update({"User-Agent": REPO})
+
+    print("Fetching comments...")
+    comments = fetch_comments(session, args.force_fetch)
+    print(f"Processing {len(comments)} comments...")
+
+    download_avatars(session, comments)
+    download_images(session, comments)
+    prepare_comments(comments)
+
+    print("Rendering template...")
+    render(comments)
+    copy_to_public()
+    print("Done.")
 
 
 if __name__ == "__main__":
