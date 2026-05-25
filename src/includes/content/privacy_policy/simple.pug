@@ -152,7 +152,7 @@
                 p If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at {{ appContact }}.
 
                 +attribution('privacy policy')
-            textarea#privacy_simple_txtarea.textarea(onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+            textarea#privacy_simple_txtarea.textarea(aria-label='Privacy policy output' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
         footer.modal-card-foot
             +outputButtons('privacy_simple_content', 'privacy_simple_txtarea')
             +flycricketDeploy('deployFcSimple()')

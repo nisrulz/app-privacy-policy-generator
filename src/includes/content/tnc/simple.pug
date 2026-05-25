@@ -158,7 +158,7 @@
                 strong Contact Us
                 p If you have any questions or suggestions about the Terms and Conditions, please do not hesitate to contact the Service Provider at {{ appContact }}.
                 +attribution('Terms & Conditions')
-            textarea#tandc_txtarea.textarea(onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+            textarea#tandc_txtarea.textarea(aria-label='Terms and conditions output' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
         footer.modal-card-foot
             +outputButtons('tandc_content', 'tandc_txtarea')
             +flycricketDeploy('deployFcSimple()')

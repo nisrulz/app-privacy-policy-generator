@@ -216,7 +216,7 @@
 
                 p To request deletion of your personal data or to exercise any of your rights, contact the Service Provider using the details provided above. The Service Provider will respond within one month of receiving your request, extendable by up to two months where necessary due to the complexity or volume of requests, as permitted by applicable law.
                 +attribution('privacy policy')
-            textarea#privacy_gdpr_txtarea.textarea(onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+            textarea#privacy_gdpr_txtarea.textarea(aria-label='GDPR privacy policy output' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
         footer.modal-card-foot
             +outputButtons('privacy_gdpr_content', 'privacy_gdpr_txtarea')
             +flycricketDeploy('fc_deploy_gdpr()')
