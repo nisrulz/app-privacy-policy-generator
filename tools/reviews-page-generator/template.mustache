@@ -133,24 +133,52 @@
       }
       
       /* Style for the search box */
-      .search-box {
+      .search-wrapper {
+        position: relative;
         width: 95%;
         max-width: 600px;
-        padding: 15px;
         margin: 10px auto;
+      }
+
+      .search-box {
+        width: 100%;
+        padding: 15px 44px 15px 15px;
         display: block;
         border-radius: 8px;
         border: 1px solid #ccc;
         font-size: 16px;
         outline: none;
-        margin-left: auto;
-        margin-right: auto;
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box;
       }
 
       .search-box:focus {
         border-color: #007bff;
         box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+
+      .clear-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #999;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+        cursor: pointer;
+        display: none;
+        transition: background 0.2s;
+        padding: 0;
+      }
+
+      .clear-btn:hover {
+        background: #666;
       }
 
       /* Style for the review count */
@@ -163,6 +191,15 @@
         border-radius: 8px;
         display: inline-block;
         margin-left: 10px;
+      }
+
+      /* No results message */
+      .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: #888;
+        font-size: 1.1em;
+        display: none;
       }
 
       /* Style for the action bar */
@@ -190,8 +227,12 @@
           <a href="https://ko-fi.com/A443EQ6" target="_blank" class="link">☕️ Buy Me a Coffee</a>
           <span class="review-count">📊 Total Reviews: <span id="reviewCount">{{ total_comments }}</span></span>
         </div>
-        <input type="text" id="searchInput" class="search-box" placeholder="Search reviews..." />
+        <div class="search-wrapper">
+          <input type="text" id="searchInput" class="search-box" placeholder="Search reviews..." />
+          <button id="clearBtn" class="clear-btn" aria-label="Clear search">&times;</button>
+        </div>
       </div>
+      <div class="no-results" id="noResults">No reviews match your search.</div>
       <div class="review-columns" id="reviewContainer">
         <a
           href="https://github.com/nisrulz/app-privacy-policy-generator/issues/65"
@@ -259,13 +300,19 @@
       document.addEventListener("DOMContentLoaded", function () {
         const reviewCountElement = document.getElementById("reviewCount");
         const searchInput = document.getElementById("searchInput");
+        const clearBtn = document.getElementById("clearBtn");
+        const noResults = document.getElementById("noResults");
+        const reviewCards = Array.from(
+          document.querySelectorAll(".review-card:not(.header-card)")
+        );
+        const totalCards = reviewCards.length;
 
-        function getReviewCards() {
-          return document.querySelectorAll(".review-card:not(.header-card)");
-        }
-
-        function updateReviewCount(count) {
-          reviewCountElement.textContent = typeof count === "number" ? count : getReviewCards().length;
+        function updateReviewCount(visible) {
+          if (typeof visible === "number") {
+            reviewCountElement.textContent = visible + " of " + totalCards;
+          } else {
+            reviewCountElement.textContent = totalCards;
+          }
         }
 
         function showCard(card, show) {
@@ -273,22 +320,24 @@
         }
 
         function filterReviews(query) {
-          const cards = getReviewCards();
           query = query.trim().toLowerCase();
           let visible = 0;
-          // Process cards in chunks to avoid blocking the UI
           let index = 0;
-          const chunkSize = 100; // Adjust based on performance
+          const chunkSize = 100;
+
           function processChunk() {
-            const end = Math.min(index + chunkSize, cards.length);
+            const end = Math.min(index + chunkSize, reviewCards.length);
             for (; index < end; index++) {
-              const card = cards[index];
-              const match = card.innerText.toLowerCase().includes(query);
+              const card = reviewCards[index];
+              const match = !query || card.innerText.toLowerCase().includes(query);
               showCard(card, match);
               if (match) visible++;
             }
-            if (index < cards.length) {
+            if (index < reviewCards.length) {
               requestAnimationFrame(processChunk);
+            } else {
+              updateReviewCount(visible);
+              noResults.style.display = visible === 0 && query ? "block" : "none";
             }
           }
           processChunk();
@@ -296,16 +345,44 @@
 
         function debounce(fn, delay) {
           let timer;
+          let leadingCalled = false;
           return function (...args) {
+            const context = this;
+            if (!timer) {
+              leadingCalled = false;
+            }
+            if (!leadingCalled) {
+              fn.apply(context, args);
+              leadingCalled = true;
+            }
             clearTimeout(timer);
-            timer = setTimeout(() => fn.apply(this, args), delay);
+            timer = setTimeout(function () {
+              leadingCalled = false;
+              fn.apply(context, args);
+            }, delay);
           };
+        }
+
+        function clearSearch() {
+          searchInput.value = "";
+          clearBtn.style.display = "none";
+          filterReviews("");
+          searchInput.focus();
         }
 
         function setupSearch() {
           searchInput.addEventListener("input", debounce(function () {
+            clearBtn.style.display = searchInput.value ? "block" : "none";
             filterReviews(searchInput.value);
-          }, 200));
+          }, 300));
+
+          clearBtn.addEventListener("click", clearSearch);
+
+          searchInput.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") {
+              clearSearch();
+            }
+          });
         }
 
         // Initialize
