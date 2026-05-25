@@ -6,15 +6,17 @@ Static web app (Vue.js + Pug + Sass) that generates privacy policies and terms &
 
 ## Source Layout
 
-- `src/index.pug` — entry point (includes all partials)
-- `src/includes/content/privacy_policy/` — privacy templates: `gdpr.pug`, `simple.pug`, `no_tracking.pug`
-- `src/includes/content/tnc/` — T&C template: `simple.pug`
-- `src/includes/content/wizard/` — wizard steps: `step_1.pug`–`step_7.pug`
-- `src/includes/content/faq.pug` — FAQ modal with Vue-controlled visibility
-- `src/includes/content/disclaimer.pug` — Disclaimer modal
+- `src/index.pug` — entry point (includes all partials); `lang` compile-time variable
+- `src/locales/` — locale JSON files (one per language); `en.json` is the source of truth
+- `src/includes/content/privacy_policy/` — privacy templates: `gdpr.pug`, `simple.pug`, `no_tracking.pug`; all text via `$t('key')`
+- `src/includes/content/tnc/` — T&C template: `simple.pug`; all text via `$t('key')`
+- `src/includes/content/wizard/` — wizard steps: `step_1.pug`–`step_7.pug`; all labels via `$t('key')`
+- `src/includes/content/faq.pug` — FAQ modal with Vue-controlled visibility; text via `$t('key')`
+- `src/includes/content/disclaimer.pug` — Disclaimer modal; text via `$t('key')`
 - `src/js/main.js` — Vue app entry point: registers mixins, form state, and modal toggles
+- `src/js/localeMixin.js` — Vue mixin: `$t()` translation, `switchLocale()`, `_updateMeta()`
 - `src/js/wizardMixin.js` — Vue mixin: wizard navigation, step validation, and content rendering
-- `src/js/platformMixin.js` — Vue mixin: platform-aware text descriptors and device vocabulary
+- `src/js/platformMixin.js` — Vue mixin: platform-aware text descriptors (reads from locale data)
 - `src/js/utils.js` — utility helpers
 - `src/includes/yaml/thirdpartyservices.yml` — 3rd-party service definitions (source of truth); JS is auto-generated during build
 - `src/includes/vendor/` — vendored third-party CSS (normalize.css), JS (Vue.js, to-markdown), and images served locally
@@ -37,8 +39,9 @@ Build pipeline:
 2. `sass` compiles `src/sass/` (including locally-vendored bulma) → `public/css/style.css`; `pug3` inlines `src/includes/vendor/normalize.min.css` into `public/index.html`
 3. `js-yaml` converts `src/includes/yaml/thirdpartyservices.yml` → temp JS (intermediate file, not tracked)
 4. `uglifycss` + `purgecss` minify and purge unused CSS → `public/css/style.min.css`
-5. `uglifyjs` minifies JS → `public/js/*.min.js`
-6. Vendor JS files (Vue, to-markdown) copied to `public/js/vendor/`; vendor images copied to `public/images/vendor/`
+5. `js-yaml` converts `src/locales/en.json` → `public/js/locale.min.js` (locale data)
+6. `uglifyjs` minifies JS → `public/js/*.min.js`
+7. Vendor JS files (Vue, to-markdown) copied to `public/js/vendor/`; vendor images copied to `public/images/vendor/`
 
 Additional global tools (image compression, deployment):
 ```sh
@@ -71,6 +74,7 @@ Dev: open `public/index.html` in browser after render. No dev server.
 | `src/js/main.js` | Vue app — data, computed, `generate()`, validation, mixin registration |
 | `src/js/wizardMixin.js` | Wizard flow, step navigation, and preview state |
 | `src/js/platformMixin.js` | Platform type vocabulary and conditional flags |
+| `src/js/localeMixin.js` | Vue mixin: `$t()` translation, locale switching, meta tag updates |
 | `src/includes/content/privacy_policy/gdpr.pug` | GDPR/CCPA-compliant policy |
 | `src/includes/content/privacy_policy/simple.pug` | Simple/standard policy |
 | `src/includes/content/privacy_policy/no_tracking.pug` | No-tracking policy |
@@ -103,6 +107,7 @@ CI via GitHub Actions (.github/workflows/). Only maintainers can deploy. Firebas
 ## Skills
 
 - `.agents/skills/add-thirdparty-service/` — Load this skill when adding a new 3rd-party service entry.
+- `.agents/skills/add-localization/` — Load this skill when adding a new language translation.
 
 ## Quick Workflow for Edits
 

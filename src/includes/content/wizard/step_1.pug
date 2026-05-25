@@ -1,30 +1,29 @@
 section#step-1.columns.has-text-centered(v-if='wizardStep==1')
   .column.is-full
-    a.title(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' target='_blank' rel='noopener noreferrer' aria-label='App Privacy Policy Generator on GitHub')
-    img.center-block.hero-image(src='images/app_graphics/side_image.png' alt='App Privacy Policy Generator hero image' width='2024' height='1132' fetchpriority='high')
+    a.title(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' target='_blank' rel='noopener noreferrer' :aria-label='translate("meta.title")')
+    img.center-block.hero-image(src='/images/app_graphics/side_image.png' :alt='translate("wizard.step1.heroAlt")' width='2024' height='1132' fetchpriority='high')
     p.is-size-8.mt-2
-      | Generate a customized Privacy Policy and Terms of Use document for your apps
+      | {{ translate('wizard.step1.tagline') }}
     p.mt-2
-      | Forever 
-      a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' target='_blank' rel='noopener noreferrer') free and open-source, 
-      | built with 
+      a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' target='_blank' rel='noopener noreferrer') {{ translate('wizard.step1.freeAndOpenSource') }}
+      |  {{ translate('wizard.step1.builtWith') }} 
       span.heart ♥️ 
-      | by 
+      |  {{ translate('wizard.step1.by') }} 
       a(href='http://www.nisrulz.com/' target='_blank' rel='noopener noreferrer') Nishant
-      |  and 
-      a(href='https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors' target='_blank' rel='noopener noreferrer') contributors.
+      |  {{ translate('wizard.step1.and') }} 
+      a(href='https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors' target='_blank' rel='noopener noreferrer') {{ translate('wizard.step1.contributors') }}
       br
-      a(href='reviews.html' target='_blank' rel='noopener noreferrer') ⭐️ Check out the Guestbook for reviews 
+      a(href='/reviews.html' target='_blank' rel='noopener noreferrer') ⭐️ {{ translate('wizard.step1.guestbook') }} 
       span | 
-      a.has-info(href="#" rel="noopener noreferrer" @click.prevent="toggleFaqModalVisibility") Read FAQ
+      a.has-info(href="#" rel="noopener noreferrer" @click.prevent="toggleFaqModalVisibility") {{ translate('wizard.step1.readFaq') }}
     p.mt-2
       a(href='https://bsky.app/intent/compose?text=%F0%9F%93%9D%20App%20Privacy%20Policy%20Generator%3A%20A%20free%20web-app%20to%20generate%20a%20generic%20privacy%20policy%20for%20your%20Android%2C%20iOS%2C%20KaiOS%2C%20Windows%2C%20%26%20Web%20apps%0A%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BB%20by%20%40nisrulz.com%20%0A%0A%E2%9C%85%20Web%20App%3A%20https%3A%2F%2Fapp-privacy-policy-generator.nisrulz.com%20%0A%0A%E2%9C%85%20Reviews%3A%20https%3A%2F%2Fapp-privacy-policy-generator.nisrulz.com%2Freviews.html%20%0A%0A%23free%20%23app%20%23privacy%20%23policy%20%23generator' target='_blank' rel='noopener noreferrer')
-        img(style='margin-right: 6px' src='https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff&label=Share%20on&color=0285FF' alt='Bluesky' width='86' height='20')
+        img(style='margin-right: 6px' src='https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff&label=Share%20on&color=0285FF' :alt='translate("misc.shareBluesky")' width='86' height='20')
       a(href="#" @click.prevent='toggleDisclaimerModalVisibility' rel='noopener noreferrer')
-        img.social-logo(src='images/app_icons/disclaimer.svg' alt='Disclaimer' width='20' height='20')
+        img.social-logo(src='/images/app_icons/disclaimer.svg' :alt='translate("wizard.step1.disclaimer")' width='20' height='20')
       a(href='https://github.com/nisrulz/app-privacy-policy-generator' target='_blank' rel='noopener noreferrer')
         img(alt='GitHub stars' src='https://img.shields.io/github/stars/nisrulz/app-privacy-policy-generator?style=social' width='100' height='20')
       a(href='https://ko-fi.com/nisrulz' target='_blank' rel='noopener noreferrer')
-        img(src='images/vendor/kofi1.png' alt='Buy Me a Coffee at ko-fi.com' width='76' height='19' style='border:0')
+        img(src='/images/vendor/kofi1.png' :alt='translate("wizard.step1.buyMeCoffee")' width='76' height='19' style='border:0')
     hr
-    button.button.is-primary.start-btn(@click='nextStep') Start
+    button.button.is-primary.start-btn(@click='nextStep') {{ translate('wizard.step1.start') }}

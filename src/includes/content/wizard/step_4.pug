@@ -5,7 +5,7 @@ section#step-4.columns(v-if="wizardStep==4")
             +wizardProgress(42)
             .scrollable.content
                 .control
-                    | Select App Type:
+                    | {{ translate('wizard.step4.selectAppType') }}
                     span.tag.is-primary.is-light {{typeOfApp}}
                     br
                     label.radio
@@ -14,7 +14,7 @@ section#step-4.columns(v-if="wizardStep==4")
                             value="Free" 
                             type="radio"
                             )
-                        |   Free
+                        |   {{ translate('wizard.step4.free') }}
                     br
                     label.radio
                         input(
@@ -22,7 +22,7 @@ section#step-4.columns(v-if="wizardStep==4")
                             value="Open Source" 
                             type="radio"
                             )
-                        |   Open Source
+                        |   {{ translate('wizard.step4.openSource') }}
                     br
                     label.radio
                         input(
@@ -30,7 +30,7 @@ section#step-4.columns(v-if="wizardStep==4")
                             value="Freemium" 
                             type="radio"
                             )
-                        |   Freemium
+                        |   {{ translate('wizard.step4.freemium') }}
                     br
                     label.radio
                         input(
@@ -38,7 +38,7 @@ section#step-4.columns(v-if="wizardStep==4")
                             value="Ad Supported" 
                             type="radio"
                             )
-                        |   Ad Supported
+                        |   {{ translate('wizard.step4.adSupported') }}
                     br
                     label.radio
                         input(
@@ -46,24 +46,24 @@ section#step-4.columns(v-if="wizardStep==4")
                             value="Commercial" 
                             type="radio"
                             )
-                        |   Commercial
+                        |   {{ translate('wizard.step4.commercial') }}
                 br
                 div.block(v-show='typeOfPolicyInt!=2')
                     input(v-model="isLocationTracked" id="locationcheckbox" type="checkbox")
                     label(for="locationcheckbox")
                         span.checkbox-logo 📍
-                        strong Is Location tracked ?
+                        strong {{ translate('wizard.step4.locationTracked') }}
                     br
                     input(v-model="isAIUsed" id="aicheckbox" type="checkbox")
                     label(for="aicheckbox")
                         span.checkbox-logo 🤖
-                        strong Is AI used ?
+                        strong {{ translate('wizard.step4.aiUsed') }}
                     br
                     input(v-model="hasDataDeletion" id="datadeletioncheckbox" type="checkbox")
                     label(for="datadeletioncheckbox")
                         span.checkbox-logo 🗑️
-                        strong Include Data Deletion instructions
+                        strong {{ translate('wizard.step4.dataDeletion') }}
         footer.card-footer
-            a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep') Next
+            a.card-footer-item(@click='prevStep') {{ translate('wizard.step4.previous') }}
+            a.card-footer-item(@click='nextStep') {{ translate('wizard.step4.next') }}
     +wizardSidebar

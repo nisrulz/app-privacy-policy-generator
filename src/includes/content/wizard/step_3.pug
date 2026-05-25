@@ -6,20 +6,20 @@ section#step-3.columns(v-if='wizardStep==3')
             .scrollable.content
                 .control
                     .field
-                        label.label(for="businessAddress") Business Address
+                        label.label(for="businessAddress") {{ translate('wizard.step3.businessAddress') }}
                         .control
                             input#businessAddress.input(
                                 v-bind:class="{ 'is-danger': (typeOfPolicyInt==3 && businessAddress.length == 0) }"
-                                placeholder="Street, City, Postal Code, Country"
+                                :placeholder="translate('wizard.step3.businessAddressPlaceholder')"
                                 v-model="businessAddress"
                                 type="text"
                                 )
-                        p.help.has-text-grey(v-show="!(typeOfPolicyInt==3 && businessAddress.length == 0)") Registered business or contact address for legal notices and GDPR disclosures.
-                        p.help.is-danger(v-show="(typeOfPolicyInt==3 && businessAddress.length == 0)") Business address is strongly recommended for GDPR policies.
+                        p.help.has-text-grey(v-show="!(typeOfPolicyInt==3 && businessAddress.length == 0)") {{ translate('wizard.step3.businessAddressHelp') }}
+                        p.help.is-danger(v-show="(typeOfPolicyInt==3 && businessAddress.length == 0)") {{ translate('wizard.step3.businessAddressRequired') }}
                 br
                 .control
                     .field
-                        label.label(for="effectiveFromDate") Policy Effective Date
+                        label.label(for="effectiveFromDate") {{ translate('wizard.step3.effectiveDate') }}
                         .control
                             input#effectiveFromDate.input.is-primary(
                                 v-model="effectiveFromDate" 
@@ -29,28 +29,28 @@ section#step-3.columns(v-if='wizardStep==3')
                 br
                 .control(v-show="typeOfPolicyInt!=2")
                     .field
-                        label.label(for="pidInfoIn") Personally Identifiable Information
+                        label.label(for="pidInfoIn") {{ translate('wizard.step3.pidInfo') }}
                         .control
                             input#pidInfoIn.input(
-                                placeholder="Email, userId, age, gender, etc" 
+                                :placeholder="translate('wizard.step3.pidInfoPlaceholder')" 
                                 v-model="pidInfoIn" 
                                 type="text"
                                 )
-                        p.help.has-text-grey Personally Identifiable Information you collect (comma separated)
+                        p.help.has-text-grey {{ translate('wizard.step3.pidInfoHelp') }}
                 br
                 .control
                     .field
-                        label.label(for="ageOfDigitalConsent") Age of Digital Consent
+                        label.label(for="ageOfDigitalConsent") {{ translate('wizard.step3.ageOfConsent') }}
                         .control
                             input#ageOfDigitalConsent.input(
-                                placeholder="16"
+                                :placeholder="translate('wizard.step3.ageOfConsentPlaceholder')"
                                 v-model="ageOfDigitalConsent" 
                                 type="number"
                                 min="13"
                                 max="18"
                                 )
-                        p.help.has-text-grey Minimum age for digital consent in your jurisdiction (16 for EU/Germany, 13 for US COPPA).
+                        p.help.has-text-grey {{ translate('wizard.step3.ageOfConsentHelp') }}
         footer.card-footer
-            a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep') Next
+            a.card-footer-item(@click='prevStep') {{ translate('wizard.step3.previous') }}
+            a.card-footer-item(@click='nextStep') {{ translate('wizard.step3.next') }}
     +wizardSidebar

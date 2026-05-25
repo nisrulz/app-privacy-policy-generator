@@ -5,8 +5,8 @@ section#step-7.columns(v-if="wizardStep==7")
             +wizardProgress(84)
             div(v-show='typeOfPolicyInt!=2')
                 p
-                    b Include links to Third Party Services 
-                    span.tag.is-primary.is-light Scroll for more
+                    b {{ translate('wizard.step7.includeLinks') }}
+                    span.tag.is-primary.is-light {{ translate('wizard.step7.scrollForMore') }}
                 .scrollable-thirdparty.content
                     a(rel="noopener noreferrer" v-for="item in thirdPartyServicesWithPrivacyOrTerms" :key="item.name")
                         input(
@@ -16,15 +16,15 @@ section#step-7.columns(v-if="wizardStep==7")
                             )
                         label(:for="'list-switch-' + item.name")
                             img.checkbox-logo(
-                                :alt="item.name" 
+                                :alt="tpsName(item)" 
                                 :src="item.logo"
                                 )
-                            span {{ item.name }}
+                            span {{ tpsName(item) }}
             div(v-show='typeOfPolicyInt==2')
-                p No third party services to choose. Goto 
-                    b Next step.
+                p {{ translate('wizard.step7.noServices') }} 
+                    b {{ translate('wizard.step7.nextStep') }}
                 div.scrollable-thirdparty.content
         footer.card-footer
-            a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep') Next
+            a.card-footer-item(@click='prevStep') {{ translate('wizard.step7.previous') }}
+            a.card-footer-item(@click='nextStep') {{ translate('wizard.step7.next') }}
     +wizardSidebar

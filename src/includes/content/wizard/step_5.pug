@@ -5,24 +5,24 @@ section#step-5.columns(v-if="wizardStep==5")
             +wizardProgress(56)
             .scrollable.content
                 .control
-                    | Select Platform(s):
+                    | {{ translate('wizard.step5.selectPlatform') }}
                     span.tag.is-primary.is-light {{selectedPlatformsLabel}}
                     br
                     input(v-model="platforms.Android" id="platform-android" type="checkbox")
-                    label(for="platform-android")  Android
+                    label(for="platform-android")  {{ translate('wizard.step5.android') }}
                     br
                     input(v-model="platforms.iOS" id="platform-ios" type="checkbox")
-                    label(for="platform-ios")  iOS
+                    label(for="platform-ios")  {{ translate('wizard.step5.ios') }}
                     br
                     input(v-model="platforms.KaiOS" id="platform-kaios" type="checkbox")
-                    label(for="platform-kaios")  KaiOS
+                    label(for="platform-kaios")  {{ translate('wizard.step5.kaios') }}
                     br
                     input(v-model="platforms.Windows" id="platform-windows" type="checkbox")
-                    label(for="platform-windows")  Windows (UWP)
+                    label(for="platform-windows")  {{ translate('wizard.step5.windows') }}
                     br
                     input(v-model="platforms.Web" id="platform-web" type="checkbox")
-                    label(for="platform-web")  Web App
+                    label(for="platform-web")  {{ translate('wizard.step5.web') }}
         footer.card-footer
-            a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep') Next
+            a.card-footer-item(@click='prevStep') {{ translate('wizard.step5.previous') }}
+            a.card-footer-item(@click='nextStep') {{ translate('wizard.step5.next') }}
     +wizardSidebar

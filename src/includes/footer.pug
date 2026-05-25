@@ -1,19 +1,22 @@
 //- Footer
 
 //- Vendor scripts (self-hosted)
-script(src='js/vendor/vue.global.prod.js')
-script(src='js/vendor/to-markdown.min.js')
+script(src='/js/vendor/vue.global.prod.js')
+script(src='/js/vendor/to-markdown.min.js')
+
+//- Locale data
+script(src='js/locale.min.js')
 
 //- Application specific
-script(src='js/thirdpartyservices.min.js')
-script(src='js/utils.min.js')
-script(src='js/main.min.js')
+script(src='/js/thirdpartyservices.min.js')
+script(src='/js/utils.min.js')
+script(src='/js/main.min.js')
 
 //- Affliates
 
 //- Flycricket
 if (flycricket)
-    script(src='js/flycricket.min.js')
+    script(src='/js/flycricket.min.js')
 
 //- Service Worker for PWA offline support and caching
 script.

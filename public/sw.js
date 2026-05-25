@@ -13,6 +13,7 @@ const PRECACHE_URLS = [
   "/js/main.min.js",
   "/js/utils.min.js",
   "/js/thirdpartyservices.min.js",
+  "/js/locale.min.js",
   "/js/flycricket.min.js",
   "/js/vendor/vue.global.prod.js",
   "/js/vendor/to-markdown.min.js",
@@ -84,9 +85,11 @@ async function staleWhileRevalidate(request) {
 }
 
 async function networkFirst(request) {
-  // Normalize root URL to index.html for cache matching
+  // Normalize root and locale paths to index.html for cache matching
   const url = new URL(request.url);
-  const cacheKey = url.pathname === "/" ? "/index.html" : request;
+  const path = url.pathname;
+  const isLocaleRoot = /^\/[a-z]{2}(\/index\.html)?$/.test(path) && path !== "/index.html";
+  const cacheKey = path === "/" || isLocaleRoot ? (path.replace(/\/$/, "") + "/index.html") : request;
 
   if (request.method !== "GET") return fetch(request);
 

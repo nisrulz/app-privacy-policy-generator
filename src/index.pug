@@ -1,5 +1,6 @@
 doctype html
-html(lang="en", data-theme="light")
+- var lang = 'en'
+html(lang=lang, data-theme="light")
     - var flycricket = true
     - var noTracking = true
     - var gdpr = true
@@ -8,6 +9,10 @@ html(lang="en", data-theme="light")
     head
         include includes/head.pug
     body.bg-pattern
-        main#app.container.mt-6
+        main#app.container
+            .locale-bar.has-text-right(v-if='availableLocales && availableLocales.length > 1')
+                .select.is-small
+                    select#locale-select(@change='switchLocale($event.target.value)')
+                        option(v-for='loc in availableLocales' :value='loc.code' :key='loc.code' :selected='loc.code === currentLocale') {{ loc.label }}
             include includes/content.pug
         include includes/footer.pug
