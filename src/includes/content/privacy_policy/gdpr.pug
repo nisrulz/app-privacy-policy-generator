@@ -105,7 +105,7 @@
                 br
                 strong What are my opt-out rights?
 
-                div(v-if='isMobileApp || isBothPlatforms')
+                div(v-if='isMobileApp || isWindowsApp')
                     p You can stop further collection of information from your {{ deviceType }} by uninstalling the Application. Uninstalling will stop the Application from collecting data from your device, but it does not automatically delete information that has already been transmitted to the Service Provider or to third parties.
                 div(v-if='isWebApp')
                     p You can stop further collection of information from your device by ceasing to use the website. Ceasing to use will stop the website from collecting data from your device, but it does not automatically delete information that has already been transmitted to the Service Provider or to third parties.
@@ -122,6 +122,12 @@
                     li Data required for legal compliance: Retained as long as required by applicable law
 
                 p You have the right to request deletion of your personal data at any time, except where retention is required by law. If you'd like the Service Provider to delete User Provided Data that you have provided via the Application, please contact them at {{ appContact }} and they will respond within the time required by applicable law. Please note that some User Provided Data may be required in order for the Application to function properly.
+
+                div(v-if='hasDataDeletion')
+                    br
+                    strong Data Deletion
+                    p You can request deletion of your personal data or account by contacting the Service Provider at {{ appContact }}. The Service Provider will process your request within the timeframes required by applicable law.
+                    p Upon verification of your identity, the Service Provider will delete your personal data from its systems, except where retention is required for legal compliance or legitimate business purposes.
 
                 br
                 strong How does the Application address children's privacy?

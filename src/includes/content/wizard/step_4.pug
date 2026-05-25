@@ -51,13 +51,18 @@ section#step-4.columns(v-if="wizardStep==4")
                 div.block(v-show='typeOfPolicyInt!=2')
                     input(v-model="isLocationTracked" id="locationcheckbox" type="checkbox")
                     label(for="locationcheckbox")
-                        img.checkbox-logo(src="images/app_graphics/location.svg")
+                        span.checkbox-logo 📍
                         strong Is Location tracked ?
                     br
                     input(v-model="isAIUsed" id="aicheckbox" type="checkbox")
                     label(for="aicheckbox")
-                        img.checkbox-logo(src="images/app_graphics/ai.svg")
+                        span.checkbox-logo 🤖
                         strong Is AI used ?
+                    br
+                    input(v-model="hasDataDeletion" id="datadeletioncheckbox" type="checkbox")
+                    label(for="datadeletioncheckbox")
+                        span.checkbox-logo 🗑️
+                        strong Include Data Deletion instructions
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep') Next
