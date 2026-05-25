@@ -1,6 +1,10 @@
 window.formDataMixin = {
   data() {
     return {
+      currentLocale: document.documentElement.getAttribute('lang') || 'en',
+      availableLocales: [
+        { code: 'en', label: 'English' }
+      ],
       iOrWe: "[I/We]",
       typeOfApp: "Free",
       typeOfAppTxt: "a Free",

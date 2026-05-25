@@ -1,13 +1,4 @@
 window.localeMixin = {
-  data() {
-    return {
-      currentLocale: document.documentElement.getAttribute('lang') || 'en',
-      availableLocales: [
-        { code: 'en', label: 'English' }
-      ]
-    }
-  },
-
   methods: {
     translate(key, params) {
       var localeData = window.__locale || {}
@@ -57,5 +48,5 @@ window.localeMixin = {
 
   mounted() {
     this._updateMeta()
-  }
+  },
 };
