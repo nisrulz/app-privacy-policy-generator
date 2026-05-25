@@ -58,4 +58,4 @@ window.localeMixin = {
   mounted() {
     this._updateMeta()
   }
-}
+};

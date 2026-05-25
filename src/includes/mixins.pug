@@ -1,11 +1,12 @@
 //- Modal shell — wraps content in a Bulma modal card
 mixin modal(flag, titleKey, toggle, vShow)
   - var cls = '{\'is-active\': ' + flag + '}'
+  - var titleHtml = '{{ $t(\'' + titleKey + '\') }}'
   .modal(v-bind:class=cls)&attributes(vShow ? { 'v-show': vShow } : {})
     .modal-background
     .modal-card
       header.modal-card-head
-        p.modal-card-title.no-select {{ $t(titleKey) }}
+        p.modal-card-title.no-select !{titleHtml}
         button.delete(aria-label='close' @click=toggle)
       block
 
@@ -17,9 +18,10 @@ mixin outputButtons(contentId, textareaId)
 
 //- Generator attribution
 mixin attribution(type)
+  - var attrExpr = "$t('modal.attribution." + type + "')"
   hr
   p
-    span(v-html="$t('modal.attribution.' + type)")
+    span(v-html=attrExpr)
     a(href='https://app-privacy-policy-generator.nisrulz.com/' target='_blank' rel='noopener noreferrer') App Privacy Policy Generator
 
 //- Flycricket deploy button (compile-time conditional on flycricket var)
