@@ -1,10 +1,8 @@
 //- Footer
 
-//- VueJS
-script(src='https://unpkg.com/vue@3/dist/vue.global.prod.js')
-
-//- to-markdown
-script(src='https://cdnjs.cloudflare.com/ajax/libs/to-markdown/3.1.1/to-markdown.min.js' integrity='sha256-2PIa0cHy6lNEesnk4/qokv291Whx/uhAy2V6WL2zmfo=' crossorigin='anonymous')
+//- Vendor scripts (self-hosted)
+script(src='js/vendor/vue.global.prod.js')
+script(src='js/vendor/to-markdown.min.js')
 
 //- Application specific
 script(src='js/thirdpartyservices.min.js')
@@ -16,3 +14,9 @@ script(src='js/main.min.js')
 //- Flycricket
 if (flycricket)
     script(src='js/flycricket.min.js')
+
+//- Service Worker for PWA offline support and caching
+script.
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }

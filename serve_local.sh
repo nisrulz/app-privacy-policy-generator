@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # App Privacy Policy Generator: A simple web app to generate a generic 
-# privacy policy for your Android/iOS apps
+# privacy policy for your Android, iOS, and Web apps
 # 
 # Copyright 2017-Present Nishant Srivastava
 # 

@@ -1,13 +1,8 @@
 section#step-2.columns(v-if='wizardStep==2')
     .column.card
         .card-content
-            p.is-hidden-desktop
-                a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-                    target='_blank' 
-                    rel='noopener noreferrer')
-                    img.is-size-1(src='images/text_logo.svg')
-
-            progress.progress.is-small.is-link(value='16' max='100')
+            +wizardMobileLogo
+            +wizardProgress(16)
             .scrollable.content
                 .control
                     | Type: 
@@ -37,7 +32,7 @@ section#step-2.columns(v-if='wizardStep==2')
                 br
                 .control
                     .field
-                        label.label App Name
+                        label.label(for="appName") App Name
                         .control
                             input#appName.input(
                                 v-bind:class="{ 'is-danger': (appName.length == 0) }" 
@@ -46,11 +41,12 @@ section#step-2.columns(v-if='wizardStep==2')
                                 required="" 
                                 type="text"
                                 )
+                        p.help.has-text-grey(v-show="!(appName.length == 0)") Name of the app or service covered by the generated document.
                         p.help(v-bind:class="{ 'is-danger': (appName.length == 0) }" v-show="(appName.length == 0)") Application Name is required.
                 br
                 .control
                     .field
-                        label.label Contact Information
+                        label.label(for="appContact") Contact Information
                         .control
                             input#appContact.input(
                                 v-bind:class="{ 'is-danger': (appContact.length == 0) }" 
@@ -59,33 +55,20 @@ section#step-2.columns(v-if='wizardStep==2')
                                 required="" 
                                 type="email"
                                 )
+                        p.help.has-text-grey(v-show="!(appContact.length == 0)") Email address for privacy, legal, and support inquiries.
                         p.help(v-bind:class="{ 'is-danger': (appContact.length == 0) }" v-show="(appContact.length == 0)") Email address is required.
                 br
-                .control
+                .control(v-show="typeOfPolicyInt==3")
                     .field
-                        label.label Policy Effective Date
+                        label.label(for="euRepresentative") EU Representative (optional)
                         .control
-                            input#effectiveFromDate.input.is-primary(
-                                v-model="effectiveFromDate" 
-                                required="" 
-                                type="date"
-                                )
-                br
-                .control(v-show="typeOfPolicyInt!=2")
-                    .field
-                        label.label Personally Identifiable Information
-                        .control
-                            input#pidInfoIn.input(
-                                placeholder="Email, userId, age, gender, etc" 
-                                v-model="pidInfoIn" 
+                            input#euRepresentative.input(
+                                placeholder="EU Representative Name and Contact"
+                                v-model="euRepresentative" 
                                 type="text"
                                 )
-                        p.help.has-text-grey Personally Identifiable Information you collect (comma separated)
+                        p.help.has-text-grey Name and contact details of your EU representative, if required under GDPR Article 27.
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep') Next
-    .column.is-information.is-hidden-touch
-        a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-            target='_blank' 
-            rel='noopener noreferrer')
-            img.center-block.sidebar-img(src='images/app_graphics/side_image.webp')
+            a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") Next
+    +wizardSidebar

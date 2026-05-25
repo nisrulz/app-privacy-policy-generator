@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # App Privacy Policy Generator: A simple web app to generate a generic 
-# privacy policy for your Android/iOS apps
+# privacy policy for your Android, iOS, and Web apps
 # 
 # Copyright 2017-Present Nishant Srivastava
 # 
@@ -24,6 +24,6 @@ echo "➡ Rendering from templates"
 ./render.sh
 echo ""
 echo "➡ Deploying to Firebase Hosting"
-firebase deploy -m $version
+firebase deploy -m "$version"
 echo ""
 echo "✅ Done!"

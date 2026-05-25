@@ -1,72 +1,56 @@
 section#step-3.columns(v-if='wizardStep==3')
     .column.card
         .card-content
-            p.is-hidden-desktop
-                a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-                    target='_blank' 
-                    rel='noopener noreferrer')
-                    img.is-size-1(src='images/text_logo.svg')
-            progress.progress.is-small.is-link(value='32' max='100')
+            +wizardMobileLogo
+            +wizardProgress(28)
             .scrollable.content
                 .control
-                    | Select App Type:
-                    span.tag.is-primary.is-light {{typeOfApp}}
-                    br
-                    label.radio
-                        input(
-                            v-model="typeOfApp" 
-                            value="Free" 
-                            type="radio"
-                            )
-                        |   Free
-                    br
-                    label.radio
-                        input(
-                            v-model="typeOfApp" 
-                            value="Open Source" 
-                            type="radio"
-                            )
-                        |   Open Source
-                    br
-                    label.radio
-                        input(
-                            v-model="typeOfApp" 
-                            value="Freemium" 
-                            type="radio"
-                            )
-                        |   Freemium
-                    br
-                    label.radio
-                        input(
-                            v-model="typeOfApp" 
-                            value="Ad Supported" 
-                            type="radio"
-                            )
-                        |   Ad Supported
-                    br
-                    label.radio
-                        input(
-                            v-model="typeOfApp" 
-                            value="Commercial" 
-                            type="radio"
-                            )
-                        |   Commercial
+                    .field
+                        label.label(for="businessAddress") Business Address
+                        .control
+                            input#businessAddress.input(
+                                v-bind:class="{ 'is-danger': (typeOfPolicyInt==3 && businessAddress.length == 0) }"
+                                placeholder="Street, City, Postal Code, Country"
+                                v-model="businessAddress"
+                                type="text"
+                                )
+                        p.help.has-text-grey(v-show="!(typeOfPolicyInt==3 && businessAddress.length == 0)") Registered business or contact address for legal notices and GDPR disclosures.
+                        p.help.is-danger(v-show="(typeOfPolicyInt==3 && businessAddress.length == 0)") Business address is strongly recommended for GDPR policies.
                 br
-                div.block(v-show='typeOfPolicyInt!=2')
-                    input(v-model="isLocationTracked" id="locationcheckbox" type="checkbox")
-                    label(for="locationcheckbox")
-                        img.checkbox-logo(src="images/app_graphics/location.svg")
-                        strong Is Location tracked ?
-                    br
-                    input(v-model="isAIUsed" id="aicheckbox" type="checkbox")
-                    label(for="aicheckbox")
-                        img.checkbox-logo(src="images/app_graphics/ai.svg")
-                        strong Is AI used ?
+                .control
+                    .field
+                        label.label(for="effectiveFromDate") Policy Effective Date
+                        .control
+                            input#effectiveFromDate.input.is-primary(
+                                v-model="effectiveFromDate" 
+                                required="" 
+                                type="date"
+                                )
+                br
+                .control(v-show="typeOfPolicyInt!=2")
+                    .field
+                        label.label(for="pidInfoIn") Personally Identifiable Information
+                        .control
+                            input#pidInfoIn.input(
+                                placeholder="Email, userId, age, gender, etc" 
+                                v-model="pidInfoIn" 
+                                type="text"
+                                )
+                        p.help.has-text-grey Personally Identifiable Information you collect (comma separated)
+                br
+                .control
+                    .field
+                        label.label(for="ageOfDigitalConsent") Age of Digital Consent
+                        .control
+                            input#ageOfDigitalConsent.input(
+                                placeholder="16"
+                                v-model="ageOfDigitalConsent" 
+                                type="number"
+                                min="13"
+                                max="18"
+                                )
+                        p.help.has-text-grey Minimum age for digital consent in your jurisdiction (16 for EU/Germany, 13 for US COPPA).
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep') Next
-    .column.is-information.is-hidden-touch
-        a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-            target='_blank' 
-            rel='noopener noreferrer')
-            img.center-block.sidebar-img(src='images/app_graphics/side_image.webp')
+    +wizardSidebar

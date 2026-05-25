@@ -5,5 +5,7 @@ node_modules/
 dist/
 .DS_Store
 .env
+.context/
+public/downloaded_images/
+src/js/thirdpartyservices.js
 
-public/downloaded_images/banner.jpg

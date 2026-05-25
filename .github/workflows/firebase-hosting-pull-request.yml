@@ -22,13 +22,14 @@ jobs:
           node-version: 20 # has to be LTS
           cache: 'npm'
 
-      - name: Install all CLI tools
-        run: npm install -g @tokilabs/pug3-cli sass js-yaml svgo png-minify uglifycss uglify-js purgecss
+      - name: Install dependencies
+        run: npm install
       
+      - name: Install additional global tools
+        run: npm install -g svgo png-minify
+
       - name: Render the website from templates
-        run: |
-          chmod +x ./render.sh
-          ./render.sh
+        run: npm run build
           
       - name: Firebase Deploy to Preview Channel
         uses: FirebaseExtended/action-hosting-deploy@v0

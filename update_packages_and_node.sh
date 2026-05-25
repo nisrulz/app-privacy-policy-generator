@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # App Privacy Policy Generator: A simple web app to generate a generic
-# privacy policy for your Android/iOS apps
+# privacy policy for your Android, iOS, and Web apps
 #
 # Copyright 2017-Present Nishant Srivastava
 #
@@ -33,8 +33,8 @@ node -v
 echo ""
 
 # Use NVM to install or switch to the latest stable Node.js version
-echo "⬆️ Installing latest stable Node.js version..."
-nvm install node
+echo "⬆️ Installing latest LTS Node.js version..."
+nvm install --lts
 echo ""
 
 # Upgrade npm to the latest global version for system-wide package management enhancements

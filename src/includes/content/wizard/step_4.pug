@@ -1,61 +1,64 @@
 section#step-4.columns(v-if="wizardStep==4")
     .column.card
         .card-content
-            p.is-hidden-desktop
-                a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-                    target='_blank' 
-                    rel='noopener noreferrer')
-                    img.is-size-1(src='images/text_logo.svg')
-            progress.progress.is-small.is-link(value='48' max='100')
+            +wizardMobileLogo
+            +wizardProgress(42)
             .scrollable.content
                 .control
-                    | Select Mobile OS:
-                    span.tag.is-primary.is-light {{osType}}
+                    | Select App Type:
+                    span.tag.is-primary.is-light {{typeOfApp}}
                     br
                     label.radio
                         input(
-                            v-model="osType" 
-                            value="Android" 
+                            v-model="typeOfApp" 
+                            value="Free" 
                             type="radio"
                             )
-                        |   Android
+                        |   Free
                     br
                     label.radio
                         input(
-                            v-model="osType" 
-                            value="iOS" 
+                            v-model="typeOfApp" 
+                            value="Open Source" 
                             type="radio"
                             )
-                        |   iOS
+                        |   Open Source
                     br
                     label.radio
                         input(
-                            v-model="osType" 
-                            value="KaiOS" 
+                            v-model="typeOfApp" 
+                            value="Freemium" 
                             type="radio"
                             )
-                        |   KaiOS
+                        |   Freemium
                     br
                     label.radio
                         input(
-                            v-model="osType" 
-                            value="Android & iOS" 
+                            v-model="typeOfApp" 
+                            value="Ad Supported" 
                             type="radio"
                             )
-                        |   Android & iOS
+                        |   Ad Supported
                     br
                     label.radio
                         input(
-                            v-model="osType" 
-                            value="Android, iOS & KaiOS" 
+                            v-model="typeOfApp" 
+                            value="Commercial" 
                             type="radio"
                             )
-                        |   Android, iOS & KaiOS
+                        |   Commercial
+                br
+                div.block(v-show='typeOfPolicyInt!=2')
+                    input(v-model="isLocationTracked" id="locationcheckbox" type="checkbox")
+                    label(for="locationcheckbox")
+                        img.checkbox-logo(src="images/app_graphics/location.svg")
+                        strong Is Location tracked ?
+                    br
+                    input(v-model="isAIUsed" id="aicheckbox" type="checkbox")
+                    label(for="aicheckbox")
+                        img.checkbox-logo(src="images/app_graphics/ai.svg")
+                        strong Is AI used ?
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep') Next
-    .column.is-information.is-hidden-touch
-        a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' 
-            target='_blank' 
-            rel='noopener noreferrer')
-            img.center-block.sidebar-img(src='images/app_graphics/side_image.webp')
+    +wizardSidebar

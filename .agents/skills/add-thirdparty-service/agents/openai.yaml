@@ -1,0 +1,3 @@
+display_name: Add 3rd Party Service
+short_description: Add a new third-party service entry with YAML config and logo
+default_prompt: Add {service_name} as a third-party service
