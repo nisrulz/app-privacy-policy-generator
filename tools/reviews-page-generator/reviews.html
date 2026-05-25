@@ -202,6 +202,40 @@
         display: none;
       }
 
+      /* Pagination */
+      .pagination {
+        text-align: center;
+        margin: 0 auto 20px;
+        display: none;
+      }
+
+      .pagination button {
+        padding: 8px 18px;
+        margin: 0 6px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+      }
+
+      .pagination button:hover:not(:disabled) {
+        background: #e9ecef;
+      }
+
+      .pagination button:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+
+      .pagination .page-info {
+        display: inline-block;
+        padding: 8px 12px;
+        font-size: 14px;
+        color: #555;
+      }
+
       /* Style for the action bar */
       .action-bar {
         width: 90%;
@@ -233,6 +267,11 @@
         </div>
       </div>
       <div class="no-results" id="noResults">No reviews match your search.</div>
+      <div class="pagination" id="pagination">
+        <button id="prevBtn">&#8592; Previous</button>
+        <span class="page-info" id="pageInfo"></span>
+        <button id="nextBtn">Next &#8594;</button>
+      </div>
       <div class="review-columns" id="reviewContainer">
         <a
           href="https://github.com/nisrulz/app-privacy-policy-generator/issues/65"
@@ -10864,15 +10903,23 @@ Your generator is really quick, efficient, and concise!</p></div>
           input: document.getElementById("searchInput"),
           clear: document.getElementById("clearBtn"),
           noResults: document.getElementById("noResults"),
+          pagination: document.getElementById("pagination"),
+          prevBtn: document.getElementById("prevBtn"),
+          nextBtn: document.getElementById("nextBtn"),
+          pageInfo: document.getElementById("pageInfo"),
         };
         const cards = Array.from(
           document.querySelectorAll(".review-card:not(.header-card)")
         );
         const total = cards.length;
+        const PAGE_SIZE = 50;
+        const totalPages = Math.ceil(total / PAGE_SIZE);
+        let currentPage = 1;
+        let isSearching = false;
 
         // --- Helpers ---
         function matches(card, query) {
-          return !query || card.innerText.toLowerCase().includes(query);
+          return card.innerText.toLowerCase().includes(query);
         }
 
         function toggleCard(card, visible) {
@@ -10892,7 +10939,7 @@ Your generator is really quick, efficient, and concise!</p></div>
           }
         }
 
-        function filterCards(cards, query, onDone) {
+        function filterCards(cards, predicate, onDone) {
           let visible = 0;
           let i = 0;
           const CHUNK = 100;
@@ -10900,9 +10947,9 @@ Your generator is really quick, efficient, and concise!</p></div>
           function nextChunk() {
             const end = Math.min(i + CHUNK, cards.length);
             for (; i < end; i++) {
-              const match = matches(cards[i], query);
-              toggleCard(cards[i], match);
-              if (match) visible++;
+              const show = predicate(cards[i], i);
+              toggleCard(cards[i], show);
+              if (show) visible++;
             }
             if (i < cards.length) {
               requestAnimationFrame(nextChunk);
@@ -10913,18 +10960,55 @@ Your generator is really quick, efficient, and concise!</p></div>
           nextChunk();
         }
 
+        function updatePagination() {
+          el.pageInfo.textContent = currentPage + " of " + totalPages;
+          el.prevBtn.disabled = currentPage <= 1;
+          el.nextBtn.disabled = currentPage >= totalPages;
+        }
+
+        function showPagination() {
+          el.pagination.style.display = "block";
+          updatePagination();
+        }
+
+        function hidePagination() {
+          el.pagination.style.display = "none";
+        }
+
+        function goToPage(page) {
+          isSearching = false;
+          currentPage = page;
+          const start = (page - 1) * PAGE_SIZE;
+          const end = Math.min(start + PAGE_SIZE, total);
+          filterCards(cards, function (card, index) {
+            return index >= start && index < end;
+          }, function (visible) {
+            el.count.textContent = visible + " of " + total;
+            el.noResults.style.display = "none";
+            showPagination();
+          });
+        }
+
         function search(query) {
           const q = query.trim().toLowerCase();
-          filterCards(cards, q, function (visible) {
-            el.count.textContent = visible + " of " + total;
-            el.noResults.style.display = visible === 0 && q ? "block" : "none";
-          });
+          if (q) {
+            isSearching = true;
+            hidePagination();
+            filterCards(cards, function (card) {
+              return matches(card, q);
+            }, function (visible) {
+              el.count.textContent = visible + " of " + total;
+              el.noResults.style.display = visible === 0 ? "block" : "none";
+            });
+          } else {
+            goToPage(currentPage);
+          }
         }
 
         function clearSearch() {
           el.input.value = "";
           el.clear.style.display = "none";
-          search("");
+          goToPage(1);
           el.input.focus();
         }
 
@@ -10955,10 +11039,16 @@ Your generator is really quick, efficient, and concise!</p></div>
         }
 
         function init() {
-          el.count.textContent = total;
           el.input.addEventListener("input", debounce(onInput, 300));
           el.clear.addEventListener("click", clearSearch);
           el.input.addEventListener("keydown", onKeydown);
+          el.prevBtn.addEventListener("click", function () {
+            if (currentPage > 1) goToPage(currentPage - 1);
+          });
+          el.nextBtn.addEventListener("click", function () {
+            if (currentPage < totalPages) goToPage(currentPage + 1);
+          });
+          goToPage(1);
         }
 
         init();
