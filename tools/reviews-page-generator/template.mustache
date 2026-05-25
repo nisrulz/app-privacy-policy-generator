@@ -31,7 +31,7 @@
         margin: 0 0 20px;
         padding: 20px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
         display: inline-block;
         width: 100%;
         box-sizing: border-box;
@@ -316,7 +316,20 @@
         }
 
         function toggleCard(card, visible) {
-          card.style.display = visible ? "inline-block" : "none";
+          if (visible) {
+            card.style.display = "inline-block";
+            card.style.opacity = "0";
+            requestAnimationFrame(function () {
+              card.style.opacity = "1";
+            });
+          } else {
+            card.style.opacity = "0";
+            setTimeout(function () {
+              if (card.style.opacity === "0") {
+                card.style.display = "none";
+              }
+            }, 200);
+          }
         }
 
         function filterCards(cards, query, onDone) {
