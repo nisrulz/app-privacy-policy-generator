@@ -13,6 +13,6 @@ html(lang=lang, data-theme="light")
             .locale-bar.has-text-right(v-if='availableLocales && availableLocales.length > 1')
                 .select.is-small
                     select#locale-select(@change='switchLocale($event.target.value)')
-                        option(v-for='loc in availableLocales' :value='loc.code' :key='loc.code') {{ loc.label }}
+                        option(v-for='loc in availableLocales' :value='loc.code' :key='loc.code' :selected='loc.code === currentLocale') {{ loc.label }}
             include includes/content.pug
         include includes/footer.pug
