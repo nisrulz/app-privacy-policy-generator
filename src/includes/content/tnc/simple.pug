@@ -16,6 +16,9 @@
                     p This Application is distributed as open source software under the applicable open source license. Your use, reproduction, and distribution of the Application are governed by the terms of that license.
 
                 br
+                strong Intellectual Property
+                p The Service Provider retains all intellectual property rights in the Application, including its code, design, trademarks, service marks, trade names, logos, and branding (the "IP"). Nothing in these Terms grants you any license or right to use the Service Provider's trademarks, logos, or branding for any purpose. You agree not to remove, alter, or obscure any copyright, trademark, or other proprietary notices displayed in or on the Application.
+                br
                 strong Termination
                 p The Service Provider may suspend your access to the Application or services if you materially breach these Terms. The Service Provider will provide you with written notice of the breach and, where the breach is capable of cure, you will have 14 days from receipt of notice to remedy the breach. If you fail to cure the breach within that period, the Service Provider may terminate your access.
                 br
@@ -23,7 +26,7 @@
                 br
                 p Upon termination, your right to use the Application will end and you must delete all copies from your devices.
                 br
-                p By accessing and using this Application, you represent that you are legally permitted to use it in your jurisdiction. If you are below the minimum age required by applicable law, a parent or legal guardian must review and accept these Terms on your behalf.
+                p By accessing and using this Application, you represent that you are legally permitted to use it in your jurisdiction. You must be at least {{ ageOfDigitalConsent }} years of age (the age of digital consent in your jurisdiction) to use the Application. If you are below {{ ageOfDigitalConsent }}, a parent or legal guardian must review and accept these Terms on your behalf.
                 div(v-if='!isAppOpenSource()')
                     br
                     p Unauthorized copying, modification of the Application, any part of the Application, or the Service Provider's trademarks is strictly prohibited. Any attempts to extract the source code of the Application, translate the Application into other languages, or create derivative versions are not permitted. All trademarks, copyrights, database rights, and other intellectual property rights related to the Application remain the property of the Service Provider.
@@ -49,6 +52,8 @@
                 p Content submitted through the Application may be visible to other users or to the public, depending on how the Application functions.
                 br
                 p If you believe content violates these Terms, infringes your rights, or is unlawful, you may report it to the Service Provider at {{ appContact }}. The report should include enough information for the Service Provider to identify the content, evaluate the complaint, and contact you if follow-up is required.
+                br
+                p Where the Application provides such features, you may also report content, block other users, or mute notifications directly through the Application's interface. The Service Provider will review in-app reports with the same standards described in these Terms.
                 br
                 p The Service Provider may review reported content, request additional information where necessary, remove or restrict access to content, and take action against the responsible account where appropriate. Users affected by moderation decisions may contact the Service Provider at {{ appContact }} to request further review. The Service Provider will respond to appeals within a reasonable period and provide the reasons for any upheld moderation decision, subject to applicable law.
                 br
