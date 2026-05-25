@@ -23,7 +23,7 @@ const PRECACHE_URLS = [
   "/apple-touch-icon.png",
   "/site.webmanifest",
   "/images/vendor/kofi1.png",
-  "/images/app_graphics/side_image.webp",
+  "/images/app_graphics/side_image.png",
   "/images/app_icons/disclaimer.svg"
 ];
 
@@ -33,7 +33,7 @@ self.addEventListener("install", (event) => {
     caches.open(CACHE_NAME).then((cache) =>
       Promise.allSettled(
         PRECACHE_URLS.map((url) =>
-          cache.add(url).catch(() => {})
+          cache.add(url).catch(() => { })
         )
       )
     )
@@ -87,6 +87,8 @@ async function networkFirst(request) {
   // Normalize root URL to index.html for cache matching
   const url = new URL(request.url);
   const cacheKey = url.pathname === "/" ? "/index.html" : request;
+
+  if (request.method !== "GET") return fetch(request);
 
   try {
     const response = await fetch(request);

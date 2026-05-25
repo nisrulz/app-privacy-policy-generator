@@ -1,21 +1,6 @@
-/*  
-  App Privacy Policy Generator: A simple web app to generate a generic 
-  privacy policy for your Android, iOS, and Web apps
-
-  Copyright 2017-Present Nishant Srivastava
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-*/
-
 window.platformMixin = {
   data() {
     return {
-      // === Platform-Aware Text ===
-      // These defaults assume Mobile App; generate() overrides for Web/Both
-      platformType: "Mobile App",
       deviceType: "mobile device",
       deviceTypePlural: "mobile devices",
       platformDesc: "mobile devices",
@@ -23,68 +8,90 @@ window.platformMixin = {
       osDesc: "your mobile operating system",
       browserDesc: "the type of mobile Internet browsers you use",
       uninstallDesc: "by uninstalling the Application",
-      osType: "Android",
-      requirementOfSystem: "system",
     };
   },
 
   computed: {
-    // Platform type matchers used across all templates
+    selectedPlatformsLabel() {
+      var labels = [];
+      if (this.platforms.Android) labels.push("Android");
+      if (this.platforms.iOS) labels.push("iOS");
+      if (this.platforms.KaiOS) labels.push("KaiOS");
+      if (this.platforms.Windows) labels.push("Windows");
+      if (this.platforms.Web) labels.push("Web");
+      return labels.length ? labels.join(", ") : "None";
+    },
     isMobileApp() {
-      return this.platformType === "Mobile App";
+      return this.platforms.Android || this.platforms.iOS || this.platforms.KaiOS;
     },
     isWebApp() {
-      return this.platformType === "Web App";
+      return this.platforms.Web;
     },
-    isBothPlatforms() {
-      return this.platformType === "Both";
+    isWindowsApp() {
+      return this.platforms.Windows;
+    },
+    isPhoneOs() {
+      return this.isMobileApp;
     },
   },
 
   methods: {
-    // Map selected OS combo to the system requirement phrase used in T&C
-    _setOsRequirement() {
-      switch (this.osType) {
-        case "Android & iOS":
-          this.requirementOfSystem = "both systems";
-          break;
-        default:
-          this.requirementOfSystem = "system";
-      }
-    },
-
-    // Derive device/language vocabulary from the platform type selection.
-    // All templates reference these variables so the text reads naturally
-    // whether the app targets mobile, web, or both.
     _setPlatformText() {
-      switch (this.platformType) {
-        case "Web App":
-          this.deviceType = "device";
-          this.deviceTypePlural = "devices";
-          this.platformDesc = "web browsers";
-          this.deviceIdDesc = "your device's unique identifier (e.g., IP address or browser fingerprint)";
-          this.osDesc = "your operating system";
-          this.browserDesc = "the type of web browser you use";
-          this.uninstallDesc = "by ceasing to use the website";
-          break;
-        case "Both":
-          this.deviceType = "mobile device or computer";
-          this.deviceTypePlural = "mobile devices and computers";
-          this.platformDesc = "mobile devices and web browsers";
-          this.deviceIdDesc = "your device's unique device ID or identifier";
-          this.osDesc = "your operating system";
-          this.browserDesc = "the type of browser you use";
-          this.uninstallDesc = "by uninstalling the Application or ceasing to use the website";
-          break;
-        default:
-          this.deviceType = "mobile device";
-          this.deviceTypePlural = "mobile devices";
-          this.platformDesc = "mobile devices";
-          this.deviceIdDesc = "your mobile device's unique device ID";
-          this.osDesc = "your mobile operating system";
-          this.browserDesc = "the type of mobile Internet browsers you use";
-          this.uninstallDesc = "by uninstalling the Application";
-          break;
+      var isMobile = this.isMobileApp;
+      var isWin = this.isWindowsApp;
+      var isWeb = this.isWebApp;
+
+      var descs = [];
+      if (isMobile) descs.push("mobile devices");
+      if (isWin) descs.push("Windows devices");
+      if (isWeb) descs.push("web browsers");
+      if (descs.length === 0) descs.push("mobile devices");
+
+      this.platformDesc = descs.length === 2
+        ? descs[0] + " and " + descs[1]
+        : descs.slice(0, -1).join(", ") + ", and " + descs[descs.length - 1];
+
+      var devs = [];
+      if (isMobile) devs.push("mobile device");
+      if (isWin) devs.push("Windows device");
+      if (isWeb) devs.push("computer");
+      if (devs.length === 0) devs.push("mobile device");
+
+      this.deviceType = devs.length === 2
+        ? devs[0] + " or " + devs[1]
+        : devs.slice(0, -1).join(", ") + ", or " + devs[devs.length - 1];
+
+      var devPlurals = [];
+      if (isMobile) devPlurals.push("mobile devices");
+      if (isWin) devPlurals.push("Windows devices");
+      if (isWeb) devPlurals.push("computers");
+      if (devPlurals.length === 0) devPlurals.push("mobile devices");
+
+      this.deviceTypePlural = devPlurals.length === 2
+        ? devPlurals[0] + " and " + devPlurals[1]
+        : devPlurals.slice(0, -1).join(", ") + ", and " + devPlurals[devPlurals.length - 1];
+
+      var uninstallParts = [];
+      if (isMobile || isWin) uninstallParts.push("by uninstalling the Application");
+      if (isWeb) uninstallParts.push("by ceasing to use the website");
+      this.uninstallDesc = uninstallParts.join(" or ") || "by uninstalling the Application";
+
+      if (isMobile && !isWin && !isWeb) {
+        this.deviceIdDesc = "your mobile device's unique device ID";
+        this.osDesc = "your mobile operating system";
+        this.browserDesc = "the type of mobile Internet browsers you use";
+      } else if (isWin && !isMobile && !isWeb) {
+        this.deviceIdDesc = "your device's unique device ID";
+        this.osDesc = "your Windows operating system";
+        this.browserDesc = "the type of Internet browser you use";
+      } else if (isWeb && !isMobile && !isWin) {
+        this.deviceIdDesc = "your device's unique identifier (e.g., IP address or browser fingerprint)";
+        this.osDesc = "your operating system";
+        this.browserDesc = "the type of web browser you use";
+      } else {
+        this.deviceIdDesc = "your device's unique device ID or identifier";
+        this.osDesc = "your operating system";
+        this.browserDesc = "the type of browser you use";
       }
     },
   }
