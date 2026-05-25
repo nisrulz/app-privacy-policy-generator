@@ -5,77 +5,23 @@ section#step-5.columns(v-if="wizardStep==5")
             +wizardProgress(56)
             .scrollable.content
                 .control
-                    | Platform Type:
-                    span.tag.is-primary.is-light {{platformType}}
+                    | Select Platform(s):
+                    span.tag.is-primary.is-light {{selectedPlatformsLabel}}
                     br
-                    label.radio
-                        input(
-                            v-model="platformType"
-                            value="Mobile App"
-                            type="radio"
-                            )
-                        |   Mobile App
+                    input(v-model="platforms.Android" id="platform-android" type="checkbox")
+                    label(for="platform-android")  Android
                     br
-                    label.radio
-                        input(
-                            v-model="platformType"
-                            value="Web App"
-                            type="radio"
-                            )
-                        |   Web App
+                    input(v-model="platforms.iOS" id="platform-ios" type="checkbox")
+                    label(for="platform-ios")  iOS
                     br
-                    label.radio
-                        input(
-                            v-model="platformType"
-                            value="Both"
-                            type="radio"
-                            )
-                        |   Both
+                    input(v-model="platforms.KaiOS" id="platform-kaios" type="checkbox")
+                    label(for="platform-kaios")  KaiOS
                     br
+                    input(v-model="platforms.Windows" id="platform-windows" type="checkbox")
+                    label(for="platform-windows")  Windows (UWP)
                     br
-                    .control(v-if="platformType !== 'Web App'")
-                        | Select Mobile OS:
-                        span.tag.is-primary.is-light {{osType}}
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="Android"
-                                type="radio"
-                                )
-                            |   Android
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="iOS"
-                                type="radio"
-                                )
-                            |   iOS
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="KaiOS"
-                                type="radio"
-                                )
-                            |   KaiOS
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="Android & iOS"
-                                type="radio"
-                                )
-                            |   Android & iOS
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="Android, iOS & KaiOS"
-                                type="radio"
-                                )
-                            |   Android, iOS & KaiOS
+                    input(v-model="platforms.Web" id="platform-web" type="checkbox")
+                    label(for="platform-web")  Web App
         footer.card-footer
             a.card-footer-item(@click='prevStep') Previous
             a.card-footer-item(@click='nextStep') Next
