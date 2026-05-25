@@ -1,224 +1,160 @@
+# /// script
+# dependencies = [
+#   "requests",
+#   "chevron",
+#   "markdown",
+#   "pillow",
+# ]
+# ///
+
 import os
+import re
+import json
+import time
 import requests
 import chevron
 import markdown
-import json
-import time
-import re
 from PIL import Image
 from datetime import datetime, timedelta
-import argparse
+from pathlib import Path
+from argparse import ArgumentParser
 
-
-# Parse command-line arguments
-def parse_arguments():
-    parser = argparse.ArgumentParser(
-        description="Fetch GitHub issue comments and generate HTML page."
-    )
-    parser.add_argument(
-        "--force-fetch",
-        action="store_true",
-        help="Force fetching of fresh comments from GitHub API",
-    )
-    return parser.parse_args()
-
-
-# Get arguments
-args = parse_arguments()
-FORCE_FETCH = args.force_fetch  # Set based on script argument
-
-
-# GitHub repo details and issue number
 OWNER = "nisrulz"
 REPO = "app-privacy-policy-generator"
 ISSUE_NUMBER = "65"
-URL = f"https://api.github.com/repos/{OWNER}/{REPO}/issues/{ISSUE_NUMBER}/comments"
-HEADERS = {"User-Agent": f"{REPO}"}
+API_URL = f"https://api.github.com/repos/{OWNER}/{REPO}/issues/{ISSUE_NUMBER}/comments"
+HEADERS = {"User-Agent": REPO}
 
-# Directory constants
-JSON_DIR = "comments_json"
-PROFILE_PIC_DIR = "profile_pictures"
-DOWNLOADED_IMAGES_DIR = "downloaded_images"
-ONE_WEEK_AGO = datetime.now() - timedelta(weeks=1)
-
-
-# Create necessary directories
-def create_directories():
-    os.makedirs(JSON_DIR, exist_ok=True)
-    os.makedirs(PROFILE_PIC_DIR, exist_ok=True)
-    os.makedirs(DOWNLOADED_IMAGES_DIR, exist_ok=True)
+BASE = Path(__file__).parent
+JSON_DIR = BASE / "comments_json"
+PROFILE_DIR = BASE / "profile_pictures"
+IMAGES_DIR = BASE / "downloaded_images"
+TEMPLATE = BASE / "template.mustache"
+OUTPUT = BASE / "reviews.html"
+PUBLIC = BASE / "../../public"
+ONE_WEEK = timedelta(weeks=1)
 
 
-# Fetch comments from GitHub API or load from cached JSON files
-def fetch_comments():
-    params = {"per_page": 100, "page": 1}
+def parse_args():
+    p = ArgumentParser(description="Generate reviews page from GitHub issue comments")
+    p.add_argument("--force-fetch", action="store_true", help="Ignore cached JSON, re-fetch from GitHub")
+    return p.parse_args()
+
+
+def setup_dirs():
+    for d in (JSON_DIR, PROFILE_DIR, IMAGES_DIR):
+        d.mkdir(exist_ok=True)
+
+
+def fetch_comments(force):
     comments = []
-
+    page = 1
     while True:
-        json_file = os.path.join(JSON_DIR, f"comments_page_{params['page']}.json")
-        fetch_from_network = should_fetch_from_network(json_file)
-
-        if fetch_from_network:
-            page_comments = fetch_comments_from_api(params)
-            if not page_comments:
-                break
-            save_comments_to_file(json_file, page_comments)
+        path = JSON_DIR / f"comments_page_{page}.json"
+        data = None
+        if not force and path.exists() and datetime.fromtimestamp(path.stat().st_mtime) > datetime.now() - ONE_WEEK:
+            data = json.loads(path.read_text())
+            print(f"  Loaded cached: {path.name}")
         else:
-            page_comments = load_comments_from_file(json_file)
-
-        comments.extend(page_comments)
-        params["page"] += 1
-
-        if not page_comments:
+            data = fetch_page(page)
+            if data is None:
+                break
+            path.write_text(json.dumps(data))
+            print(f"  Fetched & saved: {path.name} ({len(data)} comments)")
+            time.sleep(1)
+        if not data:
             break
-
+        comments.extend(data)
+        page += 1
     comments.reverse()
     return comments
 
 
-# Check if the comments should be fetched from network
-def should_fetch_from_network(json_file):
-    if FORCE_FETCH:
-        return True  # Always fetch if force mode is enabled
-
-    if os.path.exists(json_file):
-        file_mod_time = datetime.fromtimestamp(os.path.getmtime(json_file))
-        if file_mod_time < ONE_WEEK_AGO:
-            return True
-    else:
-        return True
-    return False
-
-
-# Fetch comments from GitHub API
-def fetch_comments_from_api(params):
-    response = requests.get(URL, headers=HEADERS, params=params)
-    if response.status_code == 403:
-        print("⚠️ Rate limit exceeded. Waiting for 60 seconds...")
+def fetch_page(page):
+    resp = requests.get(API_URL, headers=HEADERS, params={"per_page": 100, "page": page})
+    if resp.status_code == 403:
+        print("  Rate limited, waiting 60s...")
         time.sleep(60)
-    elif response.status_code != 200:
-        print(f"🔴 Error: Received status code {response.status_code}")
-        return []
-    return response.json()
+        return fetch_page(page)
+    if resp.status_code != 200:
+        print(f"  Error {resp.status_code}")
+        return None
+    return resp.json()
 
 
-# Save comments to a JSON file
-def save_comments_to_file(json_file, page_comments):
-    with open(json_file, "w") as f:
-        json.dump(page_comments, f)
-    print(f"✅ Fetched and saved {len(page_comments)} comments to {json_file}\n")
-    time.sleep(1)  # Delay between each page fetch
-
-
-# Load comments from a JSON file
-def load_comments_from_file(json_file):
-    with open(json_file, "r") as f:
-        page_comments = json.load(f)
-    print(f"\n✅ Loaded comments from {json_file}")
-    return page_comments
-
-
-# Check if the image is already downloaded
-def is_image_already_downloaded(local_path, expected_url):
-    if os.path.exists(local_path):
+def ensure_image(url, path):
+    if path.exists():
         try:
-            with Image.open(local_path) as img:
-                width, height = img.size
-            file_size = os.path.getsize(local_path)
-            return width > 0 and height > 0 and file_size > 0
+            with Image.open(path) as img:
+                if img.size[0] > 0:
+                    return False
         except Exception:
-            return False
-    return False
-
-
-# Download and cache images
-def download_and_cache_image(url, local_path):
-    if is_image_already_downloaded(local_path, url):
-        print(f"⚡ Image already exists, skipping download: {local_path}")
-        return False
-
-    response = requests.get(url)
-    with open(local_path, "wb") as f:
-        f.write(response.content)
-    print(f"⬇️ Downloaded image from {url}")
+            pass
+    path.parent.mkdir(exist_ok=True)
+    path.write_bytes(requests.get(url).content)
     return True
 
 
-# Process and download profile pictures
-def process_profile_pictures(comments):
-    for comment in comments:
-        avatar_url = comment["user"]["avatar_url"]
-        username = comment["user"]["login"]
-        avatar_file = os.path.join(PROFILE_PIC_DIR, f"{username}.png")
-        if download_and_cache_image(avatar_url, avatar_file):
-            resize_image(avatar_file)
-            print(f"✅ Resized profile picture for {username} to 48x48 pixels\n")
-        comment["user"]["avatar_local"] = avatar_file
+def resize_avatar(path):
+    with Image.open(path) as img:
+        img.resize((48, 48), Image.LANCZOS).save(path)
 
 
-# Resize image to 48x48 pixels
-def resize_image(avatar_file):
-    with Image.open(avatar_file) as img:
-        img = img.resize((48, 48), Image.LANCZOS)
-        img.save(avatar_file)
-
-# Remap Reactions
-def remap_reactions(comment):
-    raw = comment.get("reactions", {})
-    mapped = {
-        "thumbs_up": raw.get("+1", 0),
-        "thumbs_down": raw.get("-1", 0),
-        "laugh": raw.get("laugh", 0),
-        "hooray": raw.get("hooray", 0),
-        "confused": raw.get("confused", 0),
-        "heart": raw.get("heart", 0),
-        "rocket": raw.get("rocket", 0),
-        "eyes": raw.get("eyes", 0)
-    }
-    # Only include reactions with a count > 0
-    comment["reactions"] = {k: v for k, v in mapped.items() if v > 0}
+def format_reactions(raw):
+    mapping = {"+1": "thumbs_up", "-1": "thumbs_down", "laugh": "laugh", "hooray": "hooray",
+               "confused": "confused", "heart": "heart", "rocket": "rocket", "eyes": "eyes"}
+    return {mapping[k]: v for k, v in raw.items() if k in mapping and v > 0}
 
 
-# Process and download images in comment bodies
-def process_comment_images(comments):
-    image_pattern = re.compile(
-        r"(https?://(?:[^\s/$.?#].[^\s]*)\.(?:png|jpg|jpeg|gif))"
-    )
-    for comment in comments:
-        remap_reactions(comment)
-        comment["created_at_formatted"] = datetime.strptime(
-            comment["created_at"], "%Y-%m-%dT%H:%M:%SZ"
-        ).strftime("%d %b %Y")
-        comment["body"] = markdown.markdown(comment["body"])
-        for image_url in image_pattern.findall(comment["body"]):
-            image_name = os.path.basename(image_url)
-            image_path = os.path.join(DOWNLOADED_IMAGES_DIR, image_name)
-            download_and_cache_image(image_url, image_path)
-            comment["body"] = comment["body"].replace(image_url, image_path)
+def process_comment(c, avatar_dir, images_dir):
+    c["reactions"] = format_reactions(c.get("reactions", {}))
+    c["created_at_formatted"] = datetime.strptime(c["created_at"], "%Y-%m-%dT%H:%M:%SZ").strftime("%d %b %Y")
+    c["body"] = markdown.markdown(c["body"])
+
+    avatar_path = avatar_dir / f"{c['user']['login']}.png"
+    avatar_url = c["user"]["avatar_url"]
+    if ensure_image(avatar_url, avatar_path):
+        resize_avatar(avatar_path)
+        print(f"  Downloaded & resized avatar: {c['user']['login']}")
+    c["user"]["avatar_local"] = str(avatar_path)
+
+    for url in re.findall(r"https?://[^\s]+\.(?:png|jpg|jpeg|gif)", c["body"]):
+        name = url.rsplit("/", 1)[-1].split("?")[0]
+        img_path = images_dir / name
+        if ensure_image(url, img_path):
+            print(f"  Downloaded image: {name}")
+        c["body"] = c["body"].replace(url, str(img_path))
 
 
-# Render HTML template with comments
-def render_html(comments):
-    data = {"issue_number": ISSUE_NUMBER, "comments": comments}
-
-    with open("template.mustache", "r") as f:
-        template = f.read()
-    html_content = chevron.render(template, data)
-
-    with open("reviews.html", "w") as f:
-        f.write(html_content)
-
-    print("\n=========================================")
-    print("\n🚀 Static webpage generated: reviews.html")
+def render(comments):
+    html = chevron.render(TEMPLATE.read_text(), {"issue_number": ISSUE_NUMBER, "comments": comments})
+    OUTPUT.write_text(html)
+    print(f"\n  Generated: {OUTPUT}")
 
 
-# Main function to execute the steps
+def copy_to_public():
+    for src in (IMAGES_DIR, PROFILE_DIR):
+        dst = PUBLIC / src.name
+        dst.mkdir(exist_ok=True)
+        for f in src.iterdir():
+            if f.is_file() and f.name != ".DS_Store":
+                (dst / f.name).write_bytes(f.read_bytes())
+    (PUBLIC / OUTPUT.name).write_bytes(OUTPUT.read_bytes())
+    print("  Copied assets → public/")
+
+
 def main():
-    create_directories()
-    comments = fetch_comments()
-    process_profile_pictures(comments)
-    process_comment_images(comments)
-    render_html(comments)
+    args = parse_args()
+    setup_dirs()
+    print("Fetching comments...")
+    comments = fetch_comments(args.force_fetch)
+    print(f"Processing {len(comments)} comments...")
+    for c in comments:
+        process_comment(c, PROFILE_DIR, IMAGES_DIR)
+    print("Rendering template...")
+    render(comments)
+    copy_to_public()
+    print("Done.")
 
 
 if __name__ == "__main__":

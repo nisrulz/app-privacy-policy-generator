@@ -1,16 +1,38 @@
 # Reviews Page Generator
 
-This is a python script that pulls the comments listed under the [Guest Book issue](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) and transforms the returned JSON responses to feed into a Static web page.
+Generates a static Guest Book page from [GitHub Issue #65](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) comments. Requires [`uv`](https://docs.astral.sh/uv/) (single Rust binary, no Python needed).
 
-Some highlights, the python script:
+## How it works
 
-1. will fetch and download the comments jsons by page only once a week. If attempted again within a week, then it will not make a network call but use the downloaded json files.
-1. will download all images contained in the comments into downloaded_images directory.
-1. will download all profile pictures for each comment and resize them into 48x48 size.
-1. will process markdown contained in the comments into html.
-1. will then transform the `template.mustache` into `reviews.html` file.
+1. Fetches all comment pages from the GitHub Issues API (cached as JSON for 1 week)
+2. Downloads & resizes profile pictures (48×48)
+3. Downloads embedded images from comment bodies
+4. Converts comment markdown → HTML
+5. Renders `template.mustache` → `reviews.html`
+6. Copies assets into `../../public/`
 
-There are some helper shell scripts available.
+## Usage
 
-1. `setup.sh` - will setup and activate the virtual env for the python tool. It will also download dependencies.
-1. `generate.sh` - will generate the `reviews.html` page and copy the required files into `public` directory.
+```bash
+# Normal run (uses cached data if less than 1 week old)
+./gen_reviews_page.sh
+
+# Force re-fetch from GitHub
+./gen_reviews_page.sh -f
+```
+
+## Requirements
+
+- [`uv`](https://docs.astral.sh/uv/#installation) — install once: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+- Everything else (Python, venv, deps) is managed automatically by `uv`
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `fetch_and_generate.py` | Main script (uv inline deps, runs with `uv run`) |
+| `gen_reviews_page.sh` | Entry point — `-f` forces re-fetch, runs script, copies output |
+| `template.mustache` | Mustache template for the reviews page |
+| `comments_json/` | Cached API responses (gitignored after generation) |
+| `profile_pictures/` | Downloaded & resized author avatars |
+| `downloaded_images/` | Images embedded in comments |
