@@ -5,14 +5,14 @@ section#step-2.columns(v-if='wizardStep==2')
             +wizardProgress(16)
             .scrollable.content
                 .control
-                    | Type: 
+                    | {{ $t('wizard.step2.type') }}
                     label.radio
                         input(
                             v-model="typeOfPolicyInt" 
                             value="1" 
                             type="radio"
                             )
-                        |   Simple
+                        |   {{ $t('wizard.step2.simple') }}
                     if noTracking
                         label.radio
                             input(
@@ -20,7 +20,7 @@ section#step-2.columns(v-if='wizardStep==2')
                                 value="2" 
                                 type="radio"
                                 )
-                            |   No Tracking
+                            |   {{ $t('wizard.step2.noTracking') }}
                     if gdpr
                         label.radio
                             input(
@@ -28,47 +28,47 @@ section#step-2.columns(v-if='wizardStep==2')
                                 value="3" 
                                 type="radio"
                                 )
-                            |   GDPR
+                            |   {{ $t('wizard.step2.gdpr') }}
                 br
                 .control
                     .field
-                        label.label(for="appName") App Name
+                        label.label(for="appName") {{ $t('wizard.step2.appName') }}
                         .control
                             input#appName.input(
                                 v-bind:class="{ 'is-danger': (appName.length == 0) }" 
-                                placeholder="Awesome App Name" 
+                                :placeholder="$t('wizard.step2.appNamePlaceholder')" 
                                 v-model="appName" 
                                 required="" 
                                 type="text"
                                 )
-                        p.help.has-text-grey(v-show="!(appName.length == 0)") Name of the app or service covered by the generated document.
-                        p.help(v-bind:class="{ 'is-danger': (appName.length == 0) }" v-show="(appName.length == 0)") Application Name is required.
+                        p.help.has-text-grey(v-show="!(appName.length == 0)") {{ $t('wizard.step2.appNameHelp') }}
+                        p.help(v-bind:class="{ 'is-danger': (appName.length == 0) }" v-show="(appName.length == 0)") {{ $t('wizard.step2.appNameRequired') }}
                 br
                 .control
                     .field
-                        label.label(for="appContact") Contact Information
+                        label.label(for="appContact") {{ $t('wizard.step2.contactInfo') }}
                         .control
                             input#appContact.input(
                                 v-bind:class="{ 'is-danger': (appContact.length == 0) }" 
-                                placeholder="Email Address" 
+                                :placeholder="$t('wizard.step2.contactPlaceholder')" 
                                 v-model="appContact" 
                                 required="" 
                                 type="email"
                                 )
-                        p.help.has-text-grey(v-show="!(appContact.length == 0)") Email address for privacy, legal, and support inquiries.
-                        p.help(v-bind:class="{ 'is-danger': (appContact.length == 0) }" v-show="(appContact.length == 0)") Email address is required.
+                        p.help.has-text-grey(v-show="!(appContact.length == 0)") {{ $t('wizard.step2.contactHelp') }}
+                        p.help(v-bind:class="{ 'is-danger': (appContact.length == 0) }" v-show="(appContact.length == 0)") {{ $t('wizard.step2.contactRequired') }}
                 br
                 .control(v-show="typeOfPolicyInt==3")
                     .field
-                        label.label(for="euRepresentative") EU Representative (optional)
+                        label.label(for="euRepresentative") {{ $t('wizard.step2.euRepresentative') }}
                         .control
                             input#euRepresentative.input(
-                                placeholder="EU Representative Name and Contact"
+                                :placeholder="$t('wizard.step2.euRepresentativePlaceholder')"
                                 v-model="euRepresentative" 
                                 type="text"
                                 )
-                        p.help.has-text-grey Name and contact details of your EU representative, if required under GDPR Article 27.
+                        p.help.has-text-grey {{ $t('wizard.step2.euRepresentativeHelp') }}
         footer.card-footer
-            a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") Next
+            a.card-footer-item(@click='prevStep') {{ $t('wizard.step2.previous') }}
+            a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") {{ $t('wizard.step2.next') }}
     +wizardSidebar

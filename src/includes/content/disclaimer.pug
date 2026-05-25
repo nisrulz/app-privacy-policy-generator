@@ -1,16 +1,15 @@
-//- Disclaimer Modal
 .modal(v-bind:class="{ 'is-active': showDisclaimerModal }")
     .modal-background
     .modal-card
         header.modal-card-head
-            p.modal-card-title Disclaimer
+            p.modal-card-title.no-select {{ $t('disclaimer.title') }}
             button.delete(aria-label='close' @click='toggleDisclaimerModalVisibility')
         section.modal-card-body
-            p The generated documents are provided on an "AS IS" basis, without any warranties, express or implied. They are for reference only and do not constitute legal advice. No attorney-client relationship is created by using this tool.
-            p You are solely responsible for ensuring the generated documents comply with applicable laws in your jurisdiction. You should consult a qualified lawyer before using them.
-            p The developer disclaims all liability for any loss, damage, or legal consequences arising from the use of these templates. In no event shall the developer be liable for any direct, indirect, incidental, or consequential damages.
-            p By using this tool, you agree to indemnify and hold harmless the developer against any claims arising from your use of the generated documents.
-            p These terms are governed by the laws of the developer's jurisdiction.
+            p {{ $t('disclaimer.text1') }}
+            p {{ $t('disclaimer.text2') }}
+            p {{ $t('disclaimer.text3') }}
+            p {{ $t('disclaimer.text4') }}
+            p {{ $t('disclaimer.text5') }}
         footer.modal-card-foot
             button.button.is-info(aria-label='close' @click='toggleDisclaimerModalVisibility')
-                | Ok
+                | {{ $t('modal.btn.ok') }}

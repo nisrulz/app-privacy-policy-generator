@@ -1,228 +1,207 @@
-+modal('showGDPRPrivacyModal', 'GDPR Compliant Privacy Policy', 'toggleGDPRPrivacyModalVisibility', 'typeOfPolicyInt==3')
++modal('showGDPRPrivacyModal', 'modal.privacyGDPR.title', 'toggleGDPRPrivacyModalVisibility', 'typeOfPolicyInt==3')
         section.modal-card-body.modal-box
             #privacy_gdpr_content(v-show='contentRenderType==1')
-                strong Privacy Policy
+                strong {{ $t('gdpr.title') }}
 
-                p This privacy policy is applicable to the {{ appName }} app for {{ platformDesc }}, together with any related services operated by {{ devOrCompanyName }} (collectively, the "Application"). {{ devOrCompanyName }} is hereinafter referred to as the "Service Provider".
+                p(v-html="$t('gdpr.intro')")
 
                 br
-                strong Data Controller Information
+                strong {{ $t('gdpr.controllerTitle') }}
 
-                p {{ devOrCompanyName }} acts as the Data Controller responsible for the processing of your personal data.
+                p {{ $t('gdpr.controllerText') }}
                 ul
-                    li Name: {{ devOrCompanyName }}
-                    li(v-if='businessAddress') Address: {{ businessAddress }}
-                    li Email: {{ appContact }}
+                    li(v-html="$t('gdpr.controllerName')")
+                    li(v-if='businessAddress') {{ $t('gdpr.controllerAddress') }}
+                    li(v-html="$t('gdpr.controllerEmail')")
 
-                p For data protection inquiries and to exercise your GDPR rights, please contact the Data Controller using the contact information above.
+                p {{ $t('gdpr.controllerInquiry') }}
 
-                p(v-if='euRepresentative') EU Representative: {{ euRepresentative }}
-
-                br
-                strong What information does the Application obtain and how is it used?
-
-                p The Application and related services acquire the information you supply when you download, access, or register for the service. Registration with the Service Provider is not mandatory. However, you might not be able to use some of the features offered by the service unless you register.
-
-                p The Service Provider may also use the information you provide to send important information, required notices, and, where permitted by law, marketing communications.
+                p(v-if='euRepresentative') {{ $t('gdpr.euRepresentative') }}
 
                 br
-                strong Legal basis for processing your personal data
+                strong {{ $t('gdpr.infoTitle') }}
 
-                p Where the GDPR applies, the Service Provider relies on one or more lawful bases to process your personal data, including:
+                p {{ $t('gdpr.infoText1') }}
+
+                p {{ $t('gdpr.infoText2') }}
+
+                br
+                strong {{ $t('gdpr.legalBasisTitle') }}
+
+                p {{ $t('gdpr.legalBasisIntro') }}
                 ul
-                    li Contract performance: processing necessary to provide the Application or fulfil a contract with you.
-                    li Consent: where you have given explicit consent to processing, including for marketing, analytics, or optional features. You may withdraw consent at any time without affecting processing that occurred before withdrawal.
-                    li Legitimate interests: where processing is necessary for the Service Provider's specific legitimate interests, such as maintaining network and information security, preventing fraud and abuse, or improving the Application's core functionality through analytics, provided those interests are not overridden by your data protection rights or fundamental freedoms.
-                    li Legal obligation: to comply with laws or government requests.
+                    li {{ $t('gdpr.legalBasis.contract') }}
+                    li {{ $t('gdpr.legalBasis.consent') }}
+                    li {{ $t('gdpr.legalBasis.legitimate') }}
+                    li {{ $t('gdpr.legalBasis.obligation') }}
 
                 br
-                strong Cookies and similar technologies
+                strong {{ $t('gdpr.cookiesTitle') }}
 
-                p The Application or its third-party SDKs may use cookies, SDKs, pixels, and similar technologies to support functionality, analytics, and service delivery. Where required by law, the Service Provider will obtain your consent before using non-essential tracking technologies.
-
-                br
-                strong Automated decision-making and profiling
-
-                p If the Application uses automated decision-making, including profiling, that produces legal effects concerning you or similarly significantly affects you, you have the right to request human review, express your point of view, and contest the decision. Information about the logic involved and the likely consequences of that processing will be provided where required by law.
+                p {{ $t('gdpr.cookiesText') }}
 
                 br
-                strong What information does the Application collect automatically?
+                strong {{ $t('gdpr.automatedTitle') }}
 
-                p In addition, the Application may collect certain information automatically, including, but not limited to, the type of {{ deviceType }} you use, {{ deviceIdDesc }}, the IP address of your {{ deviceType }}, {{ osDesc }}, {{ browserDesc }}, and information about the way you use the Application.
+                p {{ $t('gdpr.automatedText') }}
 
                 br
-                strong Does the Application collect precise real time location information of the device?
+                strong {{ $t('gdpr.autoCollectTitle') }}
 
-                p(v-if='!isLocationTracked') This Application does not gather precise information about the location of your {{ deviceType }}.
+                p(v-html="$t('gdpr.autoCollectText')")
+
+                br
+                strong {{ $t('gdpr.locationTitle') }}
+
+                p(v-if='!isLocationTracked', v-html="$t('gdpr.locationNo')")
                 div(v-if='isLocationTracked')
-                    p This Application collects your device's location to provide the following functions:
+                    p {{ $t('gdpr.locationYes') }}
                     ul
-                        li Geolocation Services: The Service Provider utilizes location data to provide features such as personalized content, relevant recommendations, and location-based services.
-                        li Analytics and Improvements: Aggregated and anonymized location data helps the Service Provider to analyze user behavior, identify trends, and improve the overall performance and functionality of the Application.
-                        li Third-Party Services: Periodically, the Service Provider may transmit anonymized location data to external services. These services assist them in enhancing the Application and optimizing their offerings.
+                        li {{ $t('gdpr.locationGeo') }}
+                        li {{ $t('gdpr.locationAnalytics') }}
+                        li {{ $t('gdpr.locationThirdParty') }}
 
                 br
-                strong Does the Application use Artificial Intelligence (AI) technologies?
-                p(v-if='!isAIUsed') The Application does not use Artificial Intelligence (AI) technologies to process your data or provide features.
+                strong {{ $t('gdpr.aiTitle') }}
+                p(v-if='!isAIUsed') {{ $t('gdpr.aiNo') }}
                 div(v-if='isAIUsed')
-                    p The Application uses Artificial Intelligence (AI) technologies to enhance user experience and provide certain features. The AI components may process user data in the following ways:
+                    p {{ $t('gdpr.aiYes') }}
                     ul
-                        li Personalized Content: AI may analyze your usage patterns to deliver content tailored to your preferences and behavior.
-                        li Recommendations: AI may suggest features, services, or content based on your interactions within the Application.
-                        li Automated Functionalities: Certain app features may be powered by AI to automate tasks or improve efficiency.
-                        li Data Protection: All AI processing is performed in accordance with this privacy policy and applicable laws, ensuring your data is handled securely and responsibly.
+                        li {{ $t('gdpr.aiPersonalized') }}
+                        li {{ $t('gdpr.aiRecommendations') }}
+                        li {{ $t('gdpr.aiAutomated') }}
+                        li {{ $t('gdpr.aiProtection') }}
                 br
-                strong Do third parties see and/or have access to information obtained by the Application?
+                strong {{ $t('gdpr.thirdPartyTitle') }}
 
-                p Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.
+                p {{ $t('gdpr.thirdPartyText') }}
 
                 br
-                strong International Data Transfers
+                strong {{ $t('gdpr.dataTransfersTitle') }}
 
-                p The Service Provider or its third-party service providers may transfer personal data outside the European Economic Area (EEA). Where such transfers occur, the Service Provider will use an appropriate transfer mechanism required by GDPR Chapter V.
+                p {{ $t('gdpr.dataTransfersText') }}
                 ul
-                    li Adequacy decisions by the European Commission
-                    li Standard Contractual Clauses (SCCs) approved by the European Commission
-                    li Other safeguards or derogations recognized under GDPR Chapter V, including consent where legally permitted
+                    li {{ $t('gdpr.dataTransfers.adequacy') }}
+                    li {{ $t('gdpr.dataTransfers.scc') }}
+                    li {{ $t('gdpr.dataTransfers.safeguards') }}
 
-                p Countries outside the EEA may not provide the same level of data protection as the EEA. Where required by law, the Service Provider will apply appropriate safeguards and obtain any consent required for the transfer.
+                p {{ $t('gdpr.dataTransfersNote') }}
 
                 div(v-if='hasThirdPartyServicesSelected')
                     br
-                    p Please note that the Application utilizes third-party services that have their own Privacy Policy about handling data. Below are the links to the Privacy Policy of the third-party service providers used by the Application:
+                    p {{ $t('gdpr.thirdPartyServicesText') }}
                     ul
                         li(v-for="item in enabledThirdPartyServicesWithPrivacy" :key="item.name")
                             a(:href='item.link.privacy' target='_blank' rel='noopener noreferrer') {{item.name}}
-                p The Service Provider may disclose User Provided and Automatically Collected Information:
+                p {{ $t('gdpr.disclosureText') }}
                     ul
+                        li {{ $t('gdpr.disclosure.law') }}
+                        li {{ $t('gdpr.disclosure.safety') }}
+                        li {{ $t('gdpr.disclosure.providers') }}
 
-                        li as required by law, such as to comply with a subpoena, or similar legal process;
-                        li when they believe in good faith that disclosure is necessary to protect their rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;
-                        li with their trusted services providers who work on their behalf, do not have an independent use of the information the Service Provider discloses to them, and have agreed to adhere to the rules set forth in this privacy statement.
-
-                p Where the GDPR applies, the Service Provider enters into Data Processing Agreements (DPAs) with third-party service providers that process personal data on its behalf, as required by Article 28 of the GDPR. These DPAs impose the same data protection obligations on those service providers as described in this Privacy Policy.
+                p {{ $t('gdpr.dpaText') }}
 
                 br
-                strong What are my opt-out rights?
+                strong {{ $t('gdpr.optOutTitle') }}
 
                 div(v-if='isMobileApp || isWindowsApp')
-                    p You can stop further collection of information from your {{ deviceType }} by uninstalling the Application. Uninstalling will stop the Application from collecting data from your device, but it does not automatically delete information that has already been transmitted to the Service Provider or to third parties.
+                    p(v-html="$t('gdpr.optOutUninstall')")
                 div(v-if='isWebApp')
-                    p You can stop further collection of information from your device by ceasing to use the website. Ceasing to use will stop the website from collecting data from your device, but it does not automatically delete information that has already been transmitted to the Service Provider or to third parties.
-                p To request deletion of your personal data, withdraw consent, or exercise any of your rights, contact the Service Provider at {{ appContact }}.
+                    p(v-html="$t('gdpr.optOutCease')")
+                p(v-html="$t('gdpr.optOutContact')")
 
                 br
-                strong What is the data retention policy and how can you manage your information?
+                strong {{ $t('gdpr.retentionTitle') }}
 
-                p The Service Provider retains personal data based on its necessity for the stated purposes:
+                p {{ $t('gdpr.retentionIntro') }}
                 ul
-                    li User Provided Data: Retained for the duration of your use of the Application plus 12 months thereafter, unless longer retention is required by law
-                    li Automatically Collected Data: Retained for up to 24 months from collection, unless longer retention is required for legal compliance or security purposes
-                    li Aggregated and Anonymized Data: Retained indefinitely as it no longer identifies you
-                    li Data required for legal compliance: Retained as long as required by applicable law
+                    li {{ $t('gdpr.retention.userData') }}
+                    li {{ $t('gdpr.retention.autoData') }}
+                    li {{ $t('gdpr.retention.aggregated') }}
+                    li {{ $t('gdpr.retention.legal') }}
 
-                p You have the right to request deletion of your personal data at any time, except where retention is required by law. If you'd like the Service Provider to delete User Provided Data that you have provided via the Application, please contact them at {{ appContact }} and they will respond within the time required by applicable law. Please note that some User Provided Data may be required in order for the Application to function properly.
+                p(v-html="$t('gdpr.retentionDeletion')")
 
                 div(v-if='hasDataDeletion')
                     br
-                    strong Data Deletion
-                    p You can request deletion of your personal data or account by contacting the Service Provider at {{ appContact }}. The Service Provider will process your request within the timeframes required by applicable law.
-                    p Upon verification of your identity, the Service Provider will delete your personal data from its systems, except where retention is required for legal compliance or legitimate business purposes.
+                    strong {{ $t('gdpr.dataDeletionTitle') }}
+                    p(v-html="$t('gdpr.dataDeletionText')")
+                    p {{ $t('gdpr.dataDeletionVerify') }}
 
                 br
-                strong How does the Application address children's privacy?
+                strong {{ $t('gdpr.childrenTitle') }}
 
-                p The Application is not intended for children under {{ ageOfDigitalConsent }} years of age, or where a higher age of digital consent is established under applicable law. The Service Provider does not knowingly solicit data from children or market the Application to them.
+                p(v-html="$t('gdpr.childrenIntro')")
                 div(v-if='hasThirdPartyServicesSelected')
                     br
-                    p
-                        | Where parental or guardian consent is required under applicable law, the Application is not intended for use without that consent.
-                        | The Service Provider does not knowingly collect personally
-                        | identifiable information from children under {{ ageOfDigitalConsent }} years of age, or where a higher age of digital consent is established by applicable law, in violation of applicable law. In the event
-                        | the Service Provider discovers that a child has provided
-                        | personal information, the Service Provider will immediately
-                        | delete this from their servers. If you are a parent or guardian
-                        | and you are aware that your child has provided the Service Provider with
-                        | personal information, please contact the Service Provider ({{ appContact }}) so that
-                        | they will be able to take the necessary actions.
+                    p(v-html="$t('gdpr.childrenWithServices')")
                 div(v-else)
                     br
-                    p
-                        | The Service Provider does not knowingly collect personally
-                        | identifiable information from children. The Service Provider 
-                        | encourages all children to never submit any personally
-                        | identifiable information through the Application and/or Services.
-                        | The Service Provider encourages parents and legal guardians to monitor 
-                        | their children's Internet usage and to help enforce this Policy by instructing 
-                        | their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child 
-                        | has provided personally identifiable information to the Service Provider through the Application and/or Services, 
-                        | please contact the Service Provider <span v-if="appContact">({{ appContact }})</span> so that they will be able to take the necessary actions. 
-                        | If you are under {{ ageOfDigitalConsent }} years of age, or where a higher age of digital consent is established by applicable law, your parent 
-                        | or guardian must provide consent on your behalf where permitted by law.
+                    p(v-html="$t('gdpr.childrenWithoutServices')")
 
                 br
-                strong How is your information kept secure?
+                strong {{ $t('gdpr.securityTitle') }}
 
-                p The Service Provider is committed to safeguarding the confidentiality of your information. The Service Provider implements physical, electronic, and procedural safeguards to protect information it processes and maintains. For example, access is limited to authorized employees and contractors who need to know that information to operate, develop, or improve the Application. However, no security system can prevent all potential security breaches.
-
-                br
-                strong Data Breach Notification
-                p In the event of a personal data breach that poses a risk to your rights and freedoms, the Service Provider will notify the relevant supervisory authority within 72 hours of becoming aware of the breach, as required by applicable law. Where the breach is likely to result in a high risk to your rights and freedoms, the Service Provider will also notify you without undue delay, providing information about the nature of the breach, the categories of data affected, and the measures taken or proposed to address the breach.
-                br
-                strong How will you be informed of changes to this Privacy Policy?
-
-                p The Service Provider may update this Privacy Policy from time to time. The Service Provider will notify you of material changes by posting the updated Privacy Policy with an effective date. Where required by law, the Service Provider will seek your consent to material changes before they take effect.
-                br
-                p Previous versions of this Privacy Policy will be maintained and made available upon request by contacting the Service Provider at {{ appContact }}.
-                br
-                p This privacy policy is effective as of {{ effectiveFromDate }}
+                p {{ $t('gdpr.securityText') }}
 
                 br
-                strong What are your GDPR data protection rights?
+                strong {{ $t('gdpr.breachTitle') }}
+                p {{ $t('gdpr.breachText') }}
+                br
+                strong {{ $t('gdpr.changesTitle') }}
 
-                p Under the GDPR, you have the following rights:
+                p {{ $t('gdpr.changesText') }}
+                br
+                p(v-html="$t('gdpr.changesPrev')")
+                br
+                p(v-html="$t('gdpr.effectiveDate')")
+
+                br
+                strong {{ $t('gdpr.gdprRightsTitle') }}
+
+                p {{ $t('gdpr.gdprRightsIntro') }}
                 ul
-                    li Right of Access: You can request access to your personal data.
-                    li Right to Rectification: You can request correction of inaccurate data.
-                    li Right to Erasure: You can request deletion of your personal data (the "right to be forgotten").
-                    li Right to Restrict Processing: You can request that the Data Controller limits how they use your data.
-                    li Right to Data Portability: You can request a copy of your data in a structured, commonly used, machine-readable format.
-                    li Right to Object: You can object to processing based on legitimate interests. You have an absolute right to object to processing for direct marketing purposes at any time.
-                    li Right to Withdraw Consent: Where processing is based on your consent, you can withdraw it at any time. Withdrawal is as simple as toggling preferences in the Application's settings or contacting the Data Controller.
-                    li Rights Regarding Automated Decision-Making: You have rights related to automated decisions that affect you.
+                    li {{ $t('gdpr.gdprRights.access') }}
+                    li {{ $t('gdpr.gdprRights.rectification') }}
+                    li {{ $t('gdpr.gdprRights.erasure') }}
+                    li {{ $t('gdpr.gdprRights.restrict') }}
+                    li {{ $t('gdpr.gdprRights.portability') }}
+                    li {{ $t('gdpr.gdprRights.object') }}
+                    li {{ $t('gdpr.gdprRights.withdraw') }}
+                    li {{ $t('gdpr.gdprRights.automated') }}
 
-                p If you believe your data protection rights have been violated, you have the right to lodge a complaint with your local Data Protection Authority. Contact details for each country's Data Protection Authority can be found at: 
+                p {{ $t('gdpr.gdprRightsComplaint') }}
                     a(href='https://edpb.ec.europa.eu/about-edpb/members_en' target='_blank' rel='noopener noreferrer') https://edpb.ec.europa.eu/about-edpb/members_en
-                p If you are located in the United Kingdom, you may contact the Information Commissioner's Office at 
+                p {{ $t('gdpr.gdprRightsICO') }}
                     a(href='https://ico.org.uk' target='_blank' rel='noopener noreferrer') https://ico.org.uk
 
                 br
-                strong What are your California privacy rights (CCPA/CPRA)?
+                strong {{ $t('gdpr.ccpaTitle') }}
 
-                p If you are a resident of California, the California Consumer Privacy Act (CCPA) and the California Privacy Rights Act (CPRA) provide you with additional rights regarding your personal information:
+                p {{ $t('gdpr.ccpaIntro') }}
                 ul
-                    li Right to Know: You can request disclosure of the categories and specific pieces of personal information the Service Provider has collected about you.
-                    li Right to Delete: You can request deletion of personal information the Service Provider has collected from you, subject to certain exceptions.
-                    li Right to Correct: You can request correction of inaccurate personal information.
-                    li Right to Opt-Out: You can opt out of the sale or sharing of your personal information for cross-context behavioral advertising.
-                    li Right to Limit Use of Sensitive Personal Information: You can limit the use of your sensitive personal information to essential purposes.
-                    li Right to Non-Discrimination: The Service Provider will not discriminate against you for exercising any of your CCPA/CPRA rights.
+                    li {{ $t('gdpr.ccpa.know') }}
+                    li {{ $t('gdpr.ccpa.delete') }}
+                    li {{ $t('gdpr.ccpa.correct') }}
+                    li {{ $t('gdpr.ccpa.optOut') }}
+                    li {{ $t('gdpr.ccpa.limit') }}
+                    li {{ $t('gdpr.ccpa.nonDiscrimination') }}
 
-                p To exercise any of these rights, please contact the Service Provider at {{ appContact }}. The Service Provider will verify your request using the information you provide and respond within the timeframes required by law. You may designate an authorized agent to make a request on your behalf.
+                p(v-html="$t('gdpr.ccpaExercise')")
 
                 br  
-                strong How do you give your consent?
+                strong {{ $t('gdpr.consentTitle') }}
 
-                p Where processing is based on consent, you provide that consent by affirmatively opting in to the relevant feature or action. You may withdraw consent at any time without affecting processing carried out before withdrawal. Processing based on other lawful bases, including contract performance, legitimate interests, or legal obligations, is carried out as described above.
+                p {{ $t('gdpr.consentText') }}
 
                 br
-                strong How can you contact the Data Controller?
+                strong {{ $t('gdpr.contactTitle') }}
 
-                p If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at {{ appContact }}.
+                p(v-html="$t('gdpr.contactText')")
 
-                p To request deletion of your personal data or to exercise any of your rights, contact the Service Provider using the details provided above. The Service Provider will respond within one month of receiving your request, extendable by up to two months where necessary due to the complexity or volume of requests, as permitted by applicable law.
+                p(v-html="$t('gdpr.contactDeletion')")
                 +attribution('privacy policy')
-            textarea#privacy_gdpr_txtarea.textarea(aria-label='GDPR privacy policy output' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+            textarea#privacy_gdpr_txtarea.textarea(:aria-label='$t("gdpr.title") + $t("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
         footer.modal-card-foot
             +outputButtons('privacy_gdpr_content', 'privacy_gdpr_txtarea')
             +flycricketDeploy('fc_deploy_gdpr()')

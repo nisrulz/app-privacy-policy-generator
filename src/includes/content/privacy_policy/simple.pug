@@ -1,164 +1,143 @@
-+modal('showPrivacyModal', 'Simple Privacy Policy', 'togglePrivacyModalVisibility', 'typeOfPolicyInt==1')
++modal('showPrivacyModal', 'modal.privacySimple.title', 'togglePrivacyModalVisibility', 'typeOfPolicyInt==1')
         section.modal-card-body.modal-box
             #privacy_simple_content(v-show='contentRenderType==1')
-                strong Privacy Policy
+                strong {{ $t('simple.title') }}
 
-                p This privacy policy applies to the {{ appName }} app for {{ platformDesc }}, together with any related services operated by {{ devOrCompanyName }} (collectively, the "Application"). {{ devOrCompanyName }} is hereby referred to as the "Service Provider".
+                p(v-html="$t('simple.intro')")
 
                 br
-                strong Information Collection and Use
+                strong {{ $t('simple.infoCollectionTitle') }}
 
-                p The Application collects information when you download and use it. This information may include information such as 
+                p {{ $t('simple.infoCollectionIntro') }}
                     ul 
-                        li Your device's Internet Protocol address
-                        li The pages of the Application that you visit, the time and date of your visit, the time spent on those pages
-                        li The time spent on the Application
-                        li {{ osDesc }} you use
+                        li {{ $t('simple.infoCollection.ip') }}
+                        li {{ $t('simple.infoCollection.pages') }}
+                        li {{ $t('simple.infoCollection.time') }}
+                        li(v-html="$t('simple.infoCollection.os')")
 
                 br
-                strong Cookies and tracking technologies
+                strong {{ $t('simple.cookiesTitle') }}
 
-                p The Application or its third-party SDKs may use cookies, SDKs, pixels, and similar technologies to support functionality, analytics, or service delivery. Where required by applicable law, the Service Provider will obtain consent before using non-essential tracking technologies.
+                p {{ $t('simple.cookiesText') }}
 
                 div(v-if='isLocationTracked')
                     br
-                    strong Location Information
-                    p The Application collects your device's location to provide location-based features, improve the Application, and support related services.
+                    strong {{ $t('simple.locationTitle') }}
+                    p {{ $t('simple.locationIntro') }}
                     ul
-                        li Geolocation Services: The Service Provider may use location data to provide location-based features or content.
-                        li Analytics and Improvements: Aggregated location data may help the Service Provider understand usage patterns and improve performance.
-                        li Third-Party Services: Location data may be shared with third-party services used to support Application functionality, subject to this privacy policy and applicable law.
+                        li {{ $t('simple.locationGeo') }}
+                        li {{ $t('simple.locationAnalytics') }}
+                        li {{ $t('simple.locationThirdParty') }}
 
                 br
-                strong Your Rights
-                p You may request access to, correction of, or deletion of your personal data held by the Service Provider. To exercise these rights, or to withdraw consent where processing is based on consent, contact the Service Provider at {{ appContact }}.
+                strong {{ $t('simple.yourRightsTitle') }}
+                p(v-html="$t('simple.yourRightsText')")
 
                 br
-                strong Your California privacy rights (CCPA/CPRA)
-                p If you are a California resident, you have the right to know what personal information is collected, the right to delete personal information, the right to opt out of the sale or sharing of personal information, and the right to non-discrimination for exercising these rights. To exercise your CCPA/CPRA rights, contact the Service Provider at {{ appContact }}.
+                strong {{ $t('simple.ccpaTitle') }}
+                p(v-html="$t('simple.ccpaText')")
 
                 div(v-if='isAIUsed')
                     br
-                    strong Artificial Intelligence
-                    p The Application uses Artificial Intelligence (AI) technologies to enhance user experience and provide certain features. The AI components may process user data to deliver personalized content, recommendations, or automated functionalities. All AI processing is performed in accordance with this privacy policy and applicable laws. If you have questions about the AI features or data processing, please contact the Service Provider.
+                    strong {{ $t('simple.aiTitle') }}
+                    p {{ $t('simple.aiText') }}
                     br
 
-                p The Service Provider may use the information you provide to send important information, required notices, and, where permitted by law, marketing communications.
+                p {{ $t('simple.marketingText') }}
                 br
-                p For a better experience while using the Application, the Service Provider may require you to provide certain personally identifiable information{{pidInfo}} The information the Service Provider requests will be retained and used as described in this privacy policy.
-
-                br
-                strong Third Party Access
-
-                p Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.
+                p(v-html="$t('simple.piiText')")
 
                 br
-                strong International Data Transfers
+                strong {{ $t('simple.thirdPartyTitle') }}
 
-                p The Service Provider or its third-party service providers may transfer personal data to countries outside your country of residence, including outside the European Economic Area (EEA). Where applicable law requires safeguards for international transfers, the Service Provider will use appropriate mechanisms.
+                p {{ $t('simple.thirdPartyText') }}
+
+                br
+                strong {{ $t('simple.dataTransfersTitle') }}
+
+                p {{ $t('simple.dataTransfersText') }}
                 ul
-                    li Standard Contractual Clauses (SCCs) approved by the European Commission
-                    li Adequacy decisions or other legally recognized transfer mechanisms
-                    li Your consent, where required and legally permitted
+                    li {{ $t('simple.dataTransfers.scc') }}
+                    li {{ $t('simple.dataTransfers.adequacy') }}
+                    li {{ $t('simple.dataTransfers.consent') }}
 
-                p Data protection laws in other countries may differ from those in your jurisdiction. Where required by law, the Service Provider will apply appropriate safeguards and obtain any consent required for the transfer.
+                p {{ $t('simple.dataTransfersNote') }}
 
                 div(v-if='hasThirdPartyServicesSelected')
                     br
-                    p Please note that the Application utilizes third-party services that have their own Privacy Policy about handling data. Below are the links to the Privacy Policy of the third-party service providers used by the Application:
+                    p {{ $t('simple.thirdPartyServicesText') }}
                     ul
                         li(v-for="item in enabledThirdPartyServicesWithPrivacy" :key="item.name")
                             a(:href='item.link.privacy' target='_blank' rel='noopener noreferrer') {{item.name}}
                 br
 
-                p The Service Provider may disclose User Provided and Automatically Collected Information:
+                p {{ $t('simple.disclosureText') }}
                     ul
-
-                        li as required by law, such as to comply with a subpoena, or similar legal process;
-                        li when they believe in good faith that disclosure is necessary to protect their rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;
-                        li with their trusted services providers who work on their behalf, do not have an independent use of the information the Service Provider discloses to them, and have agreed to adhere to the rules set forth in this privacy statement.
+                        li {{ $t('simple.disclosure.law') }}
+                        li {{ $t('simple.disclosure.safety') }}
+                        li {{ $t('simple.disclosure.providers') }}
                 br
 
-                strong Opt-Out Rights
+                strong {{ $t('simple.optOutTitle') }}
                 div(v-if='isMobileApp || isWindowsApp')
-                    p You can stop further collection of information from your {{ deviceType }} by uninstalling the Application. Uninstalling will stop the Application from collecting data from your device, but it does not automatically delete information that has already been transmitted to the Service Provider or to third parties.
+                    p(v-html="$t('simple.optOutUninstall')")
                 div(v-if='isWebApp')
-                    p You can stop further collection of information from your device by ceasing to use the website. Ceasing to use will stop the website from collecting data from your device, but it does not automatically delete information that has already been transmitted to the Service Provider or to third parties.
-                p To request deletion of your personal data, to withdraw consent, or to exercise any of your rights, contact the Service Provider at {{ appContact }}.
+                    p(v-html="$t('simple.optOutCease')")
+                p(v-html="$t('simple.optOutContact')")
 
                 br
-                strong Data Retention Policy
-                p The Service Provider retains personal data based on its necessity for the stated purposes:
+                strong {{ $t('simple.retentionTitle') }}
+                p {{ $t('simple.retentionIntro') }}
                 ul
-                    li User Provided Data: Retained for the duration of your use of the Application plus 12 months thereafter, unless longer retention is required by law
-                    li Automatically Collected Data: Retained for up to 24 months from collection, unless longer retention is required for legal compliance
-                    li Aggregated and Anonymized Data: Retained indefinitely as it no longer identifies you
-                    li Data required for legal compliance: Retained as long as required by applicable law
+                    li {{ $t('simple.retention.userData') }}
+                    li {{ $t('simple.retention.autoData') }}
+                    li {{ $t('simple.retention.aggregated') }}
+                    li {{ $t('simple.retention.legal') }}
 
-                p You may request deletion of your personal data, subject to any legal obligation to retain it. If you want the Service Provider to delete User Provided Data submitted through the Application, please contact them at {{ appContact }}. Please note that some User Provided Data may be required for the Application to function properly.
+                p(v-html="$t('simple.retentionDeletion')")
 
                 div(v-if='hasDataDeletion')
                     br
-                    strong Data Deletion
-                    p You can request deletion of your personal data or account by contacting the Service Provider at {{ appContact }}. The Service Provider will process your request within the timeframes required by applicable law.
-                    p Upon verification of your identity, the Service Provider will delete your personal data from its systems, except where retention is required for legal compliance or legitimate business purposes.
+                    strong {{ $t('simple.dataDeletionTitle') }}
+                    p(v-html="$t('simple.dataDeletionText')")
+                    p {{ $t('simple.dataDeletionVerify') }}
 
                 br
-                strong Children
-                p The Application is not intended for children under {{ ageOfDigitalConsent }} years of age, or such higher age as required by applicable law. The Service Provider does not knowingly solicit data from children or market the Application to them.
+                strong {{ $t('simple.childrenTitle') }}
+                p(v-html="$t('simple.childrenIntro')")
                 div(v-if='hasThirdPartyServicesSelected')
                     br
-                    p
-                        | Where parental or guardian consent is required under applicable law, the Application is not intended for use without that consent.
-                        | The Service Provider does not knowingly collect personally
-                        | identifiable information from children under {{ ageOfDigitalConsent }} years of age in violation of applicable law. In the event
-                        | the Service Provider discovers that a child has provided
-                        | personal information, the Service Provider will immediately
-                        | delete this from their servers. If you are a parent or guardian
-                        | and you are aware that your child has provided the Service Provider with
-                        | personal information, please contact the Service Provider ({{ appContact }}) so that
-                        | they will be able to take the necessary actions.
+                    p(v-html="$t('simple.childrenWithServices')")
                 div(v-else)
                     br
-                    p
-                        | The Service Provider does not knowingly collect personally
-                        | identifiable information from children. The Service Provider 
-                        | encourages all children to never submit any personally
-                        | identifiable information through the Application and/or Services.
-                        | The Service Provider encourages parents and legal guardians to monitor 
-                        | their children's Internet usage and to help enforce this Policy by instructing 
-                        | their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child 
-                        | has provided personally identifiable information to the Service Provider through the Application and/or Services, 
-                        | please contact the Service Provider <span v-if="appContact">({{ appContact }})</span> so that they will be able to take the necessary actions. 
-                        | If you are under {{ ageOfDigitalConsent }} years of age, your parent 
-                        | or guardian must provide consent on your behalf where permitted by law.
+                    p(v-html="$t('simple.childrenWithoutServices')")
 
                 br
-                strong Security
-                p The Service Provider is concerned about safeguarding the confidentiality of your information. The Service Provider provides physical, electronic, and procedural safeguards to protect information the Service Provider processes and maintains.
+                strong {{ $t('simple.securityTitle') }}
+                p {{ $t('simple.securityText') }}
 
                 br
-                strong Data Breach Notification
-                p If a data breach occurs that affects your personal data, the Service Provider will notify you in accordance with applicable legal requirements, including, where required, providing information about the nature of the breach and the steps being taken to address it.
+                strong {{ $t('simple.breachTitle') }}
+                p {{ $t('simple.breachText') }}
 
                 br
-                strong Changes
-                p The Service Provider may update this Privacy Policy from time to time. The Service Provider will notify you of material changes by posting the updated Privacy Policy with an effective date. Where required by law, the Service Provider will seek your consent to material changes before they take effect.
+                strong {{ $t('simple.changesTitle') }}
+                p {{ $t('simple.changesText') }}
                 br
-                p Previous versions of this Privacy Policy will be maintained and made available upon request by contacting the Service Provider at {{ appContact }}.
+                p(v-html="$t('simple.changesPrev')")
                 br
-                p This privacy policy is effective as of {{ effectiveFromDate }}
+                p(v-html="$t('simple.effectiveDate')")
 
                 br
-                strong Your Consent
-                p Where processing is based on consent, you provide that consent by affirmatively opting in to the relevant feature or action. You may withdraw consent at any time without affecting processing carried out before withdrawal. Processing based on other lawful bases is carried out as described above.
+                strong {{ $t('simple.consentTitle') }}
+                p {{ $t('simple.consentText') }}
 
                 br
-                strong Contact Us
-                p If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at {{ appContact }}.
+                strong {{ $t('simple.contactTitle') }}
+                p(v-html="$t('simple.contactText')")
 
                 +attribution('privacy policy')
-            textarea#privacy_simple_txtarea.textarea(aria-label='Privacy policy output' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+            textarea#privacy_simple_txtarea.textarea(:aria-label='$t("simple.title") + $t("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
         footer.modal-card-foot
             +outputButtons('privacy_simple_content', 'privacy_simple_txtarea')
             +flycricketDeploy('deployFcSimple()')
