@@ -68,7 +68,7 @@
                     p {{ $t('simple.thirdPartyServicesText') }}
                     ul
                         li(v-for="item in enabledThirdPartyServicesWithPrivacy" :key="item.name")
-                            a(:href='item.link.privacy' target='_blank' rel='noopener noreferrer') {{item.name}}
+                            a(:href='item.link.privacy' target='_blank' rel='noopener noreferrer') {{ tpsName(item) }}
                 br
 
                 p {{ $t('simple.disclosureText') }}

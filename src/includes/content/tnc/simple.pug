@@ -70,7 +70,7 @@
                     p {{ $t('tnc.thirdPartyTitle') }}
                     ul
                         li( v-for="item in enabledThirdPartyServicesWithTerms" :key="item.name")
-                            a(:href='item.link.terms' target='_blank' rel='noopener noreferrer') {{item.name}}
+                            a(:href='item.link.terms' target='_blank' rel='noopener noreferrer') {{ tpsName(item) }}
                 br
                 div(v-if='isMobileApp')
                     p {{ $t('tnc.mobileData') }}

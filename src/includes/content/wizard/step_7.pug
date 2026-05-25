@@ -16,10 +16,10 @@ section#step-7.columns(v-if="wizardStep==7")
                             )
                         label(:for="'list-switch-' + item.name")
                             img.checkbox-logo(
-                                :alt="item.name" 
+                                :alt="tpsName(item)" 
                                 :src="item.logo"
                                 )
-                            span {{ item.name }}
+                            span {{ tpsName(item) }}
             div(v-show='typeOfPolicyInt==2')
                 p {{ $t('wizard.step7.noServices') }} 
                     b {{ $t('wizard.step7.nextStep') }}

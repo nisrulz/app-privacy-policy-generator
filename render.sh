@@ -21,22 +21,15 @@
 echo ""
 echo " 👨🏻‍💻 Starting..."
 echo ""
-# Using pug-cli to render from pug to html
-# Specifically a fork
-# - NPM: https://www.npmjs.com/package/@tokilabs/pug3-cli
-# - Github: https://github.com/tokilabs/pug3-cli
-# because the original is not maintained anymore!
-# Install pug-cli: bundled as devDependency in package.json
-npx -q pug3 src/index.pug --out public --silent
-echo " ✅  STEP 1: RENDER PUG > HTML"
 
-echo ""
-# Using sass-cli to render from sass to css
-npx -q sass src/sass/style.sass public/css/style.css
-echo " ✅  STEP 2: RENDER SASS > CSS"
+LANGS="en"
+BASE_DIR="public"
 
-echo ""
-# Using js-yaml to convert yaml to json
+# --- Shared: Sass ---
+npx -q sass src/sass/style.sass "$BASE_DIR/css/style.css"
+echo " ✅  STEP 1: RENDER SASS > CSS"
+
+# --- Shared: YAML → thirdparty JS ---
 TS_JS_FILE=$(mktemp /tmp/thirdpartyservices.XXXXXX.js)
 LOCALE_JS_FILE=$(mktemp /tmp/locale.XXXXXX.js)
 trap 'rm -f "$TS_JS_FILE" "$LOCALE_JS_FILE"' EXIT
@@ -67,37 +60,53 @@ npx -q js-yaml $YAML_DIR/thirdpartyservices.yml >$TEMP_JSON_FILE
 JSON_DATA=$(cat $TEMP_JSON_FILE)
 echo "var thirdPartyServicesJsonArray = $JSON_DATA" >>"$TS_JS_FILE"
 rm $TEMP_JSON_FILE
-echo " ✅  STEP 3: RENDER YAML > JSON"
+echo " ✅  STEP 2: RENDER YAML > JSON"
 
-echo ""
-npx -q uglifycss public/css/style.css --output public/css/style.min.css
-rm -f public/css/style.css public/css/style.css.map
+# --- Shared: First pug render (for PurgeCSS reference) ---
+npx -q pug3 src/index.pug --out "$BASE_DIR" --silent
+echo " ✅  STEP 3: RENDER PUG > HTML (reference for PurgeCSS)"
+
+# --- Shared: Minify CSS + PurgeCSS ---
+npx -q uglifycss "$BASE_DIR/css/style.css" --output "$BASE_DIR/css/style.min.css"
+rm -f "$BASE_DIR/css/style.css" "$BASE_DIR/css/style.css.map"
+npx -q purgecss --css "$BASE_DIR/css/style.min.css" \
+--content "$BASE_DIR/index.html" \
+--output "$BASE_DIR/css/style.min.css"
 echo " ✅  STEP 4: Minify CSS"
 
-echo ""
-npx -q purgecss --css public/css/style.min.css \
---content public/index.html \
---output public/css/style.min.css
-echo " ✅  STEP 5: Cleanup unused CSS"
+# --- Shared: Minify JS (except locale) ---
+npx -q uglifyjs "$TS_JS_FILE" --output "$BASE_DIR/js/thirdpartyservices.min.js"
+npx -q uglifyjs src/js/wizardMixin.js src/js/platformMixin.js src/js/localeMixin.js src/js/main.js --output "$BASE_DIR/js/main.min.js"
+npx -q uglifyjs src/js/utils.js --output "$BASE_DIR/js/utils.min.js"
+npx -q uglifyjs src/js/flycricket.js --output "$BASE_DIR/js/flycricket.min.js"
+echo " ✅  STEP 5: Minify JS"
 
-echo ""
-echo "window.__locale = $(cat src/locales/en.json);" > "$LOCALE_JS_FILE"
-npx -q uglifyjs "$LOCALE_JS_FILE" --output public/js/locale.min.js
-npx -q uglifyjs "$TS_JS_FILE" --output public/js/thirdpartyservices.min.js
-npx -q uglifyjs src/js/wizardMixin.js src/js/platformMixin.js src/js/localeMixin.js src/js/main.js --output public/js/main.min.js
-npx -q uglifyjs src/js/utils.js --output public/js/utils.min.js
-npx -q uglifyjs src/js/flycricket.js --output public/js/flycricket.min.js
-echo " ✅  STEP 6: Minify JS"
+# --- Shared: Copy vendor assets ---
+mkdir -p "$BASE_DIR/js/vendor"
+cp src/includes/vendor/vue.global.prod.js "$BASE_DIR/js/vendor/vue.global.prod.js"
+cp src/includes/vendor/to-markdown.min.js "$BASE_DIR/js/vendor/to-markdown.min.js"
+mkdir -p "$BASE_DIR/images/vendor"
+cp src/includes/vendor/kofi1.png "$BASE_DIR/images/vendor/kofi1.png"
+echo " ✅  STEP 6: Copy vendor assets"
 
-echo ""
-# Copy vendored third-party JS to public
-mkdir -p public/js/vendor
-cp src/includes/vendor/vue.global.prod.js public/js/vendor/vue.global.prod.js
-cp src/includes/vendor/to-markdown.min.js public/js/vendor/to-markdown.min.js
-# Copy vendored third-party images to public
-mkdir -p public/images/vendor
-cp src/includes/vendor/kofi1.png public/images/vendor/kofi1.png
-echo " ✅  STEP 7: Copy vendor assets"
+# --- Per-locale: Render HTML + locale JS ---
+for LANG in $LANGS; do
+  OUT_DIR="$BASE_DIR"
+  if [ "$LANG" != "en" ]; then
+    OUT_DIR="$BASE_DIR/$LANG"
+  fi
+
+  echo "window.__locale = $(cat src/locales/$LANG.json);" > "$LOCALE_JS_FILE"
+  mkdir -p "$OUT_DIR/js"
+  npx -q uglifyjs "$LOCALE_JS_FILE" --output "$OUT_DIR/js/locale.min.js"
+
+  # Render pug with lang variable override (sed then restore)
+  sed -i.bak "s/- var lang = '[a-z]*'/- var lang = '$LANG'/" src/index.pug
+  npx -q pug3 src/index.pug --out "$OUT_DIR" --silent
+  mv src/index.pug.bak src/index.pug
+
+  echo " ✅  STEP 7.$LANG: RENDER PUG > HTML ($LANG)"
+done
 
 echo ""
 echo " 📈  STEP 8: Optimized website is ready"

@@ -11,7 +11,7 @@ html(lang=lang, data-theme="light")
     body.bg-pattern
         main#app.container.mt-6
             include includes/content.pug
-        .locale-bar.container.has-text-centered
+        .locale-bar.container.has-text-centered(v-if='availableLocales.length > 1')
             label.locale-label(for="locale-select")
             select#locale-select(v-model='currentLocale' @change='switchLocale(currentLocale)')
                 option(v-for='loc in availableLocales' :value='loc.code' :key='loc.code') {{ loc.label }}

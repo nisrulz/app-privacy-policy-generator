@@ -111,6 +111,25 @@ Some locale values contain HTML in the source JSON (e.g., `<strong>` tags, links
 
 ---
 
+## Third-Party Service Names
+
+Third-party service names in `src/includes/yaml/thirdpartyservices.yml` can also be translated. Add locale-specific `name_{code}` fields to any entry:
+
+```yaml
+- name: Google Play Services
+  name_es: Servicios de Google Play
+  name_fr: Services Google Play
+  enabled: false
+  logo: images/third_party_logos/gps.png
+  link:
+    privacy: https://www.google.com/policies/privacy/
+    terms: https://policies.google.com/terms
+```
+
+The app automatically uses the locale-specific name when available, falling back to the default `name` field.
+
+---
+
 ## Important Notes
 
 - **Legal templates require professional review**: Privacy policies and Terms & Conditions are legal documents. If you translate them, have your translation reviewed by a native-speaking legal professional before using it.

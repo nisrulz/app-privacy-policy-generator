@@ -1,3 +1,10 @@
+# To add locale-specific names, add a name_{code} field:
+#   - name: Service Name
+#     name_es: Nombre del Servicio
+#     name_fr: Nom du Service
+#     enabled: false
+#     logo: ...
+#     link: ...
 ---
 - name: Google Play Services
   enabled: false

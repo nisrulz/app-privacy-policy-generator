@@ -105,6 +105,12 @@ const app = createApp({
       return this.thirdPartyServices.some((item) => item.enabled === true);
     },
 
+    // Get locale-aware name for a third-party service
+    tpsName(item) {
+      var localeKey = 'name_' + this.currentLocale;
+      return item[localeKey] || item.name;
+    },
+
     // Toggle a third-party service checkbox (mutates the array item in place)
     toggleState(item) {
       item.enabled = !item.enabled;

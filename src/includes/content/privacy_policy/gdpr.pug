@@ -92,7 +92,7 @@
                     p {{ $t('gdpr.thirdPartyServicesText') }}
                     ul
                         li(v-for="item in enabledThirdPartyServicesWithPrivacy" :key="item.name")
-                            a(:href='item.link.privacy' target='_blank' rel='noopener noreferrer') {{item.name}}
+                            a(:href='item.link.privacy' target='_blank' rel='noopener noreferrer') {{ tpsName(item) }}
                 p {{ $t('gdpr.disclosureText') }}
                     ul
                         li {{ $t('gdpr.disclosure.law') }}
