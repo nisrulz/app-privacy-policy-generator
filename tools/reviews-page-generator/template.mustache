@@ -37,6 +37,7 @@
         box-sizing: border-box;
         text-decoration: none;
         color: inherit;
+        cursor: pointer;
       }
       .review-card:hover {
         transform: translateY(-5px);
@@ -290,7 +291,7 @@
           </div>
         </a>
         {{#comments}}
-        <a href="{{ html_url }}" target="_blank" class="review-card">
+        <div class="review-card" data-url="{{ html_url }}">
           <div class="review-header">
             <img
               src="{{ user.avatar_local }}"
@@ -330,7 +331,7 @@
             {{/eyes}}
           </div>
           {{/reactions}}
-        </a>
+        </div>
         {{/comments}}
       </div>
     </div>
@@ -478,7 +479,15 @@
           if (e.key === "Escape") clearSearch();
         }
 
+        function onCardClick(e) {
+          var card = e.target.closest(".review-card");
+          if (card && card.dataset.url) {
+            window.open(card.dataset.url, "_blank");
+          }
+        }
+
         function init() {
+          document.addEventListener("click", onCardClick);
           el.input.addEventListener("input", debounce(onInput, 300));
           el.clear.addEventListener("click", clearSearch);
           el.input.addEventListener("keydown", onKeydown);
