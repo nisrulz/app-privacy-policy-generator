@@ -281,9 +281,11 @@
       </div>
       <div class="no-results" id="noResults">No reviews match your search.</div>
       <div class="pagination" id="pagination">
-        <button id="prevBtn">&#8592; Previous</button>
+        <button id="firstBtn">&#9198;</button>
+        <button id="prevBtn">&#9664;</button>
         <span class="page-info" id="pageInfo"></span>
-        <button id="nextBtn">Next &#8594;</button>
+        <button id="nextBtn">&#9654;</button>
+        <button id="lastBtn">&#9197;</button>
       </div>
       <div class="review-columns" id="reviewContainer">
         <a
@@ -357,8 +359,10 @@
           clear: document.getElementById("clearBtn"),
           noResults: document.getElementById("noResults"),
           pagination: document.getElementById("pagination"),
+          firstBtn: document.getElementById("firstBtn"),
           prevBtn: document.getElementById("prevBtn"),
           nextBtn: document.getElementById("nextBtn"),
+          lastBtn: document.getElementById("lastBtn"),
           pageInfo: document.getElementById("pageInfo"),
         };
         const cards = Array.from(
@@ -415,8 +419,10 @@
 
         function updatePagination() {
           el.pageInfo.textContent = currentPage + " of " + totalPages;
+          el.firstBtn.disabled = currentPage <= 1;
           el.prevBtn.disabled = currentPage <= 1;
           el.nextBtn.disabled = currentPage >= totalPages;
+          el.lastBtn.disabled = currentPage >= totalPages;
         }
 
         function showPagination() {
@@ -503,12 +509,14 @@
           el.input.addEventListener("input", debounce(onInput, 300));
           el.clear.addEventListener("click", clearSearch);
           el.input.addEventListener("keydown", onKeydown);
+          el.firstBtn.addEventListener("click", function () { goToPage(1); });
           el.prevBtn.addEventListener("click", function () {
             if (currentPage > 1) goToPage(currentPage - 1);
           });
           el.nextBtn.addEventListener("click", function () {
             if (currentPage < totalPages) goToPage(currentPage + 1);
           });
+          el.lastBtn.addEventListener("click", function () { goToPage(totalPages); });
           goToPage(1);
         }
 
