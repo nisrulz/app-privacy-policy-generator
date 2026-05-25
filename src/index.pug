@@ -12,7 +12,7 @@ html(lang=lang, data-theme="light")
         main#app.container
             .locale-bar.has-text-centered(v-if='availableLocales && availableLocales.length > 1')
                 .select.is-small
-                    select#locale-select(v-model='currentLocale' @change='switchLocale(currentLocale)')
+                    select#locale-select(@change='switchLocale($event.target.value)')
                         option(v-for='loc in availableLocales' :value='loc.code' :key='loc.code') {{ loc.label }}
             include includes/content.pug
         include includes/footer.pug
