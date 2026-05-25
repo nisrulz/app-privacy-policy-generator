@@ -298,96 +298,97 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const reviewCountElement = document.getElementById("reviewCount");
-        const searchInput = document.getElementById("searchInput");
-        const clearBtn = document.getElementById("clearBtn");
-        const noResults = document.getElementById("noResults");
-        const reviewCards = Array.from(
+        // --- DOM refs ---
+        const el = {
+          count: document.getElementById("reviewCount"),
+          input: document.getElementById("searchInput"),
+          clear: document.getElementById("clearBtn"),
+          noResults: document.getElementById("noResults"),
+        };
+        const cards = Array.from(
           document.querySelectorAll(".review-card:not(.header-card)")
         );
-        const totalCards = reviewCards.length;
+        const total = cards.length;
 
-        function updateReviewCount(visible) {
-          if (typeof visible === "number") {
-            reviewCountElement.textContent = visible + " of " + totalCards;
-          } else {
-            reviewCountElement.textContent = totalCards;
-          }
+        // --- Helpers ---
+        function matches(card, query) {
+          return !query || card.innerText.toLowerCase().includes(query);
         }
 
-        function showCard(card, show) {
-          card.style.display = show ? "inline-block" : "none";
+        function toggleCard(card, visible) {
+          card.style.display = visible ? "inline-block" : "none";
         }
 
-        function filterReviews(query) {
-          query = query.trim().toLowerCase();
+        function filterCards(cards, query, onDone) {
           let visible = 0;
-          let index = 0;
-          const chunkSize = 100;
+          let i = 0;
+          const CHUNK = 100;
 
-          function processChunk() {
-            const end = Math.min(index + chunkSize, reviewCards.length);
-            for (; index < end; index++) {
-              const card = reviewCards[index];
-              const match = !query || card.innerText.toLowerCase().includes(query);
-              showCard(card, match);
+          function nextChunk() {
+            const end = Math.min(i + CHUNK, cards.length);
+            for (; i < end; i++) {
+              const match = matches(cards[i], query);
+              toggleCard(cards[i], match);
               if (match) visible++;
             }
-            if (index < reviewCards.length) {
-              requestAnimationFrame(processChunk);
+            if (i < cards.length) {
+              requestAnimationFrame(nextChunk);
             } else {
-              updateReviewCount(visible);
-              noResults.style.display = visible === 0 && query ? "block" : "none";
+              onDone(visible);
             }
           }
-          processChunk();
+          nextChunk();
+        }
+
+        function search(query) {
+          const q = query.trim().toLowerCase();
+          filterCards(cards, q, function (visible) {
+            el.count.textContent = visible + " of " + total;
+            el.noResults.style.display = visible === 0 && q ? "block" : "none";
+          });
+        }
+
+        function clearSearch() {
+          el.input.value = "";
+          el.clear.style.display = "none";
+          search("");
+          el.input.focus();
         }
 
         function debounce(fn, delay) {
           let timer;
-          let leadingCalled = false;
+          let leading = false;
           return function (...args) {
-            const context = this;
-            if (!timer) {
-              leadingCalled = false;
-            }
-            if (!leadingCalled) {
-              fn.apply(context, args);
-              leadingCalled = true;
+            const ctx = this;
+            if (!leading) {
+              leading = true;
+              fn.apply(ctx, args);
             }
             clearTimeout(timer);
             timer = setTimeout(function () {
-              leadingCalled = false;
-              fn.apply(context, args);
+              leading = false;
+              fn.apply(ctx, args);
             }, delay);
           };
         }
 
-        function clearSearch() {
-          searchInput.value = "";
-          clearBtn.style.display = "none";
-          filterReviews("");
-          searchInput.focus();
+        function onInput() {
+          el.clear.style.display = el.input.value ? "block" : "none";
+          search(el.input.value);
         }
 
-        function setupSearch() {
-          searchInput.addEventListener("input", debounce(function () {
-            clearBtn.style.display = searchInput.value ? "block" : "none";
-            filterReviews(searchInput.value);
-          }, 300));
-
-          clearBtn.addEventListener("click", clearSearch);
-
-          searchInput.addEventListener("keydown", function (e) {
-            if (e.key === "Escape") {
-              clearSearch();
-            }
-          });
+        function onKeydown(e) {
+          if (e.key === "Escape") clearSearch();
         }
 
-        // Initialize
-        updateReviewCount();
-        setupSearch();
+        function init() {
+          el.count.textContent = total;
+          el.input.addEventListener("input", debounce(onInput, 300));
+          el.clear.addEventListener("click", clearSearch);
+          el.input.addEventListener("keydown", onKeydown);
+        }
+
+        init();
       });
     </script>
   </body>
