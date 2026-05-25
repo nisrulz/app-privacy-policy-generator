@@ -228,6 +228,20 @@ img.social-logo
     background: #65cdf4
 
 // Bulma Overrides
+// Ensures .delete close button cross icon is visible.
+// Bulma uses CSS variables (hsla var()...) that may not produce a visible
+// cross in some contexts.  Use hardcoded fallbacks to guarantee contrast.
+.modal-card-head .delete
+  background-color: rgba(0, 0, 0, 0.5)
+
+  &::after,
+  &::before
+    background-color: #fff
+  // Override bulma skeleton bug where .delete:after is grouped with
+  // .is-skeleton.delete:before and set to display:none
+  &::after
+    display: block
+
 .button
   margin: 0.5em
   height: 2.5em
