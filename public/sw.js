@@ -79,14 +79,17 @@ async function cacheFirst(request) {
     }
     return response;
   } catch {
-    return caches.match(request);
+    const fallback = await caches.match(request);
+    return fallback || new Response("", { status: 404 });
   }
 }
 
 async function networkFirst(request) {
-  // Normalize root URL to index.html for cache matching
+  // Normalize root and locale paths to index.html for cache matching
   const url = new URL(request.url);
-  const cacheKey = url.pathname === "/" ? "/index.html" : request;
+  const path = url.pathname;
+  const isLocaleRoot = /^\/[a-z]{2}(\/index\.html)?$/.test(path) && path !== "/index.html";
+  const cacheKey = path === "/" || isLocaleRoot ? (path.replace(/\/$/, "") + "/index.html") : request;
 
   if (request.method !== "GET") return fetch(request);
 

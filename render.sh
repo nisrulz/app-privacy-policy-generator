@@ -22,7 +22,7 @@ echo ""
 echo " 👨🏻‍💻 Starting..."
 echo ""
 
-LANGS="en"
+LANGS="en de"
 BASE_DIR="public"
 
 # --- Shared: Sass ---

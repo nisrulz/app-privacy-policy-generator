@@ -3,7 +3,8 @@ window.formDataMixin = {
     return {
       currentLocale: document.documentElement.getAttribute('lang') || 'en',
       availableLocales: [
-        { code: 'en', label: 'English' }
+        { code: 'en', label: 'English' },
+        { code: 'de', label: 'Deutsch' }
       ],
       iOrWe: "[I/We]",
       typeOfApp: "Free",
