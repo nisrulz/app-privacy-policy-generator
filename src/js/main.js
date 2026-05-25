@@ -51,7 +51,7 @@ const app = createApp({
 
       // === Platform Selection ===
       platforms: {
-        Android: false,
+        Android: true,
         iOS: false,
         KaiOS: false,
         Windows: false,
