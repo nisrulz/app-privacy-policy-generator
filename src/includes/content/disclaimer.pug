@@ -2,14 +2,14 @@
     .modal-background
     .modal-card
         header.modal-card-head
-            p.modal-card-title.no-select {{ $t('disclaimer.title') }}
+            p.modal-card-title.no-select {{ translate('disclaimer.title') }}
             button.delete(aria-label='close' @click='toggleDisclaimerModalVisibility')
         section.modal-card-body
-            p {{ $t('disclaimer.text1') }}
-            p {{ $t('disclaimer.text2') }}
-            p {{ $t('disclaimer.text3') }}
-            p {{ $t('disclaimer.text4') }}
-            p {{ $t('disclaimer.text5') }}
+            p {{ translate('disclaimer.text1') }}
+            p {{ translate('disclaimer.text2') }}
+            p {{ translate('disclaimer.text3') }}
+            p {{ translate('disclaimer.text4') }}
+            p {{ translate('disclaimer.text5') }}
         footer.modal-card-foot
             button.button.is-info(aria-label='close' @click='toggleDisclaimerModalVisibility')
-                | {{ $t('modal.btn.ok') }}
+                | {{ translate('modal.btn.ok') }}

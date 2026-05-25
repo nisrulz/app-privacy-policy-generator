@@ -6,20 +6,20 @@ section#step-3.columns(v-if='wizardStep==3')
             .scrollable.content
                 .control
                     .field
-                        label.label(for="businessAddress") {{ $t('wizard.step3.businessAddress') }}
+                        label.label(for="businessAddress") {{ translate('wizard.step3.businessAddress') }}
                         .control
                             input#businessAddress.input(
                                 v-bind:class="{ 'is-danger': (typeOfPolicyInt==3 && businessAddress.length == 0) }"
-                                :placeholder="$t('wizard.step3.businessAddressPlaceholder')"
+                                :placeholder="translate('wizard.step3.businessAddressPlaceholder')"
                                 v-model="businessAddress"
                                 type="text"
                                 )
-                        p.help.has-text-grey(v-show="!(typeOfPolicyInt==3 && businessAddress.length == 0)") {{ $t('wizard.step3.businessAddressHelp') }}
-                        p.help.is-danger(v-show="(typeOfPolicyInt==3 && businessAddress.length == 0)") {{ $t('wizard.step3.businessAddressRequired') }}
+                        p.help.has-text-grey(v-show="!(typeOfPolicyInt==3 && businessAddress.length == 0)") {{ translate('wizard.step3.businessAddressHelp') }}
+                        p.help.is-danger(v-show="(typeOfPolicyInt==3 && businessAddress.length == 0)") {{ translate('wizard.step3.businessAddressRequired') }}
                 br
                 .control
                     .field
-                        label.label(for="effectiveFromDate") {{ $t('wizard.step3.effectiveDate') }}
+                        label.label(for="effectiveFromDate") {{ translate('wizard.step3.effectiveDate') }}
                         .control
                             input#effectiveFromDate.input.is-primary(
                                 v-model="effectiveFromDate" 
@@ -29,28 +29,28 @@ section#step-3.columns(v-if='wizardStep==3')
                 br
                 .control(v-show="typeOfPolicyInt!=2")
                     .field
-                        label.label(for="pidInfoIn") {{ $t('wizard.step3.pidInfo') }}
+                        label.label(for="pidInfoIn") {{ translate('wizard.step3.pidInfo') }}
                         .control
                             input#pidInfoIn.input(
-                                :placeholder="$t('wizard.step3.pidInfoPlaceholder')" 
+                                :placeholder="translate('wizard.step3.pidInfoPlaceholder')" 
                                 v-model="pidInfoIn" 
                                 type="text"
                                 )
-                        p.help.has-text-grey {{ $t('wizard.step3.pidInfoHelp') }}
+                        p.help.has-text-grey {{ translate('wizard.step3.pidInfoHelp') }}
                 br
                 .control
                     .field
-                        label.label(for="ageOfDigitalConsent") {{ $t('wizard.step3.ageOfConsent') }}
+                        label.label(for="ageOfDigitalConsent") {{ translate('wizard.step3.ageOfConsent') }}
                         .control
                             input#ageOfDigitalConsent.input(
-                                :placeholder="$t('wizard.step3.ageOfConsentPlaceholder')"
+                                :placeholder="translate('wizard.step3.ageOfConsentPlaceholder')"
                                 v-model="ageOfDigitalConsent" 
                                 type="number"
                                 min="13"
                                 max="18"
                                 )
-                        p.help.has-text-grey {{ $t('wizard.step3.ageOfConsentHelp') }}
+                        p.help.has-text-grey {{ translate('wizard.step3.ageOfConsentHelp') }}
         footer.card-footer
-            a.card-footer-item(@click='prevStep') {{ $t('wizard.step3.previous') }}
-            a.card-footer-item(@click='nextStep') {{ $t('wizard.step3.next') }}
+            a.card-footer-item(@click='prevStep') {{ translate('wizard.step3.previous') }}
+            a.card-footer-item(@click='nextStep') {{ translate('wizard.step3.next') }}
     +wizardSidebar

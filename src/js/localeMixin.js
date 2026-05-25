@@ -9,7 +9,7 @@ window.localeMixin = {
   },
 
   methods: {
-    $t(key, params) {
+    translate(key, params) {
       var localeData = window.__locale || {}
       var text = localeData[key]
       if (text === undefined || text === null) return key

@@ -1,73 +1,73 @@
 +modal('showNoTrackingPrivacyPolicyModal', 'modal.privacyNoTracking.title', 'toggleNoTrackingPrivacyPolicyModalVisibility', 'typeOfPolicyInt==2')
         section.modal-card-body.modal-box
             #privacy_notrack_content(v-show='contentRenderType==1')
-                strong {{ $t('noTracking.title') }}
+                strong {{ translate('noTracking.title') }}
 
-                p(v-html="$t('noTracking.intro')")
-
-                br 
-                strong {{ $t('noTracking.infoTitle') }}
-
-                p {{ $t('noTracking.infoText') }}
+                p(v-html="translate('noTracking.intro')")
 
                 br 
-                strong {{ $t('noTracking.locationTitle') }}
+                strong {{ translate('noTracking.infoTitle') }}
 
-                p(v-html="$t('noTracking.locationText')")
-
-                br 
-                strong {{ $t('noTracking.thirdPartyTitle') }}
-
-                p {{ $t('noTracking.thirdPartyText') }}
+                p {{ translate('noTracking.infoText') }}
 
                 br 
-                strong {{ $t('noTracking.optOutTitle') }}
+                strong {{ translate('noTracking.locationTitle') }}
+
+                p(v-html="translate('noTracking.locationText')")
+
+                br 
+                strong {{ translate('noTracking.thirdPartyTitle') }}
+
+                p {{ translate('noTracking.thirdPartyText') }}
+
+                br 
+                strong {{ translate('noTracking.optOutTitle') }}
 
                 div(v-if='isMobileApp || isWindowsApp')
-                    p {{ $t('noTracking.optOutUninstall') }}
+                    p {{ translate('noTracking.optOutUninstall') }}
                 div(v-if='isWebApp')
-                    p {{ $t('noTracking.optOutCease') }}
-                p(v-html="$t('noTracking.optOutContact')")
+                    p {{ translate('noTracking.optOutCease') }}
+                p(v-html="translate('noTracking.optOutContact')")
 
                 br 
-                strong {{ $t('noTracking.childrenTitle') }}
+                strong {{ translate('noTracking.childrenTitle') }}
 
-                p(v-html="$t('noTracking.childrenText')")
+                p(v-html="translate('noTracking.childrenText')")
 
                 br 
-                strong {{ $t('noTracking.securityTitle') }}
+                strong {{ translate('noTracking.securityTitle') }}
 
-                p {{ $t('noTracking.securityText') }}
+                p {{ translate('noTracking.securityText') }}
                 br 
-                strong {{ $t('noTracking.breachTitle') }}
-                p {{ $t('noTracking.breachText') }}
+                strong {{ translate('noTracking.breachTitle') }}
+                p {{ translate('noTracking.breachText') }}
                 br
 
                 div(v-if='hasDataDeletion')
-                    strong {{ $t('noTracking.dataDeletionTitle') }}
-                    p(v-html="$t('noTracking.dataDeletionText')")
+                    strong {{ translate('noTracking.dataDeletionTitle') }}
+                    p(v-html="translate('noTracking.dataDeletionText')")
                     br
 
-                strong {{ $t('noTracking.changesTitle') }}
+                strong {{ translate('noTracking.changesTitle') }}
 
-                p {{ $t('noTracking.changesText') }}
+                p {{ translate('noTracking.changesText') }}
                 br
-                p(v-html="$t('noTracking.changesPrev')")
+                p(v-html="translate('noTracking.changesPrev')")
                 br
-                p(v-html="$t('noTracking.effectiveDate')")
+                p(v-html="translate('noTracking.effectiveDate')")
 
                 br
-                strong {{ $t('noTracking.consentTitle') }}
+                strong {{ translate('noTracking.consentTitle') }}
 
-                p {{ $t('noTracking.consentText') }}
+                p {{ translate('noTracking.consentText') }}
 
                 br 
-                strong {{ $t('noTracking.contactTitle') }}
+                strong {{ translate('noTracking.contactTitle') }}
 
-                p(v-html="$t('noTracking.contactText')")
+                p(v-html="translate('noTracking.contactText')")
 
                 +attribution('privacy policy')
-            textarea#privacy_notrack_txtarea.textarea(:aria-label='$t("noTracking.title") + $t("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+            textarea#privacy_notrack_txtarea.textarea(:aria-label='translate("noTracking.title") + translate("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
         footer.modal-card-foot
             +outputButtons('privacy_notrack_content', 'privacy_notrack_txtarea')
             +flycricketDeploy('fc_deploy_notracking()')

@@ -20,7 +20,7 @@ window.platformMixin = {
       if (this.platforms.KaiOS) labels.push(locale["platform.kaios"] || "KaiOS");
       if (this.platforms.Windows) labels.push(locale["platform.windows"] || "Windows");
       if (this.platforms.Web) labels.push(locale["platform.web"] || "Web");
-      return labels.length ? labels.join(", ") : this.$t("platform.selectedNone");
+      return labels.length ? labels.join(", ") : this.translate("platform.selectedNone");
     },
     isMobileApp() {
       return this.platforms.Android || this.platforms.iOS || this.platforms.KaiOS;
@@ -37,7 +37,7 @@ window.platformMixin = {
   },
 
   methods: {
-    $tPlatform(key) {
+    platformWord(key) {
       var locale = window.__locale || {};
       return locale[key] || key;
     },
@@ -47,18 +47,18 @@ window.platformMixin = {
       var isWin = this.isWindowsApp;
       var isWeb = this.isWebApp;
 
-      var platformMobileDevices = this.$tPlatform("platform.mobileDevices");
-      var platformWindowsDevices = this.$tPlatform("platform.windowsDevices");
-      var platformWebBrowsers = this.$tPlatform("platform.webBrowsers");
-      var platformMobileDevice = this.$tPlatform("platform.mobileDevice");
-      var platformWindowsDevice = this.$tPlatform("platform.windowsDevice");
-      var platformComputer = this.$tPlatform("platform.computer");
-      var platformComputers = this.$tPlatform("platform.computers");
-      var platformUninstallApp = this.$tPlatform("platform.uninstallApp");
-      var platformCeaseWeb = this.$tPlatform("platform.ceaseWeb");
-      var platformOr = this.$tPlatform("platform.or");
-      var platformAnd = this.$tPlatform("platform.and");
-      var platformCommaAnd = this.$tPlatform("platform.commaAnd");
+      var platformMobileDevices = this.platformWord("platform.mobileDevices");
+      var platformWindowsDevices = this.platformWord("platform.windowsDevices");
+      var platformWebBrowsers = this.platformWord("platform.webBrowsers");
+      var platformMobileDevice = this.platformWord("platform.mobileDevice");
+      var platformWindowsDevice = this.platformWord("platform.windowsDevice");
+      var platformComputer = this.platformWord("platform.computer");
+      var platformComputers = this.platformWord("platform.computers");
+      var platformUninstallApp = this.platformWord("platform.uninstallApp");
+      var platformCeaseWeb = this.platformWord("platform.ceaseWeb");
+      var platformOr = this.platformWord("platform.or");
+      var platformAnd = this.platformWord("platform.and");
+      var platformCommaAnd = this.platformWord("platform.commaAnd");
 
       var descs = [];
       if (isMobile) descs.push(platformMobileDevices);
@@ -95,18 +95,18 @@ window.platformMixin = {
       if (isWeb) uninstallParts.push(platformCeaseWeb);
       this.uninstallDesc = uninstallParts.join(" " + platformOr + " ") || platformUninstallApp;
 
-      var deviceIdMobile = this.$tPlatform("platform.deviceId.mobile");
-      var deviceIdWindows = this.$tPlatform("platform.deviceId.windows");
-      var deviceIdWeb = this.$tPlatform("platform.deviceId.web");
-      var deviceIdMixed = this.$tPlatform("platform.deviceId.mixed");
-      var osMobile = this.$tPlatform("platform.os.mobile");
-      var osWindows = this.$tPlatform("platform.os.windows");
-      var osWeb = this.$tPlatform("platform.os.web");
-      var osMixed = this.$tPlatform("platform.os.mixed");
-      var browserMobile = this.$tPlatform("platform.browser.mobile");
-      var browserWindows = this.$tPlatform("platform.browser.windows");
-      var browserWeb = this.$tPlatform("platform.browser.web");
-      var browserMixed = this.$tPlatform("platform.browser.mixed");
+      var deviceIdMobile = this.platformWord("platform.deviceId.mobile");
+      var deviceIdWindows = this.platformWord("platform.deviceId.windows");
+      var deviceIdWeb = this.platformWord("platform.deviceId.web");
+      var deviceIdMixed = this.platformWord("platform.deviceId.mixed");
+      var osMobile = this.platformWord("platform.os.mobile");
+      var osWindows = this.platformWord("platform.os.windows");
+      var osWeb = this.platformWord("platform.os.web");
+      var osMixed = this.platformWord("platform.os.mixed");
+      var browserMobile = this.platformWord("platform.browser.mobile");
+      var browserWindows = this.platformWord("platform.browser.windows");
+      var browserWeb = this.platformWord("platform.browser.web");
+      var browserMixed = this.platformWord("platform.browser.mixed");
 
       if (isMobile && !isWin && !isWeb) {
         this.deviceIdDesc = deviceIdMobile;

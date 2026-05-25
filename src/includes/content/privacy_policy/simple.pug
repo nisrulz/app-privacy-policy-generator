@@ -1,143 +1,143 @@
 +modal('showPrivacyModal', 'modal.privacySimple.title', 'togglePrivacyModalVisibility', 'typeOfPolicyInt==1')
         section.modal-card-body.modal-box
             #privacy_simple_content(v-show='contentRenderType==1')
-                strong {{ $t('simple.title') }}
+                strong {{ translate('simple.title') }}
 
-                p(v-html="$t('simple.intro')")
+                p(v-html="translate('simple.intro')")
 
                 br
-                strong {{ $t('simple.infoCollectionTitle') }}
+                strong {{ translate('simple.infoCollectionTitle') }}
 
-                p {{ $t('simple.infoCollectionIntro') }}
+                p {{ translate('simple.infoCollectionIntro') }}
                     ul 
-                        li {{ $t('simple.infoCollection.ip') }}
-                        li {{ $t('simple.infoCollection.pages') }}
-                        li {{ $t('simple.infoCollection.time') }}
-                        li(v-html="$t('simple.infoCollection.os')")
+                        li {{ translate('simple.infoCollection.ip') }}
+                        li {{ translate('simple.infoCollection.pages') }}
+                        li {{ translate('simple.infoCollection.time') }}
+                        li(v-html="translate('simple.infoCollection.os')")
 
                 br
-                strong {{ $t('simple.cookiesTitle') }}
+                strong {{ translate('simple.cookiesTitle') }}
 
-                p {{ $t('simple.cookiesText') }}
+                p {{ translate('simple.cookiesText') }}
 
                 div(v-if='isLocationTracked')
                     br
-                    strong {{ $t('simple.locationTitle') }}
-                    p {{ $t('simple.locationIntro') }}
+                    strong {{ translate('simple.locationTitle') }}
+                    p {{ translate('simple.locationIntro') }}
                     ul
-                        li {{ $t('simple.locationGeo') }}
-                        li {{ $t('simple.locationAnalytics') }}
-                        li {{ $t('simple.locationThirdParty') }}
+                        li {{ translate('simple.locationGeo') }}
+                        li {{ translate('simple.locationAnalytics') }}
+                        li {{ translate('simple.locationThirdParty') }}
 
                 br
-                strong {{ $t('simple.yourRightsTitle') }}
-                p(v-html="$t('simple.yourRightsText')")
+                strong {{ translate('simple.yourRightsTitle') }}
+                p(v-html="translate('simple.yourRightsText')")
 
                 br
-                strong {{ $t('simple.ccpaTitle') }}
-                p(v-html="$t('simple.ccpaText')")
+                strong {{ translate('simple.ccpaTitle') }}
+                p(v-html="translate('simple.ccpaText')")
 
                 div(v-if='isAIUsed')
                     br
-                    strong {{ $t('simple.aiTitle') }}
-                    p {{ $t('simple.aiText') }}
+                    strong {{ translate('simple.aiTitle') }}
+                    p {{ translate('simple.aiText') }}
                     br
 
-                p {{ $t('simple.marketingText') }}
+                p {{ translate('simple.marketingText') }}
                 br
-                p(v-html="$t('simple.piiText')")
-
-                br
-                strong {{ $t('simple.thirdPartyTitle') }}
-
-                p {{ $t('simple.thirdPartyText') }}
+                p(v-html="translate('simple.piiText')")
 
                 br
-                strong {{ $t('simple.dataTransfersTitle') }}
+                strong {{ translate('simple.thirdPartyTitle') }}
 
-                p {{ $t('simple.dataTransfersText') }}
+                p {{ translate('simple.thirdPartyText') }}
+
+                br
+                strong {{ translate('simple.dataTransfersTitle') }}
+
+                p {{ translate('simple.dataTransfersText') }}
                 ul
-                    li {{ $t('simple.dataTransfers.scc') }}
-                    li {{ $t('simple.dataTransfers.adequacy') }}
-                    li {{ $t('simple.dataTransfers.consent') }}
+                    li {{ translate('simple.dataTransfers.scc') }}
+                    li {{ translate('simple.dataTransfers.adequacy') }}
+                    li {{ translate('simple.dataTransfers.consent') }}
 
-                p {{ $t('simple.dataTransfersNote') }}
+                p {{ translate('simple.dataTransfersNote') }}
 
                 div(v-if='hasThirdPartyServicesSelected')
                     br
-                    p {{ $t('simple.thirdPartyServicesText') }}
+                    p {{ translate('simple.thirdPartyServicesText') }}
                     ul
                         li(v-for="item in enabledThirdPartyServicesWithPrivacy" :key="item.name")
                             a(:href='item.link.privacy' target='_blank' rel='noopener noreferrer') {{ tpsName(item) }}
                 br
 
-                p {{ $t('simple.disclosureText') }}
+                p {{ translate('simple.disclosureText') }}
                     ul
-                        li {{ $t('simple.disclosure.law') }}
-                        li {{ $t('simple.disclosure.safety') }}
-                        li {{ $t('simple.disclosure.providers') }}
+                        li {{ translate('simple.disclosure.law') }}
+                        li {{ translate('simple.disclosure.safety') }}
+                        li {{ translate('simple.disclosure.providers') }}
                 br
 
-                strong {{ $t('simple.optOutTitle') }}
+                strong {{ translate('simple.optOutTitle') }}
                 div(v-if='isMobileApp || isWindowsApp')
-                    p(v-html="$t('simple.optOutUninstall')")
+                    p(v-html="translate('simple.optOutUninstall')")
                 div(v-if='isWebApp')
-                    p(v-html="$t('simple.optOutCease')")
-                p(v-html="$t('simple.optOutContact')")
+                    p(v-html="translate('simple.optOutCease')")
+                p(v-html="translate('simple.optOutContact')")
 
                 br
-                strong {{ $t('simple.retentionTitle') }}
-                p {{ $t('simple.retentionIntro') }}
+                strong {{ translate('simple.retentionTitle') }}
+                p {{ translate('simple.retentionIntro') }}
                 ul
-                    li {{ $t('simple.retention.userData') }}
-                    li {{ $t('simple.retention.autoData') }}
-                    li {{ $t('simple.retention.aggregated') }}
-                    li {{ $t('simple.retention.legal') }}
+                    li {{ translate('simple.retention.userData') }}
+                    li {{ translate('simple.retention.autoData') }}
+                    li {{ translate('simple.retention.aggregated') }}
+                    li {{ translate('simple.retention.legal') }}
 
-                p(v-html="$t('simple.retentionDeletion')")
+                p(v-html="translate('simple.retentionDeletion')")
 
                 div(v-if='hasDataDeletion')
                     br
-                    strong {{ $t('simple.dataDeletionTitle') }}
-                    p(v-html="$t('simple.dataDeletionText')")
-                    p {{ $t('simple.dataDeletionVerify') }}
+                    strong {{ translate('simple.dataDeletionTitle') }}
+                    p(v-html="translate('simple.dataDeletionText')")
+                    p {{ translate('simple.dataDeletionVerify') }}
 
                 br
-                strong {{ $t('simple.childrenTitle') }}
-                p(v-html="$t('simple.childrenIntro')")
+                strong {{ translate('simple.childrenTitle') }}
+                p(v-html="translate('simple.childrenIntro')")
                 div(v-if='hasThirdPartyServicesSelected')
                     br
-                    p(v-html="$t('simple.childrenWithServices')")
+                    p(v-html="translate('simple.childrenWithServices')")
                 div(v-else)
                     br
-                    p(v-html="$t('simple.childrenWithoutServices')")
+                    p(v-html="translate('simple.childrenWithoutServices')")
 
                 br
-                strong {{ $t('simple.securityTitle') }}
-                p {{ $t('simple.securityText') }}
+                strong {{ translate('simple.securityTitle') }}
+                p {{ translate('simple.securityText') }}
 
                 br
-                strong {{ $t('simple.breachTitle') }}
-                p {{ $t('simple.breachText') }}
+                strong {{ translate('simple.breachTitle') }}
+                p {{ translate('simple.breachText') }}
 
                 br
-                strong {{ $t('simple.changesTitle') }}
-                p {{ $t('simple.changesText') }}
+                strong {{ translate('simple.changesTitle') }}
+                p {{ translate('simple.changesText') }}
                 br
-                p(v-html="$t('simple.changesPrev')")
+                p(v-html="translate('simple.changesPrev')")
                 br
-                p(v-html="$t('simple.effectiveDate')")
+                p(v-html="translate('simple.effectiveDate')")
 
                 br
-                strong {{ $t('simple.consentTitle') }}
-                p {{ $t('simple.consentText') }}
+                strong {{ translate('simple.consentTitle') }}
+                p {{ translate('simple.consentText') }}
 
                 br
-                strong {{ $t('simple.contactTitle') }}
-                p(v-html="$t('simple.contactText')")
+                strong {{ translate('simple.contactTitle') }}
+                p(v-html="translate('simple.contactText')")
 
                 +attribution('privacy policy')
-            textarea#privacy_simple_txtarea.textarea(:aria-label='$t("simple.title") + $t("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+            textarea#privacy_simple_txtarea.textarea(:aria-label='translate("simple.title") + translate("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
         footer.modal-card-foot
             +outputButtons('privacy_simple_content', 'privacy_simple_txtarea')
             +flycricketDeploy('deployFcSimple()')

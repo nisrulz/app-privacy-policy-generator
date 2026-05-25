@@ -5,7 +5,7 @@ section#step-6.columns(v-if="wizardStep==6")
             +wizardProgress(70)
             .scrollable.content
                 .control
-                    | {{ $t('wizard.step6.selectOwner') }}
+                    | {{ translate('wizard.step6.selectOwner') }}
                     span.tag.is-primary.is-light {{typeOfDev}}
                     br
                     label.radio
@@ -14,7 +14,7 @@ section#step-6.columns(v-if="wizardStep==6")
                             value="Individual" 
                             type="radio"
                             )
-                        |   {{ $t('wizard.step6.individual') }}
+                        |   {{ translate('wizard.step6.individual') }}
                     br
                     label.radio
                         input(
@@ -22,33 +22,33 @@ section#step-6.columns(v-if="wizardStep==6")
                             value="Company" 
                             type="radio"
                             )
-                        |   {{ $t('wizard.step6.company') }}
+                        |   {{ translate('wizard.step6.company') }}
                 br
                 .control(v-if="typeOfDev=='Company'")
                     .field
-                        label.label(for="companyName") {{ $t('wizard.step6.companyName') }}
+                        label.label(for="companyName") {{ translate('wizard.step6.companyName') }}
                         .control
                             input#companyName.input(
                                 v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }"
-                                :placeholder="$t('wizard.step6.companyNamePlaceholder')" 
+                                :placeholder="translate('wizard.step6.companyNamePlaceholder')" 
                                 v-model="companyName" 
                                 required=""
                                 type="text"
                                 )
-                        p.help(v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }" v-show="(companyName.length == 0 && typeOfDev=='Company')") {{ $t('wizard.step6.companyNameRequired') }}
+                        p.help(v-bind:class="{ 'is-danger': (companyName.length == 0 && typeOfDev=='Company') }" v-show="(companyName.length == 0 && typeOfDev=='Company')") {{ translate('wizard.step6.companyNameRequired') }}
                 .control(v-if="typeOfDev=='Individual'")
                     .field
-                        label.label(for="devName") {{ $t('wizard.step6.devName') }}
+                        label.label(for="devName") {{ translate('wizard.step6.devName') }}
                         .control
                             input#devName.input(
                                 v-bind:class="{ 'is-danger': (devName.length == 0 && typeOfDev=='Individual') }"
-                                :placeholder="$t('wizard.step6.devNamePlaceholder')" 
+                                :placeholder="translate('wizard.step6.devNamePlaceholder')" 
                                 v-model="devName" 
                                 required=""
                                 type="text"
                                 )
-                        p.help(v-bind:class="{ 'is-danger': (devName.length == 0 && typeOfDev=='Individual') }" v-show="(devName.length == 0 && typeOfDev=='Individual')") {{ $t('wizard.step6.devNameRequired') }}
+                        p.help(v-bind:class="{ 'is-danger': (devName.length == 0 && typeOfDev=='Individual') }" v-show="(devName.length == 0 && typeOfDev=='Individual')") {{ translate('wizard.step6.devNameRequired') }}
         footer.card-footer
-            a.card-footer-item(@click='prevStep') {{ $t('wizard.step6.previous') }}
-            a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") {{ $t('wizard.step6.next') }}
+            a.card-footer-item(@click='prevStep') {{ translate('wizard.step6.previous') }}
+            a.card-footer-item(@click='nextStep' :class="{ 'is-disabled': !canAdvance }") {{ translate('wizard.step6.next') }}
     +wizardSidebar

@@ -1,7 +1,7 @@
 //- Modal shell — wraps content in a Bulma modal card
 mixin modal(flag, titleKey, toggle, vShow)
   - var cls = '{\'is-active\': ' + flag + '}'
-  - var titleHtml = '{{ $t(\'' + titleKey + '\') }}'
+  - var titleHtml = '{{ translate(\'' + titleKey + '\') }}'
   .modal(v-bind:class=cls)&attributes(vShow ? { 'v-show': vShow } : {})
     .modal-background
     .modal-card
@@ -12,13 +12,13 @@ mixin modal(flag, titleKey, toggle, vShow)
 
 //- HTML / Markdown / Preview buttons for policy modals
 mixin outputButtons(contentId, textareaId)
-  button.button.is-primary(@click=`getHtml('${contentId}','${textareaId}')`) {{ $t('modal.btn.html') }}
-  button.button.is-primary(@click=`getMarkdown('${contentId}', '${textareaId}')`) {{ $t('modal.btn.markdown') }}
-  button.button.is-primary(v-if='contentRenderType!=1' @click='preview()') {{ $t('modal.btn.preview') }}
+  button.button.is-primary(@click=`getHtml('${contentId}','${textareaId}')`) {{ translate('modal.btn.html') }}
+  button.button.is-primary(@click=`getMarkdown('${contentId}', '${textareaId}')`) {{ translate('modal.btn.markdown') }}
+  button.button.is-primary(v-if='contentRenderType!=1' @click='preview()') {{ translate('modal.btn.preview') }}
 
 //- Generator attribution
 mixin attribution(type)
-  - var attrExpr = "$t('modal.attribution." + type + "')"
+  - var attrExpr = "translate('modal.attribution." + type + "')"
   hr
   p
     span(v-html=attrExpr)
@@ -29,7 +29,7 @@ mixin flycricketDeploy(method)
   if (flycricket)
     div(style='flex:1')
       button.button.is-info(@click=method style='float:right;')
-        | {{ $t('modal.btn.deployFlycricket') }}
+        | {{ translate('modal.btn.deployFlycricket') }}
 
 //- Wizard progress bar — is-primary for final step, is-link otherwise
 mixin wizardProgress(value)

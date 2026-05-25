@@ -35,8 +35,8 @@ window.generatorMixin = {
       if (this.pidInfoIn === "") {
         this.pidInfo = ".";
       } else {
-        var prefix = this.$t("misc.pidInfoPrefix");
-        var suffix = this.$t("misc.pidInfoSuffix");
+        var prefix = this.translate("misc.pidInfoPrefix");
+        var suffix = this.translate("misc.pidInfoSuffix");
         this.pidInfo = prefix + this.pidInfoIn + suffix;
       }
     },

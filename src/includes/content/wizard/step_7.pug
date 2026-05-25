@@ -5,8 +5,8 @@ section#step-7.columns(v-if="wizardStep==7")
             +wizardProgress(84)
             div(v-show='typeOfPolicyInt!=2')
                 p
-                    b {{ $t('wizard.step7.includeLinks') }}
-                    span.tag.is-primary.is-light {{ $t('wizard.step7.scrollForMore') }}
+                    b {{ translate('wizard.step7.includeLinks') }}
+                    span.tag.is-primary.is-light {{ translate('wizard.step7.scrollForMore') }}
                 .scrollable-thirdparty.content
                     a(rel="noopener noreferrer" v-for="item in thirdPartyServicesWithPrivacyOrTerms" :key="item.name")
                         input(
@@ -21,10 +21,10 @@ section#step-7.columns(v-if="wizardStep==7")
                                 )
                             span {{ tpsName(item) }}
             div(v-show='typeOfPolicyInt==2')
-                p {{ $t('wizard.step7.noServices') }} 
-                    b {{ $t('wizard.step7.nextStep') }}
+                p {{ translate('wizard.step7.noServices') }} 
+                    b {{ translate('wizard.step7.nextStep') }}
                 div.scrollable-thirdparty.content
         footer.card-footer
-            a.card-footer-item(@click='prevStep') {{ $t('wizard.step7.previous') }}
-            a.card-footer-item(@click='nextStep') {{ $t('wizard.step7.next') }}
+            a.card-footer-item(@click='prevStep') {{ translate('wizard.step7.previous') }}
+            a.card-footer-item(@click='nextStep') {{ translate('wizard.step7.next') }}
     +wizardSidebar

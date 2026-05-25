@@ -1,207 +1,207 @@
 +modal('showGDPRPrivacyModal', 'modal.privacyGDPR.title', 'toggleGDPRPrivacyModalVisibility', 'typeOfPolicyInt==3')
         section.modal-card-body.modal-box
             #privacy_gdpr_content(v-show='contentRenderType==1')
-                strong {{ $t('gdpr.title') }}
+                strong {{ translate('gdpr.title') }}
 
-                p(v-html="$t('gdpr.intro')")
+                p(v-html="translate('gdpr.intro')")
 
                 br
-                strong {{ $t('gdpr.controllerTitle') }}
+                strong {{ translate('gdpr.controllerTitle') }}
 
-                p {{ $t('gdpr.controllerText') }}
+                p {{ translate('gdpr.controllerText') }}
                 ul
-                    li(v-html="$t('gdpr.controllerName')")
-                    li(v-if='businessAddress') {{ $t('gdpr.controllerAddress') }}
-                    li(v-html="$t('gdpr.controllerEmail')")
+                    li(v-html="translate('gdpr.controllerName')")
+                    li(v-if='businessAddress') {{ translate('gdpr.controllerAddress') }}
+                    li(v-html="translate('gdpr.controllerEmail')")
 
-                p {{ $t('gdpr.controllerInquiry') }}
+                p {{ translate('gdpr.controllerInquiry') }}
 
-                p(v-if='euRepresentative') {{ $t('gdpr.euRepresentative') }}
-
-                br
-                strong {{ $t('gdpr.infoTitle') }}
-
-                p {{ $t('gdpr.infoText1') }}
-
-                p {{ $t('gdpr.infoText2') }}
+                p(v-if='euRepresentative') {{ translate('gdpr.euRepresentative') }}
 
                 br
-                strong {{ $t('gdpr.legalBasisTitle') }}
+                strong {{ translate('gdpr.infoTitle') }}
 
-                p {{ $t('gdpr.legalBasisIntro') }}
+                p {{ translate('gdpr.infoText1') }}
+
+                p {{ translate('gdpr.infoText2') }}
+
+                br
+                strong {{ translate('gdpr.legalBasisTitle') }}
+
+                p {{ translate('gdpr.legalBasisIntro') }}
                 ul
-                    li {{ $t('gdpr.legalBasis.contract') }}
-                    li {{ $t('gdpr.legalBasis.consent') }}
-                    li {{ $t('gdpr.legalBasis.legitimate') }}
-                    li {{ $t('gdpr.legalBasis.obligation') }}
+                    li {{ translate('gdpr.legalBasis.contract') }}
+                    li {{ translate('gdpr.legalBasis.consent') }}
+                    li {{ translate('gdpr.legalBasis.legitimate') }}
+                    li {{ translate('gdpr.legalBasis.obligation') }}
 
                 br
-                strong {{ $t('gdpr.cookiesTitle') }}
+                strong {{ translate('gdpr.cookiesTitle') }}
 
-                p {{ $t('gdpr.cookiesText') }}
-
-                br
-                strong {{ $t('gdpr.automatedTitle') }}
-
-                p {{ $t('gdpr.automatedText') }}
+                p {{ translate('gdpr.cookiesText') }}
 
                 br
-                strong {{ $t('gdpr.autoCollectTitle') }}
+                strong {{ translate('gdpr.automatedTitle') }}
 
-                p(v-html="$t('gdpr.autoCollectText')")
+                p {{ translate('gdpr.automatedText') }}
 
                 br
-                strong {{ $t('gdpr.locationTitle') }}
+                strong {{ translate('gdpr.autoCollectTitle') }}
 
-                p(v-if='!isLocationTracked', v-html="$t('gdpr.locationNo')")
+                p(v-html="translate('gdpr.autoCollectText')")
+
+                br
+                strong {{ translate('gdpr.locationTitle') }}
+
+                p(v-if='!isLocationTracked', v-html="translate('gdpr.locationNo')")
                 div(v-if='isLocationTracked')
-                    p {{ $t('gdpr.locationYes') }}
+                    p {{ translate('gdpr.locationYes') }}
                     ul
-                        li {{ $t('gdpr.locationGeo') }}
-                        li {{ $t('gdpr.locationAnalytics') }}
-                        li {{ $t('gdpr.locationThirdParty') }}
+                        li {{ translate('gdpr.locationGeo') }}
+                        li {{ translate('gdpr.locationAnalytics') }}
+                        li {{ translate('gdpr.locationThirdParty') }}
 
                 br
-                strong {{ $t('gdpr.aiTitle') }}
-                p(v-if='!isAIUsed') {{ $t('gdpr.aiNo') }}
+                strong {{ translate('gdpr.aiTitle') }}
+                p(v-if='!isAIUsed') {{ translate('gdpr.aiNo') }}
                 div(v-if='isAIUsed')
-                    p {{ $t('gdpr.aiYes') }}
+                    p {{ translate('gdpr.aiYes') }}
                     ul
-                        li {{ $t('gdpr.aiPersonalized') }}
-                        li {{ $t('gdpr.aiRecommendations') }}
-                        li {{ $t('gdpr.aiAutomated') }}
-                        li {{ $t('gdpr.aiProtection') }}
+                        li {{ translate('gdpr.aiPersonalized') }}
+                        li {{ translate('gdpr.aiRecommendations') }}
+                        li {{ translate('gdpr.aiAutomated') }}
+                        li {{ translate('gdpr.aiProtection') }}
                 br
-                strong {{ $t('gdpr.thirdPartyTitle') }}
+                strong {{ translate('gdpr.thirdPartyTitle') }}
 
-                p {{ $t('gdpr.thirdPartyText') }}
+                p {{ translate('gdpr.thirdPartyText') }}
 
                 br
-                strong {{ $t('gdpr.dataTransfersTitle') }}
+                strong {{ translate('gdpr.dataTransfersTitle') }}
 
-                p {{ $t('gdpr.dataTransfersText') }}
+                p {{ translate('gdpr.dataTransfersText') }}
                 ul
-                    li {{ $t('gdpr.dataTransfers.adequacy') }}
-                    li {{ $t('gdpr.dataTransfers.scc') }}
-                    li {{ $t('gdpr.dataTransfers.safeguards') }}
+                    li {{ translate('gdpr.dataTransfers.adequacy') }}
+                    li {{ translate('gdpr.dataTransfers.scc') }}
+                    li {{ translate('gdpr.dataTransfers.safeguards') }}
 
-                p {{ $t('gdpr.dataTransfersNote') }}
+                p {{ translate('gdpr.dataTransfersNote') }}
 
                 div(v-if='hasThirdPartyServicesSelected')
                     br
-                    p {{ $t('gdpr.thirdPartyServicesText') }}
+                    p {{ translate('gdpr.thirdPartyServicesText') }}
                     ul
                         li(v-for="item in enabledThirdPartyServicesWithPrivacy" :key="item.name")
                             a(:href='item.link.privacy' target='_blank' rel='noopener noreferrer') {{ tpsName(item) }}
-                p {{ $t('gdpr.disclosureText') }}
+                p {{ translate('gdpr.disclosureText') }}
                     ul
-                        li {{ $t('gdpr.disclosure.law') }}
-                        li {{ $t('gdpr.disclosure.safety') }}
-                        li {{ $t('gdpr.disclosure.providers') }}
+                        li {{ translate('gdpr.disclosure.law') }}
+                        li {{ translate('gdpr.disclosure.safety') }}
+                        li {{ translate('gdpr.disclosure.providers') }}
 
-                p {{ $t('gdpr.dpaText') }}
+                p {{ translate('gdpr.dpaText') }}
 
                 br
-                strong {{ $t('gdpr.optOutTitle') }}
+                strong {{ translate('gdpr.optOutTitle') }}
 
                 div(v-if='isMobileApp || isWindowsApp')
-                    p(v-html="$t('gdpr.optOutUninstall')")
+                    p(v-html="translate('gdpr.optOutUninstall')")
                 div(v-if='isWebApp')
-                    p(v-html="$t('gdpr.optOutCease')")
-                p(v-html="$t('gdpr.optOutContact')")
+                    p(v-html="translate('gdpr.optOutCease')")
+                p(v-html="translate('gdpr.optOutContact')")
 
                 br
-                strong {{ $t('gdpr.retentionTitle') }}
+                strong {{ translate('gdpr.retentionTitle') }}
 
-                p {{ $t('gdpr.retentionIntro') }}
+                p {{ translate('gdpr.retentionIntro') }}
                 ul
-                    li {{ $t('gdpr.retention.userData') }}
-                    li {{ $t('gdpr.retention.autoData') }}
-                    li {{ $t('gdpr.retention.aggregated') }}
-                    li {{ $t('gdpr.retention.legal') }}
+                    li {{ translate('gdpr.retention.userData') }}
+                    li {{ translate('gdpr.retention.autoData') }}
+                    li {{ translate('gdpr.retention.aggregated') }}
+                    li {{ translate('gdpr.retention.legal') }}
 
-                p(v-html="$t('gdpr.retentionDeletion')")
+                p(v-html="translate('gdpr.retentionDeletion')")
 
                 div(v-if='hasDataDeletion')
                     br
-                    strong {{ $t('gdpr.dataDeletionTitle') }}
-                    p(v-html="$t('gdpr.dataDeletionText')")
-                    p {{ $t('gdpr.dataDeletionVerify') }}
+                    strong {{ translate('gdpr.dataDeletionTitle') }}
+                    p(v-html="translate('gdpr.dataDeletionText')")
+                    p {{ translate('gdpr.dataDeletionVerify') }}
 
                 br
-                strong {{ $t('gdpr.childrenTitle') }}
+                strong {{ translate('gdpr.childrenTitle') }}
 
-                p(v-html="$t('gdpr.childrenIntro')")
+                p(v-html="translate('gdpr.childrenIntro')")
                 div(v-if='hasThirdPartyServicesSelected')
                     br
-                    p(v-html="$t('gdpr.childrenWithServices')")
+                    p(v-html="translate('gdpr.childrenWithServices')")
                 div(v-else)
                     br
-                    p(v-html="$t('gdpr.childrenWithoutServices')")
+                    p(v-html="translate('gdpr.childrenWithoutServices')")
 
                 br
-                strong {{ $t('gdpr.securityTitle') }}
+                strong {{ translate('gdpr.securityTitle') }}
 
-                p {{ $t('gdpr.securityText') }}
-
-                br
-                strong {{ $t('gdpr.breachTitle') }}
-                p {{ $t('gdpr.breachText') }}
-                br
-                strong {{ $t('gdpr.changesTitle') }}
-
-                p {{ $t('gdpr.changesText') }}
-                br
-                p(v-html="$t('gdpr.changesPrev')")
-                br
-                p(v-html="$t('gdpr.effectiveDate')")
+                p {{ translate('gdpr.securityText') }}
 
                 br
-                strong {{ $t('gdpr.gdprRightsTitle') }}
+                strong {{ translate('gdpr.breachTitle') }}
+                p {{ translate('gdpr.breachText') }}
+                br
+                strong {{ translate('gdpr.changesTitle') }}
 
-                p {{ $t('gdpr.gdprRightsIntro') }}
+                p {{ translate('gdpr.changesText') }}
+                br
+                p(v-html="translate('gdpr.changesPrev')")
+                br
+                p(v-html="translate('gdpr.effectiveDate')")
+
+                br
+                strong {{ translate('gdpr.gdprRightsTitle') }}
+
+                p {{ translate('gdpr.gdprRightsIntro') }}
                 ul
-                    li {{ $t('gdpr.gdprRights.access') }}
-                    li {{ $t('gdpr.gdprRights.rectification') }}
-                    li {{ $t('gdpr.gdprRights.erasure') }}
-                    li {{ $t('gdpr.gdprRights.restrict') }}
-                    li {{ $t('gdpr.gdprRights.portability') }}
-                    li {{ $t('gdpr.gdprRights.object') }}
-                    li {{ $t('gdpr.gdprRights.withdraw') }}
-                    li {{ $t('gdpr.gdprRights.automated') }}
+                    li {{ translate('gdpr.gdprRights.access') }}
+                    li {{ translate('gdpr.gdprRights.rectification') }}
+                    li {{ translate('gdpr.gdprRights.erasure') }}
+                    li {{ translate('gdpr.gdprRights.restrict') }}
+                    li {{ translate('gdpr.gdprRights.portability') }}
+                    li {{ translate('gdpr.gdprRights.object') }}
+                    li {{ translate('gdpr.gdprRights.withdraw') }}
+                    li {{ translate('gdpr.gdprRights.automated') }}
 
-                p {{ $t('gdpr.gdprRightsComplaint') }}
+                p {{ translate('gdpr.gdprRightsComplaint') }}
                     a(href='https://edpb.ec.europa.eu/about-edpb/members_en' target='_blank' rel='noopener noreferrer') https://edpb.ec.europa.eu/about-edpb/members_en
-                p {{ $t('gdpr.gdprRightsICO') }}
+                p {{ translate('gdpr.gdprRightsICO') }}
                     a(href='https://ico.org.uk' target='_blank' rel='noopener noreferrer') https://ico.org.uk
 
                 br
-                strong {{ $t('gdpr.ccpaTitle') }}
+                strong {{ translate('gdpr.ccpaTitle') }}
 
-                p {{ $t('gdpr.ccpaIntro') }}
+                p {{ translate('gdpr.ccpaIntro') }}
                 ul
-                    li {{ $t('gdpr.ccpa.know') }}
-                    li {{ $t('gdpr.ccpa.delete') }}
-                    li {{ $t('gdpr.ccpa.correct') }}
-                    li {{ $t('gdpr.ccpa.optOut') }}
-                    li {{ $t('gdpr.ccpa.limit') }}
-                    li {{ $t('gdpr.ccpa.nonDiscrimination') }}
+                    li {{ translate('gdpr.ccpa.know') }}
+                    li {{ translate('gdpr.ccpa.delete') }}
+                    li {{ translate('gdpr.ccpa.correct') }}
+                    li {{ translate('gdpr.ccpa.optOut') }}
+                    li {{ translate('gdpr.ccpa.limit') }}
+                    li {{ translate('gdpr.ccpa.nonDiscrimination') }}
 
-                p(v-html="$t('gdpr.ccpaExercise')")
+                p(v-html="translate('gdpr.ccpaExercise')")
 
                 br  
-                strong {{ $t('gdpr.consentTitle') }}
+                strong {{ translate('gdpr.consentTitle') }}
 
-                p {{ $t('gdpr.consentText') }}
+                p {{ translate('gdpr.consentText') }}
 
                 br
-                strong {{ $t('gdpr.contactTitle') }}
+                strong {{ translate('gdpr.contactTitle') }}
 
-                p(v-html="$t('gdpr.contactText')")
+                p(v-html="translate('gdpr.contactText')")
 
-                p(v-html="$t('gdpr.contactDeletion')")
+                p(v-html="translate('gdpr.contactDeletion')")
                 +attribution('privacy policy')
-            textarea#privacy_gdpr_txtarea.textarea(:aria-label='$t("gdpr.title") + $t("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+            textarea#privacy_gdpr_txtarea.textarea(:aria-label='translate("gdpr.title") + translate("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
         footer.modal-card-foot
             +outputButtons('privacy_gdpr_content', 'privacy_gdpr_txtarea')
             +flycricketDeploy('fc_deploy_gdpr()')

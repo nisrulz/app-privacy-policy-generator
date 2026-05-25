@@ -5,72 +5,72 @@ section#step-8.columns(v-if="wizardStep==8")
             +wizardProgress(100)
             .scrollable.content
                 .notification.is-warning
-                    p {{ $t('wizard.step8.supportTitle') }}
+                    p {{ translate('wizard.step8.supportTitle') }}
                     ol
                         li
                             a(
                                 rel="noopener noreferrer" 
                                 target="_blank" 
                                 href="https://github.com/sponsors/nisrulz"
-                                ) {{ $t('wizard.step8.sponsor') }} 👨🏻‍💻
+                                ) {{ translate('wizard.step8.sponsor') }} 👨🏻‍💻
                         li
                             a(
                                 rel="noopener noreferrer" 
                                 target="_blank" 
                                 href="https://ko-fi.com/nisrulz"
-                                ) {{ $t('wizard.step8.buyMeCoffee') }} ☕
+                                ) {{ translate('wizard.step8.buyMeCoffee') }} ☕
                         p
-                    p {{ $t('wizard.step8.sharePrompt') }}
+                    p {{ translate('wizard.step8.sharePrompt') }}
                         a(
                             rel="noopener noreferrer" 
                             target="_blank" 
                             href="https://bsky.app/intent/compose?text=%F0%9F%93%9D%20App%20Privacy%20Policy%20Generator%3A%20A%20free%20web-app%20to%20generate%20a%20generic%20privacy%20policy%20for%20your%20Android%2FiOS%2FKaiOS%2FWindows%20%F0%9F%93%B1%20apps%20%F0%9F%9A%80.%0A%0A%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BB%20Built%20by%20%40nisrulz.com%20%0A%0A%E2%9C%85%20Web%20App%3A%20https%3A%2F%2Fapp-privacy-policy-generator.nisrulz.com%20%0A%0A%E2%9C%85%20Checkout%20Reviews%3A%20https%3A%2F%2Fgithub.com%2Fnisrulz%2Fapp-privacy-policy-generator%2Fissues%2F65%20%0A%0A%23appg%20%23free%20%23app%20%23privacy%20%23policy%20%23generator"
-                            )  {{ $t('wizard.step8.bluesky') }}
+                            )  {{ translate('wizard.step8.bluesky') }}
                         a(
                             rel="noopener noreferrer" 
                             target="_blank" 
                             href="https://www.linkedin.com/shareArticle?mini=true&url=https://app-privacy-policy-generator.nisrulz.com/"
-                            )  {{ $t('wizard.step8.linkedin') }}
+                            )  {{ translate('wizard.step8.linkedin') }}
                         a(
                             rel="noopener noreferrer" 
                             target="_blank" 
                             href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fapp-privacy-policy-generator.nisrulz.com%2F"
-                            )  {{ $t('wizard.step8.facebook') }}
+                            )  {{ translate('wizard.step8.facebook') }}
                         a(
                             rel="noopener noreferrer" 
                             target="_blank" 
                             href="https://reddit.com/submit?url=https://app-privacy-policy-generator.nisrulz.com/&title=%F0%9F%93%9D%20App%20Privacy%20Policy%20Generator"
-                            )  {{ $t('wizard.step8.reddit') }}
-                    p {{ $t('wizard.step8.guestbookPrompt') }}
-                        a(href='reviews.html' target='_blank' rel='noopener noreferrer') &nbsp;{{ $t('wizard.step8.guestbook') }} 🤗
-                p {{ $t('wizard.step8.chooseDoc') }}
+                            )  {{ translate('wizard.step8.reddit') }}
+                    p {{ translate('wizard.step8.guestbookPrompt') }}
+                        a(href='reviews.html' target='_blank' rel='noopener noreferrer') &nbsp;{{ translate('wizard.step8.guestbook') }} 🤗
+                p {{ translate('wizard.step8.chooseDoc') }}
                     br
                     a.has-info(
                         rel="noopener noreferrer" 
                         @click="toggleFaqModalVisibility"
-                            ) {{ $t('wizard.step8.readFaq') }}
+                            ) {{ translate('wizard.step8.readFaq') }}
                     p.has-text-grey-light
-                        | {{ $t('wizard.step8.disclaimerNote') }}
+                        | {{ translate('wizard.step8.disclaimerNote') }}
                     p(style='margin-bottom: 0;')
                         a.has-text-danger(
                             rel="noopener noreferrer" 
                             @click="toggleDisclaimerModalVisibility"
-                            ) {{ $t('wizard.step8.readDisclaimer') }}
+                            ) {{ translate('wizard.step8.readDisclaimer') }}
         footer.card-footer
-            a.card-footer-item(@click='prevStep') {{ $t('wizard.step8.previous') }}
+            a.card-footer-item(@click='prevStep') {{ translate('wizard.step8.previous') }}
             a.card-footer-item(@click='togglePrivacyModalVisibility' 
                 rel="noopener noreferrer" 
                 v-if="typeOfPolicyInt==1"
-                ) {{ $t('wizard.step8.privacyPolicy') }}
+                ) {{ translate('wizard.step8.privacyPolicy') }}
             if noTracking
                 a.card-footer-item(@click='toggleNoTrackingPrivacyPolicyModalVisibility' 
                     rel="noopener noreferrer" 
                     v-if="typeOfPolicyInt==2"
-                    ) {{ $t('wizard.step8.privacyPolicy') }}
+                    ) {{ translate('wizard.step8.privacyPolicy') }}
             if gdpr
                 a.card-footer-item(@click='toggleGDPRPrivacyModalVisibility' 
                     rel="noopener noreferrer" 
                     v-if="typeOfPolicyInt==3"
-                    ) {{ $t('wizard.step8.privacyPolicy') }}
-            a.card-footer-item(@click='toggleTermsModalVisibility' rel="noopener noreferrer") {{ $t('wizard.step8.termsConditions') }}
+                    ) {{ translate('wizard.step8.privacyPolicy') }}
+            a.card-footer-item(@click='toggleTermsModalVisibility' rel="noopener noreferrer") {{ translate('wizard.step8.termsConditions') }}
     +wizardSidebar

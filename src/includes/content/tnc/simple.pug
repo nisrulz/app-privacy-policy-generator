@@ -1,155 +1,155 @@
 +modal('showTermsModal', 'modal.terms.title', 'toggleTermsModalVisibility')
         section.modal-card-body.modal-box
             #tandc_content(v-show='contentRenderType==1')
-                strong {{ $t('tnc.title') }}
+                strong {{ translate('tnc.title') }}
                 br 
-                p(v-html="$t('tnc.intro')")
+                p(v-html="translate('tnc.intro')")
                 br 
-                p {{ $t('tnc.acceptance') }}
+                p {{ translate('tnc.acceptance') }}
 
                 br
                 div(v-if='!isAppOpenSource()')
-                    strong {{ $t('tnc.licenseTitle') }}
-                    p(v-html="$t('tnc.licenseCommercial')")
+                    strong {{ translate('tnc.licenseTitle') }}
+                    p(v-html="translate('tnc.licenseCommercial')")
                 div(v-else)
-                    strong {{ $t('tnc.licenseTitle') }}
-                    p {{ $t('tnc.licenseOpenSource') }}
+                    strong {{ translate('tnc.licenseTitle') }}
+                    p {{ translate('tnc.licenseOpenSource') }}
 
                 br
-                strong {{ $t('tnc.ipTitle') }}
-                p {{ $t('tnc.ipText') }}
+                strong {{ translate('tnc.ipTitle') }}
+                p {{ translate('tnc.ipText') }}
                 br
-                strong {{ $t('tnc.terminationTitle') }}
-                p {{ $t('tnc.terminationBreach') }}
+                strong {{ translate('tnc.terminationTitle') }}
+                p {{ translate('tnc.terminationBreach') }}
                 br
-                p {{ $t('tnc.terminationImmediate') }}
+                p {{ translate('tnc.terminationImmediate') }}
                 br
-                p {{ $t('tnc.terminationEffect') }}
+                p {{ translate('tnc.terminationEffect') }}
                 br
-                p(v-html="$t('tnc.terminationAge')")
+                p(v-html="translate('tnc.terminationAge')")
                 div(v-if='!isAppOpenSource()')
                     br
-                    p {{ $t('tnc.terminationNoDeriv') }}
+                    p {{ translate('tnc.terminationNoDeriv') }}
                 br
-                strong {{ $t('tnc.ugcTitle') }}
-                p {{ $t('tnc.ugcIntro') }}
+                strong {{ translate('tnc.ugcTitle') }}
+                p {{ translate('tnc.ugcIntro') }}
                 ul
-                    li {{ $t('tnc.ugc.illegal') }}
-                    li {{ $t('tnc.ugc.abusive') }}
-                    li {{ $t('tnc.ugc.discrimination') }}
-                    li {{ $t('tnc.ugc.spam') }}
-                    li {{ $t('tnc.ugc.privacy') }}
-                    li {{ $t('tnc.ugc.misleading') }}
-                    li {{ $t('tnc.ugc.violence') }}
+                    li {{ translate('tnc.ugc.illegal') }}
+                    li {{ translate('tnc.ugc.abusive') }}
+                    li {{ translate('tnc.ugc.discrimination') }}
+                    li {{ translate('tnc.ugc.spam') }}
+                    li {{ translate('tnc.ugc.privacy') }}
+                    li {{ translate('tnc.ugc.misleading') }}
+                    li {{ translate('tnc.ugc.violence') }}
                 br
-                p {{ $t('tnc.ugc.rightsTitle') }}
+                p {{ translate('tnc.ugc.rightsTitle') }}
                 ul
-                    li {{ $t('tnc.ugc.remove') }}
-                    li {{ $t('tnc.ugc.suspend') }}
-                    li {{ $t('tnc.ugc.lawEnforcement') }}
-                    li {{ $t('tnc.ugc.moderate') }}
+                    li {{ translate('tnc.ugc.remove') }}
+                    li {{ translate('tnc.ugc.suspend') }}
+                    li {{ translate('tnc.ugc.lawEnforcement') }}
+                    li {{ translate('tnc.ugc.moderate') }}
                 br
-                p {{ $t('tnc.ugc.visibility') }}
+                p {{ translate('tnc.ugc.visibility') }}
                 br
-                p(v-html="$t('tnc.ugc.report')")
+                p(v-html="translate('tnc.ugc.report')")
                 br
-                p {{ $t('tnc.ugc.inApp') }}
+                p {{ translate('tnc.ugc.inApp') }}
                 br
-                p(v-html="$t('tnc.ugc.review')")
+                p(v-html="translate('tnc.ugc.review')")
                 br
-                p {{ $t('tnc.ugc.license') }}
+                p {{ translate('tnc.ugc.license') }}
                 br
-                p {{ $t('tnc.ugc.personalData') }}
+                p {{ translate('tnc.ugc.personalData') }}
                 br
-                p {{ $t('tnc.ugc.modification') }}
+                p {{ translate('tnc.ugc.modification') }}
                 br
-                p(v-html="$t('tnc.dataStorage')")
+                p(v-html="translate('tnc.dataStorage')")
                 div(v-if='isPhoneOs')
-                    p(v-html="$t('tnc.jailbreak')")
+                    p(v-html="translate('tnc.jailbreak')")
                 div(v-if='hasThirdPartyServicesSelected')
-                    p {{ $t('tnc.thirdPartyTitle') }}
+                    p {{ translate('tnc.thirdPartyTitle') }}
                     ul
                         li( v-for="item in enabledThirdPartyServicesWithTerms" :key="item.name")
                             a(:href='item.link.terms' target='_blank' rel='noopener noreferrer') {{ tpsName(item) }}
                 br
                 div(v-if='isMobileApp')
-                    p {{ $t('tnc.mobileData') }}
+                    p {{ translate('tnc.mobileData') }}
                     br
-                    p {{ $t('tnc.mobileCharges') }}
+                    p {{ translate('tnc.mobileCharges') }}
                 div(v-if='isWebApp')
-                    p {{ $t('tnc.webData') }}
+                    p {{ translate('tnc.webData') }}
                     br
-                    p {{ $t('tnc.webCharges') }}
+                    p {{ translate('tnc.webCharges') }}
                 br
-                p {{ $t('tnc.battery') }}
+                p {{ translate('tnc.battery') }}
                 br
-                p {{ $t('tnc.consumerRights') }}
+                p {{ translate('tnc.consumerRights') }}
 
-                strong {{ $t('tnc.limitationTitle') }}
-                p {{ $t('tnc.limitationText') }}
+                strong {{ translate('tnc.limitationTitle') }}
+                p {{ translate('tnc.limitationText') }}
                 br
-                p {{ $t('tnc.limitationRetains') }}
+                p {{ translate('tnc.limitationRetains') }}
                 ul
-                    li {{ $t('tnc.limitation.death') }}
-                    li {{ $t('tnc.limitation.fraud') }}
-                    li {{ $t('tnc.limitation.other') }}
+                    li {{ translate('tnc.limitation.death') }}
+                    li {{ translate('tnc.limitation.fraud') }}
+                    li {{ translate('tnc.limitation.other') }}
                 br
-                p {{ $t('tnc.limitationCap') }}
+                p {{ translate('tnc.limitationCap') }}
                 br
-                p {{ $t('tnc.limitationThirdParty') }}
+                p {{ translate('tnc.limitationThirdParty') }}
                 br
-                strong {{ $t('tnc.indemnificationTitle') }}
-                p {{ $t('tnc.indemnificationText') }}
+                strong {{ translate('tnc.indemnificationTitle') }}
+                p {{ translate('tnc.indemnificationText') }}
                 br
-                p {{ $t('tnc.indemnificationException') }}
+                p {{ translate('tnc.indemnificationException') }}
                 br
                 div(v-if="isAIUsed")
-                    p {{ $t('tnc.aiText') }}
+                    p {{ translate('tnc.aiText') }}
                     br
-                p {{ $t('tnc.updates') }}
+                p {{ translate('tnc.updates') }}
                 br
-                strong {{ $t('tnc.governingLawTitle') }}
+                strong {{ translate('tnc.governingLawTitle') }}
                 br
-                p {{ $t('tnc.governingLawText') }}
+                p {{ translate('tnc.governingLawText') }}
                 br
-                p {{ $t('tnc.governingLawDispute') }}
+                p {{ translate('tnc.governingLawDispute') }}
                 br
-                strong {{ $t('tnc.dsaTitle') }}
+                strong {{ translate('tnc.dsaTitle') }}
                 br
-                p {{ $t('tnc.dsaIntro') }}
+                p {{ translate('tnc.dsaIntro') }}
                 br
-                p(v-html="$t('tnc.dsaPointOfContact')")
+                p(v-html="translate('tnc.dsaPointOfContact')")
                 br
                 p(v-if='euRepresentative')
-                    strong {{ $t('tnc.dsaEuRep') }}
+                    strong {{ translate('tnc.dsaEuRep') }}
                 br
-                p {{ $t('tnc.dsaModeration') }}
+                p {{ translate('tnc.dsaModeration') }}
                 br
-                p {{ $t('tnc.dsaNotice') }}
+                p {{ translate('tnc.dsaNotice') }}
                 br
-                p {{ $t('tnc.dsaDispute') }}
+                p {{ translate('tnc.dsaDispute') }}
                 br
-                p(v-html="$t('tnc.dsaTransparency')")
+                p(v-html="translate('tnc.dsaTransparency')")
                 br
-                p {{ $t('tnc.dsaNote') }}
+                p {{ translate('tnc.dsaNote') }}
                 br
-                strong {{ $t('tnc.severabilityTitle') }}
-                p {{ $t('tnc.severabilityText') }}
+                strong {{ translate('tnc.severabilityTitle') }}
+                p {{ translate('tnc.severabilityText') }}
                 br
-                strong {{ $t('tnc.entireAgreementTitle') }}
-                p {{ $t('tnc.entireAgreementText') }}
+                strong {{ translate('tnc.entireAgreementTitle') }}
+                p {{ translate('tnc.entireAgreementText') }}
                 br
-                strong {{ $t('tnc.changesTitle') }}
-                p {{ $t('tnc.changesText') }}
+                strong {{ translate('tnc.changesTitle') }}
+                p {{ translate('tnc.changesText') }}
                 br
-                p(v-html="$t('tnc.changesPrev')")
+                p(v-html="translate('tnc.changesPrev')")
                 br
-                p(v-html="$t('tnc.effectiveDate')")
+                p(v-html="translate('tnc.effectiveDate')")
                 br
-                strong {{ $t('tnc.contactTitle') }}
-                p(v-html="$t('tnc.contactText')")
+                strong {{ translate('tnc.contactTitle') }}
+                p(v-html="translate('tnc.contactText')")
                 +attribution('Terms & Conditions')
-            textarea#tandc_txtarea.textarea(:aria-label='$t("tnc.title") + $t("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+            textarea#tandc_txtarea.textarea(:aria-label='translate("tnc.title") + translate("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
         footer.modal-card-foot
             +outputButtons('tandc_content', 'tandc_txtarea')
             +flycricketDeploy('deployFcSimple()')

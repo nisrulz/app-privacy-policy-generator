@@ -2,26 +2,26 @@
     .modal-background
     .modal-card
         header.modal-card-head
-            p.modal-card-title.no-select {{ $t('faq.title') }}
+            p.modal-card-title.no-select {{ translate('faq.title') }}
             button.delete(aria-label='close' @click='toggleFaqModalVisibility')
         section.modal-card-body
-            strong {{ $t('faq.q1') }}
-            p {{ $t('faq.a1') }}
+            strong {{ translate('faq.q1') }}
+            p {{ translate('faq.a1') }}
             br
-            strong {{ $t('faq.q2') }}
-            p {{ $t('faq.a2') }}
+            strong {{ translate('faq.q2') }}
+            p {{ translate('faq.a2') }}
             br
-            strong {{ $t('faq.q3') }}
-            p {{ $t('faq.a3') }}
+            strong {{ translate('faq.q3') }}
+            p {{ translate('faq.a3') }}
             br
-            strong {{ $t('faq.q4') }}
-            p {{ $t('faq.a4') }}
+            strong {{ translate('faq.q4') }}
+            p {{ translate('faq.a4') }}
             br
-            strong {{ $t('faq.q5') }}
-            p {{ $t('faq.a5') }}
+            strong {{ translate('faq.q5') }}
+            p {{ translate('faq.a5') }}
             br
-            strong {{ $t('faq.q6') }}
-            p {{ $t('faq.a6') }}
+            strong {{ translate('faq.q6') }}
+            p {{ translate('faq.a6') }}
         footer.modal-card-foot
             button.button.is-info(aria-label='close' @click='toggleFaqModalVisibility')
-                | {{ $t('modal.btn.ok') }}
+                | {{ translate('modal.btn.ok') }}
