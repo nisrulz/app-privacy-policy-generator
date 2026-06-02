@@ -57,28 +57,27 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
 
   if (url.origin !== location.origin) return;
+  if (request.method !== "GET") return;
 
   if (request.mode === "navigate") {
     event.respondWith(networkFirst(request));
   } else {
-    event.respondWith(cacheFirst(request));
+    event.respondWith(staleWhileRevalidate(request));
   }
 });
 
-async function cacheFirst(request) {
+async function staleWhileRevalidate(request) {
   const cached = await caches.match(request);
-  if (cached) return cached;
 
-  try {
-    const response = await fetch(request);
-    if (response.ok && request.method === "GET") {
+  const fetchPromise = fetch(request).then(async (response) => {
+    if (response.ok) {
       const cache = await caches.open(CACHE_NAME);
       await cache.put(request, response.clone());
     }
     return response;
-  } catch {
-    return caches.match(request);
-  }
+  }).catch(() => cached);
+
+  return cached || (await fetchPromise);
 }
 
 async function networkFirst(request) {
