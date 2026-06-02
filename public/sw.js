@@ -58,6 +58,7 @@ self.addEventListener("fetch", (event) => {
 
   if (url.origin !== location.origin) return;
   if (request.method !== "GET") return;
+  if (url.pathname.startsWith("/cdn-cgi/")) return;
 
   if (request.mode === "navigate") {
     event.respondWith(networkFirst(request));
@@ -70,14 +71,16 @@ async function staleWhileRevalidate(request) {
   const cached = await caches.match(request);
 
   const fetchPromise = fetch(request).then(async (response) => {
-    if (response.ok) {
-      const cache = await caches.open(CACHE_NAME);
-      await cache.put(request, response.clone());
-    }
+    try {
+      if (response.ok) {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(request, response.clone());
+      }
+    } catch (_) {}
     return response;
-  }).catch(() => cached);
+  }).catch(() => null);
 
-  return cached || (await fetchPromise);
+  return cached || (await fetchPromise) || new Response("", { status: 504 });
 }
 
 async function networkFirst(request) {
