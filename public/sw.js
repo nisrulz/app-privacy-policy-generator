@@ -3,7 +3,7 @@
   Caches static assets for offline use and reduced server load.
 */
 
-const CACHE_NAME = "app-privacy-policy-v1";
+const CACHE_NAME = "app-privacy-policy-v2";
 
 const PRECACHE_URLS = [
   "/index.html",
@@ -28,6 +28,7 @@ const PRECACHE_URLS = [
 ];
 
 self.addEventListener("install", (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) =>
       Promise.allSettled(
@@ -47,7 +48,7 @@ self.addEventListener("activate", (event) => {
           .filter((name) => name !== CACHE_NAME)
           .map((name) => caches.delete(name))
       )
-    )
+    ).then(() => self.clients.claim())
   );
 });
 
