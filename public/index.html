@@ -56,4 +56,7 @@ or guardian must provide consent on your behalf where permitted by law.</p></div
   navigator.serviceWorker.register('/sw.js').catch(function(err) {
     console.warn('SW registration failed:', err);
   });
+  navigator.serviceWorker.addEventListener('controllerchange', function () {
+    window.location.reload();
+  });
 }</script></body></html>
