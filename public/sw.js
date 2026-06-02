@@ -95,6 +95,9 @@ async function networkFirst(request) {
     return response;
   } catch {
     const cached = await caches.match(cacheKey);
-    return cached || new Response("Offline", { status: 503 });
+    if (cached) return cached;
+    const offlineShell = await caches.match("/index.html");
+    if (offlineShell) return offlineShell;
+    return new Response("Offline", { status: 503 });
   }
 }
