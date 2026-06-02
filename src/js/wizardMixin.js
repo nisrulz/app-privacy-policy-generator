@@ -24,10 +24,15 @@ window.wizardMixin = {
     canAdvance() {
       switch (this.wizardStep) {
         case 2:
-          return !!(this.appName.trim() && this.appContact.trim());
+          return (
+            String(this.appName).trim().length > 0 &&
+            String(this.appContact).trim().length > 0
+          );
         case 6:
-          if (this.typeOfDev === "Individual") return !!this.devName.trim();
-          if (this.typeOfDev === "Company") return !!this.companyName.trim();
+          if (this.typeOfDev === "Individual")
+            return String(this.devName).trim().length > 0;
+          if (this.typeOfDev === "Company")
+            return String(this.companyName).trim().length > 0;
           return false;
         default:
           return true;

@@ -1,13 +1,18 @@
 {
+    "id": "/",
     "name": "App Privacy Policy Generator",
     "short_name": "Privacy Policy Gen",
     "description": "Generate a customized Privacy Policy and Terms of Use document for your Android, iOS, KaiOS, and Web apps.",
     "start_url": "/",
     "scope": "/",
     "display": "standalone",
-    "theme_color": "#ffffff",
+    "display_override": ["standalone", "minimal-ui"],
+    "theme_color": "#485fc7",
     "background_color": "#ffffff",
     "categories": ["productivity", "development"],
+    "launch_handler": {
+        "client_mode": "auto"
+    },
     "icons": [
         {
             "src": "android-chrome-192x192.png",

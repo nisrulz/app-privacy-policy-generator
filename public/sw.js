@@ -3,7 +3,7 @@
   Caches static assets for offline use and reduced server load.
 */
 
-const CACHE_NAME = "app-privacy-policy-v1";
+const CACHE_NAME = "app-privacy-policy-v2";
 
 const PRECACHE_URLS = [
   "/index.html",
@@ -28,6 +28,7 @@ const PRECACHE_URLS = [
 ];
 
 self.addEventListener("install", (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) =>
       Promise.allSettled(
@@ -47,7 +48,7 @@ self.addEventListener("activate", (event) => {
           .filter((name) => name !== CACHE_NAME)
           .map((name) => caches.delete(name))
       )
-    )
+    ).then(() => self.clients.claim())
   );
 });
 
@@ -56,28 +57,30 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
 
   if (url.origin !== location.origin) return;
+  if (request.method !== "GET") return;
+  if (url.pathname.startsWith("/cdn-cgi/")) return;
 
   if (request.mode === "navigate") {
     event.respondWith(networkFirst(request));
   } else {
-    event.respondWith(cacheFirst(request));
+    event.respondWith(staleWhileRevalidate(request));
   }
 });
 
-async function cacheFirst(request) {
+async function staleWhileRevalidate(request) {
   const cached = await caches.match(request);
-  if (cached) return cached;
 
-  try {
-    const response = await fetch(request);
-    if (response.ok) {
-      const cache = await caches.open(CACHE_NAME);
-      cache.put(request, response.clone());
-    }
+  const fetchPromise = fetch(request).then(async (response) => {
+    try {
+      if (response.ok) {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(request, response.clone());
+      }
+    } catch (_) {}
     return response;
-  } catch {
-    return caches.match(request);
-  }
+  }).catch(() => null);
+
+  return cached || (await fetchPromise) || new Response("", { status: 504 });
 }
 
 async function networkFirst(request) {
@@ -87,13 +90,16 @@ async function networkFirst(request) {
 
   try {
     const response = await fetch(request);
-    if (response.ok) {
+    if (response.ok && request.method === "GET") {
       const cache = await caches.open(CACHE_NAME);
-      cache.put(cacheKey, response.clone());
+      await cache.put(cacheKey, response.clone());
     }
     return response;
   } catch {
     const cached = await caches.match(cacheKey);
-    return cached || new Response("Offline", { status: 503 });
+    if (cached) return cached;
+    const offlineShell = await caches.match("/index.html");
+    if (offlineShell) return offlineShell;
+    return new Response("Offline", { status: 503 });
   }
 }
