@@ -3,10 +3,10 @@
 </div>
 
 <div align="center"><strong>
-  <em>A free, open-source web app to generate privacy policies and terms & conditions for your Android, iOS, KaiOS, and Web apps. Supports Simple, No-Tracking, and GDPR-compliant policies with DSA compliance. Installable as a PWA with offline support. 📄✨</em>
+  <em>A free, open-source web app to generate privacy policies and terms & conditions for your Android, iOS, KaiOS, and Web apps.</em>
 </strong><br>
 <a href="https://app-privacy-policy-generator.nisrulz.com/">Web App</a> |
-<a href="https://app-privacy-policy-generator.nisrulz.com/reviews.html" target="_blank" rel="noopener noreferrer">Guestbook for reviews</a>
+<a href="https://app-privacy-policy-generator.nisrulz.com/reviews.html" target="_blank" rel="noopener noreferrer">Guestbook</a>
 </div>
 
 <br>
@@ -16,14 +16,7 @@
   <img src="https://img.shields.io/github/stars/nisrulz/app-privacy-policy-generator.svg?style=social&amp;label=Star" alt="GitHub stars">
 </a> <a href="https://github.com/nisrulz/app-privacy-policy-generator/fork">
   <img src="https://img.shields.io/github/forks/nisrulz/app-privacy-policy-generator.svg?style=social&amp;label=Fork" alt="GitHub forks">
-</a> <a href="https://github.com/nisrulz/app-privacy-policy-generator">
-  <img src="https://img.shields.io/github/watchers/nisrulz/app-privacy-policy-generator.svg?style=social&amp;label=Watch" alt="GitHub watchers">
-</a> <a href="https://github.com/nisrulz/app-privacy-policy-generator">
-  <img src="https://img.shields.io/github/followers/nisrulz.svg?style=social&amp;label=Follow" alt="GitHub followers">
 </a>
-
-[![Follow me on Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff&label=Follow%20me%20on&color=0285FF)](https://bsky.app/profile/nisrulz.com)
-[![Share on Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff&label=Share%20on&color=0285FF)](https://bsky.app/intent/compose?text=%F0%9F%93%9D%20App%20Privacy%20Policy%20Generator%3A%20A%20free%20web-app%20to%20generate%20a%20generic%20privacy%20policy%20for%20your%20Android%2FiOS%2FKaiOS%20%F0%9F%93%B1%20apps%20%F0%9F%9A%80.%0A%0A%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BB%20Built%20by%20%40nisrulz.com%20%0A%0A%E2%9C%85%20Web%20App%3A%20https%3A%2F%2Fapp-privacy-policy-generator.nisrulz.com%20%0A%0A%E2%9C%85%20Checkout%20Reviews%3A%20https%3A%2F%2Fgithub.com%2Fnisrulz%2Fapp-privacy-policy-generator%2Fissues%2F65%20%0A%0A%23appg%20%23free%20%23app%20%23privacy%20%23policy%20%23generator)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A443EQ6)
 
@@ -31,47 +24,54 @@
 
 [![Deploy to Production](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml) [![Deploy to Firebase Hosting on PR](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml)
 
-## Features
+## What it does
 
-- **3 policy types**: Simple, No-Tracking, and GDPR-compliant privacy policies
-- **Terms & Conditions** with DSA compliance, UGC policy, and governing law
-- **Platform-aware**: Text adapts to Mobile, Web, or both
-- **Configurable**: Age of consent, AI disclosure, location tracking, PII fields, EU representative, open-source toggle
-- **Output**: Preview, HTML, or Markdown
-- **PWA-ready**: Installable, works offline
-- **FAQ & Disclaimer** included
+You fill out a wizard, pick what data your app collects, and it spits out a privacy policy and terms & conditions. Three flavors: Simple, No Tracking, GDPR. The text adapts automatically based on whether your app runs on mobile, web, or both. You can tweak age of consent, AI disclosure, location tracking, PII fields, and more. Export as Preview, HTML, or Markdown. It is a PWA too, so it works offline.
+
+## Quick Start
+
+```sh
+npm install
+❯ make serve
+```
+
+Requires [Go](https://go.dev/dl/) 1.25+ and Node.js.
+
+## Docs
+
+| Doc | What's in it |
+|-----|-------------|
+| [Development](docs/development.md) | Tech stack, build, serve locally, deploy |
+| [Localization](docs/localization.md) | Add a new language translation |
+| [AGENTS.md](AGENTS.md) | AI agent conventions and project layout |
 
 ## Contributing
 
 This project accepts **bug fixes only**. This policy helps keep maintenance sustainable and prevents burnout.
 
-If you have a small bug fix or typo fix, open a pull request directly. For feature proposals, please open an issue first to discuss — features carry a long-term maintenance burden and are generally not accepted, but the discussion helps inform future direction.
+For feature proposals, open an issue first.
 
-Before contributing:
-
-- Read the [dev docs](dev-doc.md) and [AGENTS.md](AGENTS.md) for setup and conventions
-- Requirements: [Go](https://go.dev/dl/) 1.25+ and Node.js
-- Build with `npm install && npm run build` (edit source under `src/` only)
+```sh
+npm install
+❯ make serve        # dev server on :8000
+❯ make test         # E2E tests (Playwright)
+```
 
 ## Support
 
-- **Report bugs**: [Open an issue](https://github.com/nisrulz/app-privacy-policy-generator/issues/new/choose)
-- **Community**: [Discussions](https://github.com/nisrulz/app-privacy-policy-generator/discussions)
-- **Guestbook**: [Leave a review](https://github.com/nisrulz/app-privacy-policy-generator/issues/65)
+- [Report bugs](https://github.com/nisrulz/app-privacy-policy-generator/issues/new/choose)
+- [Discussions](https://github.com/nisrulz/app-privacy-policy-generator/discussions)
+- [Leave a review](https://github.com/nisrulz/app-privacy-policy-generator/issues/65)
 
-## Contribute
+## Sponsor
 
-Servers and maintenance aren't free. If this tool helped you, consider:
-
-- **Sponsoring** on [GitHub Sponsors](https://github.com/sponsors/nisrulz) (one-time or monthly)
-- **Buying me a coffee** on [ko-fi](https://ko-fi.com/nisrulz)
-- **Starring** the repo and sharing it with friends
+Servers and maintenance are not free. If this tool helped you out, consider [sponsoring on GitHub](https://github.com/sponsors/nisrulz), [buying me a coffee](https://ko-fi.com/nisrulz), sharing it, or [leaving a review](https://github.com/nisrulz/app-privacy-policy-generator/issues/65).
 
 [![sponsoring monthly](img/sponsor_banner.png)](https://github.com/sponsors/nisrulz)
 
 ## Author
 
-Created by [Nishant Srivastava](https://github.com/nisrulz). See [contributors](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
+[Nishant Srivastava](https://github.com/nisrulz) and [contributors](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
 
 ## Star History
 
@@ -85,4 +85,4 @@ Created by [Nishant Srivastava](https://github.com/nisrulz). See [contributors](
 
 ## License
 
-[AGPLv3 | Copyright 2017 Nishant Srivastava](LICENSE)
+[AGPLv3](LICENSE)

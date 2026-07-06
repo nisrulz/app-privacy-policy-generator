@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")/.." || exit 1
 
-read -p "❓  Specify version?   " version
+version="${1:-}"
+if [ -z "$version" ]; then
+  read -p "❓  Specify version?   " version
+fi
 echo ""
 echo "➡ Building from templates"
 make build

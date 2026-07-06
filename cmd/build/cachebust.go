@@ -12,6 +12,8 @@ func cacheBust() error {
 	sharedFiles := []string{
 		"public/css/style.min.css",
 		"public/css/reviews.min.css",
+		"public/css/vendor/normalize.min.css",
+		"public/css/vendor/bulma.min.css",
 		"public/js/main.min.js",
 		"public/js/locales.min.js",
 		"public/js/utils.min.js",

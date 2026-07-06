@@ -15,8 +15,8 @@ watch: ## Watch for changes and rebuild
 firebase-local-preview: ## Build and preview via Firebase local server
 	@./scripts/firebase_local_preview.sh
 
-firebase-deploy: ## Build and deploy to Firebase Hosting
-	@./scripts/firebase_deploy.sh
+firebase-deploy: ## Build and deploy to Firebase Hosting (usage: make firebase-deploy VERSION="3.0.9")
+	@./scripts/firebase_deploy.sh $(VERSION)
 
 reviews: ## Generate reviews page from cached data
 	@./scripts/gen_reviews_page.sh

@@ -13,3 +13,5 @@ src/js/thirdpartyservices.js
 plan/
 /build
 cmd/build/build
+test-results/
+playwright-report/
