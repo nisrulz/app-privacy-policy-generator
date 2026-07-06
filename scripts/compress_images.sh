@@ -18,15 +18,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-echo ""
-echo "➡ Navigating to tools dir"
-cd tools/reviews-page-generator
-echo ""
-echo "➡ Setup environment"
-./setup.sh 
-echo ""
-echo "➡ Generate and open the reviews page"
-./generate.sh && open reviews.html
-cd ../../
-echo ""
-echo "✅ Done!"
+cd "$(dirname "$0")/.." || exit 1
+
+TEMP_DIR=$(mktemp -d)
+trap 'rm -rf "$TEMP_DIR"' EXIT
+
+cd public/images
+
+# Compress SVG files
+npx -q svgo -f app_graphics "$TEMP_DIR"
+mv "$TEMP_DIR"/*.svg app_graphics
+
+npx -q svgo -f app_icons "$TEMP_DIR"
+mv "$TEMP_DIR"/*.svg app_icons
+
+npx -q svgo -f social_icons "$TEMP_DIR"
+mv "$TEMP_DIR"/*.svg social_icons
+
+# Compress PNG files
+npx -q png-minify minify third_party_logos/*.png
+

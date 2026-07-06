@@ -7,5 +7,9 @@ dist/
 .env
 .context/
 public/downloaded_images/
+public/profile_pictures/
+public/tmp/
 src/js/thirdpartyservices.js
-
+plan/
+/build
+cmd/build/build
