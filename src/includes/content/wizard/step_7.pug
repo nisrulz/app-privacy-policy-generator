@@ -3,7 +3,7 @@ section#step-7.columns(v-if="wizardStep==7")
         .card-content
             +wizardMobileLogo
             +wizardProgress(84)
-            div(v-show='typeOfPolicyInt!=2')
+            .thirdparty-section(v-show='typeOfPolicyInt!=2')
                 p
                     b {{ translate('wizard.step7.includeLinks') }}
                     span.tag.is-primary.is-light {{ translate('wizard.step7.scrollForMore') }}
@@ -20,7 +20,7 @@ section#step-7.columns(v-if="wizardStep==7")
                                 :src="item.logo"
                                 )
                             span {{ tpsName(item) }}
-            div(v-show='typeOfPolicyInt==2')
+            .thirdparty-section(v-show='typeOfPolicyInt==2')
                 p {{ translate('wizard.step7.noServices') }} 
                     b {{ translate('wizard.step7.nextStep') }}
                 div.scrollable-thirdparty.content

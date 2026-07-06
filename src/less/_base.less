@@ -117,19 +117,49 @@ img.social-logo {
   color: @color-danger;
 }
 
+#app > .columns:not(#step-1) {
+  height: calc(100vh - 2.5em);
+  flex-wrap: nowrap;
+}
+
+.column.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.column.card > .card-footer {
+  flex-shrink: 0;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
 .scrollable {
-  height: 62vh;
+  flex: 1;
+  min-height: 0;
   display: flex;
   overflow-y: auto;
   flex-direction: column;
   padding: 1em;
 }
 
-.scrollable-thirdparty {
-  height: 59vh;
+.thirdparty-section {
+  flex: 1;
   display: flex;
-  overflow-y: scroll;
   flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.scrollable-thirdparty {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   border: solid #f3f3f3 2px;
   border-radius: @border-radius;
   padding: 0.5em;
