@@ -59,6 +59,11 @@ const app = createApp({
       _updateThemeLogo();
     });
   },
+  watch: {
+    wizardStep: function () {
+      this.$nextTick(_updateThemeLogo);
+    }
+  },
 });
 
 app.config.globalProperties.translate = translate

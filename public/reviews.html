@@ -8,7 +8,7 @@
     <meta name="color-scheme" content="light dark" />
     <meta name="description" content="Guest book reviews for App Privacy Policy Generator - See what users are saying about this free, open-source privacy policy generator." />
     <script>
-      var __themeToggle = false;
+      var __themeToggle = true;
       (function(){
         if (!__themeToggle) return;
         var theme = localStorage.getItem('theme');
@@ -363,6 +363,15 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0.5; }
       }
+
+      .theme-toggle {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        font-size: 1.2em;
+        line-height: 1;
+      }
     </style>
   </head>
   <body>
@@ -378,12 +387,14 @@
           <button id="clearBtn" class="clear-btn" aria-label="Clear search">&times;</button>
         </div>
         <div class="result-count" id="resultCount">623 reviews</div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" style="display:none">🌙</button>
       </div>
 
       <div class="top-links">
         <a href="/">Back to Web App</a>
+        / 
         <a href="https://ko-fi.com/A443EQ6" target="_blank">Buy Me a Coffee</a>
+        / 
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" style="display:none">🌙</button>
       </div>
 
       <div class="no-results" id="noResults">No reviews match your search.</div>
@@ -632,13 +643,26 @@
             var btn = document.getElementById("themeToggle");
             btn.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19";
           }
+          function updateThemeLogo() {
+            var theme = document.documentElement.getAttribute('data-theme');
+            document.querySelectorAll('img[data-theme-logo]').forEach(function (img) {
+              var light = img.getAttribute('data-light-src') || img.src;
+              if (!img.getAttribute('data-light-src')) {
+                img.setAttribute('data-light-src', img.src);
+                img.setAttribute('data-dark-src', img.src.replace(/(\.\w+)$/, '_dark$1'));
+              }
+              img.src = theme === 'dark' ? img.getAttribute('data-dark-src') : img.getAttribute('data-light-src');
+            });
+          }
           updateThemeToggle();
+          updateThemeLogo();
           document.getElementById("themeToggle").addEventListener("click", function () {
             var html = document.documentElement;
             var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
             html.setAttribute("data-theme", next);
             localStorage.setItem("theme", next);
             updateThemeToggle();
+            updateThemeLogo();
           });
         }
       });
