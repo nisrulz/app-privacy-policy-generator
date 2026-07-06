@@ -1,4 +1,4 @@
-.PHONY: build serve watch firebase-local-preview firebase-deploy reviews reviews-force help
+.PHONY: build serve watch firebase-local-preview firebase-deploy reviews reviews-force test test-ui test-debug help
 
 help: ## Show available commands
 	@grep -E '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  %-15s %s\n", $$1, $$2}'
@@ -23,4 +23,13 @@ reviews: ## Generate reviews page from cached data
 
 reviews-force: ## Generate reviews page (force re-fetch from GitHub)
 	@./scripts/gen_reviews_page.sh -f
+
+test: ## Run Playwright E2E tests
+	@npx playwright test
+
+test-ui: ## Run Playwright tests in UI mode
+	@npx playwright test --ui
+
+test-debug: ## Run Playwright tests in debug mode
+	@npx playwright test --debug
 
