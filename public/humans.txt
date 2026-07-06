@@ -8,4 +8,4 @@
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    jQuery, Modernizr, VueJs
+    Vue.js, Bulma CSS
