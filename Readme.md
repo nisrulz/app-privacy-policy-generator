@@ -5,8 +5,9 @@
 <div align="center"><strong>
   <em>A free, open-source web app to generate privacy policies and terms & conditions for your Android, iOS, KaiOS, and Web apps.</em>
 </strong><br>
-<a href="https://app-privacy-policy-generator.nisrulz.com/">Web App</a> |
-<a href="https://app-privacy-policy-generator.nisrulz.com/reviews.html" target="_blank" rel="noopener noreferrer">Guestbook</a>
+<a href="https://app-privacy-policy-generator.nisrulz.com/">Web App</a> /
+<a href="https://app-privacy-policy-generator.nisrulz.com/reviews.html" target="_blank" rel="noopener noreferrer">Reviews</a> /
+<a href="https://ko-fi.com/A443EQ6" target="_blank" rel="noopener noreferrer">Buy me a Coffee</a>
 </div>
 
 <br>
@@ -18,11 +19,9 @@
   <img src="https://img.shields.io/github/forks/nisrulz/app-privacy-policy-generator.svg?style=social&amp;label=Fork" alt="GitHub forks">
 </a>
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A443EQ6)
+[![Deploy to Production](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml) [![Deploy to Firebase Hosting on PR](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml)
 
 </div>
-
-[![Deploy to Production](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-merge.yml) [![Deploy to Firebase Hosting on PR](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/nisrulz/app-privacy-policy-generator/actions/workflows/firebase-hosting-pull-request.yml)
 
 ## What it does
 
@@ -32,7 +31,7 @@ You fill out a wizard, pick what data your app collects, and it spits out a priv
 
 ```sh
 npm install
-❯ make serve
+make serve
 ```
 
 Requires [Go](https://go.dev/dl/) 1.25+ and Node.js.
@@ -53,8 +52,8 @@ For feature proposals, open an issue first.
 
 ```sh
 npm install
-❯ make serve        # dev server on :8000
-❯ make test         # E2E tests (Playwright)
+make serve        # dev server on :8000
+make test         # E2E tests (Playwright)
 ```
 
 ## Support
