@@ -1,0 +1,114 @@
+.modal-card-head .delete {
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &::after,
+  &::before {
+    background-color: #fff;
+  }
+
+  &::after {
+    display: block;
+  }
+}
+
+.button {
+  margin: 0.5em;
+  height: 2.5em;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+}
+
+.checkbox,
+.radio {
+  margin: 0.3em;
+}
+
+.card-footer-item.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.row-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.is-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 0.75rem;
+  border: 1px solid @color-border;
+  border-radius: 9999px;
+  background: @color-bg;
+  line-height: 1;
+  text-decoration: none;
+  color: @color-text;
+  font-size: 0.85rem;
+}
+
+select.locale-dropdown {
+  font-size: 0.85rem;
+  padding: 0.15rem 0.3rem;
+  border: 1px solid @color-border;
+  border-radius: 4px;
+  background: @color-bg;
+  color: inherit;
+  cursor: pointer;
+  vertical-align: middle;
+
+  &:hover {
+    border-color: @color-link;
+  }
+}
+
+#app {
+  padding-top: 2.5em;
+}
+
+input[type="checkbox"] {
+  display: none;
+
+  + label {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 20px;
+    font: 14px/20px @font-sans;
+    color: @color-black;
+    cursor: pointer;
+    user-select: none;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:before {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #6cc0e5;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0.6;
+      transition: all 0.12s, border-color 0.08s;
+    }
+  }
+
+  &:checked + label:before {
+    width: 10px;
+    top: -5px;
+    left: 5px;
+    border-radius: 0;
+    opacity: 1;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    transform: rotate(45deg);
+  }
+}
