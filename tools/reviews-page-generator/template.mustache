@@ -5,312 +5,644 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Cache-Control" content="public, max-age=604800" />
     <meta http-equiv="Pragma" content="cache" />
-    <title>📖 Guest Book 🙇🏻‍♂️</title>
+    <meta name="color-scheme" content="light dark" />
+    <title>Guest Book - App Privacy Policy Generator</title>
     <style>
-      body,
-      html {
-        overflow-x: hidden;
+      :root {
+        --bg: #f5f7fa;
+        --surface: #ffffff;
+        --surface-hover: #f8f9fb;
+        --border: #e2e6ea;
+        --border-focus: #4a90d9;
+        --text: #1a1d21;
+        --text-secondary: #5f6b7a;
+        --text-muted: #8b95a5;
+        --accent: #4a90d9;
+        --accent-hover: #3a7bc8;
+        --header-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --header-text: #ffffff;
+        --header-cta: #ffd166;
+        --chip-bg: #eef1f5;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+        --radius: 12px;
+        --radius-sm: 8px;
+        --transition: 0.2s ease;
       }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0f1117;
+          --surface: #1a1d27;
+          --surface-hover: #22262f;
+          --border: #2d323e;
+          --border-focus: #6b9ede;
+          --text: #e4e7ec;
+          --text-secondary: #9aa3b2;
+          --text-muted: #6b7280;
+          --accent: #6b9ede;
+          --accent-hover: #8bb4ea;
+          --header-bg: linear-gradient(135deg, #4c5fd7 0%, #6b3fa0 100%);
+          --chip-bg: #252a36;
+          --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+          --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+          --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
+        }
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
       body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        background-color: #f8f9fa;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
       }
-      .link {
+
+      .page { max-width: 1200px; margin: 0 auto; padding: 24px 16px 60px; }
+
+      /* Top row */
+      .top-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        max-width: 900px;
+        margin: 0 auto 28px;
+        flex-wrap: wrap;
+      }
+      .top-links {
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .top-logo {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .top-logo img {
+        height: 28px;
+        width: auto;
+      }
+      .top-link {
+        color: var(--text-secondary);
         text-decoration: none;
-        color: #00a8c9;
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        transition: background var(--transition), border-color var(--transition);
+        white-space: nowrap;
       }
-      .review-columns {
-        columns: 1;
-        column-gap: 20px;
+      .top-link:hover {
+        background: var(--chip-bg);
+        border-color: var(--accent);
       }
-      .review-card {
-        background-color: #ffffff;
-        border: 1px solid #e1e4e8;
-        border-radius: 10px;
-        margin: 0 0 20px;
-        padding: 20px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s, box-shadow 0.2s;
-        display: inline-block;
+      .top-link--cta {
+        background: var(--accent);
+        color: var(--header-text);
+        border-color: var(--accent);
+      }
+      .top-link--cta:hover {
+        background: var(--accent-hover);
+      }
+      .search-bar {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        pointer-events: none;
+      }
+      .search-input {
         width: 100%;
-        box-sizing: border-box;
+        padding: 14px 44px 14px 42px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+        color: var(--text);
+        font-size: 15px;
+        outline: none;
+        transition: border-color var(--transition), box-shadow var(--transition);
+      }
+      .search-input::placeholder { color: var(--text-muted); }
+      .search-input:focus {
+        border-color: var(--border-focus);
+        box-shadow: 0 0 0 3px rgba(74,144,217,0.15);
+      }
+      .clear-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 28px;
+        height: 28px;
+        border: none;
+        border-radius: 50%;
+        background: var(--chip-bg);
+        color: var(--text-secondary);
+        font-size: 16px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        transition: background var(--transition);
+      }
+      .clear-btn:hover { background: var(--border); }
+
+      .result-count {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        white-space: nowrap;
+      }
+
+      .review-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 520px) {
+        .review-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (min-width: 840px) {
+        .review-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+
+      .review-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+        cursor: pointer;
+        transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
         text-decoration: none;
         color: inherit;
+        display: flex;
+        flex-direction: column;
       }
       .review-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: transparent;
       }
       .review-header {
         display: flex;
         align-items: center;
-        margin-bottom: 15px;
+        gap: 10px;
+        margin-bottom: 12px;
       }
       .review-avatar {
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
-        margin-right: 10px;
-        width: 48px;
-        height: 48px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1rem;
+        color: #fff;
+        text-transform: uppercase;
       }
+      .review-meta { min-width: 0; }
       .review-author {
-        font-weight: bold;
-        color: #007bff;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--accent);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .review-timestamp {
-        display: inline-block;
-        padding: 2px 8px;
-        border-radius: 3px;
-        background-color: #e1e4e8;
-        color: #757575;
-        font-size: 0.75em;
-        margin-left: 10px;
+        font-size: 0.75rem;
+        color: var(--text-muted);
       }
       .review-body {
-        margin-top: 10px;
-        color: #333333;
-        line-height: 1.5;
+        flex: 1;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.55;
+        overflow: hidden;
       }
       .review-body img {
         max-width: 100%;
         height: auto;
-        border-radius: 5px;
+        border-radius: var(--radius-sm);
+        margin-top: 8px;
       }
-      .review-reactions {
-        margin-top: 10px;
-      }
-      .header-card {
-        background-color: #d3026e;
-      }
-      .header-card p {
-        color: white;
-      }
-      .header-card p.click-here {
-        color: #ffce00;
-        font-weight: bolder;
+      .review-body blockquote {
+        margin: 8px 0;
+        padding: 8px 12px;
+        border-left: 3px solid var(--accent);
+        background: var(--chip-bg);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
         font-style: italic;
-        font-size: 1.2em;
+        color: var(--text-secondary);
+      }
+      .review-body blockquote p { margin: 0; }
+      .review-reactions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 12px;
       }
       .reaction-chip {
-        display: inline-block;
-        padding: 5px 10px;
-        margin: 5px 5px 0 0;
-        border-radius: 15px;
-        background-color: #e1e4e8;
-        color: #333333;
-        font-size: 0.85em;
-      }
-      /* Media queries for responsive design */
-      @media (min-width: 600px) {
-        .review-columns {
-          columns: 2;
-        }
-      }
-      @media (min-width: 900px) {
-        .review-columns {
-          columns: 3;
-        }
-      }
-      .container {
-        max-width: 100%;
-        overflow: hidden;
-      }
-
-      .header {
-        text-align: center;
-        max-width: 800px;
-        margin: 8px auto;
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(5px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-
-      @keyframes fadeOut {
-        from { opacity: 1; transform: translateY(0); }
-        to { opacity: 0; transform: translateY(-5px); }
-      }
-      
-      /* Style for the search box */
-      .search-box {
-        width: 95%;
-        max-width: 600px;
-        padding: 15px;
-        margin: 10px auto;
-        display: block;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 16px;
-        outline: none;
-        margin-left: auto;
-        margin-right: auto;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .search-box:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-      }
-
-      /* Style for the review count */
-      .review-count {
-        font-size: 18px;
-        font-weight: bold;
-        color: #333;
-        padding: 8px;
-        background: #f1f1f1;
-        border-radius: 8px;
-        display: inline-block;
-        margin-left: 10px;
-      }
-
-      /* Style for the action bar */
-      .action-bar {
-        width: 90%;
-        max-width: 800px;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        gap: 2em;
-        margin: 0 auto 1em auto;
+        display: inline-flex;
         align-items: center;
+        gap: 4px;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background: var(--chip-bg);
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+
+      .header-card {
+        background: #d00e73;
+        border: none;
+        color: var(--header-text);
+      }
+      .header-card .review-body {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .header-card:hover { box-shadow: var(--shadow-lg); }
+      .header-card .review-body { color: var(--header-text); opacity: 0.95; }
+      .header-card .click-here {
+        color: var(--header-cta);
+        font-weight: 700;
+        font-size: 1.05em;
+        margin-top: 8px;
+        display: inline-block;
+      }
+
+      .pagination {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        margin-top: 28px;
         flex-wrap: wrap;
       }
+      .pagination button {
+        min-width: 36px;
+        height: 36px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface);
+        color: var(--text);
+        font-size: 14px;
+        cursor: pointer;
+        transition: background var(--transition), border-color var(--transition);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .pagination button:hover:not(:disabled) {
+        background: var(--chip-bg);
+        border-color: var(--accent);
+      }
+      .pagination button:disabled { opacity: 0.35; cursor: default; }
+      .page-info {
+        padding: 0 10px;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
 
+      .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+        font-size: 1rem;
+        display: none;
+        grid-column: 1 / -1;
+      }
+      .loading {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+        grid-column: 1 / -1;
+      }
 
+      .skeleton-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+      }
+      .skeleton-header { display: flex; gap: 10px; margin-bottom: 14px; }
+      .skeleton-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--chip-bg);
+        animation: pulse 1.5s ease-in-out infinite;
+      }
+      .skeleton-lines { flex: 1; }
+      .skeleton-line {
+        height: 12px;
+        border-radius: 6px;
+        background: var(--chip-bg);
+        animation: pulse 1.5s ease-in-out infinite;
+      }
+      .skeleton-line--short { width: 60%; margin-bottom: 6px; }
+      .skeleton-line--long { width: 90%; margin-bottom: 4px; }
+      .skeleton-body { display: flex; flex-direction: column; gap: 6px; }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-      <h1>📖 App Privacy Policy Generator's Guest Book 🙇🏻‍♂️</h1>
-        <div class="action-bar">
-          <a href="/" class="link">↩️ Back to Web App</a>
-          <a href="https://ko-fi.com/A443EQ6" target="_blank" class="link">☕️ Buy Me a Coffee</a>
-          <span class="review-count">📊 Total Reviews: <span id="reviewCount">450</span></span>
-        </div>
-        <input type="text" id="searchInput" class="search-box" placeholder="Search reviews..." />
+    <div class="page">
+      <div class="top-logo">
+        <img src="./images/text_logo.svg" alt="App Privacy Policy Generator" height="28" />
       </div>
-      <div class="review-columns" id="reviewContainer">
-        <a
-          href="https://github.com/nisrulz/app-privacy-policy-generator/issues/65"
-          target="_blank"
-          class="review-card header-card"
-        >
-          <div class="review-body">
-            <img src="./downloaded_images/banner.jpg" alt="Banner Image" />
-            <p>
-              Welcome to our virtual Guest Book! Feel free to leave some kind
-              words about App Privacy Policy Generator, share your success
-              stories, or even brag about the big names using our app.<br /><br />We
-              love hearing how we've made your life easier!
-            </p>
-            <p class="click-here">↘ Click on this card to comment</p>
-          </div>
-        </a>
+
+      <div class="top-row">
+        <div class="top-links">
+          <a href="/" class="top-link">Back to Web App</a>
+          <a href="https://ko-fi.com/A443EQ6" target="_blank" class="top-link top-link--cta">Buy Me a Coffee</a>
+        </div>
+        <div class="search-bar">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search reviews..." />
+          <button id="clearBtn" class="clear-btn" aria-label="Clear search">&times;</button>
+        </div>
+        <div class="result-count" id="resultCount">{{ total_comments }} reviews</div>
+      </div>
+
+      <div class="no-results" id="noResults">No reviews match your search.</div>
+
+      <div class="review-grid" id="reviewContainer">
+        <div class="skeleton-card"><div class="skeleton-header"><div class="skeleton-avatar"></div><div class="skeleton-lines"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div></div></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--short"></div></div></div>
+        <div class="skeleton-card"><div class="skeleton-header"><div class="skeleton-avatar"></div><div class="skeleton-lines"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div></div></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--short"></div></div></div>
+        <div class="skeleton-card"><div class="skeleton-header"><div class="skeleton-avatar"></div><div class="skeleton-lines"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div></div></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--short"></div></div></div>
         {{#comments}}
-        <a href="{{ html_url }}" target="_blank" class="review-card">
+        <div class="review-card" data-url="{{ html_url }}">
           <div class="review-header">
-            <img
-              src="{{ user.avatar_local }}"
-              alt="{{ user.login }}"
-              class="review-avatar"
-            />
-            <div class="review-author">{{ user.login }}</div>
-            <div class="review-timestamp">{{ created_at_formatted }}</div>
+            <div class="review-avatar" data-author="{{ user.login }}">{{ user.login.[0] }}</div>
+            <div class="review-meta">
+              <div class="review-author">{{ user.login }}</div>
+              <div class="review-timestamp">{{ created_at_formatted }}</div>
+            </div>
           </div>
           <div class="review-body">{{{body}}}</div>
-          <!-- Use triple braces to render HTML -->
           {{#reactions}}
           <div class="review-reactions">
-            {{#heart}}
-            <span class="reaction-chip">❤️ {{ heart }}</span>
-            {{/heart}}
-            {{#thumbs_up}}
-            <span class="reaction-chip">👍 {{ thumbs_up }}</span>
-            {{/thumbs_up}}
-            {{#thumbs_down}}
-            <span class="reaction-chip">👎 {{ thumbs_down }}</span>
-            {{/thumbs_down}}
-            {{#laugh}}
-            <span class="reaction-chip">😄 {{ laugh }}</span>
-            {{/laugh}}
-            {{#hooray}}
-            <span class="reaction-chip">🎉 {{ hooray }}</span>
-            {{/hooray}}
-            {{#confused}}
-            <span class="reaction-chip">😕 {{ confused }}</span>
-            {{/confused}}
-            {{#rocket}}
-            <span class="reaction-chip">🚀 {{ rocket }}</span>
-            {{/rocket}}
-            {{#eyes}}
-            <span class="reaction-chip">👀 {{ eyes }}</span>
-            {{/eyes}}
+            {{#heart}}<span class="reaction-chip">❤️ {{ heart }}</span>{{/heart}}
+            {{#thumbs_up}}<span class="reaction-chip">👍 {{ thumbs_up }}</span>{{/thumbs_up}}
+            {{#thumbs_down}}<span class="reaction-chip">👎 {{ thumbs_down }}</span>{{/thumbs_down}}
+            {{#laugh}}<span class="reaction-chip">😄 {{ laugh }}</span>{{/laugh}}
+            {{#hooray}}<span class="reaction-chip">🎉 {{ hooray }}</span>{{/hooray}}
+            {{#confused}}<span class="reaction-chip">😕 {{ confused }}</span>{{/confused}}
+            {{#rocket}}<span class="reaction-chip">🚀 {{ rocket }}</span>{{/rocket}}
+            {{#eyes}}<span class="reaction-chip">👀 {{ eyes }}</span>{{/eyes}}
           </div>
           {{/reactions}}
-        </a>
+        </div>
         {{/comments}}
+      </div>
+
+      <div class="pagination" id="pagination">
+        <button id="firstBtn" aria-label="First page">&laquo;</button>
+        <button id="prevBtn" aria-label="Previous page">&lsaquo;</button>
+        <span class="page-info" id="pageInfo"></span>
+        <button id="nextBtn" aria-label="Next page">&rsaquo;</button>
+        <button id="lastBtn" aria-label="Last page">&raquo;</button>
       </div>
     </div>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const reviewCountElement = document.getElementById("reviewCount");
-        const searchInput = document.getElementById("searchInput");
+        var el = {
+          resultCount: document.getElementById("resultCount"),
+          input: document.getElementById("searchInput"),
+          clear: document.getElementById("clearBtn"),
+          noResults: document.getElementById("noResults"),
+          pagination: document.getElementById("pagination"),
+          firstBtn: document.getElementById("firstBtn"),
+          prevBtn: document.getElementById("prevBtn"),
+          nextBtn: document.getElementById("nextBtn"),
+          lastBtn: document.getElementById("lastBtn"),
+          pageInfo: document.getElementById("pageInfo"),
+          container: document.getElementById("reviewContainer"),
+        };
 
-        function getReviewCards() {
-          return document.querySelectorAll(".review-card:not(.header-card)");
+        var REACTION_ICONS = {
+          heart: "\u2764\uFE0F", thumbs_up: "\uD83D\uDC4D", thumbs_down: "\uD83D\uDC4E",
+          laugh: "\uD83D\uDE04", hooray: "\uD83C\uDF89", confused: "\uD83D\uDE15",
+          rocket: "\uD83D\uDE80", eyes: "\uD83D\uDC40"
+        };
+
+        var GRADIENTS = [
+          "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+          "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+          "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+          "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+          "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
+          "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)",
+          "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)",
+          "linear-gradient(135deg, #f5576c 0%, #ff6a88 100%)",
+          "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)",
+          "linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)",
+          "linear-gradient(135deg, #9890e3 0%, #b1f4cf 100%)",
+          "linear-gradient(135deg, #ebc0fd 0%, #d9ded8 100%)",
+          "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+          "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+          "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
+          "linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%)",
+          "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
+          "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)"
+        ];
+
+        function hashString(str) {
+          var hash = 0;
+          for (var i = 0; i < str.length; i++) {
+            hash = ((hash << 5) - hash) + str.charCodeAt(i);
+            hash |= 0;
+          }
+          return Math.abs(hash);
         }
 
-        function updateReviewCount(count) {
-          reviewCountElement.textContent = typeof count === "number" ? count : getReviewCards().length;
+        function applyGradients() {
+          var avatars = document.querySelectorAll(".review-avatar[data-author]");
+          for (var i = 0; i < avatars.length; i++) {
+            var author = avatars[i].dataset.author || "";
+            var gradient = GRADIENTS[hashString(author) % GRADIENTS.length];
+            avatars[i].style.background = gradient;
+          }
         }
 
-        function showCard(card, show) {
-          card.style.display = show ? "inline-block" : "none";
-        }
+        var PAGE_SIZE = 9;
+        var allReviews = [];
+        var filteredReviews = [];
+        var totalPages = 0;
+        var currentPage = 1;
 
-        function filterReviews(query) {
-          const cards = getReviewCards();
-          query = query.trim().toLowerCase();
-          let visible = 0;
-          // Process cards in chunks to avoid blocking the UI
-          let index = 0;
-          const chunkSize = 100; // Adjust based on performance
-          function processChunk() {
-            const end = Math.min(index + chunkSize, cards.length);
-            for (; index < end; index++) {
-              const card = cards[index];
-              const match = card.innerText.toLowerCase().includes(query);
-              showCard(card, match);
-              if (match) visible++;
-            }
-            if (index < cards.length) {
-              requestAnimationFrame(processChunk);
+        function buildReviewCard(r) {
+          var card = document.createElement("div");
+          card.className = "review-card";
+          card.dataset.url = r.url;
+
+          var reactionsHtml = "";
+          if (r.reactions) {
+            var keys = Object.keys(r.reactions);
+            for (var i = 0; i < keys.length; i++) {
+              var k = keys[i];
+              if (r.reactions[k] > 0 && REACTION_ICONS[k]) {
+                reactionsHtml += '<span class="reaction-chip">' + REACTION_ICONS[k] + " " + r.reactions[k] + "</span>";
+              }
             }
           }
-          processChunk();
+
+          var initial = r.author ? r.author.charAt(0) : "?";
+          var gradient = GRADIENTS[hashString(r.author || "") % GRADIENTS.length];
+
+          card.innerHTML =
+            '<div class="review-header">' +
+              '<div class="review-avatar" style="background:' + gradient + '">' + initial + "</div>" +
+              '<div class="review-meta">' +
+                '<div class="review-author">' + r.author + "</div>" +
+                '<div class="review-timestamp">' + r.timestamp + "</div>" +
+              "</div>" +
+            "</div>" +
+            '<div class="review-body">' + r.body + "</div>" +
+            (reactionsHtml ? '<div class="review-reactions">' + reactionsHtml + "</div>" : "");
+
+          return card;
+        }
+
+        function clearGrid() {
+          el.container.querySelectorAll(".review-card").forEach(function (c) { c.remove(); });
+        }
+
+        function renderPage(reviews, page) {
+          clearGrid();
+          if (page === 1) {
+            var header = document.createElement("a");
+            header.href = "https://github.com/nisrulz/app-privacy-policy-generator/issues/65";
+            header.target = "_blank";
+            header.className = "review-card header-card";
+            header.innerHTML =
+              '<div class="review-body">' +
+                '<img src="./downloaded_images/banner.jpg" alt="Banner Image" loading="lazy" />' +
+                '<p>Welcome to our virtual Guest Book! Feel free to leave some kind words about App Privacy Policy Generator, share your success stories, or even brag about the big names using our app.</p>' +
+                '<p class="click-here">Click on this card to comment</p>' +
+              "</div>";
+            el.container.appendChild(header);
+          }
+          var start = (page - 1) * PAGE_SIZE;
+          var end = Math.min(start + PAGE_SIZE, reviews.length);
+          for (var i = start; i < end; i++) {
+            el.container.appendChild(buildReviewCard(reviews[i]));
+          }
+        }
+
+        function updatePagination() {
+          el.pageInfo.textContent = currentPage + " / " + totalPages;
+          el.firstBtn.disabled = currentPage <= 1;
+          el.prevBtn.disabled = currentPage <= 1;
+          el.nextBtn.disabled = currentPage >= totalPages;
+          el.lastBtn.disabled = currentPage >= totalPages;
+        }
+
+        function showPagination() {
+          el.pagination.style.display = "flex";
+          updatePagination();
+        }
+
+        function hidePagination() { el.pagination.style.display = "none"; }
+
+        function goToPage(page) {
+          currentPage = page;
+          renderPage(filteredReviews, currentPage);
+          el.resultCount.textContent = filteredReviews.length + " reviews";
+          el.noResults.style.display = filteredReviews.length === 0 ? "block" : "none";
+          showPagination();
+        }
+
+        function search(query) {
+          var q = query.trim().toLowerCase();
+          if (q) {
+            filteredReviews = allReviews.filter(function (r) {
+              return (r.author + " " + r.body).toLowerCase().includes(q);
+            });
+          } else {
+            filteredReviews = allReviews;
+          }
+          totalPages = Math.ceil(filteredReviews.length / PAGE_SIZE);
+          goToPage(1);
+        }
+
+        function clearSearch() {
+          el.input.value = "";
+          el.clear.style.display = "none";
+          filteredReviews = allReviews;
+          totalPages = Math.ceil(filteredReviews.length / PAGE_SIZE);
+          goToPage(1);
+          el.input.focus();
         }
 
         function debounce(fn, delay) {
-          let timer;
-          return function (...args) {
+          var timer, leading = false;
+          return function () {
+            var ctx = this, args = arguments;
+            if (!leading) { leading = true; fn.apply(ctx, args); }
             clearTimeout(timer);
-            timer = setTimeout(() => fn.apply(this, args), delay);
+            timer = setTimeout(function () { leading = false; fn.apply(ctx, args); }, delay);
           };
         }
 
-        function setupSearch() {
-          searchInput.addEventListener("input", debounce(function () {
-            filterReviews(searchInput.value);
-          }, 200));
+        function onCardClick(e) {
+          var card = e.target.closest(".review-card");
+          if (card && card.dataset.url) window.open(card.dataset.url, "_blank");
         }
 
-        // Initialize
-        updateReviewCount();
-        setupSearch();
+        function init() {
+          document.addEventListener("click", onCardClick);
+          el.input.addEventListener("input", debounce(function () {
+            el.clear.style.display = el.input.value ? "flex" : "none";
+            search(el.input.value);
+          }, 300));
+          el.clear.addEventListener("click", clearSearch);
+          el.input.addEventListener("keydown", function (e) { if (e.key === "Escape") clearSearch(); });
+          el.firstBtn.addEventListener("click", function () { goToPage(1); });
+          el.prevBtn.addEventListener("click", function () { if (currentPage > 1) goToPage(currentPage - 1); });
+          el.nextBtn.addEventListener("click", function () { if (currentPage < totalPages) goToPage(currentPage + 1); });
+          el.lastBtn.addEventListener("click", function () { goToPage(totalPages); });
+
+          applyGradients();
+
+          fetch("./reviews-data.json")
+            .then(function (res) { return res.json(); })
+            .then(function (reviews) {
+              el.container.querySelectorAll(".skeleton-card").forEach(function (s) { s.remove(); });
+              allReviews = reviews;
+              filteredReviews = reviews;
+              totalPages = Math.ceil(allReviews.length / PAGE_SIZE);
+              el.resultCount.textContent = allReviews.length + " reviews";
+              goToPage(1);
+              applyGradients();
+            })
+            .catch(function () {
+              el.container.querySelectorAll(".skeleton-card").forEach(function (s) { s.remove(); });
+              el.container.insertAdjacentHTML("beforeend", '<div class="loading">Failed to load reviews.</div>');
+            });
+        }
+
+        init();
       });
     </script>
   </body>

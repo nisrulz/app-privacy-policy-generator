@@ -1,16 +1,39 @@
 # Reviews Page Generator
 
-This is a python script that pulls the comments listed under the [Guest Book issue](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) and transforms the returned JSON responses to feed into a Static web page.
+Generates a static Guest Book page from [GitHub Issue #65](https://github.com/nisrulz/app-privacy-policy-generator/issues/65) comments.
 
-Some highlights, the python script:
+## Quick start
 
-1. will fetch and download the comments jsons by page only once a week. If attempted again within a week, then it will not make a network call but use the downloaded json files.
-1. will download all images contained in the comments into downloaded_images directory.
-1. will download all profile pictures for each comment and resize them into 48x48 size.
-1. will process markdown contained in the comments into html.
-1. will then transform the `template.mustache` into `reviews.html` file.
+```bash
+# From repo root — uses cached data (if < 1 week old)
+./scripts/gen_reviews_page.sh
 
-There are some helper shell scripts available.
+# Force re-fetch from GitHub API
+./scripts/gen_reviews_page.sh -f
+```
 
-1. `setup.sh` - will setup and activate the virtual env for the python tool. It will also download dependencies.
-1. `generate.sh` - will generate the `reviews.html` page and copy the required files into `public` directory.
+## How it works
+
+| Step | Action |
+|------|--------|
+| 1 | Fetch comment pages from the GitHub Issues API (paginated, cached as JSON for 1 week) |
+| 2 | Download & resize profile pictures (48×48) in parallel (8 workers) |
+| 3 | Download embedded images in parallel |
+| 4 | Convert markdown bodies → HTML, format timestamps, remap reactions |
+| 5 | Render `template.mustache` → `reviews.html` |
+| 6 | Copy generated assets into `../../public/` |
+
+## Requirements
+
+- [Go](https://go.dev/dl/) 1.25+
+- All dependencies managed via `go.mod`
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `main.go` | Main program — fetch, process, render, deploy |
+| `go.mod` / `go.sum` | Go module definition |
+| `scripts/gen_reviews_page.sh` | Entry point (at repo root) |
+| `template.mustache` | Mustache template (rendered via string substitution) |
+| `comments_json/` | Cached API responses |
