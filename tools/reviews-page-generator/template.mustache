@@ -6,6 +6,16 @@
     <meta http-equiv="Cache-Control" content="public, max-age=604800" />
     <meta http-equiv="Pragma" content="cache" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="Guest book reviews for App Privacy Policy Generator - See what users are saying about this free, open-source privacy policy generator." />
+    <script>
+      var __themeToggle = true;
+      (function(){
+        if (!__themeToggle) return;
+        var theme = localStorage.getItem('theme');
+        if (!theme) theme = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     <title>Guest Book - App Privacy Policy Generator</title>
     <style>
       :root {
@@ -31,24 +41,26 @@
         --transition: 0.2s ease;
       }
 
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg: #0f1117;
-          --surface: #1a1d27;
-          --surface-hover: #22262f;
-          --border: #2d323e;
-          --border-focus: #6b9ede;
-          --text: #e4e7ec;
-          --text-secondary: #9aa3b2;
-          --text-muted: #6b7280;
-          --accent: #6b9ede;
-          --accent-hover: #8bb4ea;
-          --header-bg: linear-gradient(135deg, #4c5fd7 0%, #6b3fa0 100%);
-          --chip-bg: #252a36;
-          --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
-          --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
-          --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
-        }
+      [data-theme="dark"] {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface-hover: #22262f;
+        --border: #2d323e;
+        --border-focus: #6b9ede;
+        --text: #e4e7ec;
+        --text-secondary: #9aa3b2;
+        --text-muted: #6b7280;
+        --accent: #6b9ede;
+        --accent-hover: #8bb4ea;
+        --header-bg: linear-gradient(135deg, #4c5fd7 0%, #6b3fa0 100%);
+        --chip-bg: #252a36;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+        --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
+      }
+
+      [data-theme="dark"] body {
+        background-image: url('/images/bg_pattern/topography-dark.svg');
       }
 
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,9 +71,20 @@
         color: var(--text);
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
+        background-image: url('/images/bg_pattern/topography.svg');
+        background-repeat: repeat;
       }
 
       .page { max-width: 1200px; margin: 0 auto; padding: 24px 16px 60px; }
+
+      .top-logo {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .top-logo img {
+        height: 32px;
+        width: auto;
+      }
 
       /* Top row */
       .top-row {
@@ -69,44 +92,24 @@
         align-items: center;
         gap: 12px;
         max-width: 900px;
-        margin: 0 auto 28px;
+        margin: 0 auto 12px;
         flex-wrap: wrap;
+        justify-content: center;
       }
       .top-links {
         display: flex;
-        gap: 8px;
-        flex-shrink: 0;
+        justify-content: center;
+        gap: 16px;
+        max-width: 900px;
+        margin: 0 auto 28px;
       }
-      .top-logo {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .top-logo img {
-        height: 28px;
-        width: auto;
-      }
-      .top-link {
+      .top-links a {
         color: var(--text-secondary);
-        text-decoration: none;
         font-size: 0.85rem;
-        padding: 6px 12px;
-        border-radius: 20px;
-        border: 1px solid var(--border);
-        background: var(--surface);
-        transition: background var(--transition), border-color var(--transition);
         white-space: nowrap;
       }
-      .top-link:hover {
-        background: var(--chip-bg);
-        border-color: var(--accent);
-      }
-      .top-link--cta {
-        background: var(--accent);
-        color: var(--header-text);
-        border-color: var(--accent);
-      }
-      .top-link--cta:hover {
-        background: var(--accent-hover);
+      .top-links a:hover {
+        color: var(--accent);
       }
       .search-bar {
         position: relative;
@@ -360,25 +363,38 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0.5; }
       }
+
+      .theme-toggle {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        font-size: 1.2em;
+        line-height: 1;
+      }
     </style>
   </head>
   <body>
     <div class="page">
       <div class="top-logo">
-        <img src="./images/text_logo.svg" alt="App Privacy Policy Generator" height="28" />
+        <a href="/"><img src="/images/text_logo/text_logo.svg" data-theme-logo="true" alt="App Privacy Policy Generator" /></a>
       </div>
 
       <div class="top-row">
-        <div class="top-links">
-          <a href="/" class="top-link">Back to Web App</a>
-          <a href="https://ko-fi.com/A443EQ6" target="_blank" class="top-link top-link--cta">Buy Me a Coffee</a>
-        </div>
         <div class="search-bar">
           <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="text" id="searchInput" class="search-input" placeholder="Search reviews..." />
           <button id="clearBtn" class="clear-btn" aria-label="Clear search">&times;</button>
         </div>
-        <div class="result-count" id="resultCount">{{ total_comments }} reviews</div>
+        <div class="result-count" id="resultCount">623 reviews</div>
+      </div>
+
+      <div class="top-links">
+        <a href="/">Back to Web App</a>
+        / 
+        <a href="https://ko-fi.com/A443EQ6" target="_blank">Buy Me a Coffee</a>
+        / 
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" style="display:none">🌙</button>
       </div>
 
       <div class="no-results" id="noResults">No reviews match your search.</div>
@@ -387,30 +403,7 @@
         <div class="skeleton-card"><div class="skeleton-header"><div class="skeleton-avatar"></div><div class="skeleton-lines"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div></div></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--short"></div></div></div>
         <div class="skeleton-card"><div class="skeleton-header"><div class="skeleton-avatar"></div><div class="skeleton-lines"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div></div></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--short"></div></div></div>
         <div class="skeleton-card"><div class="skeleton-header"><div class="skeleton-avatar"></div><div class="skeleton-lines"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div></div></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--short"></div></div></div>
-        {{#comments}}
-        <div class="review-card" data-url="{{ html_url }}">
-          <div class="review-header">
-            <div class="review-avatar" data-author="{{ user.login }}">{{ user.login.[0] }}</div>
-            <div class="review-meta">
-              <div class="review-author">{{ user.login }}</div>
-              <div class="review-timestamp">{{ created_at_formatted }}</div>
-            </div>
-          </div>
-          <div class="review-body">{{{body}}}</div>
-          {{#reactions}}
-          <div class="review-reactions">
-            {{#heart}}<span class="reaction-chip">❤️ {{ heart }}</span>{{/heart}}
-            {{#thumbs_up}}<span class="reaction-chip">👍 {{ thumbs_up }}</span>{{/thumbs_up}}
-            {{#thumbs_down}}<span class="reaction-chip">👎 {{ thumbs_down }}</span>{{/thumbs_down}}
-            {{#laugh}}<span class="reaction-chip">😄 {{ laugh }}</span>{{/laugh}}
-            {{#hooray}}<span class="reaction-chip">🎉 {{ hooray }}</span>{{/hooray}}
-            {{#confused}}<span class="reaction-chip">😕 {{ confused }}</span>{{/confused}}
-            {{#rocket}}<span class="reaction-chip">🚀 {{ rocket }}</span>{{/rocket}}
-            {{#eyes}}<span class="reaction-chip">👀 {{ eyes }}</span>{{/eyes}}
-          </div>
-          {{/reactions}}
-        </div>
-        {{/comments}}
+        
       </div>
 
       <div class="pagination" id="pagination">
@@ -643,6 +636,35 @@
         }
 
         init();
+
+        if (__themeToggle) {
+          document.getElementById("themeToggle").style.display = "";
+          function updateThemeToggle() {
+            var btn = document.getElementById("themeToggle");
+            btn.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19";
+          }
+          function updateThemeLogo() {
+            var theme = document.documentElement.getAttribute('data-theme');
+            document.querySelectorAll('img[data-theme-logo]').forEach(function (img) {
+              var light = img.getAttribute('data-light-src') || img.src;
+              if (!img.getAttribute('data-light-src')) {
+                img.setAttribute('data-light-src', img.src);
+                img.setAttribute('data-dark-src', img.src.replace(/(\.\w+)$/, '_dark$1'));
+              }
+              img.src = theme === 'dark' ? img.getAttribute('data-dark-src') : img.getAttribute('data-light-src');
+            });
+          }
+          updateThemeToggle();
+          updateThemeLogo();
+          document.getElementById("themeToggle").addEventListener("click", function () {
+            var html = document.documentElement;
+            var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            html.setAttribute("data-theme", next);
+            localStorage.setItem("theme", next);
+            updateThemeToggle();
+            updateThemeLogo();
+          });
+        }
       });
     </script>
   </body>

@@ -61,9 +61,9 @@ func initPaths() {
 	jsonDir = filepath.Join(baseDir, "comments_json")
 	imgsDir = filepath.Join(baseDir, "downloaded_images")
 	tmplPath = filepath.Join(baseDir, "template.mustache")
-	outPath = filepath.Join(baseDir, "reviews.html")
-	dataPath = filepath.Join(baseDir, "reviews-data.json")
 	pubDir = filepath.Join(baseDir, "..", "..", "public")
+	outPath = filepath.Join(pubDir, "reviews.html")
+	dataPath = filepath.Join(pubDir, "reviews-data.json")
 }
 
 func setupDirs() {
@@ -268,9 +268,7 @@ func render(entries []reviewEntry) {
 
 func copyToPublic() {
 	copyDir(imgsDir, filepath.Join(pubDir, "downloaded_images"))
-	copyFile(outPath, filepath.Join(pubDir, "reviews.html"))
-	copyFile(dataPath, filepath.Join(pubDir, "reviews-data.json"))
-	fmt.Println("  Copied assets → public/")
+	fmt.Println("  Copied images → public/downloaded_images/")
 }
 
 func copyDir(src, dst string) {
@@ -291,15 +289,6 @@ func copyDir(src, dst string) {
 		}
 		os.WriteFile(dstPath, data, 0644)
 	}
-}
-
-func copyFile(src, dst string) {
-	data, err := os.ReadFile(src)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "  Error copying %s: %v\n", src, err)
-		return
-	}
-	os.WriteFile(dst, data, 0644)
 }
 
 func main() {
