@@ -50,6 +50,7 @@ If you have a small bug fix or typo fix, open a pull request directly. For featu
 Before contributing:
 
 - Read the [dev docs](dev-doc.md) and [AGENTS.md](AGENTS.md) for setup and conventions
+- Requirements: [Go](https://go.dev/dl/) 1.25+ and Node.js
 - Build with `npm install && npm run build` (edit source under `src/` only)
 
 ## Support
