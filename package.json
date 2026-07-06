@@ -1,6 +1,6 @@
 {
   "name": "app-privacy-policy-generator",
-  "version": "3.0.0",
+  "version": "5.1.0",
   "description": "Generate privacy policies and terms & conditions for Android, iOS, and Web apps",
   "license": "AGPL-3.0",
   "author": "Nishant Srivastava (@nisrulz)",
@@ -12,9 +12,13 @@
     "build": "make build",
     "watch": "make watch",
     "compress-images": "./scripts/compress_images.sh",
-    "serve": "make serve"
+    "serve": "make serve",
+    "test": "make test",
+    "test:ui": "make test-ui",
+    "test:debug": "make test-debug"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@tokilabs/pug3-cli": "3.0.1"
   }
 }
