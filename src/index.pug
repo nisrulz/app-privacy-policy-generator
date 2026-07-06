@@ -1,13 +1,23 @@
 doctype html
-html(lang="en", data-theme="light")
+- var lang = 'en'
+html(lang=lang data-theme=themeToggle ? '' : 'light')
     - var flycricket = true
     - var noTracking = true
     - var gdpr = true
 
+- var themeToggle = false
+
     //- Application code
     head
+        if themeToggle
+            script.
+              (function(){
+                var theme = localStorage.getItem('theme');
+                if (!theme) theme = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', theme);
+              })();
         include includes/head.pug
     body.bg-pattern
-        main#app.container.mt-6
+        main#app.container
             include includes/content.pug
         include includes/footer.pug

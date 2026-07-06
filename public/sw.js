@@ -1,18 +1,21 @@
-/*  
+/*
   App Privacy Policy Generator — Service Worker
   Caches static assets for offline use and reduced server load.
 */
 
-const CACHE_NAME = "app-privacy-policy-v2";
+const CACHE_NAME = "app-privacy-policy-v3";
 
 const PRECACHE_URLS = [
   "/index.html",
   "/reviews.html",
+  "/reviews-data.json",
   "/404.html",
+  "/de/index.html",
   "/css/style.min.css",
   "/js/main.min.js",
   "/js/utils.min.js",
   "/js/thirdpartyservices.min.js",
+  "/js/locale.min.js",
   "/js/flycricket.min.js",
   "/js/vendor/vue.global.prod.js",
   "/js/vendor/to-markdown.min.js",
@@ -22,8 +25,9 @@ const PRECACHE_URLS = [
   "/android-chrome-512x512.png",
   "/apple-touch-icon.png",
   "/site.webmanifest",
-  "/images/vendor/kofi1.png",
-  "/images/app_graphics/side_image.webp",
+  "/images/link_preview.jpg",
+  "/images/side_image/side_image.png",
+  "/images/app_graphics/404.svg",
   "/images/app_icons/disclaimer.svg"
 ];
 
@@ -33,7 +37,7 @@ self.addEventListener("install", (event) => {
     caches.open(CACHE_NAME).then((cache) =>
       Promise.allSettled(
         PRECACHE_URLS.map((url) =>
-          cache.add(url).catch(() => {})
+          cache.add(url).catch(() => { })
         )
       )
     )
@@ -71,12 +75,12 @@ async function staleWhileRevalidate(request) {
   const cached = await caches.match(request);
 
   const fetchPromise = fetch(request).then(async (response) => {
-    try {
-      if (response.ok) {
+    if (response.ok && request.method === "GET") {
+      try {
         const cache = await caches.open(CACHE_NAME);
         await cache.put(request, response.clone());
-      }
-    } catch (_) {}
+      } catch (_) {}
+    }
     return response;
   }).catch(() => null);
 
@@ -84,9 +88,13 @@ async function staleWhileRevalidate(request) {
 }
 
 async function networkFirst(request) {
-  // Normalize root URL to index.html for cache matching
+  // Normalize root and locale paths to index.html for cache matching
   const url = new URL(request.url);
-  const cacheKey = url.pathname === "/" ? "/index.html" : request;
+  const path = url.pathname;
+  const isLocaleRoot = /^\/[a-z]{2}(\/index\.html)?$/.test(path) && path !== "/index.html";
+  const cacheKey = path === "/" || isLocaleRoot ? (path.replace(/\/$/, "") + "/index.html") : request;
+
+  if (request.method !== "GET") return fetch(request);
 
   try {
     const response = await fetch(request);

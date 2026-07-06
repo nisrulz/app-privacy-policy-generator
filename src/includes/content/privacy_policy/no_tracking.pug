@@ -1,68 +1,73 @@
-+modal('showNoTrackingPrivacyPolicyModal', 'No Tracking Privacy Policy', 'toggleNoTrackingPrivacyPolicyModalVisibility', 'typeOfPolicyInt==2')
++modal('showNoTrackingPrivacyPolicyModal', 'modal.privacyNoTracking.title', 'toggleNoTrackingPrivacyPolicyModalVisibility', 'typeOfPolicyInt==2')
         section.modal-card-body.modal-box
             #privacy_notrack_content(v-show='contentRenderType==1')
-                strong Privacy Policy
+                strong {{ translate('noTracking.title') }}
 
-                p This privacy policy applies to the {{ appName }} app for {{ platformDesc }}, together with any related services operated by {{ devOrCompanyName }} (collectively, the "Application"). {{ devOrCompanyName }} is hereby referred to as the "Service Provider".
-
-                br 
-                strong What information does the Application obtain and how is it used?
-
-                p The Application does not collect, log, or store any personal information when you download and use it. Registration is not required. If the Application is used with an active internet connection, technical protocol data (such as your ephemeral IP address) is transmitted to facilitate network connectivity, but this data is not retained or used for tracking.
+                p(v-html="translate('noTracking.intro')")
 
                 br 
-                strong Does the Application collect precise real time location information of the device?
+                strong {{ translate('noTracking.infoTitle') }}
 
-                p This Application does not collect precise information about the location of your {{ deviceType }}.
-
-                br 
-                strong Do third parties see and/or have access to information obtained by the Application?
-
-                p Since the Application does not collect any information, no data is shared with third parties.
+                p {{ translate('noTracking.infoText') }}
 
                 br 
-                strong What are my opt-out rights?
+                strong {{ translate('noTracking.locationTitle') }}
 
-                div(v-if='isMobileApp || isBothPlatforms')
-                    p Since the Application does not collect personal information through normal use, uninstalling it simply removes the Application from your device.
+                p(v-html="translate('noTracking.locationText')")
+
+                br 
+                strong {{ translate('noTracking.thirdPartyTitle') }}
+
+                p {{ translate('noTracking.thirdPartyText') }}
+
+                br 
+                strong {{ translate('noTracking.optOutTitle') }}
+
+                div(v-if='isMobileApp || isWindowsApp')
+                    p {{ translate('noTracking.optOutUninstall') }}
                 div(v-if='isWebApp')
-                    p Since the Application does not collect personal information through normal use, ceasing to use the website or closing your browser simply stops the Application from operating.
-                p If you contact the Service Provider directly or voluntarily provide information by other means, you may request deletion of that information by contacting {{ appContact }}.
+                    p {{ translate('noTracking.optOutCease') }}
+                p(v-html="translate('noTracking.optOutContact')")
 
                 br 
-                strong Children
+                strong {{ translate('noTracking.childrenTitle') }}
 
-                p The Application is not intended for children under {{ ageOfDigitalConsent }} years of age, or such higher age as required by applicable law. The Service Provider does not knowingly solicit data from children or market to them. Since the Application does not collect personal information through normal use, children's data is not at risk from use of the Application alone. If you voluntarily provide personal information through other means and are under {{ ageOfDigitalConsent }} years of age, your parent or guardian must provide consent on your behalf where permitted by law.
+                p(v-html="translate('noTracking.childrenText')")
 
                 br 
-                strong Security
+                strong {{ translate('noTracking.securityTitle') }}
 
-                p Because the Application does not collect personal data, the risk of personal data exposure is minimal. However, no security system is completely secure. The Service Provider implements reasonable safeguards to protect systems and any data it holds.
+                p {{ translate('noTracking.securityText') }}
                 br 
-                strong Data Breach Notification
-                p Since the Application does not collect personal data through normal use, the risk of a data breach affecting your personal data is minimal. If a breach occurs involving any data you have voluntarily provided, the Service Provider will notify you as required by applicable law.
-                br 
-
-                strong Changes
-
-                p The Service Provider may update this Privacy Policy from time to time. The Service Provider will notify you of material changes by posting the updated Privacy Policy with an effective date. Where required by law, the Service Provider will seek your consent to material changes before they take effect.
+                strong {{ translate('noTracking.breachTitle') }}
+                p {{ translate('noTracking.breachText') }}
                 br
-                p Previous versions of this Privacy Policy will be maintained and made available upon request by contacting the Service Provider at {{ appContact }}.
+
+                div(v-if='hasDataDeletion')
+                    strong {{ translate('noTracking.dataDeletionTitle') }}
+                    p(v-html="translate('noTracking.dataDeletionText')")
+                    br
+
+                strong {{ translate('noTracking.changesTitle') }}
+
+                p {{ translate('noTracking.changesText') }}
                 br
-                p This privacy policy is effective as of {{ effectiveFromDate }}
+                p(v-html="translate('noTracking.changesPrev')")
+                br
+                p(v-html="translate('noTracking.effectiveDate')")
 
                 br
-                strong Your Consent
+                strong {{ translate('noTracking.consentTitle') }}
 
-                p If you voluntarily provide information to the Service Provider and processing is based on consent, you may withdraw that consent at any time without affecting processing carried out before withdrawal.
+                p {{ translate('noTracking.consentText') }}
 
                 br 
-                strong Contact Us
+                strong {{ translate('noTracking.contactTitle') }}
 
-                p If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at {{ appContact }}.
+                p(v-html="translate('noTracking.contactText')")
 
                 +attribution('privacy policy')
-            textarea#privacy_notrack_txtarea.textarea(onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
+            textarea#privacy_notrack_txtarea.textarea(:aria-label='translate("noTracking.title") + translate("modal.textareaLabel")' onclick='this.focus();this.select()' readonly='readonly' v-show='contentRenderType==2')
         footer.modal-card-foot
             +outputButtons('privacy_notrack_content', 'privacy_notrack_txtarea')
             +flycricketDeploy('fc_deploy_notracking()')

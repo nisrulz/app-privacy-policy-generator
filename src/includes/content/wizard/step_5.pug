@@ -5,78 +5,24 @@ section#step-5.columns(v-if="wizardStep==5")
             +wizardProgress(56)
             .scrollable.content
                 .control
-                    | Platform Type:
-                    span.tag.is-primary.is-light {{platformType}}
+                    | {{ translate('wizard.step5.selectPlatform') }}
+                    span.tag.is-primary.is-light {{selectedPlatformsLabel}}
                     br
-                    label.radio
-                        input(
-                            v-model="platformType"
-                            value="Mobile App"
-                            type="radio"
-                            )
-                        |   Mobile App
+                    input(v-model="platforms.Android" id="platform-android" type="checkbox")
+                    label(for="platform-android")  {{ translate('wizard.step5.android') }}
                     br
-                    label.radio
-                        input(
-                            v-model="platformType"
-                            value="Web App"
-                            type="radio"
-                            )
-                        |   Web App
+                    input(v-model="platforms.iOS" id="platform-ios" type="checkbox")
+                    label(for="platform-ios")  {{ translate('wizard.step5.ios') }}
                     br
-                    label.radio
-                        input(
-                            v-model="platformType"
-                            value="Both"
-                            type="radio"
-                            )
-                        |   Both
+                    input(v-model="platforms.KaiOS" id="platform-kaios" type="checkbox")
+                    label(for="platform-kaios")  {{ translate('wizard.step5.kaios') }}
                     br
+                    input(v-model="platforms.Windows" id="platform-windows" type="checkbox")
+                    label(for="platform-windows")  {{ translate('wizard.step5.windows') }}
                     br
-                    .control(v-if="platformType !== 'Web App'")
-                        | Select Mobile OS:
-                        span.tag.is-primary.is-light {{osType}}
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="Android"
-                                type="radio"
-                                )
-                            |   Android
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="iOS"
-                                type="radio"
-                                )
-                            |   iOS
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="KaiOS"
-                                type="radio"
-                                )
-                            |   KaiOS
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="Android & iOS"
-                                type="radio"
-                                )
-                            |   Android & iOS
-                        br
-                        label.radio
-                            input(
-                                v-model="osType"
-                                value="Android, iOS & KaiOS"
-                                type="radio"
-                                )
-                            |   Android, iOS & KaiOS
+                    input(v-model="platforms.Web" id="platform-web" type="checkbox")
+                    label(for="platform-web")  {{ translate('wizard.step5.web') }}
         footer.card-footer
-            a.card-footer-item(@click='prevStep') Previous
-            a.card-footer-item(@click='nextStep') Next
+            a.card-footer-item(@click='prevStep') {{ translate('wizard.step5.previous') }}
+            a.card-footer-item(@click='nextStep') {{ translate('wizard.step5.next') }}
     +wizardSidebar

@@ -1,90 +1,129 @@
-/*  
-  App Privacy Policy Generator: A simple web app to generate a generic 
-  privacy policy for your Android, iOS, and Web apps
-
-  Copyright 2017-Present Nishant Srivastava
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-*/
-
 window.platformMixin = {
   data() {
     return {
-      // === Platform-Aware Text ===
-      // These defaults assume Mobile App; generate() overrides for Web/Both
-      platformType: "Mobile App",
-      deviceType: "mobile device",
-      deviceTypePlural: "mobile devices",
-      platformDesc: "mobile devices",
-      deviceIdDesc: "your mobile device's unique device ID",
-      osDesc: "your mobile operating system",
-      browserDesc: "the type of mobile Internet browsers you use",
-      uninstallDesc: "by uninstalling the Application",
-      osType: "Android",
-      requirementOfSystem: "system",
+      deviceType: "",
+      deviceTypePlural: "",
+      platformDesc: "",
+      deviceIdDesc: "",
+      osDesc: "",
+      browserDesc: "",
+      uninstallDesc: "",
     };
   },
 
   computed: {
-    // Platform type matchers used across all templates
+    selectedPlatformsLabel() {
+      var locale = window.__locale || {};
+      var labels = [];
+      if (this.platforms.Android) labels.push(locale["platform.android"] || "Android");
+      if (this.platforms.iOS) labels.push(locale["platform.ios"] || "iOS");
+      if (this.platforms.KaiOS) labels.push(locale["platform.kaios"] || "KaiOS");
+      if (this.platforms.Windows) labels.push(locale["platform.windows"] || "Windows");
+      if (this.platforms.Web) labels.push(locale["platform.web"] || "Web");
+      return labels.length ? labels.join(", ") : this.translate("platform.selectedNone");
+    },
     isMobileApp() {
-      return this.platformType === "Mobile App";
+      return this.platforms.Android || this.platforms.iOS || this.platforms.KaiOS;
     },
     isWebApp() {
-      return this.platformType === "Web App";
+      return this.platforms.Web;
     },
-    isBothPlatforms() {
-      return this.platformType === "Both";
+    isWindowsApp() {
+      return this.platforms.Windows;
+    },
+    isPhoneOs() {
+      return this.isMobileApp;
     },
   },
 
   methods: {
-    // Map selected OS combo to the system requirement phrase used in T&C
-    _setOsRequirement() {
-      switch (this.osType) {
-        case "Android & iOS":
-          this.requirementOfSystem = "both systems";
-          break;
-        default:
-          this.requirementOfSystem = "system";
-      }
+    platformWord(key) {
+      var locale = window.__locale || {};
+      return locale[key] || key;
     },
 
-    // Derive device/language vocabulary from the platform type selection.
-    // All templates reference these variables so the text reads naturally
-    // whether the app targets mobile, web, or both.
     _setPlatformText() {
-      switch (this.platformType) {
-        case "Web App":
-          this.deviceType = "device";
-          this.deviceTypePlural = "devices";
-          this.platformDesc = "web browsers";
-          this.deviceIdDesc = "your device's unique identifier (e.g., IP address or browser fingerprint)";
-          this.osDesc = "your operating system";
-          this.browserDesc = "the type of web browser you use";
-          this.uninstallDesc = "by ceasing to use the website";
-          break;
-        case "Both":
-          this.deviceType = "mobile device or computer";
-          this.deviceTypePlural = "mobile devices and computers";
-          this.platformDesc = "mobile devices and web browsers";
-          this.deviceIdDesc = "your device's unique device ID or identifier";
-          this.osDesc = "your operating system";
-          this.browserDesc = "the type of browser you use";
-          this.uninstallDesc = "by uninstalling the Application or ceasing to use the website";
-          break;
-        default:
-          this.deviceType = "mobile device";
-          this.deviceTypePlural = "mobile devices";
-          this.platformDesc = "mobile devices";
-          this.deviceIdDesc = "your mobile device's unique device ID";
-          this.osDesc = "your mobile operating system";
-          this.browserDesc = "the type of mobile Internet browsers you use";
-          this.uninstallDesc = "by uninstalling the Application";
-          break;
+      var isMobile = this.isMobileApp;
+      var isWin = this.isWindowsApp;
+      var isWeb = this.isWebApp;
+
+      var platformMobileDevices = this.platformWord("platform.mobileDevices");
+      var platformWindowsDevices = this.platformWord("platform.windowsDevices");
+      var platformWebBrowsers = this.platformWord("platform.webBrowsers");
+      var platformMobileDevice = this.platformWord("platform.mobileDevice");
+      var platformWindowsDevice = this.platformWord("platform.windowsDevice");
+      var platformComputer = this.platformWord("platform.computer");
+      var platformComputers = this.platformWord("platform.computers");
+      var platformUninstallApp = this.platformWord("platform.uninstallApp");
+      var platformCeaseWeb = this.platformWord("platform.ceaseWeb");
+      var platformOr = this.platformWord("platform.or");
+      var platformAnd = this.platformWord("platform.and");
+      var platformCommaAnd = this.platformWord("platform.commaAnd");
+
+      var descs = [];
+      if (isMobile) descs.push(platformMobileDevices);
+      if (isWin) descs.push(platformWindowsDevices);
+      if (isWeb) descs.push(platformWebBrowsers);
+      if (descs.length === 0) descs.push(platformMobileDevices);
+
+      this.platformDesc = descs.length === 2
+        ? descs[0] + " " + platformAnd + " " + descs[1]
+        : descs.slice(0, -1).join(", ") + platformCommaAnd + descs[descs.length - 1];
+
+      var devs = [];
+      if (isMobile) devs.push(platformMobileDevice);
+      if (isWin) devs.push(platformWindowsDevice);
+      if (isWeb) devs.push(platformComputer);
+      if (devs.length === 0) devs.push(platformMobileDevice);
+
+      this.deviceType = devs.length === 2
+        ? devs[0] + " " + platformOr + " " + devs[1]
+        : devs.slice(0, -1).join(", ") + ", " + platformOr + " " + devs[devs.length - 1];
+
+      var devPlurals = [];
+      if (isMobile) devPlurals.push(platformMobileDevices);
+      if (isWin) devPlurals.push(platformWindowsDevices);
+      if (isWeb) devPlurals.push(platformComputers);
+      if (devPlurals.length === 0) devPlurals.push(platformMobileDevices);
+
+      this.deviceTypePlural = devPlurals.length === 2
+        ? devPlurals[0] + " " + platformAnd + " " + devPlurals[1]
+        : devPlurals.slice(0, -1).join(", ") + platformCommaAnd + devPlurals[devPlurals.length - 1];
+
+      var uninstallParts = [];
+      if (isMobile || isWin) uninstallParts.push(platformUninstallApp);
+      if (isWeb) uninstallParts.push(platformCeaseWeb);
+      this.uninstallDesc = uninstallParts.join(" " + platformOr + " ") || platformUninstallApp;
+
+      var deviceIdMobile = this.platformWord("platform.deviceId.mobile");
+      var deviceIdWindows = this.platformWord("platform.deviceId.windows");
+      var deviceIdWeb = this.platformWord("platform.deviceId.web");
+      var deviceIdMixed = this.platformWord("platform.deviceId.mixed");
+      var osMobile = this.platformWord("platform.os.mobile");
+      var osWindows = this.platformWord("platform.os.windows");
+      var osWeb = this.platformWord("platform.os.web");
+      var osMixed = this.platformWord("platform.os.mixed");
+      var browserMobile = this.platformWord("platform.browser.mobile");
+      var browserWindows = this.platformWord("platform.browser.windows");
+      var browserWeb = this.platformWord("platform.browser.web");
+      var browserMixed = this.platformWord("platform.browser.mixed");
+
+      if (isMobile && !isWin && !isWeb) {
+        this.deviceIdDesc = deviceIdMobile;
+        this.osDesc = osMobile;
+        this.browserDesc = browserMobile;
+      } else if (isWin && !isMobile && !isWeb) {
+        this.deviceIdDesc = deviceIdWindows;
+        this.osDesc = osWindows;
+        this.browserDesc = browserWindows;
+      } else if (isWeb && !isMobile && !isWin) {
+        this.deviceIdDesc = deviceIdWeb;
+        this.osDesc = osWeb;
+        this.browserDesc = browserWeb;
+      } else {
+        this.deviceIdDesc = deviceIdMixed;
+        this.osDesc = osMixed;
+        this.browserDesc = browserMixed;
       }
     },
   }
