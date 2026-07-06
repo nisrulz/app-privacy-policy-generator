@@ -23,6 +23,8 @@ func buildMinifyJS() error {
 		{"src/js/utils.js", "public/js/utils.min.js"},
 		{"public/tmp/thirdpartyservices.js", "public/js/thirdpartyservices.min.js"},
 		{"src/js/flycricket.js", "public/js/flycricket.min.js"},
+		{"src/js/reviewThemeToggle.js", "public/js/reviewThemeToggle.min.js"},
+		{"src/js/reviewsMain.js", "public/js/reviewsMain.min.js"},
 	}
 
 	for _, f := range jsFiles {

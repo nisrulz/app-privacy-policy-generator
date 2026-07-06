@@ -11,11 +11,14 @@ import (
 func cacheBust() error {
 	sharedFiles := []string{
 		"public/css/style.min.css",
+		"public/css/reviews.min.css",
 		"public/js/main.min.js",
 		"public/js/locales.min.js",
 		"public/js/utils.min.js",
 		"public/js/thirdpartyservices.min.js",
 		"public/js/flycricket.min.js",
+		"public/js/reviewThemeToggle.min.js",
+		"public/js/reviewsMain.min.js",
 		"public/js/vendor/vue.global.prod.js",
 		"public/js/vendor/to-markdown.min.js",
 	}

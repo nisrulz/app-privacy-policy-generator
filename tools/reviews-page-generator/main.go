@@ -33,7 +33,10 @@ var (
 	tmplPath, outPath, dataPath, pubDir string
 
 	imageURLRe = regexp.MustCompile(`https?://[^\s]+\.(?:png|jpg|jpeg|gif)`)
+	ghAssetRe  = regexp.MustCompile(`https://github\.com/user-attachments/assets/[a-f0-9-]+`)
 	commentsRe = regexp.MustCompile(`\{\{#comments\}\}[\s\S]*?\{\{/comments\}\}`)
+
+	imageMap map[string]string
 )
 
 type ghUser struct {
@@ -51,7 +54,6 @@ type ghComment struct {
 type reviewEntry struct {
 	URL       string `json:"url"`
 	Author    string `json:"author"`
-	Avatar    string `json:"avatar"`
 	Timestamp string `json:"timestamp"`
 	Body      string `json:"body"`
 }
@@ -159,7 +161,27 @@ func fetchPage(client *http.Client, page int) []ghComment {
 	return nil
 }
 
+func contentExt(ct string) string {
+	ct = strings.TrimSpace(strings.Split(ct, ";")[0])
+	switch ct {
+	case "image/png":
+		return ".png"
+	case "image/jpeg", "image/jpg":
+		return ".jpg"
+	case "image/gif":
+		return ".gif"
+	case "image/webp":
+		return ".webp"
+	case "image/svg+xml":
+		return ".svg"
+	default:
+		return ".png"
+	}
+}
+
 func downloadImages(client *http.Client, comments []ghComment) {
+	imageMap = make(map[string]string)
+
 	var (
 		mu   sync.Mutex
 		wg   sync.WaitGroup
@@ -168,9 +190,14 @@ func downloadImages(client *http.Client, comments []ghComment) {
 	sem := make(chan struct{}, concurrency)
 
 	for _, c := range comments {
-		urls := imageURLRe.FindAllString(c.Body, -1)
+		var urls []string
+		for _, u := range imageURLRe.FindAllString(c.Body, -1) {
+			urls = append(urls, strings.Split(u, "?")[0])
+		}
+		for _, u := range ghAssetRe.FindAllString(c.Body, -1) {
+			urls = append(urls, u)
+		}
 		for _, u := range urls {
-			u = strings.Split(u, "?")[0]
 			mu.Lock()
 			if seen[u] {
 				mu.Unlock()
@@ -185,9 +212,26 @@ func downloadImages(client *http.Client, comments []ghComment) {
 				sem <- struct{}{}
 				defer func() { <-sem }()
 
-				name := filepath.Base(url)
+				isAsset := ghAssetRe.MatchString(url)
+				var name string
+				if isAsset {
+					name = filepath.Base(url)
+				} else {
+					name = filepath.Base(url)
+				}
 				path := filepath.Join(imgsDir, name)
-				if _, err := os.Stat(path); err == nil {
+				if isAsset {
+					matches, _ := filepath.Glob(filepath.Join(imgsDir, name+".*"))
+					if len(matches) > 0 {
+						mu.Lock()
+						imageMap[url] = filepath.Base(matches[0])
+						mu.Unlock()
+						return
+					}
+				} else if _, err := os.Stat(path); err == nil {
+					mu.Lock()
+					imageMap[url] = name
+					mu.Unlock()
 					return
 				}
 
@@ -197,12 +241,27 @@ func downloadImages(client *http.Client, comments []ghComment) {
 				}
 				defer resp.Body.Close()
 
+				if resp.StatusCode != http.StatusOK {
+					return
+				}
+
 				data, err := io.ReadAll(resp.Body)
 				if err != nil {
 					return
 				}
+
+				if isAsset {
+					ext := contentExt(resp.Header.Get("Content-Type"))
+					name = name + ext
+					path = filepath.Join(imgsDir, name)
+				}
+
 				os.WriteFile(path, data, 0644)
 				fmt.Printf("  Downloaded image: %s\n", name)
+
+				mu.Lock()
+				imageMap[url] = name
+				mu.Unlock()
 			}(u)
 		}
 	}
@@ -226,15 +285,14 @@ func prepareComments(comments []ghComment) []reviewEntry {
 		bodyHTML := buf.String()
 
 		bodyHTML = strings.ReplaceAll(bodyHTML, c.User.AvatarURL, "")
-		for _, url := range imageURLRe.FindAllString(bodyHTML, -1) {
-			name := filepath.Base(strings.Split(url, "?")[0])
+
+		for url, name := range imageMap {
 			bodyHTML = strings.ReplaceAll(bodyHTML, url, "./downloaded_images/"+name)
 		}
 
 		entries = append(entries, reviewEntry{
 			URL:       c.HTMLURL,
 			Author:    c.User.Login,
-			Avatar:    "",
 			Timestamp: timestamp,
 			Body:      bodyHTML,
 		})

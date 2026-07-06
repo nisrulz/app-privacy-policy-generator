@@ -32,9 +32,9 @@ mv "$TEMP_DIR"/*.svg app_graphics
 npx -q svgo -f app_icons "$TEMP_DIR"
 mv "$TEMP_DIR"/*.svg app_icons
 
-npx -q svgo -f social_icons "$TEMP_DIR"
-mv "$TEMP_DIR"/*.svg social_icons
-
 # Compress PNG files
 npx -q png-minify minify third_party_logos/*.png
+
+# Compress downloaded review images
+npx -q png-minify minify ../downloaded_images/*.png 2>/dev/null || true
 
