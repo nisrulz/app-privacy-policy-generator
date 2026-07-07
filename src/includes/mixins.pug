@@ -45,5 +45,9 @@ mixin wizardMobileLogo()
 //- Wizard sidebar image
 mixin wizardSidebar()
   .column.is-information.is-hidden-touch
-    a(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' target='_blank' rel='noopener noreferrer')
+    a(href='https://github.com/nisrulz/app-privacy-policy-generator' target='_blank' rel='noopener noreferrer')
       img.center-block.sidebar-img(src='/images/side_image/side_image.png' :data-theme-logo='true')
+    p.mt-2.has-text-centered
+      a(href='https://github.com/nisrulz/app-privacy-policy-generator' target='_blank' rel='noopener noreferrer') GitHub
+      |  / 
+      button.theme-toggle(@click='toggleTheme($event)') 🌙

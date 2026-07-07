@@ -1,17 +1,28 @@
-
-*.log
-*.cache
+# Dependencies
 node_modules/
+
+# Build output
 dist/
-.DS_Store
-.env
-.context/
-public/downloaded_images/
-public/profile_pictures/
-public/tmp/
-src/js/thirdpartyservices.js
-plan/
 /build
 cmd/build/build
+
+# Generated files
+src/js/thirdpartyservices.js
+public/tmp/
+public/profile_pictures/
+
+# Environment
+.env
+
+# IDE / OS
+.DS_Store
+.context/
+plan/
+
+# Test output
 test-results/
 playwright-report/
+
+# Logs
+*.log
+*.cache

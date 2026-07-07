@@ -61,7 +61,13 @@ const app = createApp({
   },
   watch: {
     wizardStep: function () {
-      this.$nextTick(_updateThemeLogo);
+      this.$nextTick(function () {
+        var theme = document.documentElement.getAttribute('data-theme');
+        document.querySelectorAll('.theme-toggle').forEach(function (el) {
+          el.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+        });
+        _updateThemeLogo();
+      });
     }
   },
 });

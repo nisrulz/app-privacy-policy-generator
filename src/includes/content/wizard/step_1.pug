@@ -1,7 +1,7 @@
 section#step-1.columns.has-text-centered(v-if='wizardStep==1')
   .column.is-full
-    a.title(href='https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator' target='_blank' rel='noopener noreferrer' :aria-label='translate("meta.title")')
-    img.center-block.hero-image(src='/images/side_image/side_image.png' :data-theme-logo='true' :alt='translate("wizard.step1.heroAlt")' width='2024' height='1132' fetchpriority='high')
+    a.title(href='https://github.com/nisrulz/app-privacy-policy-generator' target='_blank' rel='noopener noreferrer' :aria-label='translate("meta.title")')
+      img.center-block.hero-image(src='/images/side_image/side_image.png' :data-theme-logo='true' :alt='translate("wizard.step1.heroAlt")' width='2024' height='1132' fetchpriority='high')
     p.is-size-8.mt-2
       | {{ translate('wizard.step1.tagline') }}
     p.mt-2
@@ -13,6 +13,9 @@ section#step-1.columns.has-text-centered(v-if='wizardStep==1')
       |  / 
       a(href="#" @click.prevent='toggleDisclaimerModalVisibility')
         | {{ translate('wizard.step1.disclaimer') }}
+      |  / 
+      a(href='https://github.com/nisrulz/app-privacy-policy-generator' target='_blank' rel='noopener noreferrer')
+        | GitHub
       |  / 
       a(href='https://ko-fi.com/nisrulz' target='_blank' rel='noopener noreferrer')
         | {{ translate('wizard.step1.buyMeCoffee') }}
