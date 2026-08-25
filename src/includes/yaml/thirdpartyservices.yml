@@ -197,3 +197,9 @@
   link:
     privacy: https://www.instabug.com/privacy
     terms: https://www.instabug.com/terms
+- name: AppFlyer
+  enabled: false
+  logo: /images/third_party_logos/appflyer.png
+  link:
+    privacy: https://www.appsflyer.com/legal/privacy-policy/
+    terms: https://www.appsflyer.com/legal/site-terms/
