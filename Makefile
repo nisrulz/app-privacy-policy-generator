@@ -9,6 +9,9 @@ upgrade-deps: ## Update npm and Go dependencies
 build: ## Build the project
 	@go run ./cmd/build/
 
+compress-images: ## Compress images in public/images
+	@./scripts/compress_images.sh
+
 serve: ## Build and serve locally
 	@go run ./cmd/build/ -serve
 
