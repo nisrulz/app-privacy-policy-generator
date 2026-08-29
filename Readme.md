@@ -27,16 +27,17 @@
 
 ## What it does
 
-You fill out a wizard, pick what data your app collects, and it spits out a privacy policy and terms & conditions. Three flavors: Simple, No Tracking, GDPR. The text adapts automatically based on whether your app runs on mobile, web, or both. You can tweak age of consent, AI disclosure, location tracking, PII fields, and more. Export as Preview, HTML, or Markdown. It is a PWA too, so it works offline.
+Fill out the wizard, select the data your app collects, and generate a privacy policy or Terms & Conditions. Choose Simple, No Tracking, or GDPR. The text adapts to mobile, web, or combined platforms. You can also set the age of consent, AI disclosure, location tracking, and PII fields. Export the result as a preview, HTML, or Markdown file. The app also works offline as a PWA.
 
 ## Quick Start
 
 ```sh
-npm install
+make format
+make check
 make serve
 ```
 
-Requires [Go](https://go.dev/dl/) 1.25+ and Node.js.
+Requires [Go](https://go.dev/dl/) 1.25 or later.
 
 ## Docs
 
@@ -53,9 +54,10 @@ This project accepts **bug fixes only**. This policy helps keep maintenance sust
 For feature proposals, open an issue first.
 
 ```sh
-npm install
+make format
+make check
 make serve        # dev server on :8000
-make test         # E2E tests (Playwright)
+make test         # E2E tests (chromedp)
 ```
 
 ## Support

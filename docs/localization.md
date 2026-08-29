@@ -1,6 +1,6 @@
 # Localization Guide
 
-This project does compile-time localization. Each language gets its own `index.html`. You only need to edit one JSON file per language. No code changes required.
+The build creates a separate `index.html` file for each language. Add a locale by creating one JSON file. You do not need to change Go or JavaScript code.
 
 ---
 
@@ -29,7 +29,7 @@ Edit the JSON file and replace English values with your translations. Do not cha
 ### Step 3: Build
 
 ```sh
-❯ make build
+make build
 ```
 
 The Go build tool picks up all JSON files in `src/locales/` automatically. No registration needed.
@@ -37,16 +37,16 @@ The Go build tool picks up all JSON files in `src/locales/` automatically. No re
 To build only your new locale during development:
 
 ```sh
-❯ go run ./cmd/build/ -lang es
+go run ./cmd/build/ -lang es
 ```
 
-Open `public/index.html` and check that your translations show up.
+Open the generated file and check that the translations appear.
 
 ---
 
 ## Locale file structure
 
-All strings live in `src/locales/{lang}.json`. Each file starts with a `_flag` key for the locale dropdown emoji. Currently available: English (`en.json`) and German (`de.json`).
+All strings live in `src/locales/{lang}.json`. Each file starts with a `_flag` key for the locale selector. The current locales are English (`en.json`) and German (`de.json`).
 
 Keys use dot-separated namespaces:
 
@@ -88,7 +88,7 @@ Some locale values contain HTML (`<strong>` tags, links, etc.). Vue renders thes
 
 ## Testing your translation
 
-1. Run `❯ make build`
+1. Run `make build`
 2. Open `public/index.html` in your browser
 3. Go through the wizard and check that all UI text is translated
 4. Generate a privacy policy and verify the legal text
@@ -118,5 +118,5 @@ The app uses the locale-specific name when available and falls back to the defau
 ## Important notes
 
 - Privacy policies and Terms & Conditions are legal documents. If you translate them, have a native-speaking legal professional review your translation before using it.
-- The Vue directives (`v-if`, `v-for`) in the Pug templates are language-independent. They work the same for all languages.
-- All translatable content lives in the JSON locale files. The Pug templates only have structural markup and `translate('key')` calls. Do not edit them.
+- The Vue directives (`v-if`, `v-for`) in the Go templates are language-independent. They work the same for all languages.
+- All translatable content lives in the JSON locale files. The Go templates under [`src/tpl`](../src/tpl) contain structural markup and `translate('key')` calls. Do not edit them for a translation-only change.
