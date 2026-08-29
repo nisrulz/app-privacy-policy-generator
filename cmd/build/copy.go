@@ -1,11 +1,13 @@
 package main
 
+import "fmt"
+
 func copyVendorAssets() error {
 	if err := ensureDir("public/js/vendor"); err != nil {
-		return err
+		return fmt.Errorf("create vendor js directory: %w", err)
 	}
 	if err := ensureDir("public/images/vendor"); err != nil {
-		return err
+		return fmt.Errorf("create vendor images directory: %w", err)
 	}
 
 	vendorJS := map[string]string{
@@ -15,7 +17,7 @@ func copyVendorAssets() error {
 	for src, dst := range vendorJS {
 		if fileExists(src) {
 			if err := copyFile(src, dst); err != nil {
-				return err
+				return fmt.Errorf("copy vendor asset %s: %w", src, err)
 			}
 		}
 	}

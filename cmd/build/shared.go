@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -27,7 +28,7 @@ func cleanPublic() error {
 		if os.IsNotExist(err) {
 			return nil
 		}
-		return err
+		return fmt.Errorf("read public/ directory: %w", err)
 	}
 
 	for _, entry := range entries {
@@ -36,7 +37,7 @@ func cleanPublic() error {
 
 		if generatedDirs[name] || generatedFiles[name] {
 			if err := os.RemoveAll(path); err != nil {
-				return err
+				return fmt.Errorf("remove %s: %w", path, err)
 			}
 			continue
 		}
@@ -44,12 +45,13 @@ func cleanPublic() error {
 		if entry.IsDir() && name == "css" {
 			subEntries, err := os.ReadDir(path)
 			if err != nil {
-				return err
+				return fmt.Errorf("read css directory: %w", err)
 			}
 			for _, sub := range subEntries {
 				if cssGeneratedFiles[sub.Name()] {
-					if err := os.RemoveAll(filepath.Join(path, sub.Name())); err != nil {
-						return err
+					subPath := filepath.Join(path, sub.Name())
+					if err := os.RemoveAll(subPath); err != nil {
+						return fmt.Errorf("remove %s: %w", subPath, err)
 					}
 				}
 			}
@@ -74,16 +76,18 @@ func copyFile(src, dst string) error {
 
 	srcFile, err := os.Open(src)
 	if err != nil {
-		return err
+		return fmt.Errorf("open %s: %w", src, err)
 	}
 	defer srcFile.Close()
 
 	dstFile, err := os.Create(dst)
 	if err != nil {
-		return err
+		return fmt.Errorf("create %s: %w", dst, err)
 	}
 	defer dstFile.Close()
 
-	_, err = io.Copy(dstFile, srcFile)
-	return err
+	if _, err := io.Copy(dstFile, srcFile); err != nil {
+		return fmt.Errorf("copy %s to %s: %w", src, dst, err)
+	}
+	return nil
 }

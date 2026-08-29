@@ -73,8 +73,12 @@ func renderHTML(lang, outDir string) error {
 
 	var buf bytes.Buffer
 	if err := tmpl.ExecuteTemplate(&buf, "page.html", data); err != nil {
-		return fmt.Errorf("execute templates: %w", err)
+		return fmt.Errorf("execute templates for %s: %w", lang, err)
 	}
 
-	return os.WriteFile(filepath.Join(outDir, "index.html"), buf.Bytes(), 0644)
+	outPath := filepath.Join(outDir, "index.html")
+	if err := os.WriteFile(outPath, buf.Bytes(), 0644); err != nil {
+		return fmt.Errorf("write %s: %w", outPath, err)
+	}
+	return nil
 }

@@ -40,7 +40,7 @@ func cacheBust() error {
 
 	err := filepath.Walk("public", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			return err
+			return fmt.Errorf("walk %s: %w", path, err)
 		}
 		if info.IsDir() || !strings.HasSuffix(path, ".html") {
 			return nil
@@ -48,7 +48,7 @@ func cacheBust() error {
 
 		content, err := os.ReadFile(path)
 		if err != nil {
-			return err
+			return fmt.Errorf("read %s: %w", path, err)
 		}
 
 		html := string(content)
@@ -56,15 +56,18 @@ func cacheBust() error {
 			html = strings.ReplaceAll(html, old+"\"", new+"\"")
 		}
 
-		return os.WriteFile(path, []byte(html), 0644)
+		if err := os.WriteFile(path, []byte(html), 0644); err != nil {
+			return fmt.Errorf("write %s: %w", path, err)
+		}
+		return nil
 	})
 	if err != nil {
-		return err
+		return fmt.Errorf("cache-bust HTML files: %w", err)
 	}
 
 	langs, err := getLocales()
 	if err != nil {
-		return err
+		return fmt.Errorf("determine locales: %w", err)
 	}
 
 	for _, lang := range langs {
@@ -78,7 +81,7 @@ func cacheBust() error {
 		}
 		hash, err := computeHash(f)
 		if err != nil {
-			continue
+			return fmt.Errorf("hash locale js for %s: %w", lang, err)
 		}
 		htmlPath := filepath.Join(outDir, "index.html")
 		if !fileExists(htmlPath) {
@@ -86,11 +89,11 @@ func cacheBust() error {
 		}
 		content, err := os.ReadFile(htmlPath)
 		if err != nil {
-			continue
+			return fmt.Errorf("read %s: %w", htmlPath, err)
 		}
 		html := strings.ReplaceAll(string(content), "locale.min.js\"", "locale.min.js?v="+hash+"\"")
 		if err := os.WriteFile(htmlPath, []byte(html), 0644); err != nil {
-			return err
+			return fmt.Errorf("write %s: %w", htmlPath, err)
 		}
 	}
 
@@ -100,7 +103,7 @@ func cacheBust() error {
 func computeHash(path string) (string, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("read %s: %w", path, err)
 	}
 
 	hash := md5.Sum(data)
