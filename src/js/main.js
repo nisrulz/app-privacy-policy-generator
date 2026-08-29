@@ -369,10 +369,10 @@ var appState = useAppState();
 var appWizard = useWizard(appState);
 var appContent = useContent(appState, appWizard);
 
-var app = createApp({
+var app = Vue.createApp({
   delimiters: ['[[', ']]'],
   setup: function () {
-    return Object.assign({}, appState, appWizard, appContent);
+    return Object.assign({}, Vue.toRefs(appState), Vue.toRefs(appWizard), appContent);
   },
   mounted: function () {
     this.$nextTick(function () {
