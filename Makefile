@@ -39,7 +39,7 @@ update-deps: ## Update Go dependencies
 
 serve: ## Build and serve locally || Example: make serve PORT="9090"
 	@echo "→ Starting server..."
-	@go run ./cmd/build/ -serve $(if $(PORT),-port $(PORT))
+	@./scripts/serve.sh $(if $(PORT),$(PORT))
 
 watch: ## Watch for changes and rebuild
 	@echo "→ Watching for changes..."

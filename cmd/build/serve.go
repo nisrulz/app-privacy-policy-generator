@@ -55,7 +55,6 @@ func runServe(langs []string, clean bool, port string) {
 		<-sigChan
 		fmt.Println("\n 🛑  Server stopped")
 		server.Shutdown(context.Background())
-		os.Exit(0)
 	}()
 	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		if isPortInUse(err) {
