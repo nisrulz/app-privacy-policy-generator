@@ -14,6 +14,7 @@ Code Quality
   format             Format Go source, templates, and tidy modules
   check              Run tests, vet, and build checks
   test               Run E2E tests (requires make serve running)
+  update-deps        Update Go dependencies
 
 Data
   reviews            Generate reviews page
@@ -22,5 +23,6 @@ Data
 Deploy
   deploy             Deploy to Firebase Hosting
                      Example: make deploy VERSION="3.0.9"
+  firebase-preview   Build and preview via Firebase local server
 
 EOF

@@ -10,5 +10,3 @@ else
   echo "Using cached data (use -f to force re-fetch from GitHub)"
   go run .
 fi
-
-echo "✅ Done!"

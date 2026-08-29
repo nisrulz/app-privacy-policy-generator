@@ -1,4 +1,4 @@
-.PHONY: build clean compress-images format check serve watch deploy reviews test help
+.PHONY: build clean compress-images format check update-deps serve watch deploy firebase-preview reviews test help
 
 help: ## Show available commands
 	@./scripts/help.sh
@@ -32,13 +32,23 @@ compress-images: ## Compress images in public/images
 	@./scripts/compress_images.sh
 	@echo "✓ Images compressed"
 
+update-deps: ## Update Go dependencies
+	@echo "→ Updating dependencies..."
+	@./scripts/update_deps.sh
+	@echo "✓ Dependencies updated"
+
 serve: ## Build and serve locally || Example: make serve PORT="9090"
 	@echo "→ Starting server..."
-	@go run ./cmd/build/ -serve -port $(PORT)
+	@go run ./cmd/build/ -serve $(if $(PORT),-port $(PORT))
 
 watch: ## Watch for changes and rebuild
 	@echo "→ Watching for changes..."
 	@go run ./cmd/build/ -watch
+
+firebase-preview: ## Build and preview via Firebase local server
+	@echo "→ Starting Firebase preview..."
+	@./scripts/firebase_local_preview.sh
+	@echo "✓ Preview running"
 
 deploy: ## Deploy to Firebase Hosting || Example: make deploy VERSION="3.0.9"
 	@echo "→ Deploying to Firebase..."
