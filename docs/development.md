@@ -38,8 +38,10 @@ Other useful commands:
 make format           # format Go source, templates, and tidy modules
 make check            # run tests, vet, and build checks
 make clean            # clean public/ directory
+make compress-images  # compress images in public/images
 make watch            # watch for changes and rebuild automatically
 make reviews          # generate reviews page from cached data
+make update-deps      # update Go dependencies
 ```
 
 You can also clean before building:
@@ -61,7 +63,7 @@ This formats Go source files, HTML templates, and runs `go mod tidy`.
 ## Compress images
 
 ```sh
-./scripts/compress_images.sh
+make compress-images
 ```
 
 ## Adding a 3rd party service
@@ -117,6 +119,24 @@ make test           # run E2E tests in another terminal
 ```
 
 Tests are in `cmd/build/e2e/`. The dev server must be running before you run tests.
+
+## Updating dependencies
+
+```sh
+make update-deps
+```
+
+This runs `go get -u ./...` and `go mod tidy` to update all Go dependencies.
+
+## Firebase preview
+
+Build and preview the site locally using Firebase Hosting:
+
+```sh
+make firebase-preview
+```
+
+This runs `make build` then starts `firebase serve --only hosting`.
 
 ## Deploying to production
 
