@@ -51,6 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
     return Math.abs(hash);
   }
 
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
   function applyGradients() {
     var avatars = document.querySelectorAll(".review-avatar[data-author]");
     for (var i = 0; i < avatars.length; i++) {
@@ -87,10 +95,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     card.innerHTML =
       '<div class="review-header">' +
-        '<div class="review-avatar" style="background:' + gradient + '">' + initial + "</div>" +
+        '<div class="review-avatar" style="background:' + gradient + '">' + escapeHtml(initial) + "</div>" +
         '<div class="review-meta">' +
-          '<div class="review-author">' + r.author + "</div>" +
-          '<div class="review-timestamp">' + r.timestamp + "</div>" +
+          '<div class="review-author">' + escapeHtml(r.author) + "</div>" +
+          '<div class="review-timestamp">' + escapeHtml(r.timestamp) + "</div>" +
         "</div>" +
       "</div>" +
       '<div class="review-body">' + r.body + "</div>" +

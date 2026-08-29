@@ -16,7 +16,6 @@ import (
 	"time"
 
 	"github.com/yuin/goldmark"
-	"github.com/yuin/goldmark/renderer/html"
 )
 
 const (
@@ -269,7 +268,7 @@ func downloadImages(client *http.Client, comments []ghComment) {
 }
 
 func prepareComments(comments []ghComment) []reviewEntry {
-	md := goldmark.New(goldmark.WithRendererOptions(html.WithUnsafe()))
+	md := goldmark.New()
 	var buf bytes.Buffer
 
 	entries := make([]reviewEntry, 0, len(comments))
