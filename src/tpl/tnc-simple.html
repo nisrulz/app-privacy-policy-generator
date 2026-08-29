@@ -1,0 +1,170 @@
+{{ define "termsBody" }}
+<section class="modal-card-body modal-box">
+	<div id="tandc_content" v-show="contentRenderType==1"><strong>[[ translate('tnc.title') ]]</strong>
+		<br>
+		<p v-html="translate('tnc.intro')"></p>
+		<br>
+		<p>[[ translate('tnc.acceptance') ]]</p>
+		<br>
+		<div v-if="!isAppOpenSource()"><strong>[[ translate('tnc.licenseTitle') ]]</strong>
+			<p v-html="translate('tnc.licenseCommercial')"></p>
+		</div>
+		<div v-else><strong>[[ translate('tnc.licenseTitle') ]]</strong>
+			<p>[[ translate('tnc.licenseOpenSource') ]]</p>
+		</div>
+		<br><strong>[[ translate('tnc.ipTitle') ]]</strong>
+		<p>[[ translate('tnc.ipText') ]]</p>
+		<br><strong>[[ translate('tnc.terminationTitle') ]]</strong>
+		<p>[[ translate('tnc.terminationBreach') ]]</p>
+		<br>
+		<p>[[ translate('tnc.terminationImmediate') ]]</p>
+		<br>
+		<p>[[ translate('tnc.terminationEffect') ]]</p>
+		<br>
+		<p v-html="translate('tnc.terminationAge')"></p>
+		<div v-if="!isAppOpenSource()">
+			<br>
+			<p>[[ translate('tnc.terminationNoDeriv') ]]</p>
+		</div>
+		<br><strong>[[ translate('tnc.ugcTitle') ]]</strong>
+		<p>[[ translate('tnc.ugcIntro') ]]</p>
+		<ul>
+			<li>[[ translate('tnc.ugc.illegal') ]]</li>
+			<li>[[ translate('tnc.ugc.abusive') ]]</li>
+			<li>[[ translate('tnc.ugc.discrimination') ]]</li>
+			<li>[[ translate('tnc.ugc.spam') ]]</li>
+			<li>[[ translate('tnc.ugc.privacy') ]]</li>
+			<li>[[ translate('tnc.ugc.misleading') ]]</li>
+			<li>[[ translate('tnc.ugc.violence') ]]</li>
+		</ul>
+		<br>
+		<p>[[ translate('tnc.ugc.rightsTitle') ]]</p>
+		<ul>
+			<li>[[ translate('tnc.ugc.remove') ]]</li>
+			<li>[[ translate('tnc.ugc.suspend') ]]</li>
+			<li>[[ translate('tnc.ugc.lawEnforcement') ]]</li>
+			<li>[[ translate('tnc.ugc.moderate') ]]</li>
+		</ul>
+		<br>
+		<p>[[ translate('tnc.ugc.visibility') ]]</p>
+		<br>
+		<p v-html="translate('tnc.ugc.report')"></p>
+		<br>
+		<p>[[ translate('tnc.ugc.inApp') ]]</p>
+		<br>
+		<p v-html="translate('tnc.ugc.review')"></p>
+		<br>
+		<p>[[ translate('tnc.ugc.license') ]]</p>
+		<br>
+		<p>[[ translate('tnc.ugc.personalData') ]]</p>
+		<br>
+		<p>[[ translate('tnc.ugc.modification') ]]</p>
+		<br>
+		<p v-html="translate('tnc.dataStorage')"></p>
+		<div v-if="isPhoneOs">
+			<p v-html="translate('tnc.jailbreak')"></p>
+		</div>
+		<div v-if="hasThirdPartyServicesSelected">
+			<p>[[ translate('tnc.thirdPartyTitle') ]]</p>
+			<ul>
+				<li v-for="item in enabledThirdPartyServicesWithTerms" :key="item.name"><a :href="item.link.terms"
+						target="_blank" rel="noopener noreferrer">[[ tpsName(item) ]]</a>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<div v-if="isMobileApp">
+			<p>[[ translate('tnc.mobileData') ]]</p>
+			<br>
+			<p>[[ translate('tnc.mobileCharges') ]]</p>
+		</div>
+		<div v-if="isWebApp">
+			<p>[[ translate('tnc.webData') ]]</p>
+			<br>
+			<p>[[ translate('tnc.webCharges') ]]</p>
+		</div>
+		<br>
+		<p>[[ translate('tnc.battery') ]]</p>
+		<br>
+		<p>[[ translate('tnc.consumerRights') ]]</p><strong>[[ translate('tnc.limitationTitle') ]]</strong>
+		<p>[[ translate('tnc.limitationText') ]]</p>
+		<br>
+		<p>[[ translate('tnc.limitationRetains') ]]</p>
+		<ul>
+			<li>[[ translate('tnc.limitation.death') ]]</li>
+			<li>[[ translate('tnc.limitation.fraud') ]]</li>
+			<li>[[ translate('tnc.limitation.other') ]]</li>
+		</ul>
+		<br>
+		<p>[[ translate('tnc.limitationCap') ]]</p>
+		<br>
+		<p>[[ translate('tnc.limitationThirdParty') ]]</p>
+		<br><strong>[[ translate('tnc.indemnificationTitle') ]]</strong>
+		<p>[[ translate('tnc.indemnificationText') ]]</p>
+		<br>
+		<p>[[ translate('tnc.indemnificationException') ]]</p>
+		<br>
+		<div v-if="isAIUsed">
+			<p>[[ translate('tnc.aiText') ]]</p>
+			<br>
+		</div>
+		<p>[[ translate('tnc.updates') ]]</p>
+		<br><strong>[[ translate('tnc.governingLawTitle') ]]</strong>
+		<br>
+		<p>[[ translate('tnc.governingLawText') ]]</p>
+		<br>
+		<p>[[ translate('tnc.governingLawDispute') ]]</p>
+		<br><strong>[[ translate('tnc.dsaTitle') ]]</strong>
+		<br>
+		<p>[[ translate('tnc.dsaIntro') ]]</p>
+		<br>
+		<p v-html="translate('tnc.dsaPointOfContact')"></p>
+		<br>
+		<p v-if="euRepresentative"><strong>[[ translate('tnc.dsaEuRep') ]]</strong>
+		</p>
+		<br>
+		<p>[[ translate('tnc.dsaModeration') ]]</p>
+		<br>
+		<p>[[ translate('tnc.dsaNotice') ]]</p>
+		<br>
+		<p>[[ translate('tnc.dsaDispute') ]]</p>
+		<br>
+		<p v-html="translate('tnc.dsaTransparency')"></p>
+		<br>
+		<p>[[ translate('tnc.dsaNote') ]]</p>
+		<br><strong>[[ translate('tnc.severabilityTitle') ]]</strong>
+		<p>[[ translate('tnc.severabilityText') ]]</p>
+		<br><strong>[[ translate('tnc.entireAgreementTitle') ]]</strong>
+		<p>[[ translate('tnc.entireAgreementText') ]]</p>
+		<br><strong>[[ translate('tnc.changesTitle') ]]</strong>
+		<p>[[ translate('tnc.changesText') ]]</p>
+		<br>
+		<p v-html="translate('tnc.changesPrev')"></p>
+		<br>
+		<p v-html="translate('tnc.effectiveDate')"></p>
+		<br><strong>[[ translate('tnc.contactTitle') ]]</strong>
+		<p v-html="translate('tnc.contactText')"></p>
+		{{ template "attribution" dict "type" "Terms &amp; Conditions" }}
+	</div>
+	<textarea class="textarea" id="tandc_txtarea"
+		:aria-label="translate(&quot;tnc.title&quot;) + translate(&quot;modal.textareaLabel&quot;)"
+		onclick="this.focus();this.select()" readonly="readonly" v-show="contentRenderType==2"></textarea>
+</section>
+<footer class="modal-card-foot">
+	{{ template "outputButtons" dict "contentId" "tandc_content" "textareaId" "tandc_txtarea" }}{{ template
+	"flycricketDeploy" dict "method" "deployFcSimple()" "enabled" $.Flycricket
+}}</footer>
+{{ end }}
+
+{{ define "termsModal" }}
+<div class="modal" v-bind:class="{'is-active': showTermsModal}">
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title no-select">[[ translate('modal.terms.title') ]]</p><button class="delete"
+				aria-label="close" @click="toggleTermsModalVisibility"></button>
+		</header>
+		{{ template "termsBody" . }}
+	</div>
+</div>
+{{ end }}

@@ -1,0 +1,5 @@
+{{ define "wizardProgress" }}
+{{ $class := "is-link" }}
+{{ if eq .value 100 }}{{ $class = "is-primary" }}{{ end }}
+<progress class="progress is-small {{ $class }}" value="{{ .value }}" max="100"></progress>
+{{ end }}

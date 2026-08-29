@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html lang="{{ .Lang }}" data-theme="light">
+	<head>
+		{{ if $.ThemeToggle }}
+	<script>(function () {
+			var theme = localStorage.getItem('theme');
+			if (!theme) theme = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+			document.documentElement.setAttribute('data-theme', theme);
+		})();</script>
+		{{ end }}
+		{{ template "head" . }}
+	</head>
+
+	<body class="bg-pattern">
+		<main class="container" id="app">
+			{{ template "content" . }}</main>
+		{{ template "footer" . }}
+	</body>
+
+</html>

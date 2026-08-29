@@ -11,10 +11,19 @@ import (
 func main() {
 	langFlag := flag.String("lang", "", "Comma-separated list of locales to build (default: all)")
 	cleanFlag := flag.Bool("clean", false, "Clean public/ directory before building")
+	cleanOnlyFlag := flag.Bool("clean-only", false, "Clean public/ directory and exit")
 	watchFlag := flag.Bool("watch", false, "Watch for file changes and rebuild")
 	serveFlag := flag.Bool("serve", false, "Build and serve locally")
 	portFlag := flag.String("port", "8000", "Port to serve on")
 	flag.Parse()
+
+	if *cleanOnlyFlag {
+		if err := cleanPublic(); err != nil {
+			fmt.Fprintf(os.Stderr, " ❌  %v\n", err)
+			os.Exit(1)
+		}
+		return
+	}
 
 	langs, err := determineLangs(*langFlag)
 	if err != nil {
@@ -55,8 +64,8 @@ func runBuild(langs []string, clean bool) {
 		return buildLocalesRegistry()
 	})
 
-	step("STEP 4: Render Pug → HTML (reference for CSS minification)", func() error {
-		return renderPug("en", "public")
+	step("STEP 4: Render HTML (reference for CSS minification)", func() error {
+		return renderHTML("en", "public")
 	})
 
 	step("STEP 5: Minify JS", func() error {

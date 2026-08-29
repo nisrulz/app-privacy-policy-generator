@@ -1,0 +1,37 @@
+{{ define "wizardStep5" }}
+<section class="columns" id="step-5" v-if="wizardStep==5">
+	<div class="column card">
+		<div class="card-content">
+			{{ template "wizardMobileLogo" . }}{{ template "wizardProgress" dict "value" 56 }}<div
+				class="scrollable content">
+				<div class="control">[[ translate('wizard.step5.selectPlatform') ]]<span
+						class="tag is-primary is-light">[[selectedPlatformsLabel]]</span>
+					<br>
+					<input v-model="platforms.Android" id="platform-android" type="checkbox"><label
+						for="platform-android"> [[ translate('wizard.step5.android') ]]</label>
+					<br>
+					<input v-model="platforms.iOS" id="platform-ios" type="checkbox"><label for="platform-ios"> [[
+						translate('wizard.step5.ios') ]]
+					</label>
+					<br>
+					<input v-model="platforms.KaiOS" id="platform-kaios" type="checkbox"><label for="platform-kaios"> [[
+						translate('wizard.step5.kaios') ]]
+					</label>
+					<br>
+					<input v-model="platforms.Windows" id="platform-windows" type="checkbox"><label
+						for="platform-windows"> [[ translate('wizard.step5.windows') ]]</label>
+					<br>
+					<input v-model="platforms.Web" id="platform-web" type="checkbox"><label for="platform-web"> [[
+						translate('wizard.step5.web') ]]
+					</label>
+				</div>
+			</div>
+		</div>
+		<footer class="card-footer"><a class="card-footer-item" @click="prevStep">[[ translate('wizard.step5.previous')
+				]]
+			</a><a class="card-footer-item" @click="nextStep">[[ translate('wizard.step5.next') ]]</a>
+		</footer>
+	</div>
+	{{ template "wizardSidebar" . }}
+</section>
+{{ end }}

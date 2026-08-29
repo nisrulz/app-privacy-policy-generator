@@ -1,0 +1,48 @@
+{{ define "wizardStep8" }}
+<section class="columns" id="step-8" v-if="wizardStep==8">
+	<div class="column card">
+		<div class="card-content">
+			{{ template "wizardMobileLogo" . }}{{ template "wizardProgress" dict "value" 100 }}<div
+				class="scrollable content">
+				<div class="notification is-warning">
+					<p>[[ translate('wizard.step8.supportTitle') ]]<a rel="noopener noreferrer" target="_blank"
+							href="https://github.com/sponsors/nisrulz">[[ translate('wizard.step8.sponsor') ]]</a>,
+						<a rel="noopener noreferrer" target="_blank" href="https://ko-fi.com/nisrulz">[[
+							translate('wizard.step8.buyMeCoffee') ]]
+						</a>,
+						<a rel="noopener noreferrer" target="_blank"
+							href="https://app-privacy-policy-generator.nisrulz.com/">[[
+							translate('wizard.step8.shareIt') ]]
+						</a>, or
+						<a href="/reviews.html" target="_blank" rel="noopener noreferrer">[[
+							translate('wizard.step8.leaveReview') ]]
+						</a>.
+					</p>
+				</div>
+				<p>[[ translate('wizard.step8.chooseDoc') ]]<br><a class="has-info" rel="noopener noreferrer"
+						@click="toggleFaqModalVisibility">[[ translate('wizard.step8.readFaq') ]]</a>
+					<p class="has-text-grey-light">[[ translate('wizard.step8.disclaimerNote') ]]</p>
+					<p style="margin-bottom: 0;"><a class="has-text-danger" rel="noopener noreferrer"
+							@click="toggleDisclaimerModalVisibility">[[ translate('wizard.step8.readDisclaimer') ]]</a>
+					</p>
+				</p>
+			</div>
+		</div>
+		<footer class="card-footer"><a class="card-footer-item" @click="prevStep">[[ translate('wizard.step8.previous')
+				]]
+			</a><a class="card-footer-item" @click="togglePrivacyModalVisibility" rel="noopener noreferrer"
+				v-if="typeOfPolicyInt==1">[[ translate('wizard.step8.privacyPolicy') ]]</a>
+			{{ if $.NoTracking }}<a class="card-footer-item" @click="toggleNoTrackingPrivacyPolicyModalVisibility"
+					rel="noopener noreferrer" v-if="typeOfPolicyInt==2">[[ translate('wizard.step8.privacyPolicy') ]]</a>
+			{{ end }}
+			{{ if $.Gdpr }}<a class="card-footer-item" @click="toggleGDPRPrivacyModalVisibility"
+					rel="noopener noreferrer" v-if="typeOfPolicyInt==3">[[ translate('wizard.step8.privacyPolicy') ]]</a>
+			{{ end }}
+			<a class="card-footer-item" @click="toggleTermsModalVisibility" rel="noopener noreferrer">[[
+				translate('wizard.step8.termsConditions') ]]
+			</a>
+		</footer>
+	</div>
+	{{ template "wizardSidebar" . }}
+</section>
+{{ end }}

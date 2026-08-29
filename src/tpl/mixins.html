@@ -1,0 +1,50 @@
+{{ define "outputButtons" }}
+<button class="button is-primary" @click="getHtml('{{ .contentId }}', '{{ .textareaId }}')">
+	[[ translate('modal.btn.html') ]]
+</button>
+<button class="button is-primary" @click="getMarkdown('{{ .contentId }}', '{{ .textareaId }}')">
+	[[ translate('modal.btn.markdown') ]]
+</button>
+<button class="button is-primary" v-if="contentRenderType!=1" @click="preview()">
+	[[ translate('modal.btn.preview') ]]
+</button>
+{{ end }}
+
+{{ define "attribution" }}
+<hr>
+<p><span v-html="translate('modal.attribution.{{ .type }}')"></span><a
+		href="https://app-privacy-policy-generator.nisrulz.com/" target="_blank" rel="noopener noreferrer">App Privacy
+		Policy Generator
+	</a>
+</p>
+{{ end }}
+
+{{ define "flycricketDeploy" }}
+{{ if .enabled }}<div style="flex:1"><button class="button is-info" @click="{{ .method }}" style="float:right;">[[
+			translate('modal.btn.deployFlycricket') ]]
+		</button>
+	</div>
+{{ end }}
+
+{{ end }}
+
+{{ define "wizardMobileLogo" }}
+<p class="is-hidden-desktop"><a
+		href="https://github.com/nisrulz/app-privacy-policy-generator#app-privacy-policy-generator" target="_blank"
+		rel="noopener noreferrer">
+		<img class="is-size-1" src="/images/text_logo/text_logo.svg" :data-theme-logo="true">
+	</a>
+</p>
+{{ end }}
+
+{{ define "wizardSidebar" }}
+<div class="column is-information is-hidden-touch"><a href="https://github.com/nisrulz/app-privacy-policy-generator"
+		target="_blank" rel="noopener noreferrer">
+		<img class="center-block sidebar-img" src="/images/side_image/side_image.png" :data-theme-logo="true">
+	</a>
+	<p class="mt-2 has-text-centered"><a href="https://github.com/nisrulz/app-privacy-policy-generator" target="_blank"
+			rel="noopener noreferrer">GitHub</a> /
+		<button class="theme-toggle" @click="toggleTheme($event)">🌙</button>
+	</p>
+</div>
+{{ end }}

@@ -108,35 +108,6 @@ func buildLocales(langs []string) error {
 	return nil
 }
 
-func buildLocaleJS(lang string) error {
-	outDir := "public"
-	if lang != "en" {
-		outDir = fmt.Sprintf("public/%s", lang)
-	}
-
-	if err := ensureDir(outDir); err != nil {
-		return err
-	}
-
-	locale, err := loadLocale(lang)
-	if err != nil {
-		return err
-	}
-
-	jsonData, err := json.Marshal(locale)
-	if err != nil {
-		return fmt.Errorf("marshal locale %s: %w", lang, err)
-	}
-
-	localeJS := fmt.Sprintf("window.__locale = %s", jsonData)
-
-	if err := ensureDir(filepath.Join(outDir, "js")); err != nil {
-		return err
-	}
-
-	return os.WriteFile(filepath.Join(outDir, "js", "locale.min.js"), []byte(localeJS), 0644)
-}
-
 func buildSingleLocale(lang string) error {
 	outDir := "public"
 	if lang != "en" {
@@ -167,7 +138,7 @@ func buildSingleLocale(lang string) error {
 		return fmt.Errorf("write locale js: %w", err)
 	}
 
-	if err := renderPug(lang, outDir); err != nil {
+	if err := renderHTML(lang, outDir); err != nil {
 		return err
 	}
 

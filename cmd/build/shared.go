@@ -6,6 +6,21 @@ import (
 	"path/filepath"
 )
 
+var generatedDirs = map[string]bool{
+	"de":  true,
+	"js":  true,
+	"tmp": true,
+}
+
+var generatedFiles = map[string]bool{
+	"index.html": true,
+}
+
+var cssGeneratedFiles = map[string]bool{
+	"style.min.css":   true,
+	"reviews.min.css": true,
+}
+
 func cleanPublic() error {
 	entries, err := os.ReadDir("public")
 	if err != nil {
@@ -16,9 +31,28 @@ func cleanPublic() error {
 	}
 
 	for _, entry := range entries {
-		path := filepath.Join("public", entry.Name())
-		if err := os.RemoveAll(path); err != nil {
-			return err
+		name := entry.Name()
+		path := filepath.Join("public", name)
+
+		if generatedDirs[name] || generatedFiles[name] {
+			if err := os.RemoveAll(path); err != nil {
+				return err
+			}
+			continue
+		}
+
+		if entry.IsDir() && name == "css" {
+			subEntries, err := os.ReadDir(path)
+			if err != nil {
+				return err
+			}
+			for _, sub := range subEntries {
+				if cssGeneratedFiles[sub.Name()] {
+					if err := os.RemoveAll(filepath.Join(path, sub.Name())); err != nil {
+						return err
+					}
+				}
+			}
 		}
 	}
 	return nil

@@ -1,0 +1,56 @@
+{{ define "wizardStep4" }}
+<section class="columns" id="step-4" v-if="wizardStep==4">
+	<div class="column card">
+		<div class="card-content">
+			{{ template "wizardMobileLogo" . }}{{ template "wizardProgress" dict "value" 42 }}<div
+				class="scrollable content">
+				<div class="control">[[ translate('wizard.step4.selectAppType') ]]<span
+						class="tag is-primary is-light">[[typeOfApp]]</span>
+					<br><label class="radio">
+						<input v-model="typeOfApp" value="Free" type="radio"> [[ translate('wizard.step4.free') ]]
+					</label>
+					<br><label class="radio">
+						<input v-model="typeOfApp" value="Open Source" type="radio"> [[
+						translate('wizard.step4.openSource') ]]
+					</label>
+					<br><label class="radio">
+						<input v-model="typeOfApp" value="Freemium" type="radio"> [[ translate('wizard.step4.freemium')
+						]]
+					</label>
+					<br><label class="radio">
+						<input v-model="typeOfApp" value="Ad Supported" type="radio"> [[
+						translate('wizard.step4.adSupported') ]]
+					</label>
+					<br><label class="radio">
+						<input v-model="typeOfApp" value="Commercial" type="radio"> [[
+						translate('wizard.step4.commercial') ]]
+					</label>
+				</div>
+				<br>
+				<div class="block" v-show="typeOfPolicyInt!=2">
+					<input v-model="isLocationTracked" id="locationcheckbox" type="checkbox"><label
+						for="locationcheckbox"><span class="checkbox-logo">📍</span><strong>[[
+							translate('wizard.step4.locationTracked') ]]
+						</strong>
+					</label>
+					<br>
+					<input v-model="isAIUsed" id="aicheckbox" type="checkbox"><label for="aicheckbox"><span
+							class="checkbox-logo">🤖</span><strong>[[ translate('wizard.step4.aiUsed') ]]</strong>
+					</label>
+					<br>
+					<input v-model="hasDataDeletion" id="datadeletioncheckbox" type="checkbox"><label
+						for="datadeletioncheckbox"><span class="checkbox-logo">🗑️</span><strong>[[
+							translate('wizard.step4.dataDeletion') ]]
+						</strong>
+					</label>
+				</div>
+			</div>
+		</div>
+		<footer class="card-footer"><a class="card-footer-item" @click="prevStep">[[ translate('wizard.step4.previous')
+				]]
+			</a><a class="card-footer-item" @click="nextStep">[[ translate('wizard.step4.next') ]]</a>
+		</footer>
+	</div>
+	{{ template "wizardSidebar" . }}
+</section>
+{{ end }}
