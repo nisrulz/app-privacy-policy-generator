@@ -1,6 +1,3 @@
-# Dependencies
-node_modules/
-
 # Build output
 dist/
 /build
@@ -14,15 +11,21 @@ public/profile_pictures/
 # Environment
 .env
 
+# Local trash (deleted files staged here)
+.trash/
+
 # IDE / OS
 .DS_Store
 .context/
 plan/
 
-# Test output
-test-results/
-playwright-report/
-
 # Logs
 *.log
 *.cache
+
+# Dependencies
+node_modules/
+
+# Test artifacts
+playwright-report/
+test-results/

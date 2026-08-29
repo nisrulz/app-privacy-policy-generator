@@ -95,7 +95,7 @@ for file in third_party_logos/*.png; do
 done
 
 # Compress downloaded review images
-for file in ../downloaded_images/*.png; do
+for file in ../tools/reviews-page-generator/downloaded_images/*.png; do
   [ -e "$file" ] || continue
   total=$((total + 1))
   before=$(size_of "$file")

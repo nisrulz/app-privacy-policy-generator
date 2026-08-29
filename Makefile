@@ -1,41 +1,51 @@
-.PHONY: build serve watch firebase-local-preview firebase-deploy reviews reviews-force test test-ui test-debug upgrade-deps help
+.PHONY: build clean format check serve watch deploy reviews test help
 
 help: ## Show available commands
-	@echo ""; grep -E '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*## "}; {split($$2, p, " \\|\\| "); printf "  %-25s %s\n", $$1, p[1]; if (p[2] != "") {cmd=p[2]; sub(/^Example: /, "", cmd); printf "  %-25s Example:\n", ""; printf "  %-25s   %s\n", "", cmd}; printf "\n"}'
-
-upgrade-deps: ## Update npm and Go dependencies
-	@./scripts/update_deps.sh
+	@./scripts/help.sh
 
 build: ## Build the project
+	@echo "→ Building project..."
 	@go run ./cmd/build/
+	@echo "✓ Build complete"
 
-compress-images: ## Compress images in public/images
-	@./scripts/compress_images.sh
+clean: ## Clean public/ directory
+	@echo "→ Cleaning public/..."
+	@go run ./cmd/build/ -clean-only
+	@echo "✓ Cleaned"
 
-serve: ## Build and serve locally
-	@go run ./cmd/build/ -serve
+format: ## Format Go source, templates, and tidy modules
+	@echo "→ Formatting..."
+	@gofmt -w cmd/build/*.go cmd/build/e2e/*.go tools/reviews-page-generator/*.go
+	@gotmplfmt -w src/tpl/*.html
+	@go mod tidy
+	@echo "✓ Format complete"
+
+check: ## Run tests, vet, and build checks
+	@echo "→ Running checks..."
+	@go test ./cmd/build/ -run TestGolden -v
+	@go vet ./...
+	@go build ./...
+	@echo "✓ All checks passed"
+
+serve: ## Build and serve locally || Example: make serve PORT="9090"
+	@echo "→ Starting server..."
+	@go run ./cmd/build/ -serve -port $(PORT)
 
 watch: ## Watch for changes and rebuild
+	@echo "→ Watching for changes..."
 	@go run ./cmd/build/ -watch
 
-firebase-local-preview: ## Build and preview via Firebase local server
-	@./scripts/firebase_local_preview.sh
-
-firebase-deploy: ## Build and deploy to Firebase Hosting || Example: make firebase-deploy VERSION="3.0.9"
+deploy: ## Deploy to Firebase Hosting || Example: make deploy VERSION="3.0.9"
+	@echo "→ Deploying to Firebase..."
 	@./scripts/firebase_deploy.sh $(VERSION)
+	@echo "✓ Deployed"
 
-reviews: ## Generate reviews page from cached data
-	@./scripts/gen_reviews_page.sh
+reviews: ## Generate reviews page || Example: make reviews FORCE="true"
+	@echo "→ Generating reviews page..."
+	@if [ "$(FORCE)" = "true" ]; then ./scripts/gen_reviews_page.sh -f; else ./scripts/gen_reviews_page.sh; fi
+	@echo "✓ Reviews page generated"
 
-reviews-force: ## Generate reviews page (force re-fetch from GitHub)
-	@./scripts/gen_reviews_page.sh -f
-
-test: ## Run Playwright E2E tests
-	@npx playwright test
-
-test-ui: ## Run Playwright tests in UI mode
-	@npx playwright test --ui
-
-test-debug: ## Run Playwright tests in debug mode
-	@npx playwright test --debug
-
+test: ## Run E2E tests (requires make serve running)
+	@echo "→ Running E2E tests..."
+	@go test ./cmd/build/e2e/... -v -count=1 -timeout 5m
+	@echo "✓ Tests complete"
