@@ -1,4 +1,4 @@
-.PHONY: build clean format check serve watch deploy reviews test help
+.PHONY: build clean compress-images format check serve watch deploy reviews test help
 
 help: ## Show available commands
 	@./scripts/help.sh
@@ -26,6 +26,11 @@ check: ## Run tests, vet, and build checks
 	@go vet ./...
 	@go build ./...
 	@echo "✓ All checks passed"
+
+compress-images: ## Compress images in public/images
+	@echo "→ Compressing images..."
+	@./scripts/compress_images.sh
+	@echo "✓ Images compressed"
 
 serve: ## Build and serve locally || Example: make serve PORT="9090"
 	@echo "→ Starting server..."
