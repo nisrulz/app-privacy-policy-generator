@@ -13,21 +13,14 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
-      
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-          node-version: 20 # has to be
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm install
-      
-      - name: Install additional global tools
-        run: npm install -g svgo png-minify
+          go-version: '1.26'
 
       - name: Render the website from templates
-        run: npm run build
+        run: go run ./cmd/build/
 
       - name: Firebase Deploy to Production
         uses: FirebaseExtended/action-hosting-deploy@v0

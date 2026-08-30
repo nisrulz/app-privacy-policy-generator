@@ -1,0 +1,131 @@
+{{ define "privacySimpleBody" }}
+<section class="modal-card-body modal-box">
+	<div id="privacy_simple_content" v-show="contentRenderType==1"><strong>[[ translate('simple.title') ]]</strong>
+		<p v-html="translate('simple.intro')"></p>
+		<br><strong>[[ translate('simple.infoCollectionTitle') ]]</strong>
+		<p>[[ translate('simple.infoCollectionIntro') ]]
+			<ul>
+				<li>[[ translate('simple.infoCollection.ip') ]]</li>
+				<li>[[ translate('simple.infoCollection.pages') ]]</li>
+				<li>[[ translate('simple.infoCollection.time') ]]</li>
+				<li v-html="translate('simple.infoCollection.os')"></li>
+			</ul>
+		</p>
+		<br><strong>[[ translate('simple.cookiesTitle') ]]</strong>
+		<p>[[ translate('simple.cookiesText') ]]</p>
+		<div v-if="isLocationTracked">
+			<br><strong>[[ translate('simple.locationTitle') ]]</strong>
+			<p>[[ translate('simple.locationIntro') ]]</p>
+			<ul>
+				<li>[[ translate('simple.locationGeo') ]]</li>
+				<li>[[ translate('simple.locationAnalytics') ]]</li>
+				<li>[[ translate('simple.locationThirdParty') ]]</li>
+			</ul>
+		</div>
+		<br><strong>[[ translate('simple.yourRightsTitle') ]]</strong>
+		<p v-html="translate('simple.yourRightsText')"></p>
+		<br><strong>[[ translate('simple.ccpaTitle') ]]</strong>
+		<p v-html="translate('simple.ccpaText')"></p>
+		<div v-if="isAIUsed">
+			<br><strong>[[ translate('simple.aiTitle') ]]</strong>
+			<p>[[ translate('simple.aiText') ]]</p>
+			<br>
+		</div>
+		<p>[[ translate('simple.marketingText') ]]</p>
+		<br>
+		<p v-html="translate('simple.piiText')"></p>
+		<br><strong>[[ translate('simple.thirdPartyTitle') ]]</strong>
+		<p>[[ translate('simple.thirdPartyText') ]]</p>
+		<br><strong>[[ translate('simple.dataTransfersTitle') ]]</strong>
+		<p>[[ translate('simple.dataTransfersText') ]]</p>
+		<ul>
+			<li>[[ translate('simple.dataTransfers.scc') ]]</li>
+			<li>[[ translate('simple.dataTransfers.adequacy') ]]</li>
+			<li>[[ translate('simple.dataTransfers.consent') ]]</li>
+		</ul>
+		<p>[[ translate('simple.dataTransfersNote') ]]</p>
+		<div v-if="hasThirdPartyServicesSelected">
+			<br>
+			<p>[[ translate('simple.thirdPartyServicesText') ]]</p>
+			<ul>
+				<li v-for="item in enabledThirdPartyServicesWithPrivacy" :key="item.name"><a :href="item.link.privacy"
+						target="_blank" rel="noopener noreferrer">[[ tpsName(item) ]]</a>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<p>[[ translate('simple.disclosureText') ]]
+			<ul>
+				<li>[[ translate('simple.disclosure.law') ]]</li>
+				<li>[[ translate('simple.disclosure.safety') ]]</li>
+				<li>[[ translate('simple.disclosure.providers') ]]</li>
+			</ul>
+		</p>
+		<br><strong>[[ translate('simple.optOutTitle') ]]</strong>
+		<div v-if="isMobileApp || isWindowsApp">
+			<p v-html="translate('simple.optOutUninstall')"></p>
+		</div>
+		<div v-if="isWebApp">
+			<p v-html="translate('simple.optOutCease')"></p>
+		</div>
+		<p v-html="translate('simple.optOutContact')"></p>
+		<br><strong>[[ translate('simple.retentionTitle') ]]</strong>
+		<p>[[ translate('simple.retentionIntro') ]]</p>
+		<ul>
+			<li>[[ translate('simple.retention.userData') ]]</li>
+			<li>[[ translate('simple.retention.autoData') ]]</li>
+			<li>[[ translate('simple.retention.aggregated') ]]</li>
+			<li>[[ translate('simple.retention.legal') ]]</li>
+		</ul>
+		<p v-html="translate('simple.retentionDeletion')"></p>
+		<div v-if="hasDataDeletion">
+			<br><strong>[[ translate('simple.dataDeletionTitle') ]]</strong>
+			<p v-html="translate('simple.dataDeletionText')"></p>
+			<p>[[ translate('simple.dataDeletionVerify') ]]</p>
+		</div>
+		<br><strong>[[ translate('simple.childrenTitle') ]]</strong>
+		<p v-html="translate('simple.childrenIntro')"></p>
+		<div v-if="hasThirdPartyServicesSelected">
+			<br>
+			<p v-html="translate('simple.childrenWithServices')"></p>
+		</div>
+		<div v-else>
+			<br>
+			<p v-html="translate('simple.childrenWithoutServices')"></p>
+		</div>
+		<br><strong>[[ translate('simple.securityTitle') ]]</strong>
+		<p>[[ translate('simple.securityText') ]]</p>
+		<br><strong>[[ translate('simple.breachTitle') ]]</strong>
+		<p>[[ translate('simple.breachText') ]]</p>
+		<br><strong>[[ translate('simple.changesTitle') ]]</strong>
+		<p>[[ translate('simple.changesText') ]]</p>
+		<br>
+		<p v-html="translate('simple.changesPrev')"></p>
+		<br>
+		<p v-html="translate('simple.effectiveDate')"></p>
+		<br><strong>[[ translate('simple.consentTitle') ]]</strong>
+		<p>[[ translate('simple.consentText') ]]</p>
+		<br><strong>[[ translate('simple.contactTitle') ]]</strong>
+		<p v-html="translate('simple.contactText')"></p>
+		{{ template "attribution" dict "type" "privacy policy" }}
+	</div>
+	<textarea class="textarea" id="privacy_simple_txtarea"
+		:aria-label="translate(&quot;simple.title&quot;) + translate(&quot;modal.textareaLabel&quot;)"
+		onclick="this.focus();this.select()" readonly="readonly" v-show="contentRenderType==2"></textarea>
+</section>
+<footer class="modal-card-foot">
+	{{ template "outputButtons" dict "contentId" "privacy_simple_content" "textareaId" "privacy_simple_txtarea" }}{{ template "flycricketDeploy" dict "method" "deployFcSimple()" "enabled" $.Flycricket }}</footer>
+{{ end }}
+
+{{ define "privacySimpleModal" }}
+<div class="modal" v-bind:class="{'is-active': showPrivacyModal}" v-show="typeOfPolicyInt==1">
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title no-select">[[ translate('modal.privacySimple.title') ]]</p><button class="delete"
+				aria-label="close" @click="togglePrivacyModalVisibility"></button>
+		</header>
+		{{ template "privacySimpleBody" . }}
+	</div>
+</div>
+{{ end }}

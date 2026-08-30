@@ -1,0 +1,63 @@
+{{ define "wizardStep6" }}
+<section class="columns" id="step-6" v-if="wizardStep==6">
+	<div class="column card">
+		<div class="card-content">
+			{{ template "wizardMobileLogo" . }}{{ template "wizardProgress" dict "value" 70 }}<div
+				class="scrollable content">
+				<div class="control">[[ translate('wizard.step6.selectOwner') ]]<span
+						class="tag is-primary is-light">[[typeOfDev]]</span>
+					<br><label class="radio">
+						<input v-model="typeOfDev" value="Individual" type="radio"> [[
+						translate('wizard.step6.individual') ]]
+					</label>
+					<br><label class="radio">
+						<input v-model="typeOfDev" value="Company" type="radio"> [[ translate('wizard.step6.company') ]]
+					</label>
+				</div>
+				<br>
+				<div class="control" v-if="typeOfDev=='Company'">
+					<div class="field"><label class="label" for="companyName">[[ translate('wizard.step6.companyName')
+							]]
+						</label>
+						<div class="control">
+							<input class="input" id="companyName"
+								v-bind:class="{ 'is-danger': (companyName.length == 0 &amp;&amp; typeOfDev=='Company') }"
+								:placeholder="translate('wizard.step6.companyNamePlaceholder')" v-model="companyName"
+								required="" type="text">
+						</div>
+						<p class="help"
+							v-bind:class="{ 'is-danger': (companyName.length == 0 &amp;&amp; typeOfDev=='Company') }"
+							v-show="(companyName.length == 0 &amp;&amp; typeOfDev=='Company')">[[
+							translate('wizard.step6.companyNameRequired') ]]
+						</p>
+					</div>
+				</div>
+				<div class="control" v-if="typeOfDev=='Individual'">
+					<div class="field"><label class="label" for="devName">[[ translate('wizard.step6.devName')
+							]]
+						</label>
+						<div class="control">
+							<input class="input" id="devName"
+								v-bind:class="{ 'is-danger': (devName.length == 0 &amp;&amp; typeOfDev=='Individual') }"
+								:placeholder="translate('wizard.step6.devNamePlaceholder')" v-model="devName"
+								required="" type="text">
+						</div>
+						<p class="help"
+							v-bind:class="{ 'is-danger': (devName.length == 0 &amp;&amp; typeOfDev=='Individual') }"
+							v-show="(devName.length == 0 &amp;&amp; typeOfDev=='Individual')">[[
+							translate('wizard.step6.devNameRequired') ]]
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="card-footer"><a class="card-footer-item" @click="prevStep">[[ translate('wizard.step6.previous')
+				]]
+			</a><a class="card-footer-item" @click="nextStep" :class="{ 'is-disabled': !canAdvance }">[[
+				translate('wizard.step6.next') ]]
+			</a>
+		</footer>
+	</div>
+	{{ template "wizardSidebar" . }}
+</section>
+{{ end }}

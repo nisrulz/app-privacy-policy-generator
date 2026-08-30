@@ -1,22 +1,13 @@
 # Development
 
-The web app is built with:
+The web app uses:
 
 - [Vue.js](https://vuejs.org/) for templating and reactive updates
 - [Firebase Hosting](https://firebase.google.com/docs/hosting/) for hosting
-- Go toolchain (`go run ./cmd/build/`) that orchestrates Less to CSS, YAML to JS, Pug to HTML (via `npx pug3`), JS minification, and cache-busting
-- [pug3](https://github.com/tokilabs/pug3-cli) to convert Pug templates to HTML (the only npm `devDependency`)
+- A pure Go toolchain (`go run ./cmd/build/`) that compiles Less to CSS, YAML to JS, and `text/template` files to HTML. It also minifies JavaScript and adds cache-busting values.
 - [firebase-tools](https://github.com/firebase/firebase-tools) for Firebase CLI (install globally)
 
 ---
-
-Install build tools:
-
-```sh
-npm install
-```
-
-This gives you `pug3`, the only npm dependency. The Go build toolchain uses it via `npx`.
 
 For image compression and deployment, install these globally:
 
@@ -26,40 +17,53 @@ npm install -g firebase-tools svgo png-minify
 
 ## Source layout
 
-All the code you care about lives in [`src`](src):
+The main application source lives in [`src`](../src). The build and review tools live in [`cmd/build`](../cmd/build) and [`tools/reviews-page-generator`](../tools/reviews-page-generator):
 
-- Privacy Policy templates: [`src/includes/content/privacy_policy`](src/includes/content/privacy_policy)
-- Terms & Conditions templates: [`src/includes/content/tnc`](src/includes/content/tnc)
+- Page templates (build source of truth): [`src/tpl`](src/tpl) — Go `text/template` files with `{{ }}` delimiters; Vue uses `[[ ]]` delimiters so its syntax passes through unchanged
+- Less stylesheets and a YAML file for third-party service definitions
 
-The app is made of Pug partials, Less stylesheets, and a YAML file for third-party service definitions. The Go build compiles everything into a single `index.html` under [`public`](public), plus minified CSS and JS files.
+The Go build combines the templates into one `index.html` file under [`public`](public). It also writes minified CSS and JavaScript files.
 
 To build:
 
 ```sh
-❯ make build
+make build
 ```
 
-This generates `index.html`, `style.min.css`, `main.min.js`, `utils.min.js`, `thirdpartyservices.min.js`, and locale files.
+This generates `index.html`, `style.min.css`, `main.min.js`, `utils.min.js`, `thirdpartyservices.min.js`, and the locale files.
 
 Other useful commands:
 
 ```sh
-❯ make watch            # watch for changes and rebuild automatically
-❯ make reviews          # regenerate reviews page from cached data
-❯ make reviews-force    # regenerate reviews page (re-fetch from GitHub)
+make format           # format Go source, templates, and tidy modules
+make check            # run tests, vet, and build checks
+make clean            # clean public/ directory
+make compress-images  # compress images in public/images
+make watch            # watch for changes and rebuild automatically
+make reviews          # generate reviews page from cached data
+make update-deps      # update Go dependencies
 ```
 
-You can also pass flags directly to the Go build tool:
+You can also clean before building:
 
 ```sh
-❯ go run ./cmd/build/ -lang de        # build only a specific locale
-❯ go run ./cmd/build/ -clean          # clean public/ before building
+make clean && make build
 ```
+
+## Format templates
+
+Format the Go HTML templates using [gotmplfmt](https://github.com/gohugoio/gotmplfmt):
+
+```sh
+make format
+```
+
+This formats Go source files, HTML templates, and runs `go mod tidy`.
 
 ## Compress images
 
 ```sh
-❯ ./scripts/compress_images.sh
+make compress-images
 ```
 
 ## Adding a 3rd party service
@@ -79,37 +83,60 @@ Drop the logo into [`public/images/third_party_logos/`](public/images/third_part
 
 Tip: Use [remove.bg](https://www.remove.bg/) to strip the background and [imagetools.org/trim](https://www.imagetools.org/trim) to trim excess space.
 
-## Updating packages
-
-```sh
-npm update
-```
-
 ## Serving locally
 
 Builds and serves on port 8000:
 
 ```sh
-❯ make serve
+make serve
 ```
 
 Use a custom port with:
 
 ```sh
-❯ go run ./cmd/build/ -serve -port 9090
+make serve PORT="9090"
 ```
 
 ## Testing
 
-E2E tests run against the dev server using Playwright (Chromium only):
+Format Go source files before you run the checks:
 
 ```sh
-❯ make test          # run all tests
-❯ make test-ui       # run with Playwright UI mode
-❯ make test-debug    # run with Playwright debug mode
+make format
 ```
 
-Tests are in `tests/`. The dev server starts automatically when you run tests.
+Run the Go checks:
+
+```sh
+make check
+```
+
+E2E tests run against the dev server using chromedp (pure Go, Chromium only):
+
+```sh
+make serve          # start dev server in one terminal
+make test           # run E2E tests in another terminal
+```
+
+Tests are in `cmd/build/e2e/`. The dev server must be running before you run tests.
+
+## Updating dependencies
+
+```sh
+make update-deps
+```
+
+This runs `go get -u ./...` and `go mod tidy` to update all Go dependencies.
+
+## Firebase preview
+
+Build and preview the site locally using Firebase Hosting:
+
+```sh
+make firebase-preview
+```
+
+This runs `make build` then starts `firebase serve --only hosting`.
 
 ## Deploying to production
 
@@ -117,7 +144,7 @@ Note: Only maintainers with Firebase console access can deploy.
 
 ```sh
 firebase login
-❯ make firebase-deploy VERSION="3.0.9"
+make deploy VERSION="3.0.9"
 ```
 
 Omit `VERSION` and you will be prompted for it.

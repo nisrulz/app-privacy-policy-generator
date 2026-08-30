@@ -1,0 +1,8 @@
+{{ define "affiliateFlycricket" }}
+<form id="fc-form" action="https://app.flycricket.com/import/privacy" method="post" target="_blank">
+	<input type="hidden" name="fc-referrer" value="nishant">
+	<input id="fc-terms" type="hidden" name="fc-terms">
+	<input id="fc-body" type="hidden" name="fc-privacy">
+	<input id="fc-name" type="hidden" name="fc-name" v-model="appName">
+</form>
+{{ end }}

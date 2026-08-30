@@ -42,14 +42,6 @@ func buildMinifyJS() error {
 
 func buildMainJS(m *minify.M) error {
 	files := []string{
-		"src/js/wizardMixin.js",
-		"src/js/platformMixin.js",
-		"src/js/localeMixin.js",
-		"src/js/formDataMixin.js",
-		"src/js/generatorMixin.js",
-		"src/js/modalMixin.js",
-		"src/js/thirdPartyMixin.js",
-		"src/js/contentMixin.js",
 		"src/js/main.js",
 	}
 

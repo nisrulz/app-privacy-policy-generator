@@ -2,37 +2,26 @@
 
 ## Project Overview
 
-Static web app (Vue.js + Pug) that generates privacy policies and terms & conditions for Android/iOS/Web apps. Single `index.html` output — no bundler, no hot-reload. Built via Go toolchain (`cmd/build/`) which orchestrates `pug3` via `npx`, handles YAML→JS, Less compilation (with built-in compression), JS minification, and cache-busting natively.
+Static Vue.js web app that generates privacy policies and Terms & Conditions for Android, iOS, and web apps. The build creates one `index.html` file. It uses no bundler or hot reload. The build toolchain is pure Go (`cmd/build/`): it renders Go `text/template` files, converts YAML to JavaScript, compiles Less, minifies JavaScript, and adds cache-busting values. Node is not required for the build.
 
 ## Source Layout
 
-- `src/index.pug` — entry point (includes all partials); `lang`, `flycricket`, `noTracking`, `gdpr` compile-time variables; `data-theme="light"` on `<html>`
+- `src/tpl/` — Go `text/template` files used to build the page; `page.html` is the entry point. The directory contains shared blocks (`head`, `footer`, `mixins`, `meta`, `license-header`, and `css`) plus the page content. Templates use `{{ }}` (Go template delimiters); Vue uses `[[ ]]` delimiters. Put all labels and text through `translate('key')`.
 - `src/locales/` — locale JSON files (one per language); `en.json` is the source of truth; `de.json` also exists; `_flag` key for each locale
-- `src/includes/content.pug` — includes all content: wizard, privacy policies, T&C, disclaimer, FAQ, affiliate
-- `src/includes/mixins.pug` — shared Pug mixins: `modal()`, `outputButtons()`, `attribution()`, `flycricketDeploy()`, `wizardProgress()`, `wizardMobileLogo()`, `wizardSidebar()`
-- `src/includes/meta.pug` — aggregates meta partials: `base.pug`, `app-description.pug`, `author.pug`, `webapp-support.pug`, `favicon.pug`, `link-preview.pug`
-- `src/includes/css.pug` — CSS includes (inline normalize.css, preload sidebar image, stylesheet link)
-- `src/includes/license-header.pug` — GPL license comment block
-- `src/includes/content/privacy_policies.pug` — wraps privacy policy includes with compile-time conditionals (`noTracking`, `gdpr`)
-- `src/includes/content/tncs.pug` — wraps T&C include
-- `src/includes/content/wizard.pug` — wraps all 8 wizard step includes
-- `src/includes/content/privacy_policy/` — privacy templates: `gdpr.pug`, `simple.pug`, `no_tracking.pug`; all text via `translate('key')`
-- `src/includes/content/tnc/` — T&C template: `simple.pug`; all text via `translate('key')`
-- `src/includes/content/wizard/` — wizard steps: `step_1.pug`–`step_8.pug`; all labels via `translate('key')`
-- `src/includes/content/faq.pug` — FAQ modal with Vue-controlled visibility; text via `translate('key')`
-- `src/includes/content/disclaimer.pug` — Disclaimer modal; text via `translate('key')`
-- `src/includes/content/affiliate/` — affiliate integrations (Flycricket)
-- `src/js/main.js` — Vue app entry point: creates app with 8 mixins, registers `translate()`, `_updateMeta()`, `switchLocale()` globally
-- `src/js/localeMixin.js` — Vue mixin: `_updateMeta()` on mount
-- `src/js/wizardMixin.js` — Vue mixin: wizard navigation (`nextStep`/`prevStep`), `canAdvance` guard, `totalWizardSteps: 8`, `contentRenderType`
-- `src/js/platformMixin.js` — Vue mixin: platform-aware text descriptors, `_setPlatformText()`, computed `isMobileApp`/`isWebApp`/`isWindowsApp`
-- `src/js/formDataMixin.js` — Vue mixin: all form state (`appName`, `appContact`, `platforms`, `typeOfPolicy`, `thirdPartyServices`, etc.), `availableLocales`, computed filtered services
-- `src/js/generatorMixin.js` — Vue mixin: `generate()`, validation (`_validateRequiredFields`), derived text setters (`_setDevOrCompanyName`, `_setPidInfo`, `_setAppTypeText`)
-- `src/js/modalMixin.js` — Vue mixin: modal toggle methods (`togglePrivacyModalVisibility`, `toggleGDPRPrivacyModalVisibility`, etc.)
-- `src/js/thirdPartyMixin.js` — Vue mixin: third-party service helpers (`tpsName()` with locale-aware fallback, `toggleState`, `setTypeOfPolicyInt`)
-- `src/js/contentMixin.js` — Vue mixin: HTML/Markdown export (`getHtml`/`getMarkdown`), Flycricket deploy (`deployFcSimple`)
+- `src/tpl/mixins.html` — shared template blocks: `modal()`, `outputButtons()`, `attribution()`, `flycricketDeploy()`, `wizardProgress()`, `wizardMobileLogo()`, `wizardSidebar()`; templates are invoked via `{{template "name" .}}` (carry the page-data dot) or `{{template "name" (dict ...)}}` (map args)
+- `src/tpl/meta.html` — meta partials (`metaBase`, `metaAppDescription`, `metaAuthor`, `metaWebappSupport`, `metaFavicon`, `metaDataTag`, `metaLinkPreview`)
+- `src/tpl/css.html` — CSS includes (inline normalize/bulma, preload sidebar image, stylesheet link)
+- `src/tpl/license-header.html` — GPL license comment block
+- `src/tpl/content.html` — includes all content (wizard, privacy policies, T&C, disclaimer, FAQ, affiliate)
+- `src/tpl/modals.html` — modal wrappers (privacy simple/no-tracking/gdpr, terms, disclaimer, faq)
+- `src/tpl/privacy-simple.html`, `privacy-no-tracking.html`, `privacy-gdpr.html` — privacy policy bodies; all text via `translate('key')`
+- `src/tpl/tn-simple.html` — T&C template; all text via `translate('key')`
+- `src/tpl/wizard-step-1..8.html` — wizard steps; all labels via `translate('key')`
+- `src/tpl/info-modals.html` — Disclaimer/FAQ modals with Vue-controlled visibility; text via `translate('key')`
+- `src/tpl/affiliate-flycricket.html` — Flycricket affiliate integration
+- `src/js/main.js` — Vue app entry point: creates app with 3 composables (`useAppState`, `useWizard`, `useContent`), registers `translate()`, `_updateMeta()`, `switchLocale()` globally
 - `src/js/utils.js` — utility helpers (`convertHtmlToMd`, `getRawHTML`, `getContent`, `getTitle`, `loadInTextView`)
-- `src/js/flycricket.js` — Flycricket form submission helpers (`fc_deploy_simple`, `fc_deploy_notracking`, `fc_deploy_gdpr`)
+- `src/js/flycricket.js` — Flycricket form submission helper `window.fc_deploy(bodyContentId)` (single function reused by all modal deploy buttons)
 - `src/includes/yaml/thirdpartyservices.yml` — 3rd-party service definitions (source of truth); supports locale-aware `name_{code}` fields; JS is auto-generated during build
 - `src/includes/vendor/` — vendored third-party assets: `vue.global.prod.js`, `to-markdown.min.js`
 - `src/less/style.less` — Less entry point (`@import`s 6 partials); compiled to CSS by Go build
@@ -56,24 +45,30 @@ Static web app (Vue.js + Pug) that generates privacy policies and terms & condit
 - `public/reviews-data.json` — generated reviews data (committed for convenience)
 - `public/profile_pictures/` — reviewer profile pictures (gitignored, generated by reviews tool)
 - `cmd/build/*.go` — Go build toolchain source files (edit to modify build pipeline); includes `serve.go` (HTTP server for local dev)
+- `cmd/build/golden_test.go` — rendered HTML parity tests for English and German
+- `cmd/build/testdata/golden/` — golden HTML fixtures used by the parity tests
+- `cmd/build/e2e/` — chromedp E2E tests (pure Go, no Node dependency)
+- `tools/reviews-page-generator/` — standalone Go tool that generates the reviews page and its cached data
+- `Makefile` — project commands for formatting, building, serving, testing, and deployment
 
 ## Build
 
 ```sh
-npm install
-npm run build
+make format     # format Go source files
+make check      # run Go tests, vet, and build checks
+make build      # equivalent: go run ./cmd/build/
 ```
 
-Compiles `src/` → `public/index.html`, `public/css/style.min.css`, `public/js/*.min.js`. Build outputs are tracked.
+Compiles `src/` → `public/index.html`, `public/css/style.min.css`, `public/js/*.min.js`. Build outputs are tracked. The build is pure Go — no Node/npm dependency.
 
 Build pipeline:
 1. Go compiles `src/less/style.less` → `public/css/style.min.css` via `toakleaf/less.go`
 2. Go parses `src/includes/yaml/thirdpartyservices.yml` → `public/tmp/thirdpartyservices.js`
 3. Go builds locales registry from `src/locales/` → `public/js/locales.min.js`
-4. `pug3` renders `src/index.pug` → `public/index.html`
-5. Go concatenates all 8 mixins + `main.js` → minified `public/js/main.min.js`; separately minifies `utils.min.js`, `thirdpartyservices.min.js`, `flycricket.min.js`
+4. Go renders `src/tpl/` (`text/template`, entry `page.html`) → `public/index.html`
+5. Go minifies `main.js` → `public/js/main.min.js`; separately minifies `utils.min.js`, `thirdpartyservices.min.js`, `flycricket.min.js`
 6. Go copies vendor assets (Vue, to-markdown, Ko-fi image) to `public/`
-7. Per-locale: `pug3` renders HTML with `lang` override; Go generates `locale.min.js`
+7. Per-locale: Go renders HTML with `lang` override; Go generates `locale.min.js`
 8. Cache-busting: `?v=<md5>` appended to all CSS/JS references in HTML files
 
 Dev: `make serve` (builds then serves `public/` on port 8000 via Go HTTP server).
@@ -82,18 +77,18 @@ Dev: `make serve` (builds then serves `public/` on port 8000 via Go HTTP server)
 
 - **No comments** in source code unless documenting a complex legal rationale
 - **Commit style**: `type(scope): Description`
-- **Vue.js 3** is self-hosted (served from `public/js/vendor/vue.global.prod.js`); state is split across 8 mixin files merged via `mixins: [...]` in `main.js`
-- **Pug** templates use `{{ variable }}` interpolation (Vue.js mustache syntax), not Pug's native interpolation
+- **Vue.js 3** is self-hosted (served from `public/js/vendor/vue.global.prod.js`); uses `[[ ]]` delimiters (configured in `createApp`)
+- **Go `text/template`** files use default `{{ }}` delimiters; Vue `[[ variable ]]` mustache interpolation passes through untouched (Vue.js syntax, not Go template syntax)
 - **Translation**: use `translate('key')` in templates (global method set in `main.js`), not `$t('key')`
-- **Computed properties** in Vue mixin `computed` blocks — prefer over inline string matching
+- **Computed properties** in Vue composable `computed()` calls — prefer over inline string matching
 - **Derived text** (e.g. `deviceType`, `platformDesc`) computed inside `generate()` following existing pattern, not watchers
-- **Compile-time Pug variables** set in `index.pug`: `flycricket`, `noTracking`, `gdpr` (booleans control template inclusion)
+- **Compile-time flags** are passed as context fields on `pageData` in `cmd/build/render.go`: `Lang`, `Flycricket`, `NoTracking`, `Gdpr`, `ThemeToggle` (always `true` in the current site)
 - **`data-theme`** attribute on `<html>` element; dark mode support via `_dark.less` and `toggleTheme()` in `main.js`
 - **Go 1.25** — toolchain uses `github.com/tdewolff/minify/v2` for JS and `gopkg.in/yaml.v3` for YAML parsing
 
 ## Testing
 
-No test framework. Verify by running `npm run build` and visually inspecting `public/index.html`.
+Run `make format` after Go source changes. Run `go test ./...` for Go tests. The golden parity test renders `src/tpl/` for `en`/`de` and compares output against `cmd/build/testdata/golden/`. E2E tests use chromedp (pure Go, no Node dependency) — run with `make test` (requires `make serve` running in another terminal). Run `go vet ./...` and `go build ./...` before submitting changes.
 
 ## Deployment
 
@@ -111,16 +106,17 @@ CI via GitHub Actions (`.github/workflows/`): production deploy on push to `mast
 
 ## Quick Workflow for Edits
 
-1. Edit templates under `src/`
-2. Run `npm run build` to produce `public/`
-3. Verify `public/` renders correctly (open `public/index.html`)
-4. Commit source and build output changes
+1. Edit templates under `src/tpl/`
+2. Run `make format` after Go source changes
+3. Run `make build` to produce `public/`
+4. Verify `public/` renders correctly (open `public/index.html`)
+5. Commit source and build output changes
 
 ## Contribution Rules
 
 - Bug fixes only for PRs (features discussed via issue first)
 - New 3rd-party service: load the `add-thirdparty-service` skill or manually add entry to `src/includes/yaml/thirdpartyservices.yml` + logo (160×160) to `public/images/third_party_logos/`
-- `cmd/build/` uses `npx` to resolve `pug3` from devDependencies (`@tokilabs/pug3-cli` is the required pug fork)
+- `cmd/build/` is pure Go; the build has no Node dependency (templates live in `src/tpl/`, rendering via `text/template`)
 - Build outputs expected (do not remove unless intentional): `public/index.html`, `public/css/style.min.css`, `public/js/*.min.js`, `public/js/vendor/`, `public/images/vendor/`
 - `public/sw.js`, `public/site.webmanifest`, `public/404.html`, `public/robots.txt`, `public/humans.txt`, `public/logo.svg` are tracked source files (not generated)
 - `public/reviews.html` and `public/reviews-data.json` are generated by `tools/reviews-page-generator/` but tracked for convenience

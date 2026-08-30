@@ -30,8 +30,11 @@ func runWatch(langs []string) {
 func watchDir(dir string, langs []string, done chan bool) {
 	fileTimes := make(map[string]time.Time)
 
-	filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
-		if err != nil || info.IsDir() {
+	if err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return fmt.Errorf("walk %s: %w", path, err)
+		}
+		if info.IsDir() {
 			return nil
 		}
 		if strings.HasSuffix(path, ".bak") || strings.Contains(path, "/tmp/") {
@@ -39,13 +42,19 @@ func watchDir(dir string, langs []string, done chan bool) {
 		}
 		fileTimes[path] = info.ModTime()
 		return nil
-	})
+	}); err != nil {
+		fmt.Fprintf(os.Stderr, " ❌  Initial scan of %s failed: %v\n", dir, err)
+		return
+	}
 
 	for {
 		time.Sleep(500 * time.Millisecond)
 
-		filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
-			if err != nil || info.IsDir() {
+		if err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return fmt.Errorf("walk %s: %w", path, err)
+			}
+			if info.IsDir() {
 				return nil
 			}
 			if strings.HasSuffix(path, ".bak") || strings.Contains(path, "/tmp/") {
@@ -59,6 +68,8 @@ func watchDir(dir string, langs []string, done chan bool) {
 				runBuild(langs, false)
 			}
 			return nil
-		})
+		}); err != nil {
+			fmt.Fprintf(os.Stderr, " ❌  Scan of %s failed: %v\n", dir, err)
+		}
 	}
 }

@@ -1,0 +1,25 @@
+{{ define "footer" }}
+<script src="/js/vendor/vue.global.prod.js"></script>
+<script src="/js/vendor/to-markdown.min.js"></script>
+{{ if eq .Lang "en" }}
+<script src="/js/locale.min.js"></script>
+{{ else }}
+<script src="/{{ .Lang }}/js/locale.min.js"></script>
+{{ end }}
+<script src="/js/locales.min.js"></script>
+<script src="/js/thirdpartyservices.min.js"></script>
+<script src="/js/utils.min.js"></script>
+<script src="/js/main.min.js"></script>
+{{ if $.Flycricket }}
+<script src="/js/flycricket.min.js"></script>
+{{ end }}
+<script>if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(function (err) {
+      console.warn('SW registration failed:', err);
+    });
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      window.location.reload();
+    });
+  }
+</script>
+{{ end }}

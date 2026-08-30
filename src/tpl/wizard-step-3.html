@@ -1,0 +1,72 @@
+{{ define "wizardStep3" }}
+<section class="columns" id="step-3" v-if="wizardStep==3">
+	<div class="column card">
+		<div class="card-content">
+			{{ template "wizardMobileLogo" . }}{{ template "wizardProgress" dict "value" 28 }}<div
+				class="scrollable content">
+				<div class="control">
+					<div class="field"><label class="label" for="businessAddress">[[
+							translate('wizard.step3.businessAddress') ]]
+						</label>
+						<div class="control">
+							<input class="input" id="businessAddress"
+								v-bind:class="{ 'is-danger': (typeOfPolicyInt==3 &amp;&amp; businessAddress.length == 0) }"
+								:placeholder="translate('wizard.step3.businessAddressPlaceholder')"
+								v-model="businessAddress" type="text">
+						</div>
+						<p class="help has-text-grey"
+							v-show="!(typeOfPolicyInt==3 &amp;&amp; businessAddress.length == 0)">[[
+							translate('wizard.step3.businessAddressHelp') ]]
+						</p>
+						<p class="help is-danger" v-show="(typeOfPolicyInt==3 &amp;&amp; businessAddress.length == 0)">
+							[[ translate('wizard.step3.businessAddressRequired') ]]
+						</p>
+					</div>
+				</div>
+				<br>
+				<div class="control">
+					<div class="field"><label class="label" for="effectiveFromDate">[[
+							translate('wizard.step3.effectiveDate') ]]
+						</label>
+						<div class="control">
+							<input class="input is-primary" id="effectiveFromDate" v-model="effectiveFromDate"
+								required="" type="date">
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="control" v-show="typeOfPolicyInt!=2">
+					<div class="field"><label class="label" for="pidInfoIn">[[ translate('wizard.step3.pidInfo')
+							]]
+						</label>
+						<div class="control">
+							<input class="input" id="pidInfoIn"
+								:placeholder="translate('wizard.step3.pidInfoPlaceholder')" v-model="pidInfoIn"
+								type="text">
+						</div>
+						<p class="help has-text-grey">[[ translate('wizard.step3.pidInfoHelp') ]]</p>
+					</div>
+				</div>
+				<br>
+				<div class="control">
+					<div class="field"><label class="label" for="ageOfDigitalConsent">[[
+							translate('wizard.step3.ageOfConsent') ]]
+						</label>
+						<div class="control">
+							<input class="input" id="ageOfDigitalConsent"
+								:placeholder="translate('wizard.step3.ageOfConsentPlaceholder')"
+								v-model="ageOfDigitalConsent" type="number" min="13" max="18">
+						</div>
+						<p class="help has-text-grey">[[ translate('wizard.step3.ageOfConsentHelp') ]]</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="card-footer"><a class="card-footer-item" @click="prevStep">[[ translate('wizard.step3.previous')
+				]]
+			</a><a class="card-footer-item" @click="nextStep">[[ translate('wizard.step3.next') ]]</a>
+		</footer>
+	</div>
+	{{ template "wizardSidebar" . }}
+</section>
+{{ end }}

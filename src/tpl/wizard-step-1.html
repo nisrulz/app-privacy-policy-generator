@@ -1,0 +1,34 @@
+{{ define "wizardStep1" }}
+<section class="columns has-text-centered" id="step-1" v-if="wizardStep==1">
+	<div class="column is-full"><a class="title" href="https://github.com/nisrulz/app-privacy-policy-generator"
+			target="_blank" rel="noopener noreferrer" :aria-label="translate(&quot;meta.title&quot;)">
+			<img class="center-block hero-image" src="/images/side_image/side_image.png" :data-theme-logo="true"
+				:alt="translate(&quot;wizard.step1.heroAlt&quot;)" width="2024" height="1132" fetchpriority="high">
+		</a>
+		<p class="is-size-8 mt-2">[[ translate('wizard.step1.tagline') ]]</p>
+		<p class="mt-2"><a href="/reviews.html" target="_blank" rel="noopener noreferrer">[[
+				translate('wizard.step1.guestbook') ]]
+			</a> /
+			<a class="has-info" href="#" @click.prevent="toggleFaqModalVisibility">[[ translate('wizard.step1.readFaq')
+				]]
+			</a> /
+			<a href="#" @click.prevent="toggleDisclaimerModalVisibility">[[ translate('wizard.step1.disclaimer') ]]</a>
+			/
+			<a href="https://github.com/nisrulz/app-privacy-policy-generator" target="_blank"
+				rel="noopener noreferrer">GitHub</a> /
+			<a href="https://ko-fi.com/nisrulz" target="_blank" rel="noopener noreferrer">[[
+				translate('wizard.step1.buyMeCoffee') ]]
+			</a> /
+			<select class="locale-dropdown" @change="switchLocale($event.target.value)"
+				:aria-label="translate(&quot;misc.locale&quot;)">
+				<option v-for="loc in availableLocales" :key="loc.code" :value="loc.code"
+					:selected="loc.code === currentLocale">[[ loc.flag ]] [[ loc.code.toUpperCase() ]]</option>
+			</select>
+			{{ if $.ThemeToggle }} /
+				<button class="theme-toggle" @click="toggleTheme($event)">🌙</button>
+			{{ end }}
+		</p>
+		<hr><button class="button is-primary start-btn" @click="nextStep">[[ translate('wizard.step1.start') ]]</button>
+	</div>
+</section>
+{{ end }}

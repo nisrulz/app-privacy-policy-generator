@@ -1,0 +1,36 @@
+{{ define "wizardStep7" }}
+<section class="columns" id="step-7" v-if="wizardStep==7">
+	<div class="column card">
+		<div class="card-content">
+			{{ template "wizardMobileLogo" . }}{{ template "wizardProgress" dict "value" 84 }}<div
+				class="thirdparty-section" v-show="typeOfPolicyInt!=2">
+				<p><b>[[ translate('wizard.step7.includeLinks') ]]</b><span class="tag is-primary is-light">[[
+						translate('wizard.step7.scrollForMore') ]]
+					</span>
+				</p>
+				<div class="scrollable-thirdparty content"><a rel="noopener noreferrer"
+						v-for="item in thirdPartyServicesWithPrivacyOrTerms" :key="item.name">
+						<input v-model="item.enabled" :id="'list-switch-' + item.name" type="checkbox"><label
+							:for="'list-switch-' + item.name">
+							<img class="checkbox-logo" :alt="tpsName(item)" :src="item.logo"><span>[[ tpsName(item)
+								]]
+							</span>
+						</label>
+					</a>
+				</div>
+			</div>
+			<div class="thirdparty-section" v-show="typeOfPolicyInt==2">
+				<p>[[ translate('wizard.step7.noServices') ]]
+					<b>[[ translate('wizard.step7.nextStep') ]]</b>
+				</p>
+				<div class="scrollable-thirdparty content"></div>
+			</div>
+		</div>
+		<footer class="card-footer"><a class="card-footer-item" @click="prevStep">[[ translate('wizard.step7.previous')
+				]]
+			</a><a class="card-footer-item" @click="nextStep">[[ translate('wizard.step7.next') ]]</a>
+		</footer>
+	</div>
+	{{ template "wizardSidebar" . }}
+</section>
+{{ end }}

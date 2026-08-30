@@ -1,0 +1,49 @@
+{{ define "disclaimer" }}
+<div class="modal" v-bind:class="{ 'is-active': showDisclaimerModal }">
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title no-select">[[ translate('disclaimer.title') ]]</p><button class="delete"
+				aria-label="close" @click="toggleDisclaimerModalVisibility"></button>
+		</header>
+		<section class="modal-card-body">
+			<p>[[ translate('disclaimer.text1') ]]</p>
+			<p>[[ translate('disclaimer.text2') ]]</p>
+			<p>[[ translate('disclaimer.text3') ]]</p>
+			<p>[[ translate('disclaimer.text4') ]]</p>
+			<p>[[ translate('disclaimer.text5') ]]</p>
+		</section>
+		<footer class="modal-card-foot"><button class="button is-info" aria-label="close"
+				@click="toggleDisclaimerModalVisibility">[[ translate('modal.btn.ok') ]]</button>
+		</footer>
+	</div>
+</div>
+{{ end }}
+
+{{ define "faq" }}
+<div class="modal" v-bind:class="{ 'is-active': showFaqModal }">
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title no-select">[[ translate('faq.title') ]]</p><button class="delete"
+				aria-label="close" @click="toggleFaqModalVisibility"></button>
+		</header>
+		<section class="modal-card-body"><strong>[[ translate('faq.q1') ]]</strong>
+			<p>[[ translate('faq.a1') ]]</p>
+			<br><strong>[[ translate('faq.q2') ]]</strong>
+			<p>[[ translate('faq.a2') ]]</p>
+			<br><strong>[[ translate('faq.q3') ]]</strong>
+			<p>[[ translate('faq.a3') ]]</p>
+			<br><strong>[[ translate('faq.q4') ]]</strong>
+			<p>[[ translate('faq.a4') ]]</p>
+			<br><strong>[[ translate('faq.q5') ]]</strong>
+			<p>[[ translate('faq.a5') ]]</p>
+			<br><strong>[[ translate('faq.q6') ]]</strong>
+			<p>[[ translate('faq.a6') ]]</p>
+		</section>
+		<footer class="modal-card-foot"><button class="button is-info" aria-label="close"
+				@click="toggleFaqModalVisibility">[[ translate('modal.btn.ok') ]]</button>
+		</footer>
+	</div>
+</div>
+{{ end }}

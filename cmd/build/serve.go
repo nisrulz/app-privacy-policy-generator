@@ -2,11 +2,14 @@ package main
 
 import (
 	"compress/gzip"
+	"context"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 )
 
 type gzipResponseWriter struct {
@@ -42,8 +45,30 @@ func gzipMiddleware(next http.Handler) http.Handler {
 func runServe(langs []string, clean bool, port string) {
 	runBuild(langs, clean)
 	fmt.Printf(" 🌐  Serving public/ on http://localhost:%s\n", port)
-	handler := gzipMiddleware(http.FileServer(http.Dir("public")))
-	if err := http.ListenAndServe(":"+port, handler); err != nil {
-		fmt.Fprintf(os.Stderr, " ❌  %v\n", err)
+	server := &http.Server{
+		Addr:    ":" + port,
+		Handler: gzipMiddleware(http.FileServer(http.Dir("public"))),
 	}
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		<-sigChan
+		fmt.Println("\n 🛑  Server stopped")
+		server.Shutdown(context.Background())
+	}()
+	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		if isPortInUse(err) {
+			fmt.Fprintln(os.Stderr, "")
+			fmt.Fprintln(os.Stderr, " ------------------------------------------------")
+			fmt.Fprintf(os.Stderr, " ❌  Port %s is already in use.\n\n", port)
+			fmt.Fprintln(os.Stderr, " 👨🏻‍💻  Run with a different port: make serve PORT=\"8080\"")
+			os.Exit(1)
+		}
+		fmt.Fprintf(os.Stderr, " ❌  %v\n", err)
+		os.Exit(1)
+	}
+}
+
+func isPortInUse(err error) bool {
+	return strings.Contains(err.Error(), "address already in use")
 }

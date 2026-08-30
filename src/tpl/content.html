@@ -1,0 +1,17 @@
+{{ define "content" }}
+{{ template "wizardStep1" . }}
+{{ template "wizardStep2" . }}
+{{ template "wizardStep3" . }}
+{{ template "wizardStep4" . }}
+{{ template "wizardStep5" . }}
+{{ template "wizardStep6" . }}
+{{ template "wizardStep7" . }}
+{{ template "wizardStep8" . }}
+{{ template "privacyPolicies" . }}
+{{ template "tncs" . }}
+{{ template "disclaimer" . }}
+{{ template "faq" . }}
+{{ if $.Flycricket }}
+	{{ template "affiliateFlycricket" . }}
+{{ end }}
+{{ end }}

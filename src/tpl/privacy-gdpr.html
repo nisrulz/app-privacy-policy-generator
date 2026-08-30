@@ -1,0 +1,176 @@
+{{ define "privacyGDPRBody" }}
+<section class="modal-card-body modal-box">
+	<div id="privacy_gdpr_content" v-show="contentRenderType==1"><strong>[[ translate('gdpr.title') ]]</strong>
+		<p v-html="translate('gdpr.intro')"></p>
+		<br><strong>[[ translate('gdpr.controllerTitle') ]]</strong>
+		<p>[[ translate('gdpr.controllerText') ]]</p>
+		<ul>
+			<li v-html="translate('gdpr.controllerName')"></li>
+			<li v-if="businessAddress">[[ translate('gdpr.controllerAddress') ]]</li>
+			<li v-html="translate('gdpr.controllerEmail')"></li>
+		</ul>
+		<p>[[ translate('gdpr.controllerInquiry') ]]</p>
+		<p v-if="euRepresentative">[[ translate('gdpr.euRepresentative') ]]</p>
+		<br><strong>[[ translate('gdpr.infoTitle') ]]</strong>
+		<p>[[ translate('gdpr.infoText1') ]]</p>
+		<p>[[ translate('gdpr.infoText2') ]]</p>
+		<br><strong>[[ translate('gdpr.legalBasisTitle') ]]</strong>
+		<p>[[ translate('gdpr.legalBasisIntro') ]]</p>
+		<ul>
+			<li>[[ translate('gdpr.legalBasis.contract') ]]</li>
+			<li>[[ translate('gdpr.legalBasis.consent') ]]</li>
+			<li>[[ translate('gdpr.legalBasis.legitimate') ]]</li>
+			<li>[[ translate('gdpr.legalBasis.obligation') ]]</li>
+		</ul>
+		<br><strong>[[ translate('gdpr.cookiesTitle') ]]</strong>
+		<p>[[ translate('gdpr.cookiesText') ]]</p>
+		<br><strong>[[ translate('gdpr.automatedTitle') ]]</strong>
+		<p>[[ translate('gdpr.automatedText') ]]</p>
+		<br><strong>[[ translate('gdpr.autoCollectTitle') ]]</strong>
+		<p v-html="translate('gdpr.autoCollectText')"></p>
+		<br><strong>[[ translate('gdpr.locationTitle') ]]</strong>
+		<p v-if="!isLocationTracked" v-html="translate('gdpr.locationNo')"></p>
+		<div v-if="isLocationTracked">
+			<p>[[ translate('gdpr.locationYes') ]]</p>
+			<ul>
+				<li>[[ translate('gdpr.locationGeo') ]]</li>
+				<li>[[ translate('gdpr.locationAnalytics') ]]</li>
+				<li>[[ translate('gdpr.locationThirdParty') ]]</li>
+			</ul>
+		</div>
+		<br><strong>[[ translate('gdpr.aiTitle') ]]</strong>
+		<p v-if="!isAIUsed">[[ translate('gdpr.aiNo') ]]</p>
+		<div v-if="isAIUsed">
+			<p>[[ translate('gdpr.aiYes') ]]</p>
+			<ul>
+				<li>[[ translate('gdpr.aiPersonalized') ]]</li>
+				<li>[[ translate('gdpr.aiRecommendations') ]]</li>
+				<li>[[ translate('gdpr.aiAutomated') ]]</li>
+				<li>[[ translate('gdpr.aiProtection') ]]</li>
+			</ul>
+		</div>
+		<br><strong>[[ translate('gdpr.thirdPartyTitle') ]]</strong>
+		<p>[[ translate('gdpr.thirdPartyText') ]]</p>
+		<br><strong>[[ translate('gdpr.dataTransfersTitle') ]]</strong>
+		<p>[[ translate('gdpr.dataTransfersText') ]]</p>
+		<ul>
+			<li>[[ translate('gdpr.dataTransfers.adequacy') ]]</li>
+			<li>[[ translate('gdpr.dataTransfers.scc') ]]</li>
+			<li>[[ translate('gdpr.dataTransfers.safeguards') ]]</li>
+		</ul>
+		<p>[[ translate('gdpr.dataTransfersNote') ]]</p>
+		<div v-if="hasThirdPartyServicesSelected">
+			<br>
+			<p>[[ translate('gdpr.thirdPartyServicesText') ]]</p>
+			<ul>
+				<li v-for="item in enabledThirdPartyServicesWithPrivacy" :key="item.name"><a :href="item.link.privacy"
+						target="_blank" rel="noopener noreferrer">[[ tpsName(item) ]]</a>
+				</li>
+			</ul>
+		</div>
+		<p>[[ translate('gdpr.disclosureText') ]]
+			<ul>
+				<li>[[ translate('gdpr.disclosure.law') ]]</li>
+				<li>[[ translate('gdpr.disclosure.safety') ]]</li>
+				<li>[[ translate('gdpr.disclosure.providers') ]]</li>
+			</ul>
+		</p>
+		<p>[[ translate('gdpr.dpaText') ]]</p>
+		<br><strong>[[ translate('gdpr.optOutTitle') ]]</strong>
+		<div v-if="isMobileApp || isWindowsApp">
+			<p v-html="translate('gdpr.optOutUninstall')"></p>
+		</div>
+		<div v-if="isWebApp">
+			<p v-html="translate('gdpr.optOutCease')"></p>
+		</div>
+		<p v-html="translate('gdpr.optOutContact')"></p>
+		<br><strong>[[ translate('gdpr.retentionTitle') ]]</strong>
+		<p>[[ translate('gdpr.retentionIntro') ]]</p>
+		<ul>
+			<li>[[ translate('gdpr.retention.userData') ]]</li>
+			<li>[[ translate('gdpr.retention.autoData') ]]</li>
+			<li>[[ translate('gdpr.retention.aggregated') ]]</li>
+			<li>[[ translate('gdpr.retention.legal') ]]</li>
+		</ul>
+		<p v-html="translate('gdpr.retentionDeletion')"></p>
+		<div v-if="hasDataDeletion">
+			<br><strong>[[ translate('gdpr.dataDeletionTitle') ]]</strong>
+			<p v-html="translate('gdpr.dataDeletionText')"></p>
+			<p>[[ translate('gdpr.dataDeletionVerify') ]]</p>
+		</div>
+		<br><strong>[[ translate('gdpr.childrenTitle') ]]</strong>
+		<p v-html="translate('gdpr.childrenIntro')"></p>
+		<div v-if="hasThirdPartyServicesSelected">
+			<br>
+			<p v-html="translate('gdpr.childrenWithServices')"></p>
+		</div>
+		<div v-else>
+			<br>
+			<p v-html="translate('gdpr.childrenWithoutServices')"></p>
+		</div>
+		<br><strong>[[ translate('gdpr.securityTitle') ]]</strong>
+		<p>[[ translate('gdpr.securityText') ]]</p>
+		<br><strong>[[ translate('gdpr.breachTitle') ]]</strong>
+		<p>[[ translate('gdpr.breachText') ]]</p>
+		<br><strong>[[ translate('gdpr.changesTitle') ]]</strong>
+		<p>[[ translate('gdpr.changesText') ]]</p>
+		<br>
+		<p v-html="translate('gdpr.changesPrev')"></p>
+		<br>
+		<p v-html="translate('gdpr.effectiveDate')"></p>
+		<br><strong>[[ translate('gdpr.gdprRightsTitle') ]]</strong>
+		<p>[[ translate('gdpr.gdprRightsIntro') ]]</p>
+		<ul>
+			<li>[[ translate('gdpr.gdprRights.access') ]]</li>
+			<li>[[ translate('gdpr.gdprRights.rectification') ]]</li>
+			<li>[[ translate('gdpr.gdprRights.erasure') ]]</li>
+			<li>[[ translate('gdpr.gdprRights.restrict') ]]</li>
+			<li>[[ translate('gdpr.gdprRights.portability') ]]</li>
+			<li>[[ translate('gdpr.gdprRights.object') ]]</li>
+			<li>[[ translate('gdpr.gdprRights.withdraw') ]]</li>
+			<li>[[ translate('gdpr.gdprRights.automated') ]]</li>
+		</ul>
+		<p>[[ translate('gdpr.gdprRightsComplaint') ]]<a href="https://edpb.ec.europa.eu/about-edpb/members_en"
+				target="_blank" rel="noopener noreferrer">https://edpb.ec.europa.eu/about-edpb/members_en</a>
+		</p>
+		<p>[[ translate('gdpr.gdprRightsICO') ]]<a href="https://ico.org.uk" target="_blank"
+				rel="noopener noreferrer">https://ico.org.uk</a>
+		</p>
+		<br><strong>[[ translate('gdpr.ccpaTitle') ]]</strong>
+		<p>[[ translate('gdpr.ccpaIntro') ]]</p>
+		<ul>
+			<li>[[ translate('gdpr.ccpa.know') ]]</li>
+			<li>[[ translate('gdpr.ccpa.delete') ]]</li>
+			<li>[[ translate('gdpr.ccpa.correct') ]]</li>
+			<li>[[ translate('gdpr.ccpa.optOut') ]]</li>
+			<li>[[ translate('gdpr.ccpa.limit') ]]</li>
+			<li>[[ translate('gdpr.ccpa.nonDiscrimination') ]]</li>
+		</ul>
+		<p v-html="translate('gdpr.ccpaExercise')"></p>
+		<br><strong>[[ translate('gdpr.consentTitle') ]]</strong>
+		<p>[[ translate('gdpr.consentText') ]]</p>
+		<br><strong>[[ translate('gdpr.contactTitle') ]]</strong>
+		<p v-html="translate('gdpr.contactText')"></p>
+		<p v-html="translate('gdpr.contactDeletion')"></p>
+		{{ template "attribution" dict "type" "privacy policy" }}
+	</div>
+	<textarea class="textarea" id="privacy_gdpr_txtarea"
+		:aria-label="translate(&quot;gdpr.title&quot;) + translate(&quot;modal.textareaLabel&quot;)"
+		onclick="this.focus();this.select()" readonly="readonly" v-show="contentRenderType==2"></textarea>
+</section>
+<footer class="modal-card-foot">
+	{{ template "outputButtons" dict "contentId" "privacy_gdpr_content" "textareaId" "privacy_gdpr_txtarea" }}{{ template "flycricketDeploy" dict "method" "fc_deploy('privacy_gdpr_content')" "enabled" $.Flycricket }}</footer>
+{{ end }}
+
+{{ define "privacyGDPRModal" }}
+<div class="modal" v-bind:class="{'is-active': showGDPRPrivacyModal}" v-show="typeOfPolicyInt==3">
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title no-select">[[ translate('modal.privacyGDPR.title') ]]</p><button class="delete"
+				aria-label="close" @click="toggleGDPRPrivacyModalVisibility"></button>
+		</header>
+		{{ template "privacyGDPRBody" . }}
+	</div>
+</div>
+{{ end }}

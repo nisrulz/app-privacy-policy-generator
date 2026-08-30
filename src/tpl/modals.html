@@ -1,0 +1,13 @@
+{{ define "privacyPolicies" }}
+{{ template "privacySimpleModal" . }}
+{{ if $.NoTracking }}
+	{{ template "privacyNoTrackingModal" . }}
+{{ end }}
+{{ if $.Gdpr }}
+	{{ template "privacyGDPRModal" . }}
+{{ end }}
+{{ end }}
+
+{{ define "tncs" }}
+{{ template "termsModal" . }}
+{{ end }}

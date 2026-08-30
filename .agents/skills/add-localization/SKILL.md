@@ -43,7 +43,7 @@ Keep placeholders like `{{ appName }}`, `{{ platformDesc }}`, `{{ deviceType }}`
 make build
 ```
 
-The Go build tool automatically detects all JSON files in `src/locales/` and generates per-locale HTML + JS.
+The Go build tool detects every JSON file in `src/locales/` and generates the HTML and JavaScript for each locale.
 
 Open `public/index.html` — the language switcher dropdown now includes the new language.
 
@@ -56,7 +56,8 @@ Open `public/index.html` — the language switcher dropdown now includes the new
 - [ ] FAQ and disclaimer content translated
 - [ ] Platform vocabulary translated (device types, OS, browser strings)
 - [ ] Language appears in the dropdown
-- [ ] `npm run build` succeeds
+- [ ] `make build` succeeds
+- [ ] `make check` passes (golden parity tests, go vet, build checks)
 
 ## Important Notes
 

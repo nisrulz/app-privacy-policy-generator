@@ -41,12 +41,12 @@ func buildThirdPartyJS() error {
 func loadThirdPartyServices() ([]ThirdPartyService, error) {
 	data, err := os.ReadFile("src/includes/yaml/thirdpartyservices.yml")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("read thirdpartyservices.yml: %w", err)
 	}
 
 	var services []ThirdPartyService
 	if err := yaml.Unmarshal(data, &services); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("parse thirdpartyservices.yml: %w", err)
 	}
 
 	return services, nil

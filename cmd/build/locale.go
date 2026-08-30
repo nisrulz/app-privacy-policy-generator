@@ -28,7 +28,7 @@ func loadLocale(lang string) (LocaleData, error) {
 func getLocales() ([]string, error) {
 	entries, err := os.ReadDir("src/locales")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("read locales directory: %w", err)
 	}
 
 	var langs []string
@@ -43,7 +43,7 @@ func getLocales() ([]string, error) {
 
 func buildLocalesRegistry() error {
 	if err := ensureDir("public/js"); err != nil {
-		return err
+		return fmt.Errorf("create js directory: %w", err)
 	}
 
 	entries, err := os.ReadDir("src/locales")
@@ -108,35 +108,6 @@ func buildLocales(langs []string) error {
 	return nil
 }
 
-func buildLocaleJS(lang string) error {
-	outDir := "public"
-	if lang != "en" {
-		outDir = fmt.Sprintf("public/%s", lang)
-	}
-
-	if err := ensureDir(outDir); err != nil {
-		return err
-	}
-
-	locale, err := loadLocale(lang)
-	if err != nil {
-		return err
-	}
-
-	jsonData, err := json.Marshal(locale)
-	if err != nil {
-		return fmt.Errorf("marshal locale %s: %w", lang, err)
-	}
-
-	localeJS := fmt.Sprintf("window.__locale = %s", jsonData)
-
-	if err := ensureDir(filepath.Join(outDir, "js")); err != nil {
-		return err
-	}
-
-	return os.WriteFile(filepath.Join(outDir, "js", "locale.min.js"), []byte(localeJS), 0644)
-}
-
 func buildSingleLocale(lang string) error {
 	outDir := "public"
 	if lang != "en" {
@@ -144,7 +115,7 @@ func buildSingleLocale(lang string) error {
 	}
 
 	if err := ensureDir(outDir); err != nil {
-		return err
+		return fmt.Errorf("create output directory for %s: %w", lang, err)
 	}
 
 	locale, err := loadLocale(lang)
@@ -159,16 +130,17 @@ func buildSingleLocale(lang string) error {
 
 	localeJS := fmt.Sprintf("window.__locale = %s", jsonData)
 
-	if err := ensureDir(filepath.Join(outDir, "js")); err != nil {
-		return err
+	jsDir := filepath.Join(outDir, "js")
+	if err := ensureDir(jsDir); err != nil {
+		return fmt.Errorf("create js directory for %s: %w", lang, err)
 	}
 
-	if err := os.WriteFile(filepath.Join(outDir, "js", "locale.min.js"), []byte(localeJS), 0644); err != nil {
-		return fmt.Errorf("write locale js: %w", err)
+	if err := os.WriteFile(filepath.Join(jsDir, "locale.min.js"), []byte(localeJS), 0644); err != nil {
+		return fmt.Errorf("write locale js for %s: %w", lang, err)
 	}
 
-	if err := renderPug(lang, outDir); err != nil {
-		return err
+	if err := renderHTML(lang, outDir); err != nil {
+		return fmt.Errorf("render %s: %w", lang, err)
 	}
 
 	return nil
