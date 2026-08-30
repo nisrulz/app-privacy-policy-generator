@@ -4,16 +4,12 @@ The web app uses:
 
 - [Vue.js](https://vuejs.org/) for templating and reactive updates
 - [Firebase Hosting](https://firebase.google.com/docs/hosting/) for hosting
-- A pure Go toolchain (`go run ./cmd/build/`) that compiles Less to CSS, YAML to JS, and `text/template` files to HTML. It also minifies JavaScript and adds cache-busting values.
+- A pure Go toolchain behind `make build` that compiles Less to CSS, YAML to JS, and `text/template` files to HTML. It also minifies JavaScript and adds cache-busting values.
 - [firebase-tools](https://github.com/firebase/firebase-tools) for Firebase CLI (install globally)
 
 ---
 
-For image compression and deployment, install these globally:
-
-```sh
-npm install -g firebase-tools svgo png-minify
-```
+The Make targets provide the project commands for builds, image compression, testing, and deployment.
 
 ## Source layout
 
@@ -58,7 +54,7 @@ Format the Go HTML templates using [gotmplfmt](https://github.com/gohugoio/gotmp
 make format
 ```
 
-This formats Go source files, HTML templates, and runs `go mod tidy`.
+This formats Go source files and HTML templates, then updates Go dependencies.
 
 ## Compress images
 
@@ -111,14 +107,14 @@ Run the Go checks:
 make check
 ```
 
-E2E tests run against the dev server using chromedp (pure Go, Chromium only):
+E2E tests use Playwright. Node.js is only required for these tests.
 
 ```sh
-make serve          # start dev server in one terminal
-make test           # run E2E tests in another terminal
+make check
 ```
 
-Tests are in `cmd/build/e2e/`. The dev server must be running before you run tests.
+`make check` installs the local npm dependencies and Chromium when needed. Playwright starts the dev server.
+Tests are in `tests/`.
 
 ## Updating dependencies
 
@@ -126,7 +122,7 @@ Tests are in `cmd/build/e2e/`. The dev server must be running before you run tes
 make update-deps
 ```
 
-This runs `go get -u ./...` and `go mod tidy` to update all Go dependencies.
+This updates all Go dependencies.
 
 ## Firebase preview
 
@@ -136,7 +132,7 @@ Build and preview the site locally using Firebase Hosting:
 make firebase-preview
 ```
 
-This runs `make build` then starts `firebase serve --only hosting`.
+This runs the build, then starts a Firebase local preview.
 
 ## Deploying to production
 

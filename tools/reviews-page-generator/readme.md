@@ -11,13 +11,6 @@ From the repo root:
 ❯ make reviews-force    # re-fetches everything from GitHub
 ```
 
-Or run the script directly:
-
-```sh
-❯ ./scripts/gen_reviews_page.sh
-❯ ./scripts/gen_reviews_page.sh -f    # force re-fetch
-```
-
 ## How it works
 
 1. Fetches comment pages from the GitHub Issues API (paginated, cached as JSON for 1 week)

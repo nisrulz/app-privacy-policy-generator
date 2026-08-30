@@ -57,7 +57,7 @@ Open `public/index.html` — the language switcher dropdown now includes the new
 - [ ] Platform vocabulary translated (device types, OS, browser strings)
 - [ ] Language appears in the dropdown
 - [ ] `make build` succeeds
-- [ ] `make check` passes (golden parity tests, go vet, build checks)
+- [ ] `make check` passes (Go vet, build, golden, and Playwright checks)
 
 ## Important Notes
 

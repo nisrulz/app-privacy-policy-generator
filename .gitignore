@@ -24,9 +24,9 @@ plan/
 *.log
 *.cache
 
-# Dependencies
+# Node dependencies
 node_modules/
 
-# Test artifacts
+# Playwright test artifacts
 playwright-report/
 test-results/

@@ -1,4 +1,4 @@
-.PHONY: build clean compress-images format check update-deps serve watch deploy firebase-preview reviews test help
+.PHONY: build clean compress-images format check update-deps serve watch deploy firebase-preview reviews test-ui test-debug help
 
 help: ## Show available commands
 	@./scripts/help.sh
@@ -15,16 +15,17 @@ clean: ## Clean public/ directory
 
 format: ## Format Go source, templates, and tidy modules
 	@echo "→ Formatting..."
-	@gofmt -w cmd/build/*.go cmd/build/e2e/*.go tools/reviews-page-generator/*.go
+	@gofmt -w cmd/build/*.go tools/reviews-page-generator/*.go
 	@gotmplfmt -w src/tpl/*.html
 	@go mod tidy
 	@echo "✓ Format complete"
 
-check: ## Run tests, vet, and build checks
+check: node_modules ## Run Go, golden, and Playwright checks
 	@echo "→ Running checks..."
-	@go test ./cmd/build/ -run TestGolden -v
 	@go vet ./...
 	@go build ./...
+	@npx playwright install chromium
+	@npx playwright test
 	@echo "✓ All checks passed"
 
 compress-images: ## Compress images in public/images
@@ -60,7 +61,12 @@ reviews: ## Generate reviews page || Example: make reviews FORCE="true"
 	@if [ "$(FORCE)" = "true" ]; then ./scripts/gen_reviews_page.sh -f; else ./scripts/gen_reviews_page.sh; fi
 	@echo "✓ Reviews page generated"
 
-test: ## Run E2E tests (requires make serve running)
-	@echo "→ Running E2E tests..."
-	@go test ./cmd/build/e2e/... -v -count=1 -timeout 5m
-	@echo "✓ Tests complete"
+test-ui: node_modules ## Run Playwright tests in UI mode
+	@npx playwright test --ui
+
+test-debug: node_modules ## Run Playwright tests in debug mode
+	@npx playwright test --debug
+
+node_modules: package-lock.json package.json
+	@echo "→ Installing Playwright dependencies..."
+	@npm ci --no-audit --no-fund
