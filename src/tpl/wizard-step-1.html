@@ -19,7 +19,8 @@
 			<a href="https://ko-fi.com/nisrulz" target="_blank" rel="noopener noreferrer">[[
 				translate('wizard.step1.buyMeCoffee') ]]
 			</a> /
-			<select class="locale-dropdown" @change="switchLocale($event.target.value)"
+			<label for="locale-select" class="sr-only">[[ translate('misc.locale') ]]</label>
+			<select id="locale-select" name="locale" class="locale-dropdown" @change="switchLocale($event.target.value)"
 				:aria-label="translate(&quot;misc.locale&quot;)">
 				<option v-for="loc in availableLocales" :key="loc.code" :value="loc.code"
 					:selected="loc.code === currentLocale">[[ loc.flag ]] [[ loc.code.toUpperCase() ]]</option>
