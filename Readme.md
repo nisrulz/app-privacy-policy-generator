@@ -42,7 +42,7 @@ Requires [Go](https://go.dev/dl/) 1.25 or later.
 ## Docs
 
 | Doc | What's in it |
-|-----|-------------|
+| ----- | ------------- |
 | [Development](docs/development.md) | Tech stack, build, serve locally, deploy |
 | [Localization](docs/localization.md) | Add a new language translation |
 | [AGENTS.md](AGENTS.md) | AI agent conventions and project layout |
@@ -57,7 +57,7 @@ For feature proposals, open an issue first.
 make format
 make check
 make serve        # dev server on :8000
-make test         # E2E tests (chromedp)
+make check        # Go checks and E2E tests (installs Node dependencies on demand)
 ```
 
 ## Support
@@ -75,16 +75,6 @@ Servers and maintenance are not free. If this tool helped you out, consider [spo
 ## Author
 
 [Nishant Srivastava](https://github.com/nisrulz) and [contributors](https://github.com/nisrulz/app-privacy-policy-generator/graphs/contributors).
-
-## Star History
-
-<a href="https://www.star-history.com/#nisrulz/app-privacy-policy-generator&Timeline">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=nisrulz/app-privacy-policy-generator&type=Timeline&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=nisrulz/app-privacy-policy-generator&type=Timeline" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=nisrulz/app-privacy-policy-generator&type=Timeline" />
- </picture>
-</a>
 
 ## License
 

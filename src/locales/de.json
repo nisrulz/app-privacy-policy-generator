@@ -1,5 +1,6 @@
 {
   "_flag": "🇩🇪",
+  "misc.locale": "Sprache",
   "meta.title": "App Privacy Policy Generator",
   "meta.description": "Eine kostenlose Open-Source-Web-App zur Erstellung von Datenschutzerklärungen (allgemein oder DSGVO-konform) und Nutzungsbedingungen für mobile und Web-Apps.",
   "meta.author.copyright": "Nishant Srivastava",

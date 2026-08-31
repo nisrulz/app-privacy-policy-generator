@@ -34,11 +34,7 @@ make build
 
 The Go build tool picks up all JSON files in `src/locales/` automatically. No registration needed.
 
-To build only your new locale during development:
-
-```sh
-go run ./cmd/build/ -lang es
-```
+Use `make build` to build the new locale during development.
 
 Open the generated file and check that the translations appear.
 

@@ -48,7 +48,7 @@ This compresses all images in `public/images/third_party_logos/` via the compres
 
 ```sh
 make build   # regenerates public/js/thirdpartyservices.min.js from YAML
-make check   # runs golden parity tests, go vet, and build checks
+make check   # runs Go vet, build, golden, and Playwright checks
 ```
 
 Do NOT edit `public/js/thirdpartyservices.min.js` directly — it is auto-generated from the YAML source.

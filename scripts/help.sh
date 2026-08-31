@@ -12,9 +12,12 @@ Build
 
 Code Quality
   format             Format Go source, templates, and tidy modules
-  check              Run tests, vet, and build checks
-  test               Run E2E tests (requires make serve running)
+  check              Run Go, golden, and Playwright checks
+  test-ui            Run Playwright tests in UI mode
+  test-debug         Run Playwright tests in debug mode
   update-deps        Update Go dependencies
+
+Node.js is only required for the Playwright test commands.
 
 Data
   reviews            Generate reviews page
