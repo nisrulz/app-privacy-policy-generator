@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-const goldenDir = resolve('cmd/build/testdata/golden');
+const goldenDir = resolve('tests/golden');
 
 function normalizeHtml(html: string): string {
   return html
