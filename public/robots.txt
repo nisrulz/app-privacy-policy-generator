@@ -1,31 +1,12 @@
 # www.robotstxt.org/
 
-# List generated from https://darkvisitors.com/
+# Search engines stay allowed; everything else is disallowed.
 
-User-agent: cohere-ai
-Disallow: /
+User-agent: Googlebot
+Allow: /
 
-User-agent: anthropic-ai
-Disallow: /
+User-agent: Bingbot
+Allow: /
 
-User-agent: Bytespider
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: FacebookBot
-Disallow: /
-
-User-agent: Google-Extended
-User-agent: AdsBot-Google
-Disallow: /
-
-User-agent: GPTBot
-Disallow: /
-
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: omgili
+User-agent: *
 Disallow: /
