@@ -8,5 +8,11 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
 User-agent: *
 Disallow: /
