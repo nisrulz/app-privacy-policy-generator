@@ -68,8 +68,8 @@ Build pipeline:
 2. Go parses `src/includes/yaml/thirdpartyservices.yml` → `public/tmp/thirdpartyservices.js`
 3. Go builds locales registry from `src/locales/` → `public/js/locales.min.js`
 4. Go renders `src/tpl/` (`text/template`, entry `page.html`) → `public/index.html`
-5. Go minifies `main.js` → `public/js/main.min.js`; separately minifies `utils.min.js`, `thirdpartyservices.min.js`, `flycricket.min.js`
-6. Go copies vendor assets (Vue, to-markdown, Ko-fi image) to `public/`
+5. Go minifies every `src/js/*.js` and `public/tmp/*.js` to `public/js/<name>.min.js`
+6. Go copies every `src/includes/vendor/*` asset to `public/js/vendor/`
 7. Per-locale: Go renders HTML with `lang` override; Go generates `locale.min.js`
 8. Cache-busting: `?v=<md5>` appended to all CSS/JS references in HTML files
 

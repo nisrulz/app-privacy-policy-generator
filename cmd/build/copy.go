@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"path/filepath"
+)
 
 func copyVendorAssets() error {
 	if err := ensureDir("public/js/vendor"); err != nil {
@@ -10,15 +13,14 @@ func copyVendorAssets() error {
 		return fmt.Errorf("create vendor images directory: %w", err)
 	}
 
-	vendorJS := map[string]string{
-		"src/includes/vendor/vue.global.prod.js": "public/js/vendor/vue.global.prod.js",
-		"src/includes/vendor/to-markdown.min.js": "public/js/vendor/to-markdown.min.js",
+	matches, err := filepath.Glob("src/includes/vendor/*")
+	if err != nil {
+		return fmt.Errorf("glob vendor assets: %w", err)
 	}
-	for src, dst := range vendorJS {
-		if fileExists(src) {
-			if err := copyFile(src, dst); err != nil {
-				return fmt.Errorf("copy vendor asset %s: %w", src, err)
-			}
+	for _, src := range matches {
+		dst := filepath.Join("public/js/vendor", filepath.Base(src))
+		if err := copyFile(src, dst); err != nil {
+			return fmt.Errorf("copy vendor asset %s: %w", src, err)
 		}
 	}
 
