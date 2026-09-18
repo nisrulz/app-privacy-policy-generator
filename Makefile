@@ -1,4 +1,4 @@
-.PHONY: build clean compress-images format check update-deps serve watch deploy firebase-preview reviews test-ui test-debug help
+.PHONY: build clean compress-images purge-css format check update-deps serve watch deploy firebase-preview reviews test-ui test-debug help
 
 help: ## Show available commands
 	@./scripts/help.sh
@@ -32,6 +32,11 @@ compress-images: ## Compress images in public/images
 	@echo "→ Compressing images..."
 	@./scripts/compress_images.sh
 	@echo "✓ Images compressed"
+
+purge-css: ## Purge unused Bulma CSS || Run make build afterwards to refresh cache-busting hashes
+	@echo "→ Purging unused CSS..."
+	@./scripts/purge_css.sh
+	@echo "✓ CSS purged"
 
 update-deps: ## Update Go dependencies
 	@echo "→ Updating dependencies..."

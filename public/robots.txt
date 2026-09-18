@@ -1,18 +1,76 @@
 # www.robotstxt.org/
 
 # Search engines stay allowed; everything else is disallowed.
+# robots.txt is a request, not enforcement. Aggressive crawlers ignore it.
+# Pair it with edge rules to block by user agent.
 
 User-agent: Googlebot
 Allow: /
+Disallow: /reviews.html
+Disallow: /reviews-data.json
+Disallow: /downloaded_images/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /reviews.html
+Disallow: /reviews-data.json
+Disallow: /downloaded_images/
 
 User-agent: DuckDuckBot
 Allow: /
+Disallow: /reviews.html
+Disallow: /reviews-data.json
+Disallow: /downloaded_images/
 
 User-agent: Applebot
 Allow: /
+Disallow: /reviews.html
+Disallow: /reviews-data.json
+Disallow: /downloaded_images/
+
+# AI crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+# SEO crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
 
 User-agent: *
 Disallow: /

@@ -3,15 +3,20 @@
     "public": "public",
     "headers": [
       {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Content-Security-Policy",
+            "value": "default-src 'self'; script-src 'self' 'unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; form-action 'self' https://app.flycricket.com"
+          }
+        ]
+      },
+      {
         "source": "**/*.html",
         "headers": [
           {
             "key": "Cache-Control",
             "value": "no-cache"
-          },
-          {
-            "key": "Content-Security-Policy",
-            "value": "default-src 'self'; script-src 'self' 'unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; form-action 'self' https://app.flycricket.com"
           }
         ]
       },
@@ -39,6 +44,24 @@
           {
             "key": "Cache-Control",
             "value": "public, max-age=86400"
+          }
+        ]
+      },
+      {
+        "source": "/reviews.html",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          }
+        ]
+      },
+      {
+        "source": "/reviews-data.json",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
           }
         ]
       }

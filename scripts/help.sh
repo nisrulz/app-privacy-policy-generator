@@ -6,6 +6,7 @@ Build
   build              Build the project
   clean              Clean public/ directory
   compress-images    Compress images in public/images
+  purge-css          Purge unused Bulma CSS
   serve              Build and serve locally
                      Example: make serve PORT="9090"
   watch              Watch for changes and rebuild
