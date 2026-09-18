@@ -20,6 +20,8 @@ func buildMinifyJS() error {
 		src string
 		dst string
 	}{
+		{"src/js/themeInit.js", "public/js/themeInit.min.js"},
+		{"src/js/swRegister.js", "public/js/swRegister.min.js"},
 		{"src/js/utils.js", "public/js/utils.min.js"},
 		{"public/tmp/thirdpartyservices.js", "public/js/thirdpartyservices.min.js"},
 		{"src/js/flycricket.js", "public/js/flycricket.min.js"},

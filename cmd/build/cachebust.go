@@ -16,6 +16,8 @@ func cacheBust() error {
 		"public/css/vendor/bulma.min.css",
 		"public/js/main.min.js",
 		"public/js/locales.min.js",
+		"public/js/themeInit.min.js",
+		"public/js/swRegister.min.js",
 		"public/js/utils.min.js",
 		"public/js/thirdpartyservices.min.js",
 		"public/js/flycricket.min.js",
