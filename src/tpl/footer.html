@@ -13,13 +13,5 @@
 {{ if $.Flycricket }}
 <script src="/js/flycricket.min.js"></script>
 {{ end }}
-<script>if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(function (err) {
-      console.warn('SW registration failed:', err);
-    });
-    navigator.serviceWorker.addEventListener('controllerchange', function () {
-      window.location.reload();
-    });
-  }
-</script>
+<script src="/js/swRegister.min.js"></script>
 {{ end }}

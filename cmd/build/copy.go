@@ -1,21 +1,33 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+)
 
 func copyVendorAssets() error {
-	if err := ensureDir("public/js/vendor"); err != nil {
-		return fmt.Errorf("create vendor js directory: %w", err)
-	}
-	if err := ensureDir("public/images/vendor"); err != nil {
-		return fmt.Errorf("create vendor images directory: %w", err)
+	types, err := os.ReadDir("src/includes/vendor")
+	if err != nil {
+		return fmt.Errorf("read vendor dir: %w", err)
 	}
 
-	vendorJS := map[string]string{
-		"src/includes/vendor/vue.global.prod.js": "public/js/vendor/vue.global.prod.js",
-		"src/includes/vendor/to-markdown.min.js": "public/js/vendor/to-markdown.min.js",
-	}
-	for src, dst := range vendorJS {
-		if fileExists(src) {
+	for _, t := range types {
+		if !t.IsDir() {
+			continue
+		}
+
+		dstDir := filepath.Join("public", t.Name(), "vendor")
+		if err := ensureDir(dstDir); err != nil {
+			return fmt.Errorf("create %s: %w", dstDir, err)
+		}
+
+		matches, err := filepath.Glob(filepath.Join("src/includes/vendor", t.Name(), "*"))
+		if err != nil {
+			return fmt.Errorf("glob vendor %s: %w", t.Name(), err)
+		}
+		for _, src := range matches {
+			dst := filepath.Join(dstDir, filepath.Base(src))
 			if err := copyFile(src, dst); err != nil {
 				return fmt.Errorf("copy vendor asset %s: %w", src, err)
 			}

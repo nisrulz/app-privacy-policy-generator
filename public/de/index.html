@@ -3,11 +3,7 @@
 <html lang="de" data-theme="light">
 	<head>
 		
-	<script>(function () {
-			var theme = localStorage.getItem('theme');
-			if (!theme) theme = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
-			document.documentElement.setAttribute('data-theme', theme);
-		})();</script>
+		<script src="/js/themeInit.min.js?v=edc044ba"></script>
 		
 		
 
@@ -1375,15 +1371,7 @@ along with this program.  If not, see
 
 <script src="/js/flycricket.min.js?v=7c9305e0"></script>
 
-<script>if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(function (err) {
-      console.warn('SW registration failed:', err);
-    });
-    navigator.serviceWorker.addEventListener('controllerchange', function () {
-      window.location.reload();
-    });
-  }
-</script>
+<script src="/js/swRegister.min.js?v=fe07970f"></script>
 
 	</body>
 

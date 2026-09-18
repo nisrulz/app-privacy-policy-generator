@@ -9,33 +9,30 @@ import (
 )
 
 func cacheBust() error {
-	sharedFiles := []string{
-		"public/css/style.min.css",
-		"public/css/reviews.min.css",
-		"public/css/vendor/normalize.min.css",
-		"public/css/vendor/bulma.min.css",
-		"public/js/main.min.js",
-		"public/js/locales.min.js",
-		"public/js/utils.min.js",
-		"public/js/thirdpartyservices.min.js",
-		"public/js/flycricket.min.js",
-		"public/js/reviewThemeToggle.min.js",
-		"public/js/reviewsMain.min.js",
-		"public/js/vendor/vue.global.prod.js",
-		"public/js/vendor/to-markdown.min.js",
+	patterns := []string{
+		"public/css/*.css",
+		"public/css/vendor/*.css",
+		"public/js/*.js",
+		"public/js/vendor/*.js",
 	}
 
 	hashMap := make(map[string]string)
-	for _, f := range sharedFiles {
-		if !fileExists(f) {
-			continue
-		}
-		hash, err := computeHash(f)
+	for _, pattern := range patterns {
+		matches, err := filepath.Glob(pattern)
 		if err != nil {
-			continue
+			return fmt.Errorf("glob %s: %w", pattern, err)
 		}
-		base := filepath.Base(f)
-		hashMap[base] = fmt.Sprintf("%s?v=%s", base, hash)
+		for _, f := range matches {
+			base := filepath.Base(f)
+			if base == "locale.min.js" {
+				continue
+			}
+			hash, err := computeHash(f)
+			if err != nil {
+				return fmt.Errorf("hash %s: %w", f, err)
+			}
+			hashMap[base] = fmt.Sprintf("%s?v=%s", base, hash)
+		}
 	}
 
 	err := filepath.Walk("public", func(path string, info os.FileInfo, err error) error {

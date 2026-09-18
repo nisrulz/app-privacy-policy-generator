@@ -3,7 +3,7 @@
   Caches static assets for offline use and reduced server load.
 */
 
-const CACHE_NAME = "app-privacy-policy-v4";
+const CACHE_NAME = "app-privacy-policy-v5";
 
 const PRECACHE_URLS = [
   "/index.html",
@@ -13,6 +13,8 @@ const PRECACHE_URLS = [
   "/de/index.html",
   "/css/style.min.css",
   "/js/main.min.js",
+  "/js/themeInit.min.js",
+  "/js/swRegister.min.js",
   "/js/utils.min.js",
   "/js/thirdpartyservices.min.js",
   "/js/locale.min.js",

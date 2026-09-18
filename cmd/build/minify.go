@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
+	"strings"
 
 	"github.com/tdewolff/minify/v2"
 	"github.com/tdewolff/minify/v2/js"
@@ -16,52 +18,22 @@ func buildMinifyJS() error {
 	m := minify.New()
 	m.AddFunc("text/javascript", js.Minify)
 
-	jsFiles := []struct {
-		src string
-		dst string
-	}{
-		{"src/js/utils.js", "public/js/utils.min.js"},
-		{"public/tmp/thirdpartyservices.js", "public/js/thirdpartyservices.min.js"},
-		{"src/js/flycricket.js", "public/js/flycricket.min.js"},
-		{"src/js/reviewThemeToggle.js", "public/js/reviewThemeToggle.min.js"},
-		{"src/js/reviewsMain.js", "public/js/reviewsMain.min.js"},
+	sourcePatterns := []string{
+		"src/js/*.js",
+		"public/tmp/*.js",
 	}
-
-	for _, f := range jsFiles {
-		if err := minifySingleJS(m, f.src, f.dst); err != nil {
-			return err
-		}
-	}
-
-	if err := buildMainJS(m); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func buildMainJS(m *minify.M) error {
-	files := []string{
-		"src/js/main.js",
-	}
-
-	var combined []byte
-	for _, f := range files {
-		data, err := os.ReadFile(f)
+	for _, pattern := range sourcePatterns {
+		matches, err := filepath.Glob(pattern)
 		if err != nil {
-			return fmt.Errorf("read %s: %w", f, err)
+			return fmt.Errorf("glob %s: %w", pattern, err)
 		}
-		combined = append(combined, data...)
-		combined = append(combined, '\n')
-	}
-
-	out, err := m.Bytes("text/javascript", combined)
-	if err != nil {
-		return fmt.Errorf("minify main.js: %w", err)
-	}
-
-	if err := os.WriteFile("public/js/main.min.js", out, 0644); err != nil {
-		return fmt.Errorf("write main.min.js: %w", err)
+		for _, src := range matches {
+			name := strings.TrimSuffix(filepath.Base(src), ".js")
+			dst := filepath.Join("public/js", name+".min.js")
+			if err := minifySingleJS(m, src, dst); err != nil {
+				return err
+			}
+		}
 	}
 
 	return nil
