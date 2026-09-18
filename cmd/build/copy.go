@@ -9,9 +9,6 @@ func copyVendorAssets() error {
 	if err := ensureDir("public/js/vendor"); err != nil {
 		return fmt.Errorf("create vendor js directory: %w", err)
 	}
-	if err := ensureDir("public/images/vendor"); err != nil {
-		return fmt.Errorf("create vendor images directory: %w", err)
-	}
 
 	matches, err := filepath.Glob("src/includes/vendor/*")
 	if err != nil {
