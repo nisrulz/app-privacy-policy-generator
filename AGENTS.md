@@ -23,7 +23,7 @@ Static Vue.js web app that generates privacy policies and Terms & Conditions for
 - `src/js/utils.js` — utility helpers (`convertHtmlToMd`, `getRawHTML`, `getContent`, `getTitle`, `loadInTextView`)
 - `src/js/flycricket.js` — Flycricket form submission helper `window.fc_deploy(bodyContentId)` (single function reused by all modal deploy buttons)
 - `src/includes/yaml/thirdpartyservices.yml` — 3rd-party service definitions (source of truth); supports locale-aware `name_{code}` fields; JS is auto-generated during build
-- `src/includes/vendor/` — vendored third-party assets: `vue.global.prod.js`, `to-markdown.min.js`
+- `src/includes/vendor/` — vendored third-party assets; each subdirectory mirrors to `public/<subdir>/vendor/` (for example `js/` → `public/js/vendor/`)
 - `src/less/style.less` — Less entry point (`@import`s 6 partials); compiled to CSS by Go build
 - `src/less/_variables.less` — Less variables (`@color-primary`, `@font-sans`, `@border-radius`, etc.)
 - `src/less/_base.less` — Base layout, typography, hero, cards, footer
@@ -69,7 +69,7 @@ Build pipeline:
 3. Go builds locales registry from `src/locales/` → `public/js/locales.min.js`
 4. Go renders `src/tpl/` (`text/template`, entry `page.html`) → `public/index.html`
 5. Go minifies every `src/js/*.js` and `public/tmp/*.js` to `public/js/<name>.min.js`
-6. Go copies every `src/includes/vendor/*` asset to `public/js/vendor/`
+6. Go mirrors each `src/includes/vendor/<type>/` directory to `public/<type>/vendor/`
 7. Per-locale: Go renders HTML with `lang` override; Go generates `locale.min.js`
 8. Cache-busting: `?v=<md5>` appended to all CSS/JS references in HTML files
 
