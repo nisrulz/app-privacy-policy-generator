@@ -74,6 +74,10 @@ make build
 
 `purge-css` scans `src/tpl/`, `src/js/`, and the built HTML, then rewrites `public/css/vendor/bulma.min.css`. Run `make build` after it to refresh the cache-busting hashes. Node.js is required for this command.
 
+## Review images
+
+`make reviews` calls `scripts/optimize_review_images.sh` after it generates the page. The script converts the source PNGs to WebP in `public/downloaded_images/` and points `public/reviews-data.json` at the WebP files. Source PNGs stay in `tools/reviews-page-generator/downloaded_images/`. The tool `cwebp` is required (`brew install webp`).
+
 ## Adding a 3rd party service
 
 The third-party services list is generated from a YAML file. To add one, open a PR that adds an entry to [`src/includes/yaml/thirdpartyservices.yml`](src/includes/yaml/thirdpartyservices.yml):
