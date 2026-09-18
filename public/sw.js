@@ -3,7 +3,7 @@
   Caches static assets for offline use and reduced server load.
 */
 
-const CACHE_NAME = "app-privacy-policy-v3";
+const CACHE_NAME = "app-privacy-policy-v4";
 
 const PRECACHE_URLS = [
   "/index.html",
@@ -26,7 +26,7 @@ const PRECACHE_URLS = [
   "/apple-touch-icon.png",
   "/site.webmanifest",
   "/images/link_preview.jpg",
-  "/images/side_image/side_image.png",
+  "/images/side_image/side_image.webp",
   "/images/app_graphics/404.svg",
   "/images/app_icons/disclaimer.svg"
 ];

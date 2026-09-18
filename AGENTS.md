@@ -38,7 +38,8 @@ Static Vue.js web app that generates privacy policies and Terms & Conditions for
 - `public/humans.txt` — author/tech credits (tracked, edit directly)
 - `public/logo.svg` — SVG logo (tracked, edit directly)
 - `public/images/third_party_logos/` — third-party service logo images (tracked, add via `add-thirdparty-service` skill)
-- `public/images/app_graphics/` — app graphics (side_image.png, 404.svg, etc.)
+- `public/images/side_image/` — hero and sidebar graphics (side_image.webp, side_image_dark.webp)
+- `public/images/app_graphics/` — app graphics (404.svg, etc.)
 - `public/images/app_icons/` — UI icons (disclaimer.svg, etc.)
 - `public/favicon*`, `public/apple-touch-icon.png`, `public/android-chrome-*` — favicons and PWA icons
 - `public/reviews.html` — generated reviews page (committed for convenience)
