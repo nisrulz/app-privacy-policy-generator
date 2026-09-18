@@ -41,6 +41,24 @@
             "value": "public, max-age=86400"
           }
         ]
+      },
+      {
+        "source": "/reviews.html",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          }
+        ]
+      },
+      {
+        "source": "/reviews-data.json",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          }
+        ]
       }
     ]
   }
