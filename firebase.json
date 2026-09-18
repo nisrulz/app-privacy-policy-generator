@@ -12,11 +12,11 @@
         ]
       },
       {
-        "source": "**/*.html",
+        "regex": "^/(?:[^/]+/)*(?:index\\.html)?$|^/.*\\.html$",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache"
+            "value": "no-cache, no-transform"
           }
         ]
       },
