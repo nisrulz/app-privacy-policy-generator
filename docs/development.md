@@ -35,6 +35,7 @@ make format           # format Go source, templates, and tidy modules
 make check            # run tests, vet, and build checks
 make clean            # clean public/ directory
 make compress-images  # compress images in public/images
+make purge-css        # purge unused Bulma CSS from public/css/vendor
 make watch            # watch for changes and rebuild automatically
 make reviews          # generate reviews page from cached data
 make update-deps      # update Go dependencies
@@ -61,6 +62,17 @@ This formats Go source files and HTML templates, then updates Go dependencies.
 ```sh
 make compress-images
 ```
+
+## Purge unused CSS
+
+Bulma ships every component. The page uses a small subset. Purge the unused rules after you change templates or add Bulma classes:
+
+```sh
+make purge-css
+make build
+```
+
+`purge-css` scans `src/tpl/`, `src/js/`, and the built HTML, then rewrites `public/css/vendor/bulma.min.css`. Run `make build` after it to refresh the cache-busting hashes. Node.js is required for this command.
 
 ## Adding a 3rd party service
 
