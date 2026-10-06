@@ -64,23 +64,19 @@ func runBuild(langs []string, clean bool) {
 		return buildLocalesRegistry()
 	})
 
-	step("STEP 4: Render HTML (reference for CSS minification)", func() error {
-		return renderHTML("en", "public")
-	})
-
-	step("STEP 5: Minify JS", func() error {
+	step("STEP 4: Minify JS", func() error {
 		return buildMinifyJS()
 	})
 
-	step("STEP 6: Copy vendor assets", func() error {
+	step("STEP 5: Copy vendor assets", func() error {
 		return copyVendorAssets()
 	})
 
-	step("STEP 7: Per-locale builds", func() error {
+	step("STEP 6: Per-locale builds", func() error {
 		return buildLocales(langs)
 	})
 
-	step("STEP 8: Cache-busting", func() error {
+	step("STEP 7: Cache-busting", func() error {
 		return cacheBust()
 	})
 

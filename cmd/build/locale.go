@@ -86,15 +86,6 @@ func buildLocalesRegistry() error {
 		return fmt.Errorf("write locales js: %w", err)
 	}
 
-	minified, err := minifyJS([]byte(js))
-	if err != nil {
-		return fmt.Errorf("minify locales: %w", err)
-	}
-
-	if err := os.WriteFile("public/js/locales.min.js", minified, 0644); err != nil {
-		return fmt.Errorf("write minified locales: %w", err)
-	}
-
 	return nil
 }
 
