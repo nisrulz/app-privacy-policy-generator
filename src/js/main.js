@@ -25,17 +25,6 @@ function _updateMeta() {
   if (twitterDesc && locale['meta.twitter.description']) twitterDesc.setAttribute('content', locale['meta.twitter.description'])
 }
 
-function _updateThemeLogo() {
-  var theme = document.documentElement.getAttribute('data-theme');
-  document.querySelectorAll('img[data-theme-logo]').forEach(function (img) {
-    if (!img.getAttribute('data-light-src')) {
-      img.setAttribute('data-light-src', img.src);
-      img.setAttribute('data-dark-src', img.src.replace(/(\.\w+)$/, '_dark$1'));
-    }
-    img.src = theme === 'dark' ? img.getAttribute('data-dark-src') : img.getAttribute('data-light-src');
-  });
-}
-
 function useAppState() {
   var { reactive, computed } = Vue;
 
@@ -355,21 +344,15 @@ var app = Vue.createApp({
   mounted: function () {
     this.$nextTick(function () {
       _updateMeta();
-      var theme = document.documentElement.getAttribute('data-theme');
-      document.querySelectorAll('.theme-toggle').forEach(function (el) {
-        el.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-      });
-      _updateThemeLogo();
+      themeToggle.updateGlyphs();
+      themeToggle.updateLogos();
     });
   },
   watch: {
     wizardStep: function () {
       this.$nextTick(function () {
-        var theme = document.documentElement.getAttribute('data-theme');
-        document.querySelectorAll('.theme-toggle').forEach(function (el) {
-          el.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-        });
-        _updateThemeLogo();
+        themeToggle.updateGlyphs();
+        themeToggle.updateLogos();
       });
     }
   },
@@ -377,21 +360,8 @@ var app = Vue.createApp({
 
 app.config.globalProperties.translate = translate;
 app.config.globalProperties._updateMeta = _updateMeta;
-app.config.globalProperties._updateThemeLogo = _updateThemeLogo;
-app.config.globalProperties.toggleTheme = function (e) {
-  var html = document.documentElement;
-  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-  _updateThemeLogo();
-  var btn = e && e.target;
-  if (btn) btn.textContent = next === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-  else {
-    document.querySelectorAll('.theme-toggle').forEach(function (el) {
-      el.textContent = next === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-    });
-  }
-};
+app.config.globalProperties._updateThemeLogo = themeToggle.updateLogos;
+app.config.globalProperties.toggleTheme = themeToggle.toggle;
 
 app.config.globalProperties.switchLocale = function (localeCode) {
   var currentLocale = document.documentElement.getAttribute('lang') || 'en';
