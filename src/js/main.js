@@ -28,7 +28,6 @@ function _updateMeta() {
 function _updateThemeLogo() {
   var theme = document.documentElement.getAttribute('data-theme');
   document.querySelectorAll('img[data-theme-logo]').forEach(function (img) {
-    var light = img.getAttribute('data-light-src') || img.src;
     if (!img.getAttribute('data-light-src')) {
       img.setAttribute('data-light-src', img.src);
       img.setAttribute('data-dark-src', img.src.replace(/(\.\w+)$/, '_dark$1'));
@@ -72,7 +71,6 @@ function useAppState() {
       Windows: false,
       Web: false,
     },
-    typeOfPolicy: "Simple",
     typeOfPolicyInt: 1,
     isLocationTracked: false,
     ageOfDigitalConsent: 16,
@@ -106,7 +104,6 @@ function useWizard(state) {
     deviceIdDesc: "",
     osDesc: "",
     browserDesc: "",
-    uninstallDesc: "",
   });
 
   wizard.canAdvance = computed(function () {
@@ -245,11 +242,6 @@ function useWizard(state) {
     if (devPlurals.length === 0) devPlurals.push(word("platform.mobileDevices"));
     wizard.deviceTypePlural = _joinList(devPlurals, word("platform.and"), word("platform.commaAnd"));
 
-    var uninstallParts = [];
-    if (isMobile || isWin) uninstallParts.push(word("platform.uninstallApp"));
-    if (isWeb) uninstallParts.push(word("platform.ceaseWeb"));
-    wizard.uninstallDesc = uninstallParts.join(" " + word("platform.or") + " ") || word("platform.uninstallApp");
-
     if (isMobile && !isWin && !isWeb) {
       wizard.deviceIdDesc = word("platform.deviceId.mobile");
       wizard.osDesc = word("platform.os.mobile");
@@ -280,20 +272,6 @@ function useWizard(state) {
 
   wizard.toggleState = function (item) {
     item.enabled = !item.enabled;
-  };
-
-  wizard.setTypeOfPolicyInt = function () {
-    switch (state.typeOfPolicy) {
-      case "Simple":
-        state.typeOfPolicyInt = 1;
-        break;
-      case "No Tracking":
-        state.typeOfPolicyInt = 2;
-        break;
-      case "GDPR":
-        state.typeOfPolicyInt = 3;
-        break;
-    }
   };
 
   return wizard;

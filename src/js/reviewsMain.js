@@ -237,7 +237,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateThemeLogo() {
       var theme = document.documentElement.getAttribute('data-theme');
       document.querySelectorAll('img[data-theme-logo]').forEach(function (img) {
-        var light = img.getAttribute('data-light-src') || img.src;
         if (!img.getAttribute('data-light-src')) {
           img.setAttribute('data-light-src', img.src);
           img.setAttribute('data-dark-src', img.src.replace(/(\.\w+)$/, '_dark$1'));
