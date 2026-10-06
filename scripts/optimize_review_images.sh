@@ -54,7 +54,15 @@ for ext in jpg jpeg gif svg webp; do
   done
 done
 
-find "$DST" -maxdepth 1 -name '*.png' -delete
+# Remove a PNG from $DST only when its WebP exists. A failed cwebp conversion
+# is not an error here; keeping the source PNG lets the JSON below continue to
+# point at a real file instead of a deleted one.
+for f in "$DST"/*.png; do
+  [ -e "$f" ] || continue
+  if [ -e "${f%.png}.webp" ]; then
+    rm -f "$f"
+  fi
+done
 
 if [ -f "$JSON" ]; then
   # Repoint a .png reference only when its WebP actually exists; otherwise a
