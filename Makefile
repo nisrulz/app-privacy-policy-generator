@@ -1,4 +1,4 @@
-.PHONY: build clean compress-images purge-css format check update-deps serve watch deploy firebase-preview reviews test-ui test-debug help
+.PHONY: build clean compress-images purge-css format check update-deps serve watch deploy firebase-preview reviews test-ui test-debug browsers help
 
 help: ## Show available commands
 	@./scripts/help.sh
@@ -20,11 +20,14 @@ format: ## Format Go source, templates, and tidy modules
 	@go mod tidy
 	@echo "✓ Format complete"
 
-check: node_modules ## Run Go, golden, and Playwright checks
+check: node_modules ## Run Go, script, golden, and Playwright checks
 	@echo "→ Running checks..."
 	@go vet ./...
-	@go build ./...
-	@npx playwright install chromium
+	@go test ./...
+	@go build -o /dev/null ./...
+	@cd tools/reviews-page-generator && go vet ./... && go build -o /dev/null ./...
+	@bash scripts/test_optimize_review_images.sh
+	@npx playwright install chromium --only-shell
 	@npx playwright test
 	@echo "✓ All checks passed"
 
@@ -66,11 +69,14 @@ reviews: ## Generate reviews page || Example: make reviews FORCE="true"
 	@if [ "$(FORCE)" = "true" ]; then ./scripts/gen_reviews_page.sh -f; else ./scripts/gen_reviews_page.sh; fi
 	@echo "✓ Reviews page generated"
 
-test-ui: node_modules ## Run Playwright tests in UI mode
+test-ui: node_modules browsers ## Run Playwright tests in UI mode
 	@npx playwright test --ui
 
-test-debug: node_modules ## Run Playwright tests in debug mode
+test-debug: node_modules browsers ## Run Playwright tests in debug mode
 	@npx playwright test --debug
+
+browsers: ## Install full Chromium, required by the headed UI and debug modes
+	@npx playwright install chromium
 
 node_modules: package-lock.json package.json
 	@echo "→ Installing Playwright dependencies..."

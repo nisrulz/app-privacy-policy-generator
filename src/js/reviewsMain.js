@@ -227,33 +227,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   init();
 
-  var __themeToggle = window.__themeToggle !== false;
-  if (__themeToggle) {
-    document.getElementById("themeToggle").style.display = "";
-    function updateThemeToggle() {
-      var btn = document.getElementById("themeToggle");
-      btn.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19";
-    }
-    function updateThemeLogo() {
-      var theme = document.documentElement.getAttribute('data-theme');
-      document.querySelectorAll('img[data-theme-logo]').forEach(function (img) {
-        var light = img.getAttribute('data-light-src') || img.src;
-        if (!img.getAttribute('data-light-src')) {
-          img.setAttribute('data-light-src', img.src);
-          img.setAttribute('data-dark-src', img.src.replace(/(\.\w+)$/, '_dark$1'));
-        }
-        img.src = theme === 'dark' ? img.getAttribute('data-dark-src') : img.getAttribute('data-light-src');
-      });
-    }
-    updateThemeToggle();
-    updateThemeLogo();
-    document.getElementById("themeToggle").addEventListener("click", function () {
-      var html = document.documentElement;
-      var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      html.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
-      updateThemeToggle();
-      updateThemeLogo();
-    });
-  }
+  var themeBtn = document.getElementById("themeToggle");
+  themeBtn.style.display = "";
+  themeToggle.updateGlyphs();
+  themeToggle.updateLogos();
+  themeBtn.addEventListener("click", themeToggle.toggle);
 });

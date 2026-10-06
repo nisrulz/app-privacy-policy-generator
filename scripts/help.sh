@@ -13,9 +13,10 @@ Build
 
 Code Quality
   format             Format Go source, templates, and tidy modules
-  check              Run Go, golden, and Playwright checks
+  check              Run Go, script, golden, and Playwright checks
   test-ui            Run Playwright tests in UI mode
   test-debug         Run Playwright tests in debug mode
+  browsers           Install full Chromium for the headed modes
   update-deps        Update Go dependencies
 
 Node.js is only required for the Playwright test commands.

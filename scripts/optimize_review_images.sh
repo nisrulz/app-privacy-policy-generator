@@ -54,10 +54,48 @@ for ext in jpg jpeg gif svg webp; do
   done
 done
 
-find "$DST" -maxdepth 1 -name '*.png' -delete
+# Remove a PNG from $DST only when its WebP exists. A failed cwebp conversion
+# is not an error here; keeping the source PNG lets the JSON below continue to
+# point at a real file instead of a deleted one.
+for f in "$DST"/*.png; do
+  [ -e "$f" ] || continue
+  if [ -e "${f%.png}.webp" ]; then
+    rm -f "$f"
+  fi
+done
 
 if [ -f "$JSON" ]; then
-  perl -0pi -e 's{(\./downloaded_images/[A-Za-z0-9._-]+?)\.png}{$1.webp}g' "$JSON"
+  # Repoint a .png reference only when its WebP actually exists; otherwise a
+  # failed cwebp conversion would leave the JSON pointing at a file that was
+  # never produced. The directory is passed via the environment because perl's
+  # -i resolves its target from @ARGV before the program runs, so the directory
+  # must not appear there.
+  REVIEWS_IMG_DIR="$DST" perl -0pi -e '
+    my $dir = $ENV{REVIEWS_IMG_DIR};
+    # Do not exit from this program: with -i the output file is opened and
+    # truncated at startup, and exit skips the -p loop'"'"'s implicit print,
+    # which would silently leave the JSON empty. Fall back to an empty set so
+    # every reference is left untouched.
+    my %webp;
+    if (opendir(my $dh, $dir)) {
+      # Read into an explicit loop rather than map/grep over readdir: those alias
+      # $_ to readdir'"'"'s buffer, and the in-place s/// then corrupts entries,
+      # silently yielding a partial set (40 of 79 where 79 WebP files existed).
+      # Keys are the full relative path stem, matching the capture below, which
+      # excludes the trailing ".png".
+      while (my $entry = readdir($dh)) {
+        next unless $entry =~ /\.webp\z/;
+        my $base = $entry;
+        $base =~ s/\.webp\z//;
+        $webp{"./downloaded_images/$base"} = 1;
+      }
+      closedir $dh;
+    }
+    s{(\./downloaded_images/[A-Za-z0-9._-]+?)\.png}{
+      my $stem = $1;
+      exists $webp{$stem} ? "$stem.webp" : "$stem.png";
+    }ge;
+  ' "$JSON"
 fi
 
 echo "  Converted $converted PNG(s) to WebP in $DST"

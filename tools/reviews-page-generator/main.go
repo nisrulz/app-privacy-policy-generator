@@ -57,20 +57,27 @@ type reviewEntry struct {
 	Body      string `json:"body"`
 }
 
-func initPaths() {
-	baseDir, _ = os.Getwd()
+func initPaths() error {
+	baseDir, err := os.Getwd()
+	if err != nil {
+		return fmt.Errorf("get working directory: %w", err)
+	}
 	jsonDir = filepath.Join(baseDir, "comments_json")
 	imgsDir = filepath.Join(baseDir, "downloaded_images")
 	tmplPath = filepath.Join(baseDir, "template.mustache")
 	pubDir = filepath.Join(baseDir, "..", "..", "public")
 	outPath = filepath.Join(pubDir, "reviews.html")
 	dataPath = filepath.Join(pubDir, "reviews-data.json")
+	return nil
 }
 
-func setupDirs() {
+func setupDirs() error {
 	for _, d := range []string{jsonDir, imgsDir} {
-		os.MkdirAll(d, 0755)
+		if err := os.MkdirAll(d, 0755); err != nil {
+			return fmt.Errorf("create %s: %w", d, err)
+		}
 	}
+	return nil
 }
 
 func fetchComments(client *http.Client, force bool) []ghComment {
@@ -103,7 +110,9 @@ func fetchComments(client *http.Client, force bool) []ghComment {
 			break
 		}
 		data, _ := json.Marshal(pageComments)
-		os.WriteFile(path, data, 0644)
+		if err := os.WriteFile(path, data, 0644); err != nil {
+			fmt.Printf("  Warning: could not cache %s: %v\n", path, err)
+		}
 		fmt.Printf("  Fetched comments_page_%d.json (%d comments)\n", page, len(pageComments))
 		time.Sleep(time.Second)
 
@@ -178,6 +187,26 @@ func contentExt(ct string) string {
 	}
 }
 
+// findExistingAsset resolves an asset UUID to an already-downloaded filename.
+// Asset URLs carry no extension, so the on-disk form is discovered by
+// globbing. Selection must not depend on glob ordering, which is lexical and
+// therefore arbitrarily picks .png over .webp when both exist; prefer the
+// format public/ actually serves and fall back to lexical order only to
+// break ties among the remaining formats.
+func findExistingAsset(name string) (string, bool) {
+	matches, err := filepath.Glob(filepath.Join(imgsDir, name+".*"))
+	if err != nil || len(matches) == 0 {
+		return "", false
+	}
+	sort.Strings(matches)
+	for _, m := range matches {
+		if strings.EqualFold(filepath.Ext(m), ".webp") {
+			return filepath.Base(m), true
+		}
+	}
+	return filepath.Base(matches[0]), true
+}
+
 func downloadImages(client *http.Client, comments []ghComment) {
 	imageMap = make(map[string]string)
 
@@ -212,18 +241,12 @@ func downloadImages(client *http.Client, comments []ghComment) {
 				defer func() { <-sem }()
 
 				isAsset := ghAssetRe.MatchString(url)
-				var name string
-				if isAsset {
-					name = filepath.Base(url)
-				} else {
-					name = filepath.Base(url)
-				}
+				name := filepath.Base(url)
 				path := filepath.Join(imgsDir, name)
 				if isAsset {
-					matches, _ := filepath.Glob(filepath.Join(imgsDir, name+".*"))
-					if len(matches) > 0 {
+					if existing, ok := findExistingAsset(name); ok {
 						mu.Lock()
-						imageMap[url] = filepath.Base(matches[0])
+						imageMap[url] = existing
 						mu.Unlock()
 						return
 					}
@@ -255,7 +278,10 @@ func downloadImages(client *http.Client, comments []ghComment) {
 					path = filepath.Join(imgsDir, name)
 				}
 
-				os.WriteFile(path, data, 0644)
+				if err := os.WriteFile(path, data, 0644); err != nil {
+					fmt.Printf("  Warning: could not write image %s: %v\n", name, err)
+					return
+				}
 				fmt.Printf("  Downloaded image: %s\n", name)
 
 				mu.Lock()
@@ -300,60 +326,48 @@ func prepareComments(comments []ghComment) []reviewEntry {
 	return entries
 }
 
-func render(entries []reviewEntry) {
+func render(entries []reviewEntry) error {
 	tmpl, err := os.ReadFile(tmplPath)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error reading template: %v\n", err)
-		os.Exit(1)
+		return fmt.Errorf("read template %s: %w", tmplPath, err)
 	}
 
 	output := string(tmpl)
 	output = commentsRe.ReplaceAllString(output, "")
 	output = strings.ReplaceAll(output, "{{ total_comments }}", fmt.Sprintf("%d", len(entries)))
 
-	os.WriteFile(outPath, []byte(output), 0644)
+	if err := os.WriteFile(outPath, []byte(output), 0644); err != nil {
+		return fmt.Errorf("write %s: %w", outPath, err)
+	}
 	fmt.Printf("  Generated: %s\n", outPath)
 
 	var b bytes.Buffer
 	enc := json.NewEncoder(&b)
 	enc.SetEscapeHTML(false)
-	enc.Encode(entries)
+	if err := enc.Encode(entries); err != nil {
+		return fmt.Errorf("encode reviews data: %w", err)
+	}
 	data := bytes.TrimRight(b.Bytes(), "\n")
-	os.WriteFile(dataPath, data, 0644)
+	if err := os.WriteFile(dataPath, data, 0644); err != nil {
+		return fmt.Errorf("write %s: %w", dataPath, err)
+	}
 	fmt.Printf("  Generated: %s\n", dataPath)
-}
 
-func copyToPublic() {
-	copyDir(imgsDir, filepath.Join(pubDir, "downloaded_images"))
-	fmt.Println("  Copied images → public/downloaded_images/")
-}
-
-func copyDir(src, dst string) {
-	entries, err := os.ReadDir(src)
-	if err != nil {
-		return
-	}
-	os.MkdirAll(dst, 0755)
-	for _, e := range entries {
-		if e.IsDir() {
-			continue
-		}
-		srcPath := filepath.Join(src, e.Name())
-		dstPath := filepath.Join(dst, e.Name())
-		data, err := os.ReadFile(srcPath)
-		if err != nil {
-			continue
-		}
-		os.WriteFile(dstPath, data, 0644)
-	}
+	return nil
 }
 
 func main() {
 	forceFetch := flag.Bool("force-fetch", false, "Ignore cached JSON, re-fetch from GitHub")
 	flag.Parse()
 
-	initPaths()
-	setupDirs()
+	if err := initPaths(); err != nil {
+		fmt.Fprintf(os.Stderr, "❌ %v\n", err)
+		os.Exit(1)
+	}
+	if err := setupDirs(); err != nil {
+		fmt.Fprintf(os.Stderr, "❌ %v\n", err)
+		os.Exit(1)
+	}
 
 	client := &http.Client{Timeout: 60 * time.Second}
 
@@ -365,7 +379,9 @@ func main() {
 	entries := prepareComments(comments)
 
 	fmt.Println("Rendering template...")
-	render(entries)
-	copyToPublic()
+	if err := render(entries); err != nil {
+		fmt.Fprintf(os.Stderr, "❌ %v\n", err)
+		os.Exit(1)
+	}
 	fmt.Println("Done.")
 }

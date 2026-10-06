@@ -25,18 +25,6 @@ function _updateMeta() {
   if (twitterDesc && locale['meta.twitter.description']) twitterDesc.setAttribute('content', locale['meta.twitter.description'])
 }
 
-function _updateThemeLogo() {
-  var theme = document.documentElement.getAttribute('data-theme');
-  document.querySelectorAll('img[data-theme-logo]').forEach(function (img) {
-    var light = img.getAttribute('data-light-src') || img.src;
-    if (!img.getAttribute('data-light-src')) {
-      img.setAttribute('data-light-src', img.src);
-      img.setAttribute('data-dark-src', img.src.replace(/(\.\w+)$/, '_dark$1'));
-    }
-    img.src = theme === 'dark' ? img.getAttribute('data-dark-src') : img.getAttribute('data-light-src');
-  });
-}
-
 function useAppState() {
   var { reactive, computed } = Vue;
 
@@ -72,7 +60,6 @@ function useAppState() {
       Windows: false,
       Web: false,
     },
-    typeOfPolicy: "Simple",
     typeOfPolicyInt: 1,
     isLocationTracked: false,
     ageOfDigitalConsent: 16,
@@ -106,7 +93,6 @@ function useWizard(state) {
     deviceIdDesc: "",
     osDesc: "",
     browserDesc: "",
-    uninstallDesc: "",
   });
 
   wizard.canAdvance = computed(function () {
@@ -217,56 +203,37 @@ function useWizard(state) {
     return items.slice(0, -1).join(", ") + sepLast + items[items.length - 1];
   }
 
+  var PLATFORM_WORDS = [
+    { selected: "isMobileApp", desc: "mobileDevices", one: "mobileDevice", many: "mobileDevices", variant: "mobile" },
+    { selected: "isWindowsApp", desc: "windowsDevices", one: "windowsDevice", many: "windowsDevices", variant: "windows" },
+    { selected: "isWebApp", desc: "webBrowsers", one: "computer", many: "computers", variant: "web" }
+  ];
+
+  function _selectedPlatforms() {
+    return PLATFORM_WORDS.filter(function (p) { return wizard[p.selected]; });
+  }
+
   function _setPlatformText() {
-    var isMobile = wizard.isMobileApp;
-    var isWin = wizard.isWindowsApp;
-    var isWeb = wizard.isWebApp;
-
     var word = platformWord;
+    var selected = _selectedPlatforms();
+    var active = selected.length ? selected : [PLATFORM_WORDS[0]];
 
-    var descs = [];
-    if (isMobile) descs.push(word("platform.mobileDevices"));
-    if (isWin) descs.push(word("platform.windowsDevices"));
-    if (isWeb) descs.push(word("platform.webBrowsers"));
-    if (descs.length === 0) descs.push(word("platform.mobileDevices"));
-    wizard.platformDesc = _joinList(descs, word("platform.and"), word("platform.commaAnd"));
-
-    var devs = [];
-    if (isMobile) devs.push(word("platform.mobileDevice"));
-    if (isWin) devs.push(word("platform.windowsDevice"));
-    if (isWeb) devs.push(word("platform.computer"));
-    if (devs.length === 0) devs.push(word("platform.mobileDevice"));
-    wizard.deviceType = _joinList(devs, word("platform.or"), ", " + word("platform.or") + " ");
-
-    var devPlurals = [];
-    if (isMobile) devPlurals.push(word("platform.mobileDevices"));
-    if (isWin) devPlurals.push(word("platform.windowsDevices"));
-    if (isWeb) devPlurals.push(word("platform.computers"));
-    if (devPlurals.length === 0) devPlurals.push(word("platform.mobileDevices"));
-    wizard.deviceTypePlural = _joinList(devPlurals, word("platform.and"), word("platform.commaAnd"));
-
-    var uninstallParts = [];
-    if (isMobile || isWin) uninstallParts.push(word("platform.uninstallApp"));
-    if (isWeb) uninstallParts.push(word("platform.ceaseWeb"));
-    wizard.uninstallDesc = uninstallParts.join(" " + word("platform.or") + " ") || word("platform.uninstallApp");
-
-    if (isMobile && !isWin && !isWeb) {
-      wizard.deviceIdDesc = word("platform.deviceId.mobile");
-      wizard.osDesc = word("platform.os.mobile");
-      wizard.browserDesc = word("platform.browser.mobile");
-    } else if (isWin && !isMobile && !isWeb) {
-      wizard.deviceIdDesc = word("platform.deviceId.windows");
-      wizard.osDesc = word("platform.os.windows");
-      wizard.browserDesc = word("platform.browser.windows");
-    } else if (isWeb && !isMobile && !isWin) {
-      wizard.deviceIdDesc = word("platform.deviceId.web");
-      wizard.osDesc = word("platform.os.web");
-      wizard.browserDesc = word("platform.browser.web");
-    } else {
-      wizard.deviceIdDesc = word("platform.deviceId.mixed");
-      wizard.osDesc = word("platform.os.mixed");
-      wizard.browserDesc = word("platform.browser.mixed");
+    function wordsFor(field) {
+      return active.map(function (p) { return word("platform." + p[field]); });
     }
+
+    var and = word("platform.and");
+    var commaAnd = word("platform.commaAnd");
+    var or = word("platform.or");
+
+    wizard.platformDesc = _joinList(wordsFor("desc"), and, commaAnd);
+    wizard.deviceType = _joinList(wordsFor("one"), or, ", " + or + " ");
+    wizard.deviceTypePlural = _joinList(wordsFor("many"), and, commaAnd);
+
+    var only = selected.length === 1 ? selected[0].variant : "mixed";
+    wizard.deviceIdDesc = word("platform.deviceId." + only);
+    wizard.osDesc = word("platform.os." + only);
+    wizard.browserDesc = word("platform.browser." + only);
   }
 
   wizard.checkForThirdPartyServicesEnabled = function () {
@@ -280,20 +247,6 @@ function useWizard(state) {
 
   wizard.toggleState = function (item) {
     item.enabled = !item.enabled;
-  };
-
-  wizard.setTypeOfPolicyInt = function () {
-    switch (state.typeOfPolicy) {
-      case "Simple":
-        state.typeOfPolicyInt = 1;
-        break;
-      case "No Tracking":
-        state.typeOfPolicyInt = 2;
-        break;
-      case "GDPR":
-        state.typeOfPolicyInt = 3;
-        break;
-    }
   };
 
   return wizard;
@@ -377,21 +330,15 @@ var app = Vue.createApp({
   mounted: function () {
     this.$nextTick(function () {
       _updateMeta();
-      var theme = document.documentElement.getAttribute('data-theme');
-      document.querySelectorAll('.theme-toggle').forEach(function (el) {
-        el.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-      });
-      _updateThemeLogo();
+      themeToggle.updateGlyphs();
+      themeToggle.updateLogos();
     });
   },
   watch: {
     wizardStep: function () {
       this.$nextTick(function () {
-        var theme = document.documentElement.getAttribute('data-theme');
-        document.querySelectorAll('.theme-toggle').forEach(function (el) {
-          el.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-        });
-        _updateThemeLogo();
+        themeToggle.updateGlyphs();
+        themeToggle.updateLogos();
       });
     }
   },
@@ -399,21 +346,8 @@ var app = Vue.createApp({
 
 app.config.globalProperties.translate = translate;
 app.config.globalProperties._updateMeta = _updateMeta;
-app.config.globalProperties._updateThemeLogo = _updateThemeLogo;
-app.config.globalProperties.toggleTheme = function (e) {
-  var html = document.documentElement;
-  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-  _updateThemeLogo();
-  var btn = e && e.target;
-  if (btn) btn.textContent = next === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-  else {
-    document.querySelectorAll('.theme-toggle').forEach(function (el) {
-      el.textContent = next === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-    });
-  }
-};
+app.config.globalProperties._updateThemeLogo = themeToggle.updateLogos;
+app.config.globalProperties.toggleTheme = themeToggle.toggle;
 
 app.config.globalProperties.switchLocale = function (localeCode) {
   var currentLocale = document.documentElement.getAttribute('lang') || 'en';

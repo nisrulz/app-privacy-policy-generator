@@ -56,9 +56,3 @@ func minifySingleJS(m *minify.M, src, dst string) error {
 
 	return nil
 }
-
-func minifyJS(data []byte) ([]byte, error) {
-	m := minify.New()
-	m.AddFunc("text/javascript", js.Minify)
-	return m.Bytes("text/javascript", data)
-}

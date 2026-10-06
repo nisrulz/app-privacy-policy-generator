@@ -1,0 +1,50 @@
+name: Tests
+
+'on':
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.27'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Run checks
+        run: make check
+
+      # public/ is tracked build output, and `make check` starts a webServer
+      # that execs the serve binary directly, which rebuilds public/ before
+      # serving. Assert the rebuild reproduces what is committed so a source
+      # change cannot land without its build output.
+      - name: Verify build output is in sync with sources
+        run: |
+          drift="$(git status --porcelain -- public/)"
+          if [ -n "$drift" ]; then
+            echo "::error::public/ is out of date with src/. Run 'make build' and commit the result."
+            echo "$drift"
+            git --no-pager diff --stat -- public/
+            exit 1
+          fi
