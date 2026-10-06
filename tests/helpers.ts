@@ -7,17 +7,14 @@ export async function gotoApp(page: Page) {
 
 export async function clickNext(page: Page) {
   await page.locator('a.card-footer-item').filter({ hasText: 'Next' }).click();
-  await page.waitForTimeout(200);
 }
 
 export async function clickPrevious(page: Page) {
   await page.locator('a.card-footer-item').filter({ hasText: 'Previous' }).click();
-  await page.waitForTimeout(200);
 }
 
 export async function clickStart(page: Page) {
   await page.locator('button.start-btn').click();
-  await page.waitForTimeout(200);
 }
 
 export async function expectStep(page: Page, step: number) {
