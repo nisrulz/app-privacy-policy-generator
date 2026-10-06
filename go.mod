@@ -1,6 +1,6 @@
 module github.com/nisrulz/app-privacy-policy-generator
 
-go 1.26
+go 1.27
 
 require (
 	github.com/tdewolff/minify/v2 v2.24.19
