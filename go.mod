@@ -3,7 +3,7 @@ module github.com/nisrulz/app-privacy-policy-generator
 go 1.26
 
 require (
-	github.com/tdewolff/minify/v2 v2.24.17
+	github.com/tdewolff/minify/v2 v2.24.19
 	github.com/toakleaf/less.go v0.4.2
 	gopkg.in/yaml.v3 v3.0.1
 )
