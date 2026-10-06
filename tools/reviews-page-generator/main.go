@@ -187,6 +187,26 @@ func contentExt(ct string) string {
 	}
 }
 
+// findExistingAsset resolves an asset UUID to an already-downloaded filename.
+// Asset URLs carry no extension, so the on-disk form is discovered by
+// globbing. Selection must not depend on glob ordering, which is lexical and
+// therefore arbitrarily picks .png over .webp when both exist; prefer the
+// format public/ actually serves and fall back to lexical order only to
+// break ties among the remaining formats.
+func findExistingAsset(name string) (string, bool) {
+	matches, err := filepath.Glob(filepath.Join(imgsDir, name+".*"))
+	if err != nil || len(matches) == 0 {
+		return "", false
+	}
+	sort.Strings(matches)
+	for _, m := range matches {
+		if strings.EqualFold(filepath.Ext(m), ".webp") {
+			return filepath.Base(m), true
+		}
+	}
+	return filepath.Base(matches[0]), true
+}
+
 func downloadImages(client *http.Client, comments []ghComment) {
 	imageMap = make(map[string]string)
 
@@ -224,10 +244,9 @@ func downloadImages(client *http.Client, comments []ghComment) {
 				name := filepath.Base(url)
 				path := filepath.Join(imgsDir, name)
 				if isAsset {
-					matches, _ := filepath.Glob(filepath.Join(imgsDir, name+".*"))
-					if len(matches) > 0 {
+					if existing, ok := findExistingAsset(name); ok {
 						mu.Lock()
-						imageMap[url] = filepath.Base(matches[0])
+						imageMap[url] = existing
 						mu.Unlock()
 						return
 					}
@@ -337,39 +356,6 @@ func render(entries []reviewEntry) error {
 	return nil
 }
 
-func copyToPublic() error {
-	if err := copyDir(imgsDir, filepath.Join(pubDir, "downloaded_images")); err != nil {
-		return err
-	}
-	fmt.Println("  Copied images → public/downloaded_images/")
-	return nil
-}
-
-func copyDir(src, dst string) error {
-	entries, err := os.ReadDir(src)
-	if err != nil {
-		return fmt.Errorf("read %s: %w", src, err)
-	}
-	if err := os.MkdirAll(dst, 0755); err != nil {
-		return fmt.Errorf("create %s: %w", dst, err)
-	}
-	for _, e := range entries {
-		if e.IsDir() {
-			continue
-		}
-		srcPath := filepath.Join(src, e.Name())
-		dstPath := filepath.Join(dst, e.Name())
-		data, err := os.ReadFile(srcPath)
-		if err != nil {
-			return fmt.Errorf("read %s: %w", srcPath, err)
-		}
-		if err := os.WriteFile(dstPath, data, 0644); err != nil {
-			return fmt.Errorf("write %s: %w", dstPath, err)
-		}
-	}
-	return nil
-}
-
 func main() {
 	forceFetch := flag.Bool("force-fetch", false, "Ignore cached JSON, re-fetch from GitHub")
 	flag.Parse()
@@ -394,10 +380,6 @@ func main() {
 
 	fmt.Println("Rendering template...")
 	if err := render(entries); err != nil {
-		fmt.Fprintf(os.Stderr, "❌ %v\n", err)
-		os.Exit(1)
-	}
-	if err := copyToPublic(); err != nil {
 		fmt.Fprintf(os.Stderr, "❌ %v\n", err)
 		os.Exit(1)
 	}
