@@ -18,7 +18,13 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'make serve',
+    // exec the server binary directly rather than going through `make serve`.
+    // Playwright tears down only the process it spawned; behind make, the
+    // server binary is a grandchild and survives as an orphan holding port
+    // 8000, which then breaks the next `make serve`. `exec` replaces the
+    // shell so the process Playwright owns is the server itself.
+    command:
+      'go build -o .bin/serve ./cmd/build && exec .bin/serve -serve -port 8000',
     url: 'http://localhost:8000',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
