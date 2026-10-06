@@ -64,20 +64,25 @@ if [ -f "$JSON" ]; then
   # must not appear there.
   REVIEWS_IMG_DIR="$DST" perl -0pi -e '
     my $dir = $ENV{REVIEWS_IMG_DIR};
-    opendir(my $dh, $dir) or exit 0;
-    # Read into an explicit loop rather than map/grep over readdir: those alias
-    # $_ to readdir'"'"'s buffer, and the in-place s/// then corrupts entries,
-    # silently yielding a partial set (40 of 79 where 79 WebP files existed).
-    # Keys are the full relative path stem, matching the capture below, which
-    # excludes the trailing ".png".
+    # Do not exit from this program: with -i the output file is opened and
+    # truncated at startup, and exit skips the -p loop'"'"'s implicit print,
+    # which would silently leave the JSON empty. Fall back to an empty set so
+    # every reference is left untouched.
     my %webp;
-    while (my $entry = readdir($dh)) {
-      next unless $entry =~ /\.webp\z/;
-      my $base = $entry;
-      $base =~ s/\.webp\z//;
-      $webp{"./downloaded_images/$base"} = 1;
+    if (opendir(my $dh, $dir)) {
+      # Read into an explicit loop rather than map/grep over readdir: those alias
+      # $_ to readdir'"'"'s buffer, and the in-place s/// then corrupts entries,
+      # silently yielding a partial set (40 of 79 where 79 WebP files existed).
+      # Keys are the full relative path stem, matching the capture below, which
+      # excludes the trailing ".png".
+      while (my $entry = readdir($dh)) {
+        next unless $entry =~ /\.webp\z/;
+        my $base = $entry;
+        $base =~ s/\.webp\z//;
+        $webp{"./downloaded_images/$base"} = 1;
+      }
+      closedir $dh;
     }
-    closedir $dh;
     s{(\./downloaded_images/[A-Za-z0-9._-]+?)\.png}{
       my $stem = $1;
       exists $webp{$stem} ? "$stem.webp" : "$stem.png";
