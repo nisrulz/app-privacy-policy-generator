@@ -35,9 +35,10 @@ jobs:
       - name: Run checks
         run: make check
 
-      # public/ is tracked build output, and `make check` starts a webServer that
-      # runs `make serve`, which rebuilds it. Assert the rebuild reproduces what is
-      # committed so a source change cannot land without its build output.
+      # public/ is tracked build output, and `make check` starts a webServer
+      # that execs the serve binary directly, which rebuilds public/ before
+      # serving. Assert the rebuild reproduces what is committed so a source
+      # change cannot land without its build output.
       - name: Verify build output is in sync with sources
         run: |
           drift="$(git status --porcelain -- public/)"
